@@ -277,6 +277,188 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2学习-2-——Kibana-X-Pack介绍使用/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="李志荣">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="李志荣的博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="李志荣的博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/09/ES-5-0-2学习-2-——Kibana-X-Pack介绍使用/" itemprop="url">
+                  ES 5.0.2学习(2)——Kibana+X-Pack介绍使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T16:17:51+08:00">
+                2017-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/09/ES-5-0-2学习-2-——Kibana-X-Pack介绍使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/ES-5-0-2学习-2-——Kibana-X-Pack介绍使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/02/09/ES-5-0-2学习-2-——Kibana-X-Pack介绍使用/" class="leancloud_visitors" data-flag-title="ES 5.0.2学习(2)——Kibana+X-Pack介绍使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。</p>
+<p>下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。</p>
+<p>下面的图展示的是Kibana 4的界面，和Kibana 3最大的区别是将原来的主体分成三个部分，分别是发现页、可视化、仪表盘。</p>
+<p>下面是目前Kibana 5最新版本的界面。相比较Kibana 4除了界面的风格变化，最主要是功能栏上添加了Timeline、Management和Dev Tools选项。</p>
+<p>Discover</p>
+<pre><code>You can interactively explore your data from the Discover page. You have access to every document in every index that matches the selected index pattern. You can submit search queries, filter the search results, and view document data. You can also see the number of documents that match the search query and get field value statistics. If a time field is configured for the selected index pattern, the distribution of documents over time is displayed in a histogram at the top of the page.
+</code></pre><p>从发现页可以交互地探索ES的数据。可以访问与所选索引模式相匹配的每一个索引中的每一个文档。您可以提交搜索查询、筛选搜索结果和查看文档数据。还可以看到匹配搜索查询和获取字段值统计的文档的数量。如果一个时间字段被配置为所选择的索引模式，则文档的分布随着时间的推移显示在页面顶部的直方图中。</p>
+<p>Visualize</p>
+<pre><code>Visualize enables you to create visualizations of the data in your Elasticsearch indices. You can then build dashboards that display related visualizations.Kibana visualizations are based on Elasticsearch queries. By using a series of Elasticsearch aggregations to extract and process your data, you can create charts that show you the trends, spikes, and dips you need to know about.You can create visualizations from a search saved from Discover or start with a new search query.
+</code></pre><p>可视化能使你创造你的Elasticsearch指标数据的可视化。然后你可以建立仪表板显示相关的可视化。Kibana的可视化是基于Elasticsearch查询。通过一系列的Elasticsearch聚合提取和处理您的数据，您可以创建图表显示你需要知道的关于趋势，峰值和骤降。您可以从搜索保存的搜索中创建可视化或从一个新的搜索查询开始。</p>
+<p>Dashboard</p>
+<pre><code>A Kibana dashboard displays a collection of saved visualizations. You can arrange and resize the visualizations as needed and save dashboards so they be reloaded and shared.
+</code></pre><p>一个仪表板显示Kibana保存的一系列可视化。你可以根据需要安排和调整可视化，并保存仪表盘，可以被加载和共享。</p>
+<p>Monitoring</p>
+<p>从图中可以发现，默认Kibana是没有该选项的。其实，Monitoring是由X-Pack集成提供的。</p>
+<pre><code>The X-Pack monitoring components enable you to easily monitor Elasticsearch through Kibana. You can view cluster health and performance in real time as well as analyze past cluster, index, and node metrics. In addition, you can monitor the performance of Kibana itself.When you install X-Pack on your cluster, a monitoring agent runs on each node to collect and index metrics from Elasticsearch. With X-Pack installed in Kibana, you can then view the monitoring data through a set of specialized dashboards.
+</code></pre><p>该X-pack监控组件使您可以通过Kibana轻松地监控ElasticSearch。您可以实时查看集群的健康和性能，以及分析过去的集群、索引和节点度量。此外，您可以监视Kibana本身性能。当你安装X-pack在群集上，监控代理运行在每个节点上收集和指数指标从Elasticsearch。安装在X-pack在Kibana上，您可以查看通过一套专门的仪表板监控数据。</p>
+<p>我们可以回顾安装过程：ElasticSearch 5学习——安装Elasticsearch、Kibana和X-Pack，可以发现，在安装X-pack的时候分别在ElasticSearch根目录和Kibana根目录下操作。</p>
+<p>Graph</p>
+<pre><code>The X-Pack graph capabilities enable you to discover how items in an Elasticsearch index are related. You can explore the connections between indexed terms and see which connections are the most meaningful. This can be useful in a variety of applications, from fraud detection to recommendation engines.For example, graph exploration could help you uncover website vulnerabilities that hackers are targeting so you can harden your website. Or, you might provide graph-based personalized recommendations to your e-commerce customers.X-Pack provides a simple, yet powerful graph exploration API, and an interactive graph visualization tool for Kibana. Both work with out of the box with existing Elasticsearch indices—you don’t need to store any additional data to use the X-Pack graph features.
+</code></pre><p>X-Pack图的能力使你发现一个Elasticsearch索引项是如何相关联的。你可以探索索引条款之间的连接，看看哪些连接是最有意义的。从欺诈检测到推荐引擎，对各种应用中这都是有用的，例如，图的探索可以帮助你发现网站上黑客的目标的漏洞，所以你可以硬化你的网站。或者，您可以为您的电子商务客户提供基于图表的个性化推荐。X-pack提供简单，但功能强大的图形开发API，和Kibana交互式图形可视化工具。使用X-pack图有工作与开销与现有Elasticsearch指标你不需要任何额外的数据存储的特征。</p>
+<p>Timelion</p>
+<pre><code>Timelion is a time series data visualizer that enables you to combine totally independent data sources within a single visualization. It’s driven by a simple expression language you use to retrieve time series data, perform calculations to tease out the answers to complex questions, and visualize the results.
+</code></pre><p>Timelion是一个时间序列数据的可视化，可以结合在一个单一的可视化完全独立的数据源。它是由一个简单的表达式语言驱动的，你用来检索时间序列数据，进行计算，找出复杂的问题的答案，并可视化的结果。</p>
+<p>这个功能由一系列的功能函数组成，同样的查询的结果，也可以通过Dashboard显示查看。</p>
+<p>Management</p>
+<pre><code>The Management application is where you perform your runtime configuration of Kibana, including both the initial setup and ongoing configuration of index patterns, advanced settings that tweak the behaviors of Kibana itself, and the various &quot;objects&quot; that you can save throughout Kibana such as searches, visualizations, and dashboards.This section is pluginable, so in addition to the out of the box capabitilies, packs such as X-Pack can add additional management capabilities to Kibana.
+</code></pre><p>管理中的应用是在你执行你的运行时配置kibana，包括初始设置和指标进行配置模式，高级设置，调整自己的行为和Kibana，各种“对象”，你可以查看保存在整个Kibana的内容如发现页，可视化和仪表板。<br>这部分是pluginable，除此之外，X-pack可以给Kibana增加额外的管理能力。</p>
+<pre><code>You can use X-Pack Security to control what Elasticsearch data users can access through Kibana.When you install X-Pack, Kibana users have to log in. They need to have the kibana_user role as well as access to the indices they will be working with in Kibana.If a user loads a Kibana dashboard that accesses data in an index that they are not authorized to view, they get an error that indicates the index does not exist. X-Pack Security does not currently provide a way to control which users can load which dashboards.
+</code></pre><p>你可以使用X-pack安全控制哪些用户可以访问Elasticsearch数据通过Kibana。当你安装X-pack，Kibana用户登录。他们需要有kibana_user作用以及获得的指标，他们将在Kibana的工作。如果用户加载Kibana仪表板，访问数据的一个索引，他们未被授权查看，他们得到一个错误，表明指数不存在。X-pack安全目前并不提供一种方法来控制哪些用户可以负荷的仪表板。</p>
+<p>Dev Tools</p>
+<p>原先的交互式控制台Sense，使用户方便的通过浏览器直接与Elasticsearch进行交互。从Kibana 5开始改名并直接内建在Kibana，就是Dev Tools选项。</p>
+<p>注意如果是Kibana 5以上，不能通过以下命令安装Sense。(踩过的坑)</p>
+<p>./bin/kibana plugin –install elastic/sense</p>
+<p>或者</p>
+<p>./bin/kibana-plugin install elastic/sense instead</p>
+<p>总结</p>
+<p>内容比较简单，主要是对Kibana工具的整体功能总结，方便接下来对ElasticSearch 5的学习，其中X-Pack主要是添加身份权限的验证，以及原先需要安装其他各种Marvel、Hand等各种功能插件添加到Kibana上使用才能使用的功能。</p>
+<p>学习链接：</p>
+<p>X-Pack：<a href="https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html</a></p>
+<p>Kibana：<a href="https://www.elastic.co/guide/en/kibana/current/introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/kibana/current/introduction.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2学习-1-——安装Elasticsearch、Kibana和X-Pack/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -504,7 +686,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
