@@ -616,69 +616,30 @@
         
           
             <h1 id="安装准备："><a href="#安装准备：" class="headerlink" title="安装准备："></a>安装准备：</h1><p>安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。</p>
-<h1 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h1><p>首先到官网下载最新版本的Elasticsearch压缩包。</p>
-<p>可以使用命令，注意将最新的可用的下载链接填入：</p>
-<pre><code>curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.0.2.zip
-unzip elasticsearch-5.0.2.zip
-cd elasticsearch-5.0.2
-</code></pre><h1 id="运行Elasticsearch"><a href="#运行Elasticsearch" class="headerlink" title="运行Elasticsearch"></a>运行Elasticsearch</h1><p>Elasticsearch已经准备就绪，执行以下命令可在前台启动：</p>
-<pre><code>./bin/elasticsearch
-</code></pre><p>如果想在后台以守护进程模式运行，添加-d参数。</p>
-<p>打开另一个终端进行测试：</p>
-<pre><code>curl &apos;http://localhost:9200/?pretty&apos;
-</code></pre><p>你能看到以下返回信息：</p>
-<pre><code>{
-&quot;name&quot;: &quot;vP19PMO&quot;,
-&quot;cluster_name&quot;: &quot;elasticsearch&quot;,
-&quot;cluster_uuid&quot;: &quot;IMKMfkMsSrKODIYg5gxgeQ&quot;,
-&quot;version&quot;: {
-    &quot;number&quot;: &quot;5.0.2&quot;,
-    &quot;build_hash&quot;: &quot;f6b4951&quot;,
-    &quot;build_date&quot;: &quot;2016-11-24T10:07:18.101Z&quot;,
-    &quot;build_snapshot&quot;: false,
-    &quot;lucene_version&quot;: &quot;6.2.1&quot;
-},
-&quot;tagline&quot;: &quot;You Know, for Search&quot;
-}
-</code></pre><p>这说明你的ELasticsearch集群已经启动并且正常运行。</p>
-<h1 id="安装Kiabna"><a href="#安装Kiabna" class="headerlink" title="安装Kiabna"></a>安装Kiabna</h1><p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。</p>
-<p>首先到官网下载最新版本的Kiabna压缩包。</p>
-<p>可以使用如下命令，注意将最新的可用的下载链接填入：</p>
-<pre><code>wget https://artifacts.elastic.co/downloads/kibana/kibana-5.1.1-linux-x86_64.tar.gz
-sha1sum kibana-5.1.1-linux-x86_64.tar.gz
-tar -xzf kibana-5.1.1-linux-x86_64.tar.gz
-cd kibana/
-</code></pre><p>注意：</p>
-<pre><code>https://www.elastic.co/downloads/kibana 可以在该地址获取下载链接，一定要选择对于系统和版本。
-按照文档的要求，一般情况下kibana的版本必须和Elasticsearch安装的版本一致。
-</code></pre><h1 id="安装X-Pack"><a href="#安装X-Pack" class="headerlink" title="安装X-Pack"></a>安装X-Pack</h1><p>X-Pack是一个Elastic Stack的扩展，将安全，警报，监视，报告和图形功能包含在一个易于安装的软件包中。在Elasticsearch 5.0.0之前，您必须安装单独的Shield，Watcher和Marvel插件才能获得在X-Pack中所有的功能。</p>
-<h2 id="下载前提"><a href="#下载前提" class="headerlink" title="下载前提"></a>下载前提</h2><p>Elasticsearch 5.0.2</p>
-<p>Kibana 5.0.2</p>
-<h2 id="Elasticsearch下载X-Pack"><a href="#Elasticsearch下载X-Pack" class="headerlink" title="Elasticsearch下载X-Pack"></a>Elasticsearch下载X-Pack</h2><p>在Es的根目录（每个节点），运行 bin/elasticsearch-plugin进行安装。</p>
-<pre><code>bin/elasticsearch-plugin install x-pack/Users/root/Downloads/markdown/763363-20161209181135163-1294099591.png
-</code></pre><p>安装过程中跳出选项现在y即可。</p>
-<p>如果你在Elasticsearch已禁用自动索引的创建，在elasticsearch.yml配置action.auto_create_index允许X-pack创造以下指标：</p>
-<pre><code>action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*
-</code></pre><p>运行Elasticsearch。</p>
-<pre><code>bin/elasticsearch
-</code></pre><p>Kibana下载X-Pack</p>
-<p>在Kibana根目录运行 bin/kibana-plugin 进行安装。</p>
-<pre><code>bin/kibana-plugin install x-pack/Users/root/Downloads/markdown/1.png
-</code></pre><p>安装过程会比较久，耐心等待。</p>
-<p>运行Kibana。</p>
-<pre><code>bin/kibana
-</code></pre><h2 id="验证X-Pack"><a href="#验证X-Pack" class="headerlink" title="验证X-Pack"></a>验证X-Pack</h2><p>在浏览器上输入：<a href="http://localhost:5601/" target="_blank" rel="external">http://localhost:5601/</a> ，可以打开Kibana，此时需要输入用户名和密码登录，默认分别是 elastic 和 changeme。</p>
-<h1 id="安装参考："><a href="#安装参考：" class="headerlink" title="安装参考："></a>安装参考：</h1><pre><code>每个操作系统安装Elasticsearch的文件选择不同，参考：https://www.elastic.co/downloads/elasticsearch，选择对应的文件下载。
-安装Kiabna需要根据操作系统做选择，参考：https://www.elastic.co/guide/en/kibana/current/install.html，选择对应的文件下载。
-安装X-Pack需要根据Elasticsearch安装不同的方式提供不同的安装方法，参考：https://www.elastic.co/guide/en/x-pack/5.0/installing-xpack.html#installing-xpack。
-</code></pre><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p>在刚接触Elasticsearch的时候，会有很多名词不能理解，或者不知道其中的关系。其中很多是为不同版本的Elasticsearch而存在的。</p>
+<h1 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h1><p>首先到官网下载最新版本的Elasticsearch压缩包。<br>可以使用命令，注意将最新的可用的下载链接填入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.0.2.zip</div><div class="line">unzip elasticsearch-5.0.2.zip</div><div class="line">cd elasticsearch-5.0.2</div></pre></td></tr></table></figure></p>
+<h1 id="运行Elasticsearch"><a href="#运行Elasticsearch" class="headerlink" title="运行Elasticsearch"></a>运行Elasticsearch</h1><p>Elasticsearch已经准备就绪，执行以下命令可在前台启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/elasticsearch</div></pre></td></tr></table></figure></p>
+<p>如果想在后台以守护进程模式运行，添加-d参数。<br>打开另一个终端进行测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl &apos;http://localhost:9200/?pretty&apos;</div></pre></td></tr></table></figure></p>
+<p>你能看到以下返回信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;name&quot;: &quot;vP19PMO&quot;,</div><div class="line">&quot;cluster_name&quot;: &quot;elasticsearch&quot;,</div><div class="line">&quot;cluster_uuid&quot;: &quot;IMKMfkMsSrKODIYg5gxgeQ&quot;,</div><div class="line">&quot;version&quot;: &#123;</div><div class="line">    &quot;number&quot;: &quot;5.0.2&quot;,</div><div class="line">    &quot;build_hash&quot;: &quot;f6b4951&quot;,</div><div class="line">    &quot;build_date&quot;: &quot;2016-11-24T10:07:18.101Z&quot;,</div><div class="line">    &quot;build_snapshot&quot;: false,</div><div class="line">    &quot;lucene_version&quot;: &quot;6.2.1&quot;</div><div class="line">&#125;,</div><div class="line">&quot;tagline&quot;: &quot;You Know, for Search&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这说明你的ELasticsearch集群已经启动并且正常运行。</p>
+<h1 id="安装Kiabna"><a href="#安装Kiabna" class="headerlink" title="安装Kiabna"></a>安装Kiabna</h1><p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。<br>首先到官网下载最新版本的Kiabna压缩包。<br>可以使用如下命令，注意将最新的可用的下载链接填入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget https://artifacts.elastic.co/downloads/kibana/kibana-5.1.1-linux-x86_64.tar.gz</div><div class="line">sha1sum kibana-5.1.1-linux-x86_64.tar.gz</div><div class="line">tar -xzf kibana-5.1.1-linux-x86_64.tar.gz</div><div class="line">cd kibana/</div></pre></td></tr></table></figure></p>
+<p>注意：<br><em><a href="https://www.elastic.co/downloads/kibana" target="_blank" rel="external">https://www.elastic.co/downloads/kibana</a> 可以在该地址获取下载链接，一定要选择对于系统和版本。
+</em>按照文档的要求，一般情况下kibana的版本必须和Elasticsearch安装的版本一致。</p>
+<h1 id="安装X-Pack"><a href="#安装X-Pack" class="headerlink" title="安装X-Pack"></a>安装X-Pack</h1><p>X-Pack是一个Elastic Stack的扩展，将安全，警报，监视，报告和图形功能包含在一个易于安装的软件包中。在Elasticsearch 5.0.0之前，您必须安装单独的Shield，Watcher和Marvel插件才能获得在X-Pack中所有的功能。</p>
+<h2 id="下载前提"><a href="#下载前提" class="headerlink" title="下载前提"></a>下载前提</h2><p>Elasticsearch 5.0.2<br>Kibana 5.0.2</p>
+<h2 id="Elasticsearch下载X-Pack"><a href="#Elasticsearch下载X-Pack" class="headerlink" title="Elasticsearch下载X-Pack"></a>Elasticsearch下载X-Pack</h2><p>在Es的根目录（每个节点），运行 <em>bin/elasticsearch-plugin</em> 进行安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch-plugin install x-pack/Users/root/Downloads/markdown/763363-20161209181135163-1294099591.png</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e1.png" alt=""><br>安装过程中跳出选项现在y即可。<br>如果你在Elasticsearch已禁用自动索引的创建，在<em>elasticsearch.yml</em>配置<em>action.auto_create_index</em>允许X-pack创造以下指标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*</div></pre></td></tr></table></figure></p>
+<p>运行Elasticsearch。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch</div></pre></td></tr></table></figure></p>
+<h2 id="Kibana下载X-Pack"><a href="#Kibana下载X-Pack" class="headerlink" title="Kibana下载X-Pack"></a>Kibana下载X-Pack</h2><p>在Kibana根目录运行 <em>bin/kibana-plugin</em> 进行安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kibana-plugin install x-pack/Users/root/Downloads/markdown/1.png</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e2.png" alt=""><br>安装过程会比较久，耐心等待。<br>运行Kibana。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kibana</div></pre></td></tr></table></figure></p>
+<h2 id="验证X-Pack"><a href="#验证X-Pack" class="headerlink" title="验证X-Pack"></a>验证X-Pack</h2><p>在浏览器上输入：<em><a href="http://localhost:5601/" target="_blank" rel="external">http://localhost:5601/</a></em> ，可以打开Kibana，此时需要输入用户名和密码登录，默认分别是 <em>elastic</em> 和 <em>changeme</em>。</p>
+<h1 id="安装参考："><a href="#安装参考：" class="headerlink" title="安装参考："></a>安装参考：</h1><p><em>每个操作系统安装Elasticsearch的文件选择不同，参考：<a href="https://www.elastic.co/downloads/elasticsearch，选择对应的文件下载。" target="_blank" rel="external">https://www.elastic.co/downloads/elasticsearch，选择对应的文件下载。</a>
+</em>安装Kiabna需要根据操作系统做选择，参考：<a href="https://www.elastic.co/guide/en/kibana/current/install.html，选择对应的文件下载。" target="_blank" rel="external">https://www.elastic.co/guide/en/kibana/current/install.html，选择对应的文件下载。</a><br>*安装X-Pack需要根据Elasticsearch安装不同的方式提供不同的安装方法，参考：<a href="https://www.elastic.co/guide/en/x-pack/5.0/installing-xpack.html#installing-xpack。" target="_blank" rel="external">https://www.elastic.co/guide/en/x-pack/5.0/installing-xpack.html#installing-xpack。</a></p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p>在刚接触Elasticsearch的时候，会有很多名词不能理解，或者不知道其中的关系。其中很多是为不同版本的Elasticsearch而存在的。</p>
 <h2 id="Marvel"><a href="#Marvel" class="headerlink" title="Marvel"></a>Marvel</h2><p>Marvel插件：在簇中从每个节点汇集数据。这个插件必须每个节点都得安装。<br>Marvel是Elasticsearch的管理和监控工具，在开发环境下免费使用。它包含了Sense。</p>
 <h2 id="Sense"><a href="#Sense" class="headerlink" title="Sense"></a>Sense</h2><p>交互式控制台，使用户方便的通过浏览器直接与Elasticsearch进行交互。</p>
 <h2 id="Hand"><a href="#Hand" class="headerlink" title="Hand"></a>Hand</h2><p>在学习Elasticsearch的过程中，必不可少需要通过一些工具查看es的运行状态以及数据。如果都是通过rest请求，未免太过麻烦，而且也不够人性化。此时，Head插件可以实现基本信息的查看，rest请求的模拟，数据的检索等等。</p>
 <h2 id="X-pack"><a href="#X-pack" class="headerlink" title="X-pack"></a>X-pack</h2><p>x-pack是elasticsearch的一个扩展包，将安全，警告，监视，图形和报告功能捆绑在一个易于安装的软件包中，也是官方推荐的。</p>
-<h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>kibana是一个与elasticsearch一起工作的开源的分析和可视化的平台。使用kibana可以查询、查看并与存储在elasticsearch索引的数据进行交互操作。使用kibana能执行高级的数据分析，并能以图表、表格和地图的形式查看数据。</p>
-<p>kibana使得理解大容量的数据变得非常容易。它非常简单，基于浏览器的接口使我们能够快速的创建和分享显示elasticsearch查询结果实时变化的仪表盘。</p>
-<p>在Elasticsearch 5版本之前，一般都是通过安装Kibana，而后将Marvel、Hand等各种功能插件添加到Kibana上使用。在Elasticsearch 5版本之后，一般情况下只需要安装一个官方推荐的X-pack扩展包即可。</p>
+<h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>kibana是一个与elasticsearch一起工作的开源的分析和可视化的平台。使用kibana可以查询、查看并与存储在elasticsearch索引的数据进行交互操作。使用kibana能执行高级的数据分析，并能以图表、表格和地图的形式查看数据。<br>kibana使得理解大容量的数据变得非常容易。它非常简单，基于浏览器的接口使我们能够快速的创建和分享显示elasticsearch查询结果实时变化的仪表盘。<br><strong><em>在Elasticsearch 5版本之前，一般都是通过安装Kibana，而后将Marvel、Hand等各种功能插件添加到Kibana上使用。在Elasticsearch 5版本之后，一般情况下只需要安装一个官方推荐的X-pack扩展包即可。</em></strong></p>
 
           
         
