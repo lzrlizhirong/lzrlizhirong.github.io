@@ -91,14 +91,20 @@
 
 <meta name="description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES-5.0.2-学习(3)--第一个ES例子">
+<meta property="og:title" content="ES-5.0.2-学习(5)--第一个ES例子">
 <meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/index.html">
 <meta property="og:site_name" content="李志荣的博客">
 <meta property="og:description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png">
-<meta property="og:updated_time" content="2017-02-10T09:56:10.000Z">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e52.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e53.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e54.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e55.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e56.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e57.png">
+<meta property="og:updated_time" content="2017-02-10T10:06:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES-5.0.2-学习(3)--第一个ES例子">
+<meta name="twitter:title" content="ES-5.0.2-学习(5)--第一个ES例子">
 <meta name="twitter:description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
 <meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png">
 
@@ -134,7 +140,7 @@
 
 
 
-  <title> ES-5.0.2-学习(3)--第一个ES例子 | 李志荣的博客 </title>
+  <title> ES-5.0.2-学习(5)--第一个ES例子 | 李志荣的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -334,7 +340,7 @@
             
             
               
-                ES-5.0.2-学习(3)--第一个ES例子
+                ES-5.0.2-学习(5)--第一个ES例子
               
             
           </h1>
@@ -454,6 +460,22 @@
 </ol>
 <p>在目录中添加更多的员工：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">PUT /megacorp/employee/2</div><div class="line">&#123;</div><div class="line">    &quot;first_name&quot; :  &quot;Jane&quot;,</div><div class="line">    &quot;last_name&quot; :   &quot;Smith&quot;,</div><div class="line">    &quot;age&quot; :         32,</div><div class="line">    &quot;about&quot; :       &quot;I like to collect rock albums&quot;,</div><div class="line">    &quot;interests&quot;:  [ &quot;music&quot; ]</div><div class="line">&#125;</div><div class="line"></div><div class="line">PUT /megacorp/employee/3</div><div class="line">&#123;</div><div class="line">    &quot;first_name&quot; :  &quot;Douglas&quot;,</div><div class="line">    &quot;last_name&quot; :   &quot;Fir&quot;,</div><div class="line">    &quot;age&quot; :         35,</div><div class="line">    &quot;about&quot;:        &quot;I like to build cabinets&quot;,</div><div class="line">    &quot;interests&quot;:  [ &quot;forestry&quot; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h1><p>现在我们有一些数据存储在Elasticsearch中，我们可以开始处理这个应用程序的业务需求。第一个要求是检索单个员工数据的能力。<br>这在Elasticsearch中很容易。我们只需执行HTTP GET请求并指定文档的地址——索引，类型和ID。使用这三个信息，我们可以返回原始的JSON文档，并且响应包含有关文档的一些元数据，以及Douglas Fir的原始JSON文档作为_source字段：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png" alt=""><br>可以查看：<a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-4-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">ES-5.0.2-学习(4)–简单搜索</a></p>
+<p>以同样的方式，我们将HTTP动词从PUT更改为GET以便检索文档，我们可以使用DELETE动词删除文档，并使用HEAD动词检查文档是否存在。要用更新的版本替换现有文档，我们只需再次PUT。<br>GET很简单，可以得到要求的文件。尝试一些更高级的东西，我们可以搜索所有员工，请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div></pre></td></tr></table></figure></p>
+<p>你可以看到我们仍在使用索引megacorp和类型employee，但是我们现在使用_search端点，而不是指定文档ID。响应包括我们在hits数组中的所有三个文档。默认情况下，搜索将返回前10个结果。<br>响应不仅告诉我们哪些文档匹配，而且还包括整个文档本身，以便向用户显示搜索结果的所有信息。<br>接下来，让我们尝试搜索在其姓氏中有“Smith”的员工。为此，我们将使用一个轻松的搜索方法，它很容易从命令行使用。此方法通常称为查询字符串搜索，因为我们将搜索作为URL查询字符串参数传递：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e52.png" alt=""></p>
+<h1 id="DSL查询"><a href="#DSL查询" class="headerlink" title="DSL查询"></a>DSL查询</h1><p>查询字符串搜索对于从命令行进行搜索非常方便，但它有其局限性。Elasticsearch提供了一种丰富，灵活的查询语言，称为查询DSL，它允许我们构建更复杂，更健壮的查询。<br>使用JSON请求正文指定域特定语言（DSL）。我们可以代表所有以前的搜索，像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    &quot;query&quot; : &#123;</div><div class="line">        &quot;match&quot; : &#123;</div><div class="line">            &quot;last_name&quot; : &quot;Smith&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这将返回与上一个查询相同的结果。可以看到一些事情已经改变。例如，我们不再使用查询字符串参数，而是使用请求正文。此请求体是使用JSON构建的，并使用匹配查询。<br>让我们让搜索更复杂一点。我们仍然希望找到所有名字为Smith的员工，但我们只想要30岁以上的员工。我们的查询将稍微改变一点，以容纳一个过滤器，这使我们能够有效地执行结构化搜索：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    &quot;query&quot; : &#123;</div><div class="line">        &quot;bool&quot; : &#123;</div><div class="line">            &quot;must&quot; : &#123;</div><div class="line">                &quot;match&quot; : &#123;</div><div class="line">                    &quot;last_name&quot; : &quot;smith&quot; </div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            &quot;filter&quot; : &#123;</div><div class="line">                &quot;range&quot; : &#123;</div><div class="line">                    &quot;age&quot; : &#123; &quot;gt&quot; : 30 &#125; </div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们添加了一个过滤器，执行范围搜索，并重复使用与以前相同的匹配查询。<br>现在我们的结果显示只有一个员工刚好是32并被命名为smith：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e53.png" alt=""></p>
+<p><strong><em>注意：</em></strong>关于过滤器在Elasticsearch2.0开始有很大的更新，所以有些过滤操作可能会报错。例如：<code>filtered query</code>已经被废弃。</p>
+<h1 id="全文搜索（Full-Text-Search）"><a href="#全文搜索（Full-Text-Search）" class="headerlink" title="全文搜索（Full-Text Search）"></a>全文搜索（Full-Text Search）</h1><p>到目前为止的搜索很简单：单个名字，按年龄过滤。让我们尝试更高级的全文搜索，传统数据库真正难以胜任的任务。<br>我们将寻找所有喜欢攀岩的员工：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    &quot;query&quot; : &#123;</div><div class="line">        &quot;match&quot; : &#123;</div><div class="line">            &quot;about&quot; : &quot;rock climbing&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>您可以看到我们使用与之前相同的匹配查询来搜索关于“攀岩”字段。我们得到两个匹配的文档：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e54.png" alt=""><br>默认情况下，Elasticsearch按匹配结果的相关性分值（即每个文档与查询匹配程度）对匹配结果进行排序。第一个和最高分的结果是显而易见的：John·Smith关于字段清楚地说“攀岩”。<br>但为什么Jane·Smith也返回了？她的文档被返回的原因是因为在她的字段中提到了“rock”这个词。因为只有“岩石”被提及，而不是“攀登”，她的分数低于John的。<br>这是Elasticsearch如何在全文字段中进行搜索并返回最相关的结果的一个很好的例子。这种相关性的概念对于Elasticsearch很重要，并且是一个完全与传统关系数据库无关的概念，其中记录匹配或不匹配。</p>
+<h1 id="精确字段搜索"><a href="#精确字段搜索" class="headerlink" title="精确字段搜索"></a>精确字段搜索</h1><p>在字段中查找单个字词是很好的，但有时你想要匹配字词或短语的确切序列。例如，我们可以执行一个查询，该查询将仅匹配包含“rock”和“climbing”的员工记录，并在短语“rock climbing”中显示彼此相邻的单词。<br>为此，我们使用改为match_phrase查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    &quot;query&quot; : &#123;</div><div class="line">        &quot;match_phrase&quot; : &#123;</div><div class="line">            &quot;about&quot; : &quot;rock climbing&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>仅返回John Smith的文档<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e55.png" alt=""></p>
+<h1 id="高亮搜索结果"><a href="#高亮搜索结果" class="headerlink" title="高亮搜索结果"></a>高亮搜索结果</h1><p>许多应用程序喜欢从每个搜索结果突出显示文本片段，以便用户可以看到文档与查询匹配的原因。在Elasticsearch中检索突出显示的片段很容易。<br>让我们重新运行我们以前的查询，但添加一个新的highlight参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">    &quot;query&quot; : &#123;</div><div class="line">        &quot;match_phrase&quot; : &#123;</div><div class="line">            &quot;about&quot; : &quot;rock climbing&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    &quot;highlight&quot;: &#123;</div><div class="line">        &quot;fields&quot; : &#123;</div><div class="line">            &quot;about&quot; : &#123;&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当我们运行此查询时，将返回与之前相同的返回，但现在我们在响应中得到一个新的部分，称为突出显示。<br>这包含来自about字段的文字片段，其中包含在 HTML标记中包含的匹配单词：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e56.png" alt=""></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>最后，我们来到我们的最后一个业务需求：允许管理员在员工目录上运行分析。Elasticsearch具有称为聚合的功能，允许您对数据生成复杂的分析。它类似于GROUP BY中的SQL，但功能更强大。<br>例如，让我们找到我们的员工最喜欢的兴趣：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /megacorp/employee/_search</div><div class="line">&#123;</div><div class="line">  &quot;aggs&quot;: &#123;</div><div class="line">    &quot;all_interests&quot;: &#123;</div><div class="line">      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果Elasticsearch 5版本以前，将会返回：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   ...</div><div class="line">   &quot;hits&quot;: &#123; ... &#125;,</div><div class="line">   &quot;aggregations&quot;: &#123;</div><div class="line">      &quot;all_interests&quot;: &#123;</div><div class="line">         &quot;buckets&quot;: [</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;music&quot;,</div><div class="line">               &quot;doc_count&quot;: 2</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;forestry&quot;,</div><div class="line">               &quot;doc_count&quot;: 1</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;sports&quot;,</div><div class="line">               &quot;doc_count&quot;: 1</div><div class="line">            &#125;</div><div class="line">         ]</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以看到，两个员工对音乐感兴趣，一个在林业，一个在体育。这些聚合不是预先计算的，它们是从与当前查询匹配的文档即时生成的。<br>然而如果我们使用的是Elasticsearch 5版本以上的话，将会出现如下异常：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e57.png" alt=""><br>我们可以查看 <em><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/fielddata.html#_fielddata_is_disabled_on_literal_text_literal_fields_by_default" target="_blank" rel="external">Elasticsearch 5.0文档——Fielddata is disabled on text fields by default</a></em><br>大概的意思是：Fielddata可以消耗大量的堆空间，特别是在加载高基数文本字段时。一旦fielddata已经加载到堆中，它在该段的生存期内保持。此外，加载fielddata是一个昂贵的过程，可以导致用户体验延迟命中。<br>所以fielddata默认禁用。如果尝试对文本字段上的脚本进行排序，聚合或访问值，就会看到这个异常，具体使用可以参考手册。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个小例子是一个很好的演示了什么是Elasticsearch。它只是很肤浅的介绍了简单的使用，许多功能被省略，以保持简短。但是这也突出了开始构建高级搜索功能是多么容易。</p>
 
       
     </div>
@@ -514,7 +536,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2017/02/10/ES-5-0-2-学习-3-第一个ES例子/"
-     data-title="ES-5.0.2-学习(3)--第一个ES例子"
+     data-title="ES-5.0.2-学习(5)--第一个ES例子"
      data-content=""
      data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
   <div class="ds-share-inline">
@@ -547,7 +569,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/02/10/ES-5-0-2-学习-3-第一个ES例子/"
-           data-title="ES-5.0.2-学习(3)--第一个ES例子" data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
+           data-title="ES-5.0.2-学习(5)--第一个ES例子" data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
       </div>
     
   </div>
@@ -654,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#员工文档索引"><span class="nav-number">1.</span> <span class="nav-text">员工文档索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检索文档"><span class="nav-number">2.</span> <span class="nav-text">检索文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#员工文档索引"><span class="nav-number">1.</span> <span class="nav-text">员工文档索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检索文档"><span class="nav-number">2.</span> <span class="nav-text">检索文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DSL查询"><span class="nav-number">3.</span> <span class="nav-text">DSL查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全文搜索（Full-Text-Search）"><span class="nav-number">4.</span> <span class="nav-text">全文搜索（Full-Text Search）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精确字段搜索"><span class="nav-number">5.</span> <span class="nav-text">精确字段搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高亮搜索结果"><span class="nav-number">6.</span> <span class="nav-text">高亮搜索结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">7.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
