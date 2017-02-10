@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="markdown," />
+  <meta name="keywords" content="elasticsearch," />
 
 
 
@@ -89,25 +89,18 @@
 
 
 
-<meta name="description" content="导语：Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
+<meta name="description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown——入门指南">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/index.html">
+<meta property="og:title" content="ES-5.0.2-学习(3)--第一个ES例子">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/index.html">
 <meta property="og:site_name" content="李志荣的博客">
-<meta property="og:description" content="导语：Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/1.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/2.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/3.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/34.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/5.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/7.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/6.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/8.jpeg">
-<meta property="og:updated_time" content="2017-02-10T08:08:58.000Z">
+<meta property="og:description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png">
+<meta property="og:updated_time" content="2017-02-10T09:56:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown——入门指南">
-<meta name="twitter:description" content="导语：Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/../../../../images/1.png">
+<meta name="twitter:title" content="ES-5.0.2-学习(3)--第一个ES例子">
+<meta name="twitter:description" content="想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png">
 
 
 
@@ -135,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/"/>
 
 
 
 
 
-  <title> Markdown——入门指南 | 李志荣的博客 </title>
+  <title> ES-5.0.2-学习(3)--第一个ES例子 | 李志荣的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -317,7 +310,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -341,7 +334,7 @@
             
             
               
-                Markdown——入门指南
+                ES-5.0.2-学习(3)--第一个ES例子
               
             
           </h1>
@@ -356,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T17:48:48+08:00">
-                2017-02-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T17:35:28+08:00">
+                2017-02-10
               </time>
             
 
@@ -379,8 +372,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index">
-                    <span itemprop="name">markdown</span>
+                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">elasticsearch</span>
                   </a>
                 </span>
 
@@ -397,8 +390,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/09/Markdown——入门指南/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/Markdown——入门指南/" itemprop="commentCount"></span>
+                <a href="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/ES-5-0-2-学习-3-第一个ES例子/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -429,50 +422,38 @@
       
 
       
-        <h1 id="导语："><a href="#导语：" class="headerlink" title="导语："></a>导语：</h1><p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
-<p><img src="/2017/02/09/Markdown——入门指南/../../../../images/1.png" alt="1"><br><a id="more"></a></p>
-<h1 id="一、认识-Markdown"><a href="#一、认识-Markdown" class="headerlink" title="一、认识 Markdown"></a>一、认识 Markdown</h1><p>在刚才的导语里提到，Markdown 是一种用来写作的轻量级「标记语言」，它用简洁的语法代替排版，而不像一般我们用的字处理软件 Word 或 Pages 有大量的排版、字体设置。它使我们专心于码字，用「标记」语法，来代替常见的排版格式。例如此文从内容到格式，甚至插图，键盘就可以通通搞定了。目前来看，支持 Markdown 语法的编辑器有很多，包括很多网站（例如简书）也支持了 Markdown 的文字录入。Markdown 从写作到完成，导出格式随心所欲，你可以导出 HTML 格式的文件用来网站发布，也可以十分方便的导出 PDF 格式，这种格式写出的简历更能得到 HR 的好感。甚至可以利用 CloudApp 这种云服务工具直接上传至网页用来分享你的文章，全球最大的轻博客平台 Tumblr，也支持 Mou 这类 Markdown 工具的直接上传。</p>
-<h3 id="Markdown-官方文档"><a href="#Markdown-官方文档" class="headerlink" title="Markdown 官方文档"></a>Markdown 官方文档</h3><p>这里可以看到官方的 Markdown 语法规则文档，当然，后文我也会用自己的方式阐述这些语法的具体用法。</p>
+        <p>想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。<br><a id="more"></a></p>
+<h1 id="员工文档索引"><a href="#员工文档索引" class="headerlink" title="员工文档索引"></a>员工文档索引</h1><p>业务首先需要存储员工数据。这将采取一个员工文档的形式：单个文档表示单个员工。在Elasticsearch中存储数据的行为称为索引，但是在索引文档之前，我们需要决定在哪里存储它。<br>在Elasticsearch中，文档属于某个类型，这些类型位于索引中。可以绘制一些（粗略）与传统关系数据库的对比：</p>
 <ul>
-<li><em><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">创始人 John Gruber 的 Markdown 语法说明</a></em></li>
-<li><em><a href="http://wowubuntu.com/markdown/#list" target="_blank" rel="external">Markdown 中文版语法说明</a></em></li>
+<li><strong>Relational DB  ⇒ Databases ⇒ Tables ⇒ Rows      ⇒ Columns</strong></li>
+<li><strong>Elasticsearch  ⇒ Indices   ⇒ Types  ⇒ Documents ⇒ Fields</strong></li>
 </ul>
-<h3 id="使用-Markdown-的优点"><a href="#使用-Markdown-的优点" class="headerlink" title="使用 Markdown 的优点"></a>使用 Markdown 的优点</h3><ul>
-<li>专注你的文字内容而不是排版样式，安心写作。</li>
-<li>轻松的导出 HTML、PDF 和本身的 .md 文件。</li>
-<li>纯文本内容，兼容所有的文本编辑器与字处理软件。</li>
-<li>随时修改你的文章版本，不必像字处理软件生成若干文件版本导致混乱。</li>
-<li>可读、直观、学习成本低。</li>
-</ul>
-<h3 id="使用-Markdown-的误区"><a href="#使用-Markdown-的误区" class="headerlink" title="使用 Markdown 的误区"></a>使用 Markdown 的误区</h3><blockquote>
-<p><em>We believe that writing is about content, about what you want to say – not about fancy formatting.<br>    我们坚信写作写的是内容，所思所想，而不是花样格式。<br>    — Ulysses for Mac</em></p>
-</blockquote>
+<p>Elasticsearch集群可以包含多个索引（数据库），这些索引又包含多个类型（表）。这些类型包含多个文档（行），每个文档都有多个字段（列）。<br>你可能已经注意到，在Elasticsearch的上下文中，索引被重载了几个含义。如下：</p>
 <ul>
-<li>Markdown 旨在简洁、高效，也由于 Markdown 的易读易写，人们用不同的编程语言实现了多个版本的解析器和生成器，这就导致了目前不同的 Markdown 工具集成了不同的功能（基础功能大致相同），例如流程图与时序图，复杂表格与复杂公式的呈现，虽然功能的丰富并没有什么本质的缺点，但终归有些背离初衷，何况在编写的过程中很费神，不如使用专业的工具撰写来的更有效率，所以如果你需实现复杂功能，专业的图形界面工具会更加方便。<strong>当然，如果你对折腾这些不同客户端对 Markdown 的定制所带来高阶功能感到愉悦的话，那也是无可厚非的。</strong></li>
+<li><strong>索引（名词）：</strong>正如前面所解释的那样，索引就像传统的关系数据库中的数据库一样。它是存储相关文档的地方。index的复数形式是indices或indexes。</li>
+<li><strong>索引（动词）：</strong>索引一个文档是将一个文档存储在索引（名词）中，以便它可以检索和查询。它很像插入关键词SQL。此外，如果文档已经存在，新的文档将取代旧的。</li>
+<li><strong>倒排索引：</strong>关系数据库中增加一个索引，如B-树索引，对特定列为了提高数据检索的速度。Elasticsearch和Lucene提供相同目的的索引称为倒排索引。<br>默认情况下，文档中的每个字段索引（有一个倒排索引）这样的搜索。一个没有倒排索引字段不可搜索</li>
 </ul>
-<h1 id="二、Markdown-语法的简要规则"><a href="#二、Markdown-语法的简要规则" class="headerlink" title="二、Markdown 语法的简要规则"></a>二、Markdown 语法的简要规则</h1><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p><img src="/2017/02/09/Markdown——入门指南/../../../../images/2.png" alt="标题"><br>标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 # 号即可。</p>
+<p>因此我们的员工目录，我们需要处理如下事情：</p>
+<ul>
+<li>索引的每个文档，包含每个员工的所有细节。</li>
+<li>每个文档都属于<strong><em><code>employee</code></em></strong>类型。</li>
+<li>类型都包含在<strong><em><code>megacop</code></em></strong>索引中。</li>
+<li>该索引将驻留我们Elasticsearch集群内。</li>
+</ul>
+<p>下面通过命令去索引第一个员工：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PUT /megacorp/employee/1</div><div class="line">&#123;</div><div class="line">    &quot;first_name&quot; : &quot;John&quot;,</div><div class="line">    &quot;last_name&quot; :  &quot;Smith&quot;,</div><div class="line">    &quot;age&quot; :        25,</div><div class="line">    &quot;about&quot; :      &quot;I love to go rock climbing&quot;,</div><div class="line">    &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意 <strong><em><code>/megacorp/employee/1</code></em></strong> 包含的信息:</p>
 <blockquote>
-<p>#一级标题</p>
-<p>##二级标题</p>
-<p>###三级标题</p>
+<p><strong><em><code>megacorp：</code></em></strong>索引的名称<br><strong><em><code>emplogee：</code></em></strong>类型的名称<br><strong><em><code>1：</code></em></strong>员工的id</p>
 </blockquote>
-<p>以此类推，总共六级标题，建议在井号后加一个空格，这是最标准的 Markdown 语法。</p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>熟悉 HTML 的同学肯定知道有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 - 或 * 即可变为无序列表，有序列表则直接在文字前加1. 2. 3. 符号要和文字之间加上一个字符的空格。<br><img src="/2017/02/09/Markdown——入门指南/../../../../images/3.jpeg" alt=""></p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>如果你需要引用一小段别处的句子，那么就要用引用的格式。<br>只需要在文本前加入 &gt; 这种尖括号（大于号）即可<br><img src="/2017/02/09/Markdown——入门指南/../../../../images/34.jpeg" alt=""></p>
-<h3 id="图片与链接"><a href="#图片与链接" class="headerlink" title="图片与链接"></a>图片与链接</h3><p><img src="/2017/02/09/Markdown——入门指南/../../../../images/5.jpeg" alt=""><br>注：使用markdown写文章，插入图片的格式为图片名称，这里要说的是链接地址怎么写。<br>对于hexo，有两种方式：<br>使用本地路径：在hexo/source目录下新建一个img文件夹，将图片放入该文件夹下，插入图片时链接即为/img/图片名称。<br>使用微博图床，地址<a href="http://weibotuchuang.sinaapp.com/，将图片拖入区域中，会生成图片的URL，这就是链接地址。" target="_blank" rel="external">http://weibotuchuang.sinaapp.com/，将图片拖入区域中，会生成图片的URL，这就是链接地址。</a></p>
-<h3 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h3><p>Markdown 的粗体和斜体也非常简单，用两个 <em> 包含一段文本就是粗体的语法，用一个 </em> 包含一段文本就是斜体的语法。<br>例如：<strong>这里是粗体</strong> <em>这里是斜体</em> </p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>表格是我觉得 Markdown 比较累人的地方，例子如下：<br><img src="/2017/02/09/Markdown——入门指南/../../../../images/7.png" alt=""><br>这种语法生成的表格如下：<br><img src="/2017/02/09/Markdown——入门指南/../../../../images/6.png" alt=""></p>
-<h3 id="代码框"><a href="#代码框" class="headerlink" title="代码框"></a>代码框</h3><p>如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown下实现也非常简单，只需要用两个 <code>把中间的代码包裹起来。</code>this is code`<br><img src="/2017/02/09/Markdown——入门指南/../../../../images/8.jpeg" alt=""><br>使用 tab 键即可缩进。</p>
-<h3 id="块代码"><a href="#块代码" class="headerlink" title="块代码"></a>块代码</h3><p>两种方式<br>1.代码每一行的前面都加4个空格或一个tab<br>2.第一行和最后一行都是3个，中间的行是代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this is code block 1</div><div class="line">this is code block 2</div></pre></td></tr></table></figure></p>
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>分割线的语法只需要三个 * 号，例如：</p>
-<hr>
-<h1 id="三、相关推荐"><a href="#三、相关推荐" class="headerlink" title="三、相关推荐:"></a>三、相关推荐:</h1><p>图床工具用来上传图片获取 URL 地址</p>
-<ul>
-<li><a href="http://droplr.com/" target="_blank" rel="external">Droplr</a></li>
-<li><a href="http://www.getcloudapp.com/" target="_blank" rel="external">Cloudapp</a></li>
-<li><a href="https://itunes.apple.com/cn/app/yi-xiang/id672522335?mt=12&amp;uo=4" target="_blank" rel="external">ezShare for Mac</a></li>
-<li><a href="http://weibotuchuang.sinaapp.com/" target="_blank" rel="external">围脖图床修复计划</a></li>
-</ul>
+<p>成功执行返回的是一个JSON文本，包含所有关于该员工的信息。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>如果执行过程中失败了，可能存在的原因是elasticsearch默认配置中不允许自动创建索引，所以我们可以先简单在elasticsearch.yml配置文件添加action.auto_create_index：true，允许自动创建索引。</li>
+<li>没有必要首先执行任何管理任务，如创建一个索引或指定每个字段所包含的数据类型。我们可以直接索引一个文档。Elasticsearch附带默认的一切，因此所有必要的管理任务都会使用默认值在后台处理。</li>
+</ol>
+<p>在目录中添加更多的员工：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">PUT /megacorp/employee/2</div><div class="line">&#123;</div><div class="line">    &quot;first_name&quot; :  &quot;Jane&quot;,</div><div class="line">    &quot;last_name&quot; :   &quot;Smith&quot;,</div><div class="line">    &quot;age&quot; :         32,</div><div class="line">    &quot;about&quot; :       &quot;I like to collect rock albums&quot;,</div><div class="line">    &quot;interests&quot;:  [ &quot;music&quot; ]</div><div class="line">&#125;</div><div class="line"></div><div class="line">PUT /megacorp/employee/3</div><div class="line">&#123;</div><div class="line">    &quot;first_name&quot; :  &quot;Douglas&quot;,</div><div class="line">    &quot;last_name&quot; :   &quot;Fir&quot;,</div><div class="line">    &quot;age&quot; :         35,</div><div class="line">    &quot;about&quot;:        &quot;I like to build cabinets&quot;,</div><div class="line">    &quot;interests&quot;:  [ &quot;forestry&quot; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h1><p>现在我们有一些数据存储在Elasticsearch中，我们可以开始处理这个应用程序的业务需求。第一个要求是检索单个员工数据的能力。<br>这在Elasticsearch中很容易。我们只需执行HTTP GET请求并指定文档的地址——索引，类型和ID。使用这三个信息，我们可以返回原始的JSON文档，并且响应包含有关文档的一些元数据，以及Douglas Fir的原始JSON文档作为_source字段：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e51.png" alt=""><br>可以查看：<a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-4-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">ES-5.0.2-学习(4)–简单搜索</a></p>
 
       
     </div>
@@ -496,7 +477,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/markdown/" rel="tag"># markdown</a>
+            <a href="/tags/elasticsearch/" rel="tag"># elasticsearch</a>
           
         </div>
       
@@ -509,8 +490,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/" rel="next" title="ES-5.0.2-学习(1)——安装Elasticsearch、Kibana和X-Pack">
-                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(1)——安装Elasticsearch、Kibana和X-Pack
+              <a href="/2017/02/10/ES-5-0-2-学习-3-简单搜索/" rel="next" title="ES-5.0.2-学习(4)--简单搜索">
+                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(4)--简单搜索
               </a>
             
           </div>
@@ -518,10 +499,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/" rel="prev" title="ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用">
-                ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -536,10 +513,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/09/Markdown——入门指南/"
-     data-title="Markdown——入门指南"
+        <div class="ds-share flat" data-thread-key="2017/02/10/ES-5-0-2-学习-3-第一个ES例子/"
+     data-title="ES-5.0.2-学习(3)--第一个ES例子"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/">
+     data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -569,8 +546,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/09/Markdown——入门指南/"
-           data-title="Markdown——入门指南" data-url="http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/">
+      <div class="ds-thread" data-thread-key="2017/02/10/ES-5-0-2-学习-3-第一个ES例子/"
+           data-title="ES-5.0.2-学习(3)--第一个ES例子" data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/">
       </div>
     
   </div>
@@ -677,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导语："><span class="nav-number">1.</span> <span class="nav-text">导语：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、认识-Markdown"><span class="nav-number">2.</span> <span class="nav-text">一、认识 Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown-官方文档"><span class="nav-number">2.0.1.</span> <span class="nav-text">Markdown 官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Markdown-的优点"><span class="nav-number">2.0.2.</span> <span class="nav-text">使用 Markdown 的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Markdown-的误区"><span class="nav-number">2.0.3.</span> <span class="nav-text">使用 Markdown 的误区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Markdown-语法的简要规则"><span class="nav-number">3.</span> <span class="nav-text">二、Markdown 语法的简要规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题"><span class="nav-number">3.0.1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-number">3.0.2.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">3.0.3.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片与链接"><span class="nav-number">3.0.4.</span> <span class="nav-text">图片与链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粗体与斜体"><span class="nav-number">3.0.5.</span> <span class="nav-text">粗体与斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表格"><span class="nav-number">3.0.6.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码框"><span class="nav-number">3.0.7.</span> <span class="nav-text">代码框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块代码"><span class="nav-number">3.0.8.</span> <span class="nav-text">块代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割线"><span class="nav-number">3.0.9.</span> <span class="nav-text">分割线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、相关推荐"><span class="nav-number">4.</span> <span class="nav-text">三、相关推荐:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#员工文档索引"><span class="nav-number">1.</span> <span class="nav-text">员工文档索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检索文档"><span class="nav-number">2.</span> <span class="nav-text">检索文档</span></a></li></ol></div>
             
 
           </div>
