@@ -978,7 +978,7 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: #fff;
+  background: url("../images/favicon.ico");
 }
 .header-inner {
   position: relative;
@@ -1705,7 +1705,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff8a96;
+  background: #6ec7ff;
 }
 .links-of-blogroll {
   font-size: 13px;
