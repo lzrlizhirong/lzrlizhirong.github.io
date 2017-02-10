@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-10T08:16:24.000Z</updated>
+  <updated>2017-02-10T09:08:44.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ES-5.0.2-学习(3)--简单搜索</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/</id>
+    <published>2017-02-10T08:28:55.000Z</published>
+    <updated>2017-02-10T09:08:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>注：<strong>以下操作均是在kibana中，如图所示</strong></p>
+<h1 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search</div></pre></td></tr></table></figure>
+<p><img src="/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png" alt=""><br><a id="more"></a><br><strong>hits：</strong></p>
+<blockquote>
+<ol>
+<li>total 总数</li>
+<li>hits 前10条数据</li>
+<li>hits 数组中的每个结果都包含_index、_type和文档的_id字段，被加入到_source字段中这意味着在搜索结果中我们将可以直接使用全部文档。</li>
+<li>每个节点都有一个_score字段，这是相关性得分(relevance score)，它衡量了文档与查询的匹配程度。默认的，返回的结果中关联性最大的文档排在首位；这意味着，它是按照_score降序排列的。没有指定任何查询，所以所有文档的相关性是一样的，因此所有结果的_score都是取得一个中间值1。  </li>
+</ol>
+</blockquote>
+<p><strong>took：</strong>整个搜索请求花费的毫秒数。<br><strong>_shards：</strong>节点告诉我们参与查询的分片数（total字段），有多少是成功的（successful），有多少的是失败的（failed）。<br><strong>time_out：</strong>告诉我们查询超时与否。一般的，搜索请求不会超时。如果响应速度比完整的结果更重要，你可以定义timeout参数为10或者10ms（10毫秒），或者1s（1秒）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?timeout=10ms</div></pre></td></tr></table></figure></p>
+<p>Elasticsearch将返回在请求超时前收集到的结果。<br><strong>注意：</strong> <strong><em>timeout不会停止执行查询，它仅仅告诉你目前顺利返回结果的节点然后关闭连接。在后台，其他分片可能依旧执行查询，尽管结果已经被发送。<br>使用超时是因为对于你的业务需求来说非常重要，而不是因为你想中断执行长时间运行的查询。</em></strong></p>
+<h1 id="多索引和多类别"><a href="#多索引和多类别" class="headerlink" title="多索引和多类别"></a>多索引和多类别</h1><p>在所有索引的所有类型中搜索：<em>/_search</em><br>在索引gb的所有类型中搜索：<em>/gb/_search</em><br>在索引gb和us的所有类型中搜索：<em>/gb,us/_search</em><br>在以g或u开头的索引的所有类型中搜索：/g*,u*/_search<br>在索引gb的类型user中搜索：<em>/gb/user/_search</em><br>在索引gb和us的类型为user和tweet中搜索：<em>/gb,us/user,tweet/_search</em><br>在所有索引的user和tweet中搜索：<em>/_all/user,tweet/_search</em><br>当你搜索包含单一索引时，Elasticsearch转发搜索请求到这个索引的主分片或每个分片的复制分片上，然后聚集每个分片的结果。搜索包含多个索引也是同样的方式——只不过会有更多的分片被关联。</p>
+<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><p>如果你想每页显示5个结果，页码从1到3，那请求如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET /_search?size=5</div><div class="line">GET /_search?size=5&amp;from=5</div><div class="line">GET /_search?size=5&amp;from=10</div></pre></td></tr></table></figure></p>
+<p>应该当心分页太深或者一次请求太多的结果。结果在返回前会被排序。但是记住一个搜索请求常常涉及多个分片。每个分片生成自己排好序的结果，它们接着需要集中起来排序以确保整体排序正确。<br>现在假设我们请求第1000页——结果10001到10010。工作方式都相同，不同的是每个分片都必须产生顶端的10010个结果。然后请求节点排序这50050个结果并丢弃50040个！</p>
+<h1 id="简易搜索"><a href="#简易搜索" class="headerlink" title="简易搜索"></a>简易搜索</h1><p>search API有两种表单：一种是“简易版”的查询字符串(query string)将所有参数通过查询字符串定义，另一种版本使用JSON完整的表示请求体(request body)，这种富搜索语言叫做结构化查询语句（DSL）。<br>查询字符串搜索对于在命令行下运行特定情况下查询特别有用。例如这个语句查询所有类型为tweet并在tweet字段中包含elasticsearch字符的文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_all/tweet/_search?q=tweet:elasticsearch</div></pre></td></tr></table></figure></p>
+<p>下一个语句查找name字段中包含”john”和tweet字段包含”mary”的结果。实际的查询只需要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:john +tweet:mary</div></pre></td></tr></table></figure></p>
+<p>但是url编码需要将查询字符串参数变得更加神秘：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?q=%2Bname%3Ajohn+%2Btweet%3Amary</div></pre></td></tr></table></figure></p>
+<p>“+”前缀表示语句匹配条件必须被满足。类似的”-“前缀表示条件必须不被满足。所有条件如果没有+或-表示是可选的——匹配越多，相关的文档就越多。</p>
+<h1 id="all字段"><a href="#all字段" class="headerlink" title="_all字段"></a>_all字段</h1><p>返回包含”mary”字符的所有文档的简单搜索：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?q=mary</div></pre></td></tr></table></figure></p>
+<p>当你索引一个文档，Elasticsearch把所有字符串字段值连接起来放在一个大字符串中，它被索引为一个特殊的字段_all。例如，当索引这个文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;tweet&quot;:    &quot;However did I manage before Elasticsearch?&quot;,</div><div class="line">    &quot;date&quot;:     &quot;2014-09-14&quot;,</div><div class="line">    &quot;name&quot;:     &quot;Mary Jones&quot;,</div><div class="line">    &quot;user_id&quot;:  1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这好比我们增加了一个叫做_all的额外字段值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;However did I manage before Elasticsearch? 2014-09-14 Mary Jones 1&quot;</div></pre></td></tr></table></figure></p>
+<p>若没有指定字段，查询字符串搜索（即q=xxx）使用_all字段搜索。</p>
+<h1 id="更复杂的语句"><a href="#更复杂的语句" class="headerlink" title="更复杂的语句"></a>更复杂的语句</h1><p>下一个搜索的语句：<br>_all field</p>
+<ul>
+<li>name字段包含”mary”或”john”</li>
+<li>date晚于2014-09-10</li>
+<li>_all字段包含”aggregations”或”geo”</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:(mary john) +date:&gt;2014-09-10 +(aggregations geo)</div></pre></td></tr></table></figure>
+<p>编码后的查询字符串变得不太容易阅读<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)</div></pre></td></tr></table></figure></p>
+<p>就像你上面看到的例子，简单查询字符串搜索惊人的强大。允许我们简洁明快的表示复杂的查询。这对于命令行下一次性查询或者开发模式下非常有用。<br>然而，你可以看到简洁带来了隐晦和调试困难。而且它很脆弱——查询字符串中一个细小的语法错误，像-、:、/或”错位就会导致返回错误而不是结果。<br>最后，查询字符串搜索允许任意用户在索引中任何一个字段上运行潜在的慢查询语句，可能暴露私有信息甚至使你的集群瘫痪。<br>取而代之的，生产环境我们一般依赖全功能的请求体搜索API，它能完成前面所有的事情，甚至更多。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;注：&lt;strong&gt;以下操作均是在kibana中，如图所示&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;空搜索&quot;&gt;&lt;a href=&quot;#空搜索&quot; class=&quot;headerlink&quot; title=&quot;空搜索&quot;&gt;&lt;/a&gt;空搜索&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;GET /_search&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+    
+    
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+    
+  </entry>
   
   <entry>
     <title>ES-5.0.2-学习(3)——单台服务器部署多个节点</title>
