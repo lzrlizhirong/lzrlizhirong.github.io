@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-10T06:32:26.000Z</updated>
+  <updated>2017-02-10T08:11:14.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ES-5.0.2-学习(3)——台服务器部署多个节点</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/</id>
+    <published>2017-02-10T07:49:18.000Z</published>
+    <updated>2017-02-10T08:11:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。<br><a id="more"></a></p>
+<h1 id="1、首先将elasticsearch-5-0-2文件夹再复制一份"><a href="#1、首先将elasticsearch-5-0-2文件夹再复制一份" class="headerlink" title="1、首先将elasticsearch-5.0.2文件夹再复制一份"></a>1、首先将elasticsearch-5.0.2文件夹再复制一份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R elasticsearch-5.0.2 elasticsearch-5.0.2-node-2</div></pre></td></tr></table></figure>
+<h1 id="2、主要工作就是修改elasticsearch-yml配置文件。"><a href="#2、主要工作就是修改elasticsearch-yml配置文件。" class="headerlink" title="2、主要工作就是修改elasticsearch.yml配置文件。"></a>2、主要工作就是修改elasticsearch.yml配置文件。</h1><p>实例二：config目录下的elasticsearch.yml内容<br>将node.name: node-1 修改为 node-2</p>
+<h1 id="3、分别开启两个节点"><a href="#3、分别开启两个节点" class="headerlink" title="3、分别开启两个节点"></a>3、分别开启两个节点</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/elasticsearch</div></pre></td></tr></table></figure>
+<h1 id="4、查询是否成功"><a href="#4、查询是否成功" class="headerlink" title="4、查询是否成功"></a>4、查询是否成功</h1><p>浏览器访问 <em><a href="http://localhost:9200/_cluster/health?pretty" target="_blank" rel="external">http://localhost:9200/_cluster/health?pretty</a></em><br>若出现类似如下则表示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"></div><div class="line">    &quot;cluster_name&quot;: &quot;es-lzr&quot;,</div><div class="line">    &quot;status&quot;: &quot;green&quot;,</div><div class="line">    &quot;timed_out&quot;: false,</div><div class="line">    &quot;number_of_nodes&quot;: 2,</div><div class="line">    &quot;number_of_data_nodes&quot;: 2,</div><div class="line">    &quot;active_primary_shards&quot;: 17,</div><div class="line">    &quot;active_shards&quot;: 34,</div><div class="line">    &quot;relocating_shards&quot;: 0,</div><div class="line">    &quot;initializing_shards&quot;: 0,</div><div class="line">    &quot;unassigned_shards&quot;: 0,</div><div class="line">    &quot;delayed_unassigned_shards&quot;: 0,</div><div class="line">    &quot;number_of_pending_tasks&quot;: 0,</div><div class="line">    &quot;number_of_in_flight_fetch&quot;: 0,</div><div class="line">    &quot;task_max_waiting_in_queue_millis&quot;: 0,</div><div class="line">    &quot;active_shards_percent_as_number&quot;: 100.0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以通过Kibana查看节点效果 <em><a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></em> 账号 <em>elastic</em> 密码 <em>changeme</em><br><img src="/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png" alt=""></p>
+<h1 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h1><p>1.如果修改了配置文件的 <em>http.port、transport.tcp.port</em>项，一定要将各个节点的值设置不同，否则会出现占用的情况。正常如果不修改，默认会分配值。<br>2.示例二开启时，实例一报警告（实际操作中可以忽略）：</p>
+<blockquote>
+<p>[2016-12-11T18:06:43,678][WARN ][o.e.d.z.ElectMasterService] [node-1] value for setting “discovery.zen.minimum_master_nodes” is too low. This can result in data loss! Please set it to at least a quorum of master-eligible nodes (current value: [-1], total number of master-eligible nodes used for publishing in this round: [2])<br>是因为默认情况下 <em>discovery.zen.minimum_master_nodes=1</em> 一台服务器只能有一个主节点，所以在实例二的配置文件中可以添加 <em>node.master: false</em> 。<br>3.示例二不能开启，报如下错误：<br>[2016-12-11T16:53:02,711][INFO ][o.e.d.z.ZenDiscovery     ] [node-2] failed to send join request to master [{node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300}], reason [RemoteTransportException[[node-1][127.0.0.1:9300][internal:discovery/zen/join]]; nested: IllegalArgumentException[can’t add node {node-2}{vP19PMOyT2ilJKRAqgn78w}{qhDDVzwZQ0GXZXhIMmpGKA}{127.0.0.1}{127.0.0.1:9301}, found existing node {node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300} with the same id but is a different node instance]; ]<br>[2016-12-11T16:53:02,911][INFO ][o.e.x.m.e.Exporters      ] [node-2] skipping exporter [default_local] as it isn’t ready yet<br>[2016-12-11T16:53:02,912][ERROR][o.e.x.m.AgentService     ] [node-2] exception when exporting documents<br>org.elasticsearch.xpack.monitoring.exporter.ExportException: exporters are either not ready or faulty<br>    at org.elasticsearch.xpack.monitoring.exporter.Exporters.export(Exporters.java:188) ~[x-pack-5.0.2.jar:5.0.2]<br>    at org.elasticsearch.xpack.monitoring.AgentService$ExportingWorker.run(AgentService.java:208) [x-pack-5.0.2.jar:5.0.2]<br>    at java.lang.Thread.run(Thread.java:745) [?:1.8.0_111]</p>
+</blockquote>
+<p>是因为复制的elasticsearch文件夹下包含了data文件中示例一的节点数据，需要把示例二data文件下的文件清空。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+    
+    
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+    
+      <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
+    
+  </entry>
   
   <entry>
     <title>为了保持逼格，不要停止写作</title>
@@ -64,7 +99,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94Kibana-X-Pack%E4%BB%8B%E7%BB%8D%E4%BD%BF%E7%94%A8/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/</id>
     <published>2017-02-09T11:20:34.000Z</published>
-    <updated>2017-02-10T06:34:02.000Z</updated>
+    <updated>2017-02-10T08:09:59.000Z</updated>
     
     <content type="html"><![CDATA[<p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。<br>下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png" alt=""><br><a id="more"></a><br>下面的图展示的是Kibana 4的界面，和Kibana 3最大的区别是将原来的主体分成三个部分，分别是发现页、可视化、仪表盘。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e22.png" alt=""><br>下面是目前Kibana 5最新版本的界面。相比较Kibana 4除了界面的风格变化，最主要是功能栏上添加了Timeline、Management和Dev Tools选项。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e23.png" alt=""></p>
 <h1 id="Discover"><a href="#Discover" class="headerlink" title="Discover"></a>Discover</h1><blockquote>
@@ -108,10 +143,14 @@
     
     </summary>
     
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+    
+      <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
+    
+      <category term="x-pack" scheme="http://lzrlizhirong.github.io/tags/x-pack/"/>
     
   </entry>
   
@@ -120,7 +159,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/Markdown%E2%80%94%E2%80%94%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/</id>
     <published>2017-02-09T09:48:48.000Z</published>
-    <updated>2017-02-10T06:32:47.000Z</updated>
+    <updated>2017-02-10T08:08:58.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="导语："><a href="#导语：" class="headerlink" title="导语："></a>导语：</h1><p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
 <p><img src="/2017/02/09/Markdown——入门指南/../../../../images/1.png" alt="1"><br><a id="more"></a></p>
@@ -175,10 +214,10 @@
     
     </summary>
     
-      <category term="Markdown" scheme="http://lzrlizhirong.github.io/categories/Markdown/"/>
+      <category term="markdown" scheme="http://lzrlizhirong.github.io/categories/markdown/"/>
     
     
-      <category term="MarkDown" scheme="http://lzrlizhirong.github.io/tags/MarkDown/"/>
+      <category term="markdown" scheme="http://lzrlizhirong.github.io/tags/markdown/"/>
     
   </entry>
   
@@ -187,7 +226,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/</id>
     <published>2017-02-09T08:39:09.000Z</published>
-    <updated>2017-02-10T06:33:02.000Z</updated>
+    <updated>2017-02-10T08:09:37.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="安装准备："><a href="#安装准备：" class="headerlink" title="安装准备："></a>安装准备：</h1><p>安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。</p>
 <h1 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h1><p>首先到官网下载最新版本的Elasticsearch压缩包。<br>可以使用命令，注意将最新的可用的下载链接填入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.0.2.zip</div><div class="line">unzip elasticsearch-5.0.2.zip</div><div class="line">cd elasticsearch-5.0.2</div></pre></td></tr></table></figure></p>
@@ -224,10 +263,14 @@
     
     </summary>
     
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
     
     
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
+      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+    
+      <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
+    
+      <category term="x-pack" scheme="http://lzrlizhirong.github.io/tags/x-pack/"/>
     
   </entry>
   

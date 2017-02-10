@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="elasticsearch,kibana,x-pack," />
+  <meta name="keywords" content="elasticsearch,kibana," />
 
 
 
@@ -89,28 +89,18 @@
 
 
 
-<meta name="description" content="Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。">
+<meta name="description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/index.html">
+<meta property="og:title" content="ES-5.0.2-学习(3)——台服务器部署多个节点">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/index.html">
 <meta property="og:site_name" content="李志荣的博客">
-<meta property="og:description" content="Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e22.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e23.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e24.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e25.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e26.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e27.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e28.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e29.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e210.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e211.png">
-<meta property="og:updated_time" content="2017-02-10T08:09:59.000Z">
+<meta property="og:description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png">
+<meta property="og:updated_time" content="2017-02-10T08:11:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用">
-<meta name="twitter:description" content="Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png">
+<meta name="twitter:title" content="ES-5.0.2-学习(3)——台服务器部署多个节点">
+<meta name="twitter:description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png">
 
 
 
@@ -138,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"/>
 
 
 
 
 
-  <title> ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用 | 李志荣的博客 </title>
+  <title> ES-5.0.2-学习(3)——台服务器部署多个节点 | 李志荣的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -320,7 +310,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -344,7 +334,7 @@
             
             
               
-                ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用
+                ES-5.0.2-学习(3)——台服务器部署多个节点
               
             
           </h1>
@@ -359,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T19:20:34+08:00">
-                2017-02-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T15:49:18+08:00">
+                2017-02-10
               </time>
             
 
@@ -400,8 +390,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/" itemprop="commentCount"></span>
+                <a href="/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -432,40 +422,17 @@
       
 
       
-        <p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。<br>下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png" alt=""><br><a id="more"></a><br>下面的图展示的是Kibana 4的界面，和Kibana 3最大的区别是将原来的主体分成三个部分，分别是发现页、可视化、仪表盘。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e22.png" alt=""><br>下面是目前Kibana 5最新版本的界面。相比较Kibana 4除了界面的风格变化，最主要是功能栏上添加了Timeline、Management和Dev Tools选项。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e23.png" alt=""></p>
-<h1 id="Discover"><a href="#Discover" class="headerlink" title="Discover"></a>Discover</h1><blockquote>
-<p><em>You can interactively explore your data from the Discover page. You have access to every document in every index that matches the selected index pattern. You can submit search queries, filter the search results, and view document data. You can also see the number of documents that match the search query and get field value statistics. If a time field is configured for the selected index pattern, the distribution of documents over time is displayed in a histogram at the top of the page.</em></p>
-</blockquote>
-<p>从发现页可以交互地探索ES的数据。可以访问与所选索引模式相匹配的每一个索引中的每一个文档。您可以提交搜索查询、筛选搜索结果和查看文档数据。还可以看到匹配搜索查询和获取字段值统计的文档的数量。如果一个时间字段被配置为所选择的索引模式，则文档的分布随着时间的推移显示在页面顶部的直方图中。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e24.png" alt=""></p>
-<h1 id="Visualize"><a href="#Visualize" class="headerlink" title="Visualize"></a>Visualize</h1><blockquote>
-<p>Visualize enables you to create visualizations of the data in your Elasticsearch indices. You can then build dashboards that display related visualizations.Kibana visualizations are based on Elasticsearch queries. By using a series of Elasticsearch aggregations to extract and process your data, you can create charts that show you the trends, spikes, and dips you need to know about.You can create visualizations from a search saved from Discover or start with a new search query.</p>
-</blockquote>
-<p>可视化能使你创造你的Elasticsearch指标数据的可视化。然后你可以建立仪表板显示相关的可视化。Kibana的可视化是基于Elasticsearch查询。通过一系列的Elasticsearch聚合提取和处理您的数据，您可以创建图表显示你需要知道的关于趋势，峰值和骤降。您可以从搜索保存的搜索中创建可视化或从一个新的搜索查询开始。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e25.png" alt=""></p>
-<h1 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h1><blockquote>
-<p>A Kibana dashboard displays a collection of saved visualizations. You can arrange and resize the visualizations as needed and save dashboards so they be reloaded and shared.</p>
-</blockquote>
-<p>一个仪表板显示Kibana保存的一系列可视化。你可以根据需要安排和调整可视化，并保存仪表盘，可以被加载和共享。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e26.png" alt=""></p>
-<h1 id="Monitoring"><a href="#Monitoring" class="headerlink" title="Monitoring"></a>Monitoring</h1><p>从图中可以发现，默认Kibana是没有该选项的。其实，Monitoring是由X-Pack集成提供的。</p>
+        <p>一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。<br><a id="more"></a></p>
+<h1 id="1、首先将elasticsearch-5-0-2文件夹再复制一份"><a href="#1、首先将elasticsearch-5-0-2文件夹再复制一份" class="headerlink" title="1、首先将elasticsearch-5.0.2文件夹再复制一份"></a>1、首先将elasticsearch-5.0.2文件夹再复制一份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R elasticsearch-5.0.2 elasticsearch-5.0.2-node-2</div></pre></td></tr></table></figure>
+<h1 id="2、主要工作就是修改elasticsearch-yml配置文件。"><a href="#2、主要工作就是修改elasticsearch-yml配置文件。" class="headerlink" title="2、主要工作就是修改elasticsearch.yml配置文件。"></a>2、主要工作就是修改elasticsearch.yml配置文件。</h1><p>实例二：config目录下的elasticsearch.yml内容<br>将node.name: node-1 修改为 node-2</p>
+<h1 id="3、分别开启两个节点"><a href="#3、分别开启两个节点" class="headerlink" title="3、分别开启两个节点"></a>3、分别开启两个节点</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/elasticsearch</div></pre></td></tr></table></figure>
+<h1 id="4、查询是否成功"><a href="#4、查询是否成功" class="headerlink" title="4、查询是否成功"></a>4、查询是否成功</h1><p>浏览器访问 <em><a href="http://localhost:9200/_cluster/health?pretty" target="_blank" rel="external">http://localhost:9200/_cluster/health?pretty</a></em><br>若出现类似如下则表示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"></div><div class="line">    &quot;cluster_name&quot;: &quot;es-lzr&quot;,</div><div class="line">    &quot;status&quot;: &quot;green&quot;,</div><div class="line">    &quot;timed_out&quot;: false,</div><div class="line">    &quot;number_of_nodes&quot;: 2,</div><div class="line">    &quot;number_of_data_nodes&quot;: 2,</div><div class="line">    &quot;active_primary_shards&quot;: 17,</div><div class="line">    &quot;active_shards&quot;: 34,</div><div class="line">    &quot;relocating_shards&quot;: 0,</div><div class="line">    &quot;initializing_shards&quot;: 0,</div><div class="line">    &quot;unassigned_shards&quot;: 0,</div><div class="line">    &quot;delayed_unassigned_shards&quot;: 0,</div><div class="line">    &quot;number_of_pending_tasks&quot;: 0,</div><div class="line">    &quot;number_of_in_flight_fetch&quot;: 0,</div><div class="line">    &quot;task_max_waiting_in_queue_millis&quot;: 0,</div><div class="line">    &quot;active_shards_percent_as_number&quot;: 100.0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以通过Kibana查看节点效果 <em><a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></em> 账号 <em>elastic</em> 密码 <em>changeme</em><br><img src="/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png" alt=""></p>
+<h1 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h1><p>1.如果修改了配置文件的 <em>http.port、transport.tcp.port</em>项，一定要将各个节点的值设置不同，否则会出现占用的情况。正常如果不修改，默认会分配值。<br>2.示例二开启时，实例一报警告（实际操作中可以忽略）：</p>
 <blockquote>
-<p>The X-Pack monitoring components enable you to easily monitor Elasticsearch through Kibana. You can view cluster health and performance in real time as well as analyze past cluster, index, and node metrics. In addition, you can monitor the performance of Kibana itself.When you install X-Pack on your cluster, a monitoring agent runs on each node to collect and index metrics from Elasticsearch. With X-Pack installed in Kibana, you can then view the monitoring data through a set of specialized dashboards.</p>
+<p>[2016-12-11T18:06:43,678][WARN ][o.e.d.z.ElectMasterService] [node-1] value for setting “discovery.zen.minimum_master_nodes” is too low. This can result in data loss! Please set it to at least a quorum of master-eligible nodes (current value: [-1], total number of master-eligible nodes used for publishing in this round: [2])<br>是因为默认情况下 <em>discovery.zen.minimum_master_nodes=1</em> 一台服务器只能有一个主节点，所以在实例二的配置文件中可以添加 <em>node.master: false</em> 。<br>3.示例二不能开启，报如下错误：<br>[2016-12-11T16:53:02,711][INFO ][o.e.d.z.ZenDiscovery     ] [node-2] failed to send join request to master [{node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300}], reason [RemoteTransportException[[node-1][127.0.0.1:9300][internal:discovery/zen/join]]; nested: IllegalArgumentException[can’t add node {node-2}{vP19PMOyT2ilJKRAqgn78w}{qhDDVzwZQ0GXZXhIMmpGKA}{127.0.0.1}{127.0.0.1:9301}, found existing node {node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300} with the same id but is a different node instance]; ]<br>[2016-12-11T16:53:02,911][INFO ][o.e.x.m.e.Exporters      ] [node-2] skipping exporter [default_local] as it isn’t ready yet<br>[2016-12-11T16:53:02,912][ERROR][o.e.x.m.AgentService     ] [node-2] exception when exporting documents<br>org.elasticsearch.xpack.monitoring.exporter.ExportException: exporters are either not ready or faulty<br>    at org.elasticsearch.xpack.monitoring.exporter.Exporters.export(Exporters.java:188) ~[x-pack-5.0.2.jar:5.0.2]<br>    at org.elasticsearch.xpack.monitoring.AgentService$ExportingWorker.run(AgentService.java:208) [x-pack-5.0.2.jar:5.0.2]<br>    at java.lang.Thread.run(Thread.java:745) [?:1.8.0_111]</p>
 </blockquote>
-<p>该X-pack监控组件使您可以通过Kibana轻松地监控ElasticSearch。您可以实时查看集群的健康和性能，以及分析过去的集群、索引和节点度量。此外，您可以监视Kibana本身性能。当你安装X-pack在群集上，监控代理运行在每个节点上收集和指数指标从Elasticsearch。安装在X-pack在Kibana上，您可以查看通过一套专门的仪表板监控数据。<br>回顾安装过程：<a href="https://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/">ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/</a>，可以发现，在安装X-pack的时候分别在ElasticSearch根目录和Kibana根目录下操作。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e27.png" alt=""></p>
-<h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><blockquote>
-<p>The X-Pack graph capabilities enable you to discover how items in an Elasticsearch index are related. You can explore the connections between indexed terms and see which connections are the most meaningful. This can be useful in a variety of applications, from fraud detection to recommendation engines.For example, graph exploration could help you uncover website vulnerabilities that hackers are targeting so you can harden your website. Or, you might provide graph-based personalized recommendations to your e-commerce customers.X-Pack provides a simple, yet powerful graph exploration API, and an interactive graph visualization tool for Kibana. Both work with out of the box with existing Elasticsearch indices—you don’t need to store any additional data to use the X-Pack graph features.</p>
-</blockquote>
-<p>X-Pack图的能力使你发现一个Elasticsearch索引项是如何相关联的。你可以探索索引条款之间的连接，看看哪些连接是最有意义的。从欺诈检测到推荐引擎，对各种应用中这都是有用的，例如，图的探索可以帮助你发现网站上黑客的目标的漏洞，所以你可以硬化你的网站。或者，您可以为您的电子商务客户提供基于图表的个性化推荐。X-pack提供简单，但功能强大的图形开发API，和Kibana交互式图形可视化工具。使用X-pack图有工作与开销与现有Elasticsearch指标你不需要任何额外的数据存储的特征。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e28.png" alt=""></p>
-<h1 id="Timelion"><a href="#Timelion" class="headerlink" title="Timelion"></a>Timelion</h1><blockquote>
-<p>Timelion is a time series data visualizer that enables you to combine totally independent data sources within a single visualization. It’s driven by a simple expression language you use to retrieve time series data, perform calculations to tease out the answers to complex questions, and visualize the results.</p>
-</blockquote>
-<p>Timelion是一个时间序列数据的可视化，可以结合在一个单一的可视化完全独立的数据源。它是由一个简单的表达式语言驱动的，你用来检索时间序列数据，进行计算，找出复杂的问题的答案，并可视化的结果。<br>这个功能由一系列的功能函数组成，同样的查询的结果，也可以通过Dashboard显示查看。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e29.png" alt=""></p>
-<h1 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h1><blockquote>
-<p>The Management application is where you perform your runtime configuration of Kibana, including both the initial setup and ongoing configuration of index patterns, advanced settings that tweak the behaviors of Kibana itself, and the various “objects” that you can save throughout Kibana such as searches, visualizations, and dashboards.This section is pluginable, so in addition to the out of the box capabitilies, packs such as X-Pack can add additional management capabilities to Kibana.<br>管理中的应用是在你执行你的运行时配置kibana，包括初始设置和指标进行配置模式，高级设置，调整自己的行为和Kibana，各种“对象”，你可以查看保存在整个Kibana的内容如发现页，可视化和仪表板。<br>这部分是pluginable，除此之外，X-pack可以给Kibana增加额外的管理能力。<br>You can use X-Pack Security to control what Elasticsearch data users can access through Kibana.When you install X-Pack, Kibana users have to log in. They need to have the kibana_user role as well as access to the indices they will be working with in Kibana.If a user loads a Kibana dashboard that accesses data in an index that they are not authorized to view, they get an error that indicates the index does not exist. X-Pack Security does not currently provide a way to control which users can load which dashboards.</p>
-</blockquote>
-<p>你可以使用X-pack安全控制哪些用户可以访问Elasticsearch数据通过Kibana。当你安装X-pack，Kibana用户登录。他们需要有kibana_user作用以及获得的指标，他们将在Kibana的工作。如果用户加载Kibana仪表板，访问数据的一个索引，他们未被授权查看，他们得到一个错误，表明指数不存在。X-pack安全目前并不提供一种方法来控制哪些用户可以负荷的仪表板。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e210.png" alt=""></p>
-<h1 id="Dev-Tools"><a href="#Dev-Tools" class="headerlink" title="Dev Tools"></a>Dev Tools</h1><p>原先的交互式控制台Sense，使用户方便的通过浏览器直接与Elasticsearch进行交互。从Kibana 5开始改名并直接内建在Kibana，就是Dev Tools选项。<br>注意如果是Kibana 5以上，不能通过以下命令安装Sense。(踩过的坑)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/kibana plugin --install elastic/sense</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/kibana-plugin install elastic/sense instead</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e211.png" alt=""></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>内容比较简单，主要是对Kibana工具的整体功能总结，方便接下来对ElasticSearch 5的学习，其中X-Pack主要是添加身份权限的验证，以及原先需要安装其他各种Marvel、Hand等各种功能插件添加到Kibana上使用才能使用的功能。<br>学习链接：<br>X-Pack：<a href="https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html</a><br>Kibana：<a href="https://www.elastic.co/guide/en/kibana/current/introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/kibana/current/introduction.html</a></p>
+<p>是因为复制的elasticsearch文件夹下包含了data文件中示例一的节点数据，需要把示例二data文件下的文件清空。</p>
 
       
     </div>
@@ -493,8 +460,6 @@
           
             <a href="/tags/kibana/" rel="tag"># kibana</a>
           
-            <a href="/tags/x-pack/" rel="tag"># x-pack</a>
-          
         </div>
       
 
@@ -506,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/09/Markdown——入门指南/" rel="next" title="Markdown——入门指南">
-                <i class="fa fa-chevron-left"></i> Markdown——入门指南
+              <a href="/2017/02/10/为了保持逼格，不要停止写作/" rel="next" title="为了保持逼格，不要停止写作">
+                <i class="fa fa-chevron-left"></i> 为了保持逼格，不要停止写作
               </a>
             
           </div>
@@ -515,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/10/为了保持逼格，不要停止写作/" rel="prev" title="为了保持逼格，不要停止写作">
-                为了保持逼格，不要停止写作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,10 +494,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/"
-     data-title="ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用"
+        <div class="ds-share flat" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"
+     data-title="ES-5.0.2-学习(3)——台服务器部署多个节点"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/">
+     data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -566,8 +527,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/"
-           data-title="ES-5.0.2-学习(2)——Kibana+X-Pack介绍使用" data-url="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/">
+      <div class="ds-thread" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"
+           data-title="ES-5.0.2-学习(3)——台服务器部署多个节点" data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
       </div>
     
   </div>
@@ -674,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Discover"><span class="nav-number">1.</span> <span class="nav-text">Discover</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualize"><span class="nav-number">2.</span> <span class="nav-text">Visualize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dashboard"><span class="nav-number">3.</span> <span class="nav-text">Dashboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Monitoring"><span class="nav-number">4.</span> <span class="nav-text">Monitoring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Graph"><span class="nav-number">5.</span> <span class="nav-text">Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Timelion"><span class="nav-number">6.</span> <span class="nav-text">Timelion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Management"><span class="nav-number">7.</span> <span class="nav-text">Management</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dev-Tools"><span class="nav-number">8.</span> <span class="nav-text">Dev Tools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、首先将elasticsearch-5-0-2文件夹再复制一份"><span class="nav-number">1.</span> <span class="nav-text">1、首先将elasticsearch-5.0.2文件夹再复制一份</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、主要工作就是修改elasticsearch-yml配置文件。"><span class="nav-number">2.</span> <span class="nav-text">2、主要工作就是修改elasticsearch.yml配置文件。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、分别开启两个节点"><span class="nav-number">3.</span> <span class="nav-text">3、分别开启两个节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、查询是否成功"><span class="nav-number">4.</span> <span class="nav-text">4、查询是否成功</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#踩过的坑"><span class="nav-number">5.</span> <span class="nav-text">踩过的坑</span></a></li></ol></div>
             
 
           </div>
