@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-10T10:06:55.000Z</updated>
+  <updated>2017-02-10T10:41:31.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AC%AC%E4%B8%80%E4%B8%AAES%E4%BE%8B%E5%AD%90/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/</id>
     <published>2017-02-10T09:35:28.000Z</published>
-    <updated>2017-02-10T10:06:55.000Z</updated>
+    <updated>2017-02-10T10:41:31.000Z</updated>
     
     <content type="html"><![CDATA[<p>想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。<br><a id="more"></a></p>
 <h1 id="员工文档索引"><a href="#员工文档索引" class="headerlink" title="员工文档索引"></a>员工文档索引</h1><p>业务首先需要存储员工数据。这将采取一个员工文档的形式：单个文档表示单个员工。在Elasticsearch中存储数据的行为称为索引，但是在索引文档之前，我们需要决定在哪里存储它。<br>在Elasticsearch中，文档属于某个类型，这些类型位于索引中。可以绘制一些（粗略）与传统关系数据库的对比：</p>
@@ -78,10 +78,10 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
   </entry>
   
@@ -90,7 +90,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/</id>
     <published>2017-02-10T08:28:55.000Z</published>
-    <updated>2017-02-10T09:55:05.000Z</updated>
+    <updated>2017-02-10T10:41:23.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search</div></pre></td></tr></table></figure>
 <p><img src="/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png" alt=""><br><a id="more"></a><br>注：<strong>以下操作均是在kibana中，如图所示</strong><br><strong>hits：</strong></p>
@@ -133,10 +133,10 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
   </entry>
   
@@ -145,7 +145,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/</id>
     <published>2017-02-10T07:49:18.000Z</published>
-    <updated>2017-02-10T08:16:24.000Z</updated>
+    <updated>2017-02-10T10:41:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。<br><a id="more"></a></p>
 <h1 id="1、首先将elasticsearch-5-0-2文件夹再复制一份"><a href="#1、首先将elasticsearch-5-0-2文件夹再复制一份" class="headerlink" title="1、首先将elasticsearch-5.0.2文件夹再复制一份"></a>1、首先将elasticsearch-5.0.2文件夹再复制一份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R elasticsearch-5.0.2 elasticsearch-5.0.2-node-2</div></pre></td></tr></table></figure>
@@ -166,10 +166,10 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
       <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
     
@@ -224,7 +224,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94Kibana-X-Pack%E4%BB%8B%E7%BB%8D%E4%BD%BF%E7%94%A8/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/</id>
     <published>2017-02-09T11:20:34.000Z</published>
-    <updated>2017-02-10T08:09:59.000Z</updated>
+    <updated>2017-02-10T10:40:59.000Z</updated>
     
     <content type="html"><![CDATA[<p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。<br>下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png" alt=""><br><a id="more"></a><br>下面的图展示的是Kibana 4的界面，和Kibana 3最大的区别是将原来的主体分成三个部分，分别是发现页、可视化、仪表盘。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e22.png" alt=""><br>下面是目前Kibana 5最新版本的界面。相比较Kibana 4除了界面的风格变化，最主要是功能栏上添加了Timeline、Management和Dev Tools选项。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e23.png" alt=""></p>
 <h1 id="Discover"><a href="#Discover" class="headerlink" title="Discover"></a>Discover</h1><blockquote>
@@ -268,10 +268,10 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
       <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
     
@@ -284,7 +284,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/Markdown%E2%80%94%E2%80%94%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/Markdown——入门指南/</id>
     <published>2017-02-09T09:48:48.000Z</published>
-    <updated>2017-02-10T08:08:58.000Z</updated>
+    <updated>2017-02-10T10:40:48.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="导语："><a href="#导语：" class="headerlink" title="导语："></a>导语：</h1><p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。常用的标记符号也不超过十个，这种相对于更为复杂的 HTML 标记语言来说，Markdown 可谓是十分轻量的，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
 <p><img src="/2017/02/09/Markdown——入门指南/../../../../images/1.png" alt="1"><br><a id="more"></a></p>
@@ -339,10 +339,10 @@
     
     </summary>
     
-      <category term="markdown" scheme="http://lzrlizhirong.github.io/categories/markdown/"/>
+      <category term="Markdown" scheme="http://lzrlizhirong.github.io/categories/Markdown/"/>
     
     
-      <category term="markdown" scheme="http://lzrlizhirong.github.io/tags/markdown/"/>
+      <category term="MarkDown" scheme="http://lzrlizhirong.github.io/tags/MarkDown/"/>
     
   </entry>
   
@@ -351,7 +351,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/</id>
     <published>2017-02-09T08:39:09.000Z</published>
-    <updated>2017-02-10T08:09:37.000Z</updated>
+    <updated>2017-02-10T10:40:34.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="安装准备："><a href="#安装准备：" class="headerlink" title="安装准备："></a>安装准备：</h1><p>安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。</p>
 <h1 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h1><p>首先到官网下载最新版本的Elasticsearch压缩包。<br>可以使用命令，注意将最新的可用的下载链接填入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.0.2.zip</div><div class="line">unzip elasticsearch-5.0.2.zip</div><div class="line">cd elasticsearch-5.0.2</div></pre></td></tr></table></figure></p>
@@ -388,10 +388,10 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/categories/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://lzrlizhirong.github.io/tags/elasticsearch/"/>
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
       <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
     
