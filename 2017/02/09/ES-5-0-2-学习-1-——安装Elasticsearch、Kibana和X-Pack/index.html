@@ -95,14 +95,14 @@
 <meta property="og:site_name" content="李志荣的博客">
 <meta property="og:description" content="安装准备：安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。
 安装Elasticsearch首先到官网下载最新版本的Elasticsearch压缩包。可以使用命令，注意将最新的可用的下载链接填入：123curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e1.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e2.png">
-<meta property="og:updated_time" content="2017-02-09T11:18:56.000Z">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/../../../../images/e1.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/../../../../images/e2.png">
+<meta property="og:updated_time" content="2017-02-10T02:38:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(1)——安装Elasticsearch、Kibana和X-Pack">
 <meta name="twitter:description" content="安装准备：安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。
 安装Elasticsearch首先到官网下载最新版本的Elasticsearch压缩包。可以使用命令，注意将最新的可用的下载链接填入：123curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e1.png">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/../../../../images/e1.png">
 
 
 
@@ -442,10 +442,10 @@
 <h1 id="安装X-Pack"><a href="#安装X-Pack" class="headerlink" title="安装X-Pack"></a>安装X-Pack</h1><p>X-Pack是一个Elastic Stack的扩展，将安全，警报，监视，报告和图形功能包含在一个易于安装的软件包中。在Elasticsearch 5.0.0之前，您必须安装单独的Shield，Watcher和Marvel插件才能获得在X-Pack中所有的功能。</p>
 <h2 id="下载前提"><a href="#下载前提" class="headerlink" title="下载前提"></a>下载前提</h2><p>Elasticsearch 5.0.2<br>Kibana 5.0.2</p>
 <h2 id="Elasticsearch下载X-Pack"><a href="#Elasticsearch下载X-Pack" class="headerlink" title="Elasticsearch下载X-Pack"></a>Elasticsearch下载X-Pack</h2><p>在Es的根目录（每个节点），运行 <em>bin/elasticsearch-plugin</em> 进行安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch-plugin install x-pack/Users/root/Downloads/markdown/763363-20161209181135163-1294099591.png</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e1.png" alt=""><br>安装过程中跳出选项现在y即可。<br>如果你在Elasticsearch已禁用自动索引的创建，在<em>elasticsearch.yml</em>配置<em>action.auto_create_index</em>允许X-pack创造以下指标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/../../../../images/e1.png" alt=""><br>安装过程中跳出选项现在y即可。<br>如果你在Elasticsearch已禁用自动索引的创建，在<em>elasticsearch.yml</em>配置<em>action.auto_create_index</em>允许X-pack创造以下指标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*</div></pre></td></tr></table></figure></p>
 <p>运行Elasticsearch。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch</div></pre></td></tr></table></figure></p>
 <h2 id="Kibana下载X-Pack"><a href="#Kibana下载X-Pack" class="headerlink" title="Kibana下载X-Pack"></a>Kibana下载X-Pack</h2><p>在Kibana根目录运行 <em>bin/kibana-plugin</em> 进行安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kibana-plugin install x-pack/Users/root/Downloads/markdown/1.png</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/images/e2.png" alt=""><br>安装过程会比较久，耐心等待。<br>运行Kibana。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kibana</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/../../../../images/e2.png" alt=""><br>安装过程会比较久，耐心等待。<br>运行Kibana。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kibana</div></pre></td></tr></table></figure></p>
 <h2 id="验证X-Pack"><a href="#验证X-Pack" class="headerlink" title="验证X-Pack"></a>验证X-Pack</h2><p>在浏览器上输入：<em><a href="http://localhost:5601/" target="_blank" rel="external">http://localhost:5601/</a></em> ，可以打开Kibana，此时需要输入用户名和密码登录，默认分别是 <em>elastic</em> 和 <em>changeme</em>。</p>
 <h1 id="安装参考："><a href="#安装参考：" class="headerlink" title="安装参考："></a>安装参考：</h1><p><em>每个操作系统安装Elasticsearch的文件选择不同，参考：<a href="https://www.elastic.co/downloads/elasticsearch，选择对应的文件下载。" target="_blank" rel="external">https://www.elastic.co/downloads/elasticsearch，选择对应的文件下载。</a>
 </em>安装Kiabna需要根据操作系统做选择，参考：<a href="https://www.elastic.co/guide/en/kibana/current/install.html，选择对应的文件下载。" target="_blank" rel="external">https://www.elastic.co/guide/en/kibana/current/install.html，选择对应的文件下载。</a><br>*安装X-Pack需要根据Elasticsearch安装不同的方式提供不同的安装方法，参考：<a href="https://www.elastic.co/guide/en/x-pack/5.0/installing-xpack.html#installing-xpack。" target="_blank" rel="external">https://www.elastic.co/guide/en/x-pack/5.0/installing-xpack.html#installing-xpack。</a></p>
