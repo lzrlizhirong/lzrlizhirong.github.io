@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Elasticsearch,kibana," />
+  <meta name="keywords" content="Elasticsearch,分布式," />
 
 
 
@@ -89,18 +89,25 @@
 
 
 
-<meta name="description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
+<meta name="description" content="前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（ES-5.0.2-学习(6)——分布式集群学习1），下面主要分享应对故障的一些实践。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES-5.0.2-学习(3)——单台服务器部署多个节点">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/index.html">
+<meta property="og:title" content="ES-5.0.2-学习(7)——分布式集群学习2">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/index.html">
 <meta property="og:site_name" content="八阿哥李四 | BugLess">
-<meta property="og:description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png">
-<meta property="og:updated_time" content="2017-02-11T14:56:56.000Z">
+<meta property="og:description" content="前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（ES-5.0.2-学习(6)——分布式集群学习1），下面主要分享应对故障的一些实践。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e72.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e73.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e74.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e75.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e76.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e77.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e78.png">
+<meta property="og:updated_time" content="2017-02-13T04:13:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES-5.0.2-学习(3)——单台服务器部署多个节点">
-<meta name="twitter:description" content="一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png">
+<meta name="twitter:title" content="ES-5.0.2-学习(7)——分布式集群学习2">
+<meta name="twitter:description" content="前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（ES-5.0.2-学习(6)——分布式集群学习1），下面主要分享应对故障的一些实践。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png">
 
 
 
@@ -128,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/"/>
 
 
 
 
 
-  <title> ES-5.0.2-学习(3)——单台服务器部署多个节点 | 八阿哥李四 | BugLess </title>
+  <title> ES-5.0.2-学习(7)——分布式集群学习2 | 八阿哥李四 | BugLess </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +317,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -334,7 +341,7 @@
             
             
               
-                ES-5.0.2-学习(3)——单台服务器部署多个节点
+                ES-5.0.2-学习(7)——分布式集群学习2
               
             
           </h1>
@@ -349,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T15:49:18+08:00">
-                2017-02-10 15:49:18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T13:58:08+08:00">
+                2017-02-13 13:58:08
               </time>
             
 
@@ -390,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/" itemprop="commentCount"></span>
+                <a href="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -422,21 +429,22 @@
       
 
       
-        <p>一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。<br><a id="more"></a></p>
-<h1 id="1、首先将elasticsearch-5-0-2文件夹再复制一份"><a href="#1、首先将elasticsearch-5-0-2文件夹再复制一份" class="headerlink" title="1、首先将elasticsearch-5.0.2文件夹再复制一份"></a>1、首先将elasticsearch-5.0.2文件夹再复制一份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R elasticsearch-5.0.2 elasticsearch-5.0.2-node-2</div></pre></td></tr></table></figure>
-<h1 id="2、主要工作就是修改elasticsearch-yml配置文件。"><a href="#2、主要工作就是修改elasticsearch-yml配置文件。" class="headerlink" title="2、主要工作就是修改elasticsearch.yml配置文件。"></a>2、主要工作就是修改elasticsearch.yml配置文件。</h1><p>实例二：config目录下的elasticsearch.yml内容<br>将node.name: node-1 修改为 node-2</p>
-<h1 id="3、分别开启两个节点"><a href="#3、分别开启两个节点" class="headerlink" title="3、分别开启两个节点"></a>3、分别开启两个节点</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/elasticsearch</div></pre></td></tr></table></figure>
-<h1 id="4、查询是否成功"><a href="#4、查询是否成功" class="headerlink" title="4、查询是否成功"></a>4、查询是否成功</h1><p>浏览器访问 <em><a href="http://localhost:9200/_cluster/health?pretty" target="_blank" rel="external">http://localhost:9200/_cluster/health?pretty</a></em><br>若出现类似如下则表示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"></div><div class="line">    &quot;cluster_name&quot;: &quot;es-lzr&quot;,</div><div class="line">    &quot;status&quot;: &quot;green&quot;,</div><div class="line">    &quot;timed_out&quot;: false,</div><div class="line">    &quot;number_of_nodes&quot;: 2,</div><div class="line">    &quot;number_of_data_nodes&quot;: 2,</div><div class="line">    &quot;active_primary_shards&quot;: 17,</div><div class="line">    &quot;active_shards&quot;: 34,</div><div class="line">    &quot;relocating_shards&quot;: 0,</div><div class="line">    &quot;initializing_shards&quot;: 0,</div><div class="line">    &quot;unassigned_shards&quot;: 0,</div><div class="line">    &quot;delayed_unassigned_shards&quot;: 0,</div><div class="line">    &quot;number_of_pending_tasks&quot;: 0,</div><div class="line">    &quot;number_of_in_flight_fetch&quot;: 0,</div><div class="line">    &quot;task_max_waiting_in_queue_millis&quot;: 0,</div><div class="line">    &quot;active_shards_percent_as_number&quot;: 100.0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>也可以通过Kibana查看节点效果 <em><a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></em> 账号 <em>elastic</em> 密码 <em>changeme</em><br><img src="/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/../../../../images/e31.png" alt=""></p>
-<h1 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h1><p>1.如果修改了配置文件的 <em>http.port、transport.tcp.port</em>项，一定要将各个节点的值设置不同，否则会出现占用的情况。正常如果不修改，默认会分配值。<br>2.示例二开启时，实例一报警告（实际操作中可以忽略）：</p>
-<blockquote>
-<p>[2016-12-11T18:06:43,678][WARN ][o.e.d.z.ElectMasterService] [node-1] value for setting “discovery.zen.minimum_master_nodes” is too low. This can result in data loss! Please set it to at least a quorum of master-eligible nodes (current value: [-1], total number of master-eligible nodes used for publishing in this round: [2])<br>是因为默认情况下 <em>discovery.zen.minimum_master_nodes=1</em> 一台服务器只能有一个主节点，所以在实例二的配置文件中可以添加 <em>node.master: false</em> 。</p>
-</blockquote>
-<p>3.示例二不能开启，报如下错误：</p>
-<blockquote>
-<p>[2016-12-11T16:53:02,711][INFO ][o.e.d.z.ZenDiscovery     ] [node-2] failed to send join request to master [{node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300}], reason [RemoteTransportException[[node-1][127.0.0.1:9300][internal:discovery/zen/join]]; nested: IllegalArgumentException[can’t add node {node-2}{vP19PMOyT2ilJKRAqgn78w}{qhDDVzwZQ0GXZXhIMmpGKA}{127.0.0.1}{127.0.0.1:9301}, found existing node {node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300} with the same id but is a different node instance]; ]<br>[2016-12-11T16:53:02,911][INFO ][o.e.x.m.e.Exporters      ] [node-2] skipping exporter [default_local] as it isn’t ready yet<br>[2016-12-11T16:53:02,912][ERROR][o.e.x.m.AgentService     ] [node-2] exception when exporting documents<br>org.elasticsearch.xpack.monitoring.exporter.ExportException: exporters are either not ready or faulty<br>    at org.elasticsearch.xpack.monitoring.exporter.Exporters.export(Exporters.java:188) ~[x-pack-5.0.2.jar:5.0.2]<br>    at org.elasticsearch.xpack.monitoring.AgentService$ExportingWorker.run(AgentService.java:208) [x-pack-5.0.2.jar:5.0.2]<br>    at java.lang.Thread.run(Thread.java:745) [?:1.8.0_111]</p>
-</blockquote>
-<p>是因为复制的elasticsearch文件夹下包含了data文件中示例一的节点数据，需要把示例二data文件下的文件清空。</p>
+        <p>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
+<h1 id="应对故障"><a href="#应对故障" class="headerlink" title="应对故障"></a>应对故障</h1><p>前面说了很多关于复制分片可以应对节点失效，很好保证集群的安全性，下面我们可以尝试杀掉第一个节点的进程，我们的集群变化成如下（所有的操作都是ElasticSearch自动处理）：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png" alt=""><br>我们杀掉的节点是一个主节点。一个集群必须要有一个主节点才能使其功能正常，所以集群做的第一件事就是各节点选举了一个新的主节点：Node 2。</p>
+<p>主分片1和2在我们杀掉Node 1时已经丢失，我们的索引在丢失主分片时不能正常工作。如果此时我们检查集群健康，我们将看到状态red：不是所有主分片都可用！</p>
+<p>幸运的是丢失的两个主分片的完整拷贝存在于其他节点上，所以新主节点做的第一件事是把这些在Node 2和Node 3上的复制分片升级为主分片，这时集群健康回到yellow状态。这个提升是瞬间完成的，就好像按了一下开关。</p>
+<p>为什么集群健康状态是yellow而不是green？我们有三个主分片，但是我们指定了每个主分片对应两个复制分片，当前却只有一个复制分片被分配，这就是集群状态无法达到green的原因，不过不用太担心这个：当我们杀掉Node 2，我们的程序依然可以在没有丢失数据的情况下继续运行，因为Node 3还有每个分片的拷贝。</p>
+<p>如果我们重启Node 1，集群将能够重新分配丢失的复制分片，集群状况与上一节的图5：增加number_of_replicas到2 类似。如果Node 1依旧有旧分片的拷贝，它将会尝试再利用它们，它只会从主分片上复制在故障期间有数据变更的那一部分。</p>
+<h1 id="故障实践1"><a href="#故障实践1" class="headerlink" title="故障实践1"></a>故障实践1</h1><p>上面是关于ElasticSearch在遇到故障时候的理论部分，下面我们开始实际操作。</p>
+<h3 id="查看目前集群状态"><a href="#查看目前集群状态" class="headerlink" title="查看目前集群状态"></a>查看目前集群状态</h3><p>我们回顾一下之前的<em>blogs</em>索引，在结束最后的状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /blogs</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,    (主分片个数)</div><div class="line">      &quot;number_of_replicas&quot; : 2,    (每个主分片的复制分片个数)</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e72.png" alt=""></p>
+<h3 id="切断节点"><a href="#切断节点" class="headerlink" title="切断节点"></a>切断节点</h3><p>为了模拟这种情况，在我们自己的电脑上，直接用kill命令即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep elasticsearch   #获取到elasticsearch的进程id，例如5891</div><div class="line">kill 5891</div></pre></td></tr></table></figure></p>
+<h3 id="查看集群的状态"><a href="#查看集群的状态" class="headerlink" title="查看集群的状态"></a>查看集群的状态</h3><p><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e73.png" alt=""><br>很正确，就是理论内容所描述中间会存在<em>red</em>的瞬间。<br>等·<br>等·<br>等·<br>可是等了半天，结果一直是<em>red</em>状态的结果，这是为什么呢？注意看提示无法连接到<em><a href="http://localhost:9200" target="_blank" rel="external">http://localhost:9200</a></em>，突然意识到，我们关闭的节点正好是<em>9200</em>端口的<em>Node 1</em>节点。所以我们需要修改<em>kibana.yml</em>配置文件的<em>elasticsearch.url</em>项：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e74.png" alt=""></p>
+<h3 id="再次查看集群的状态"><a href="#再次查看集群的状态" class="headerlink" title="再次查看集群的状态"></a>再次查看集群的状态</h3><p>终于，可以看到我们想要的结果，ElasticSearch集群正如上面所说的重新选Node 2作为新的主节点：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e75.png" alt=""><br>我们还可以注意到集群的健康状况从绿色变成了黄色，这是因为我们设置每个主节点2个复制分片，而现在还有一个复制节点处于不可用状态。</p>
+<h1 id="故障实践2"><a href="#故障实践2" class="headerlink" title="故障实践2"></a>故障实践2</h1><p>回顾之前的一个集群状态，<em>blogs</em>索引只设置一个复制分片的情况下：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e76.png" alt=""><br>如果在这种情况下，我们把其中的任何一个节点关闭，会出现什么效果呢？我们分析看，至少我们关闭任何一个节点都能保所有的分片都还能存在。比如我们删除<em>Node 2</em>节点，正常情况下，<em>Node 2</em>中的分片0作为主分片被删除后，主节点会分配<em>Node 1</em>节点下复制分片0重新作为主分片0，而<em>Node 2</em>中的分片1本身是复制分片，直接删除即可，但是ElasticSearch集群，除此之外还会不会有其他操作。那就是，从新在两个节点中把所有的复制分片都置为可用。下面我们看结果：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e77.png" alt=""><br>首先我们看到的和我们前面分析的一样，主节点会分配Node 1节点下复制分片0重新作为主分片0，但是也可以看到现在集群的健康状况是黄色，因为存在复制节点处于不可用状态。我们继续等。。。：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e78.png" alt=""><br>终于我们可以看到，ElasticSearch集群确实会把所有的复制节点又都置为可用状态，因为节点存在它不拥有的分片，就可以创建这个节点，最大程度的保证高可用性。</p>
+<h1 id="实践注意点"><a href="#实践注意点" class="headerlink" title="实践注意点"></a>实践注意点</h1><p>在测试过程中，ElasticSearch集群确实可以帮助我们重新分配分片的状态，但是需要注意的是，每次一个节点关闭的时候，集群需要一定的时间去管理，如果这时候我们很快的将两个节点关闭，ElasticSearch集群将无法挽救回没有主分片，也没有复制分片的那些数据，所以测试的时候需要知道这一点。</p>
+<p>不过这也反映我们在学习分享1中描述的，如果我们的复制节点足够多的话，我们可以保证高可用的能力就却强大，因为允许节点故障的次数更多，而且我们的节点故障以后，运维又可以将节点重启，继续斗争！！！</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在我们对分片如何使Elasticsearch可以水平扩展并保证数据安全有了一个清晰的认识。真正感受到Elasticsearch天生就是分布式的，确实很强大！</p>
 
       
     </div>
@@ -462,7 +470,7 @@
           
             <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
           
-            <a href="/tags/kibana/" rel="tag"># kibana</a>
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
           
         </div>
       
@@ -475,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/10/为了保持逼格，不要停止写作/" rel="next" title="为了保持逼格，不要停止写作">
-                <i class="fa fa-chevron-left"></i> 为了保持逼格，不要停止写作
+              <a href="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/" rel="next" title="ES-5.0.2-学习(6)——分布式集群学习1">
+                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(6)——分布式集群学习1
               </a>
             
           </div>
@@ -484,10 +492,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/10/ES-5-0-2-学习-3-简单搜索/" rel="prev" title="ES-5.0.2-学习(4)--简单搜索">
-                ES-5.0.2-学习(4)--简单搜索 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -502,10 +506,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"
-     data-title="ES-5.0.2-学习(3)——单台服务器部署多个节点"
+        <div class="ds-share flat" data-thread-key="2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/"
+     data-title="ES-5.0.2-学习(7)——分布式集群学习2"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
+     data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -535,8 +539,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/"
-           data-title="ES-5.0.2-学习(3)——单台服务器部署多个节点" data-url="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/">
+      <div class="ds-thread" data-thread-key="2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/"
+           data-title="ES-5.0.2-学习(7)——分布式集群学习2" data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/">
       </div>
     
   </div>
@@ -643,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、首先将elasticsearch-5-0-2文件夹再复制一份"><span class="nav-number">1.</span> <span class="nav-text">1、首先将elasticsearch-5.0.2文件夹再复制一份</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、主要工作就是修改elasticsearch-yml配置文件。"><span class="nav-number">2.</span> <span class="nav-text">2、主要工作就是修改elasticsearch.yml配置文件。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、分别开启两个节点"><span class="nav-number">3.</span> <span class="nav-text">3、分别开启两个节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、查询是否成功"><span class="nav-number">4.</span> <span class="nav-text">4、查询是否成功</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#踩过的坑"><span class="nav-number">5.</span> <span class="nav-text">踩过的坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应对故障"><span class="nav-number">1.</span> <span class="nav-text">应对故障</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#故障实践1"><span class="nav-number">2.</span> <span class="nav-text">故障实践1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看目前集群状态"><span class="nav-number">2.0.1.</span> <span class="nav-text">查看目前集群状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切断节点"><span class="nav-number">2.0.2.</span> <span class="nav-text">切断节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看集群的状态"><span class="nav-number">2.0.3.</span> <span class="nav-text">查看集群的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再次查看集群的状态"><span class="nav-number">2.0.4.</span> <span class="nav-text">再次查看集群的状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#故障实践2"><span class="nav-number">3.</span> <span class="nav-text">故障实践2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践注意点"><span class="nav-number">4.</span> <span class="nav-text">实践注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
