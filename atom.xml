@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-13T04:22:30.000Z</updated>
+  <updated>2017-02-13T07:18:43.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/"/>
     <id>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/</id>
     <published>2017-02-13T05:58:08.000Z</published>
-    <updated>2017-02-13T04:22:30.000Z</updated>
+    <updated>2017-02-13T07:18:43.000Z</updated>
     
-    <content type="html"><![CDATA[<p>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=2919622&auto=0&height=66"></iframe><br>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
 <h1 id="应对故障"><a href="#应对故障" class="headerlink" title="应对故障"></a>应对故障</h1><p>前面说了很多关于复制分片可以应对节点失效，很好保证集群的安全性，下面我们可以尝试杀掉第一个节点的进程，我们的集群变化成如下（所有的操作都是ElasticSearch自动处理）：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png" alt=""><br>我们杀掉的节点是一个主节点。一个集群必须要有一个主节点才能使其功能正常，所以集群做的第一件事就是各节点选举了一个新的主节点：Node 2。</p>
 <p>主分片1和2在我们杀掉Node 1时已经丢失，我们的索引在丢失主分片时不能正常工作。如果此时我们检查集群健康，我们将看到状态red：不是所有主分片都可用！</p>
 <p>幸运的是丢失的两个主分片的完整拷贝存在于其他节点上，所以新主节点做的第一件事是把这些在Node 2和Node 3上的复制分片升级为主分片，这时集群健康回到yellow状态。这个提升是瞬间完成的，就好像按了一下开关。</p>
@@ -43,7 +43,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（&lt;a href=&quot;http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/&quot;&gt;ES-5.0.2-学习(6)——分布式集群学习1&lt;/a&gt;），下面主要分享应对故障的一些实践。&lt;br&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;330&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=2919622&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;br&gt;前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（&lt;a href=&quot;http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/&quot;&gt;ES-5.0.2-学习(6)——分布式集群学习1&lt;/a&gt;），下面主要分享应对故障的一些实践。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     

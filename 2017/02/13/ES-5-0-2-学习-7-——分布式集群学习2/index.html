@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e76.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e77.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e78.png">
-<meta property="og:updated_time" content="2017-02-13T04:22:30.000Z">
+<meta property="og:updated_time" content="2017-02-13T07:18:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(7)——分布式集群学习2">
 <meta name="twitter:description" content="前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（ES-5.0.2-学习(6)——分布式集群学习1），下面主要分享应对故障的一些实践。">
@@ -269,7 +269,7 @@
       
         <li class="menu-item menu-item-search">
           
-            <a href="javascript:;" class="st-search-show-outputs">
+            <a href="javascript:;" class="popup-trigger">
           
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
@@ -278,25 +278,168 @@
           </a>
         </li>
       
+      <li> <a title="慎点~有劲爆音乐~请带上耳麦~" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()    '>High起来~请带上耳麦~</a></li>
     </ul>
   
 
   
     <div class="site-search">
       
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'B27KZ8YQuLWGwkS8-Eka','2.0.0');
-</script>
-
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -436,7 +579,7 @@
       
 
       
-        <p>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=2919622&auto=0&height=66"></iframe><br>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
 <h1 id="应对故障"><a href="#应对故障" class="headerlink" title="应对故障"></a>应对故障</h1><p>前面说了很多关于复制分片可以应对节点失效，很好保证集群的安全性，下面我们可以尝试杀掉第一个节点的进程，我们的集群变化成如下（所有的操作都是ElasticSearch自动处理）：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png" alt=""><br>我们杀掉的节点是一个主节点。一个集群必须要有一个主节点才能使其功能正常，所以集群做的第一件事就是各节点选举了一个新的主节点：Node 2。</p>
 <p>主分片1和2在我们杀掉Node 1时已经丢失，我们的索引在丢失主分片时不能正常工作。如果此时我们检查集群健康，我们将看到状态red：不是所有主分片都可用！</p>
 <p>幸运的是丢失的两个主分片的完整拷贝存在于其他节点上，所以新主节点做的第一件事是把这些在Node 2和Node 3上的复制分片升级为主分片，这时集群健康回到yellow状态。这个提升是瞬间完成的，就好像按了一下开关。</p>
