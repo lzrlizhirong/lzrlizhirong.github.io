@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png">
-<meta property="og:updated_time" content="2017-02-13T10:22:37.000Z">
+<meta property="og:updated_time" content="2017-02-13T10:24:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
 <meta name="twitter:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
@@ -595,7 +595,7 @@
       
 
       
-        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=31460216&auto=1&height=66"></iframe><br>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=31460216&auto=0&height=66"></iframe><br>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
 <p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
 <p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
 <p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。</p>
