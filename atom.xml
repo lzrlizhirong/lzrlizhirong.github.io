@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-10T10:41:31.000Z</updated>
+  <updated>2017-02-13T03:11:13.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ES-5.0.2-学习(6)——分布式集群学习1</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/</id>
+    <published>2017-02-13T02:21:48.000Z</published>
+    <updated>2017-02-13T03:11:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。</p>
+<p>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
+<p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
+<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。<br><a id="more"></a></p>
+<h1 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h1><p>如果我们启动一个单独的节点，它还没有数据和索引，这个集群看起来如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png" alt=""><br>只有一个空节点的集群。一个节点(node)就是一个Elasticsearch实例，而一个集群(cluster)由一个或多个节点组成，它们具有相同cluster.name，它们协同工作，分享数据和负载。当加入新的节点或者删除一个节点时，集群就会感知到并平衡数据。</p>
+<p>集群中一个节点会被选举为主节点(master)，它将临时管理集群级别的一些变更，例如新建或删除索引、增加或移除节点等。主节点不参与文档级别的变更或搜索，这意味着在流量增长的时候，该主节点不会成为集群的瓶颈。任何节点都可以成为主节点。我们例子中的集群只有一个节点，所以它会充当主节点的角色。</p>
+<p>作为用户，我们能够与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点上。我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch处理。</p>
+<h1 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h1><p>在Elasticsearch集群中可以监控统计很多信息，但是只有一个是最重要的：集群健康(cluster health)。<br>集群健康有三种状态：green、yellow或red，健康状况在后面会有很多体现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_cluster/health</div></pre></td></tr></table></figure></p>
+<p>在一个没有索引的空集群中运行如上查询，将返回这些信息：</p>
+<blockquote>
+<p>{<br>   “cluster_name”:          “elasticsearch”,<br>   “status”:                “green”,<br>   “timed_out”:             false,<br>   “number_of_nodes”:       1,<br>   “number_of_data_nodes”:  1,<br>   “active_primary_shards”: 0,<br>   “active_shards”:         0,<br>   “relocating_shards”:     0,<br>   “initializing_shards”:   0,<br>   “unassigned_shards”:     0<br>}</p>
+</blockquote>
+<p><strong><em>status</em></strong>： 是我们最感兴趣的字段。status字段提供一个综合的指标来表示集群的的服务状况。三种颜色各自的含义：</p>
+<ul>
+<li>green：所有主要分片和复制分片都可用。</li>
+<li>yellow：所有主要分片可用，但不是所有复制分片都可用。</li>
+<li>red：不是所有的主要分片都可用。</li>
+</ul>
+<h1 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h1><p>为了将数据添加到Elasticsearch，我们需要索引(index)——一个存储关联数据的地方。实际上，索引只是一个用来指向一个或多个分片(shards)的“逻辑命名空间(logical namespace)”.</p>
+<p>一个分片(shard)是一个最小级别“工作单元(worker unit)”,它只是保存了索引中所有数据的一部分。并且先初步知道分片就是一个Lucene实例，它本身就是一个完整的搜索引擎。我们的文档存储在分片中，并且在分片中被索引，但是我们的应用程序不会直接与它们通信，取而代之的是，直接与索引通信。</p>
+<p>分片是Elasticsearch在集群中分发数据的关键。把分片想象成数据的容器。文档存储在分片中，然后分片分配到你集群中的节点上。当你的集群扩容或缩小，Elasticsearch将会自动在你的节点间迁移分片，以使集群保持平衡。</p>
+<p>分片可以是主分片(primary shard)或者是复制分片(replica shard)。你索引中的每个文档属于一个单独的主分片，所以主分片的数量决定了索引最多能存储多少数据。当索引创建完成的时候，主分片的数量就固定了，但是复制分片的数量可以随时调整。</p>
+<p>复制分片只是主分片的一个副本，它可以防止硬件故障导致的数据丢失，同时可以提供读请求，比如搜索或者从别的分片取回文档。</p>
+<p>让我们在集群中唯一一个空节点上创建一个叫做blogs的索引。默认情况下，一个索引被分配5个主分片，但是为了演示的目的，我们只分配3个主分片和一个复制分片（每个主分片都有一个复制分片）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /blogs</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,</div><div class="line">      &quot;number_of_replicas&quot; : 1</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png" alt=""><br>我们的集群现在看起来就像上图——三个主分片都被分配到Node 1。如果我们现在检查集群健康(cluster-health)，我们将见到以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;yellow&quot;, &lt;1&gt;</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       1,</div><div class="line">   &quot;number_of_data_nodes&quot;:  1,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         3,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     3 &lt;2&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>集群的状态现在是 yellow</li>
+<li>我们的三个复制分片还没有被分配到节点上</li>
+</ul>
+<p>下面我们可以看下，在Kibana监控工具中查看具体情况，如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png" alt=""><br>集群的健康状态yellow表示所有的主分片(primary shards)启动并且正常运行了——集群已经可以正常处理任何请求——但是复制分片(replica shards)还没有全部可用。事实上所有的三个复制分片现在都是unassigned状态——它们还未被分配给节点。在同一个节点上保存相同的数据副本是没有必要的，如果这个节点故障了，那所有的数据副本也会丢失。</p>
+<p>现在我们的集群已经功能完备，但是依旧存在因硬件故障而导致数据丢失的风险。</p>
+<h1 id="添加故障转移"><a href="#添加故障转移" class="headerlink" title="添加故障转移"></a>添加故障转移</h1><p>在单一节点上运行意味着有单点故障的风险——没有数据备份。幸运的是，要防止单点故障，我们唯一需要做的就是启动另一个节点。</p>
+<p>具体启动方式可以查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 。</p>
+<p>如果我们启动了第二个节点，这个集群看起来就像下图。双节点集群——所有的主分片和复制分片都已分配:<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e64.png" alt=""><br>第二个节点已经加入集群，三个复制分片(replica shards)也已经被分配了——分别对应三个主分片，这意味着在丢失任意一个节点的情况下依旧可以保证数据的完整性。</p>
+<p>文档的索引将首先被存储在主分片中，然后并发复制到对应的复制节点上。这可以确保我们的数据在主节点和复制节点上都可以被检索。</p>
+<p><strong><em>cluster-health</em></strong> 现在的状态是 <strong><em>green</em></strong>，这意味着所有的6个分片（三个主分片和三个复制分片）都已可用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;green&quot;,</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       2,</div><div class="line">   &quot;number_of_data_nodes&quot;:  2,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         6,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>集群的状态是green，我们的集群不仅是功能完备的，而且是高可用的。<br>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e65.png" alt=""></p>
+<h1 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h1><p>随着应用需求的增长，我们该如何扩展？如果我们启动第三个节点，我们的集群会重新组织自己，包含3个节点的集群——分片已经被重新分配以平衡负载：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e66.png" alt=""><br>Node 3包含了分别来自Node 1和Node 2的一个分片，这样每个节点就有两个分片，和之前相比少了一个，这意味着每个节点上的分片将获得更多的硬件资源（CPU、RAM、I/O）。</p>
+<p>分片本身就是一个完整的搜索引擎，它可以使用单一节点的所有资源。我们拥有6个分片（3个主分片和三个复制分片），最多可以扩展到6个节点，每个节点上有一个分片，每个分片可以100%使用这个节点的资源。</p>
+<p>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png" alt=""></p>
+<h1 id="继续扩展"><a href="#继续扩展" class="headerlink" title="继续扩展"></a>继续扩展</h1><p>如果我们要扩展到6个以上的节点，要怎么做？</p>
+<p>主分片的数量在创建索引时已经确定。实际上，这个数量定义了能存储到索引里数据的最大数量（实际的数量取决于你的数据、硬件和应用场景）。然而，主分片或者复制分片都可以处理读请求——搜索或文档检索，所以数据的冗余越多，我们能处理的搜索吞吐量就越大。</p>
+<p>复制分片的数量可以在运行中的集群中动态地变更，这允许我们可以根据需求扩大或者缩小规模。让我们把复制分片的数量从原来的1增加到2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PUT /blogs/_settings</div><div class="line">&#123;</div><div class="line">   &quot;number_of_replicas&quot; : 2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png" alt=""><br>从图中可以看出，blogs索引现在有9个分片：3个主分片和6个复制分片。这意味着我们能够扩展到9个节点，再次变成每个节点一个分片。这样使我们的搜索性能相比原始的三节点集群增加“三倍”。</p>
+<p>实际操作也是同样的效果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png" alt=""><br><strong><em>注意：</em></strong>可以看到上面的“三倍”我们用加了引号，因为在同样数量的节点上增加更多的复制分片并不一定提高性能，因为这样做的话平均每个分片的所占有的硬件资源就减少了（大部分请求都聚集到了分片少的节点，导致一个节点吞吐量太大，反而降低性能），你需要增加硬件来提高吞吐量。所以说添加复制分片和添加节点，在保证成本的情况下，需要有一个平衡点。</p>
+<p>不过这些额外的复制节点还是有另外一个好处，使我们有更多的冗余：通过以上对节点的设置，我们能够承受两个节点故障而不丢失数据。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 ES-5.0.2-学习(7)——分布式集群学习2 继续和大家分享。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 &lt;em&gt;&lt;a href=&quot;http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/&quot;&gt;ES-5.0.2-学习(3)——单台服务器部署多个节点&lt;/a&gt;&lt;/em&gt; 搭建学习。&lt;/p&gt;
+&lt;p&gt;ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。&lt;/p&gt;
+&lt;p&gt;Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。&lt;/p&gt;
+&lt;p&gt;对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。&lt;/p&gt;
+&lt;p&gt;下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
+    
+    
+      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
+    
+      <category term="分布式" scheme="http://lzrlizhirong.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>ES-5.0.2-学习(5)--第一个ES例子</title>
