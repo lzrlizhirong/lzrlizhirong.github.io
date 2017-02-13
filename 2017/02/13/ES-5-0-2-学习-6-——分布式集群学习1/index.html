@@ -89,14 +89,12 @@
 
 
 
-<meta name="description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。
-ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(">
+<meta name="description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
 <meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/index.html">
 <meta property="og:site_name" content="八阿哥李四 | BugLess">
-<meta property="og:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。
-ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(">
+<meta property="og:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png">
@@ -106,11 +104,10 @@ ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以�
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png">
-<meta property="og:updated_time" content="2017-02-13T03:11:13.000Z">
+<meta property="og:updated_time" content="2017-02-13T04:22:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
-<meta name="twitter:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。
-ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(">
+<meta name="twitter:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
 <meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
 
 
@@ -433,11 +430,10 @@ ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以�
       
 
       
-        <p>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。</p>
-<p>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+        <p>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
 <p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
 <p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
-<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。<br><a id="more"></a></p>
+<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。</p>
 <h1 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h1><p>如果我们启动一个单独的节点，它还没有数据和索引，这个集群看起来如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png" alt=""><br>只有一个空节点的集群。一个节点(node)就是一个Elasticsearch实例，而一个集群(cluster)由一个或多个节点组成，它们具有相同cluster.name，它们协同工作，分享数据和负载。当加入新的节点或者删除一个节点时，集群就会感知到并平衡数据。</p>
 <p>集群中一个节点会被选举为主节点(master)，它将临时管理集群级别的一些变更，例如新建或删除索引、增加或移除节点等。主节点不参与文档级别的变更或搜索，这意味着在流量增长的时候，该主节点不会成为集群的瓶颈。任何节点都可以成为主节点。我们例子中的集群只有一个节点，所以它会充当主节点的角色。</p>
 <p>作为用户，我们能够与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点上。我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch处理。</p>
@@ -480,7 +476,8 @@ ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以�
 <p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png" alt=""><br>从图中可以看出，blogs索引现在有9个分片：3个主分片和6个复制分片。这意味着我们能够扩展到9个节点，再次变成每个节点一个分片。这样使我们的搜索性能相比原始的三节点集群增加“三倍”。</p>
 <p>实际操作也是同样的效果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png" alt=""><br><strong><em>注意：</em></strong>可以看到上面的“三倍”我们用加了引号，因为在同样数量的节点上增加更多的复制分片并不一定提高性能，因为这样做的话平均每个分片的所占有的硬件资源就减少了（大部分请求都聚集到了分片少的节点，导致一个节点吞吐量太大，反而降低性能），你需要增加硬件来提高吞吐量。所以说添加复制分片和添加节点，在保证成本的情况下，需要有一个平衡点。</p>
 <p>不过这些额外的复制节点还是有另外一个好处，使我们有更多的冗余：通过以上对节点的设置，我们能够承受两个节点故障而不丢失数据。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 ES-5.0.2-学习(7)——分布式集群学习2 继续和大家分享。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 <a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/" target="_blank" rel="external">ES-5.0.2-学习(7)——分布式集群学习2</a> 继续和大家分享。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6188044.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6188044.html</a></p>
 
       
     </div>

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="八阿哥李四 | BugLess">
 <meta property="og:description" content="空搜索1GET /_search">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png">
-<meta property="og:updated_time" content="2017-02-10T10:41:23.000Z">
+<meta property="og:updated_time" content="2017-02-13T04:20:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(4)--简单搜索">
 <meta name="twitter:description" content="空搜索1GET /_search">
@@ -454,6 +454,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:(mary john) +date:&gt;2014-09-10 +(aggregations geo)</div></pre></td></tr></table></figure>
 <p>编码后的查询字符串变得不太容易阅读<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)</div></pre></td></tr></table></figure></p>
 <p>就像你上面看到的例子，简单查询字符串搜索惊人的强大。允许我们简洁明快的表示复杂的查询。这对于命令行下一次性查询或者开发模式下非常有用。<br>然而，你可以看到简洁带来了隐晦和调试困难。而且它很脆弱——查询字符串中一个细小的语法错误，像-、:、/或”错位就会导致返回错误而不是结果。<br>最后，查询字符串搜索允许任意用户在索引中任何一个字段上运行潜在的慢查询语句，可能暴露私有信息甚至使你的集群瘫痪。<br>取而代之的，生产环境我们一般依赖全功能的请求体搜索API，它能完成前面所有的事情，甚至更多。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6171016.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6171016.html</a><br></p>
 
       
     </div>

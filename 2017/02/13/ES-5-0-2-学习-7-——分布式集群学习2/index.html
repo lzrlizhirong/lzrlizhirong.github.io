@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e76.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e77.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e78.png">
-<meta property="og:updated_time" content="2017-02-13T04:13:34.000Z">
+<meta property="og:updated_time" content="2017-02-13T04:22:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(7)——分布式集群学习2">
 <meta name="twitter:description" content="前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（ES-5.0.2-学习(6)——分布式集群学习1），下面主要分享应对故障的一些实践。">
@@ -445,6 +445,7 @@
 <h1 id="实践注意点"><a href="#实践注意点" class="headerlink" title="实践注意点"></a>实践注意点</h1><p>在测试过程中，ElasticSearch集群确实可以帮助我们重新分配分片的状态，但是需要注意的是，每次一个节点关闭的时候，集群需要一定的时间去管理，如果这时候我们很快的将两个节点关闭，ElasticSearch集群将无法挽救回没有主分片，也没有复制分片的那些数据，所以测试的时候需要知道这一点。</p>
 <p>不过这也反映我们在学习分享1中描述的，如果我们的复制节点足够多的话，我们可以保证高可用的能力就却强大，因为允许节点故障的次数更多，而且我们的节点故障以后，运维又可以将节点重启，继续斗争！！！</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在我们对分片如何使Elasticsearch可以水平扩展并保证数据安全有了一个清晰的认识。真正感受到Elasticsearch天生就是分布式的，确实很强大！</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6188560.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6188560.html</a></p>
 
       
     </div>

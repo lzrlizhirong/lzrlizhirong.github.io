@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-13T04:13:34.000Z</updated>
+  <updated>2017-02-13T04:22:30.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/"/>
     <id>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/</id>
     <published>2017-02-13T05:58:08.000Z</published>
-    <updated>2017-02-13T04:13:34.000Z</updated>
+    <updated>2017-02-13T04:22:30.000Z</updated>
     
     <content type="html"><![CDATA[<p>前面主要学习了ElasticSearch分布式集群的存储过程中集群、节点和分片的知识（<a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/" target="_blank" rel="external">ES-5.0.2-学习(6)——分布式集群学习1</a>），下面主要分享应对故障的一些实践。<br><a id="more"></a></p>
 <h1 id="应对故障"><a href="#应对故障" class="headerlink" title="应对故障"></a>应对故障</h1><p>前面说了很多关于复制分片可以应对节点失效，很好保证集群的安全性，下面我们可以尝试杀掉第一个节点的进程，我们的集群变化成如下（所有的操作都是ElasticSearch自动处理）：<br><img src="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/../../../../images/e71.png" alt=""><br>我们杀掉的节点是一个主节点。一个集群必须要有一个主节点才能使其功能正常，所以集群做的第一件事就是各节点选举了一个新的主节点：Node 2。</p>
@@ -38,6 +38,7 @@
 <h1 id="实践注意点"><a href="#实践注意点" class="headerlink" title="实践注意点"></a>实践注意点</h1><p>在测试过程中，ElasticSearch集群确实可以帮助我们重新分配分片的状态，但是需要注意的是，每次一个节点关闭的时候，集群需要一定的时间去管理，如果这时候我们很快的将两个节点关闭，ElasticSearch集群将无法挽救回没有主分片，也没有复制分片的那些数据，所以测试的时候需要知道这一点。</p>
 <p>不过这也反映我们在学习分享1中描述的，如果我们的复制节点足够多的话，我们可以保证高可用的能力就却强大，因为允许节点故障的次数更多，而且我们的节点故障以后，运维又可以将节点重启，继续斗争！！！</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在我们对分片如何使Elasticsearch可以水平扩展并保证数据安全有了一个清晰的认识。真正感受到Elasticsearch天生就是分布式的，确实很强大！</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6188560.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6188560.html</a></p>
 ]]></content>
     
     <summary type="html">
@@ -60,13 +61,12 @@
     <link href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/"/>
     <id>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/</id>
     <published>2017-02-13T02:21:48.000Z</published>
-    <updated>2017-02-13T03:11:13.000Z</updated>
+    <updated>2017-02-13T04:22:22.000Z</updated>
     
-    <content type="html"><![CDATA[<p>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。</p>
-<p>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+    <content type="html"><![CDATA[<p>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
 <p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
 <p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
-<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。<br><a id="more"></a></p>
+<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。</p>
 <h1 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h1><p>如果我们启动一个单独的节点，它还没有数据和索引，这个集群看起来如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png" alt=""><br>只有一个空节点的集群。一个节点(node)就是一个Elasticsearch实例，而一个集群(cluster)由一个或多个节点组成，它们具有相同cluster.name，它们协同工作，分享数据和负载。当加入新的节点或者删除一个节点时，集群就会感知到并平衡数据。</p>
 <p>集群中一个节点会被选举为主节点(master)，它将临时管理集群级别的一些变更，例如新建或删除索引、增加或移除节点等。主节点不参与文档级别的变更或搜索，这意味着在流量增长的时候，该主节点不会成为集群的瓶颈。任何节点都可以成为主节点。我们例子中的集群只有一个节点，所以它会充当主节点的角色。</p>
 <p>作为用户，我们能够与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点上。我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch处理。</p>
@@ -109,16 +109,13 @@
 <p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png" alt=""><br>从图中可以看出，blogs索引现在有9个分片：3个主分片和6个复制分片。这意味着我们能够扩展到9个节点，再次变成每个节点一个分片。这样使我们的搜索性能相比原始的三节点集群增加“三倍”。</p>
 <p>实际操作也是同样的效果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png" alt=""><br><strong><em>注意：</em></strong>可以看到上面的“三倍”我们用加了引号，因为在同样数量的节点上增加更多的复制分片并不一定提高性能，因为这样做的话平均每个分片的所占有的硬件资源就减少了（大部分请求都聚集到了分片少的节点，导致一个节点吞吐量太大，反而降低性能），你需要增加硬件来提高吞吐量。所以说添加复制分片和添加节点，在保证成本的情况下，需要有一个平衡点。</p>
 <p>不过这些额外的复制节点还是有另外一个好处，使我们有更多的冗余：通过以上对节点的设置，我们能够承受两个节点故障而不丢失数据。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 ES-5.0.2-学习(7)——分布式集群学习2 继续和大家分享。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 <a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/" target="_blank" rel="external">ES-5.0.2-学习(7)——分布式集群学习2</a> 继续和大家分享。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6188044.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6188044.html</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 &lt;em&gt;&lt;a href=&quot;http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/&quot;&gt;ES-5.0.2-学习(3)——单台服务器部署多个节点&lt;/a&gt;&lt;/em&gt; 搭建学习。&lt;/p&gt;
-&lt;p&gt;ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。&lt;/p&gt;
-&lt;p&gt;Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。&lt;/p&gt;
-&lt;p&gt;对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。&lt;/p&gt;
-&lt;p&gt;下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。&lt;br&gt;&lt;/p&gt;
+      &lt;p&gt;在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 &lt;em&gt;&lt;a href=&quot;http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/&quot;&gt;ES-5.0.2-学习(3)——单台服务器部署多个节点&lt;/a&gt;&lt;/em&gt; 搭建学习。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -136,7 +133,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AC%AC%E4%B8%80%E4%B8%AAES%E4%BE%8B%E5%AD%90/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/</id>
     <published>2017-02-10T09:35:28.000Z</published>
-    <updated>2017-02-10T10:41:31.000Z</updated>
+    <updated>2017-02-13T04:21:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。<br><a id="more"></a></p>
 <h1 id="员工文档索引"><a href="#员工文档索引" class="headerlink" title="员工文档索引"></a>员工文档索引</h1><p>业务首先需要存储员工数据。这将采取一个员工文档的形式：单个文档表示单个员工。在Elasticsearch中存储数据的行为称为索引，但是在索引文档之前，我们需要决定在哪里存储它。<br>在Elasticsearch中，文档属于某个类型，这些类型位于索引中。可以绘制一些（粗略）与传统关系数据库的对比：</p>
@@ -186,6 +183,7 @@
 <p>如果Elasticsearch 5版本以前，将会返回：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   ...</div><div class="line">   &quot;hits&quot;: &#123; ... &#125;,</div><div class="line">   &quot;aggregations&quot;: &#123;</div><div class="line">      &quot;all_interests&quot;: &#123;</div><div class="line">         &quot;buckets&quot;: [</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;music&quot;,</div><div class="line">               &quot;doc_count&quot;: 2</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;forestry&quot;,</div><div class="line">               &quot;doc_count&quot;: 1</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">               &quot;key&quot;:       &quot;sports&quot;,</div><div class="line">               &quot;doc_count&quot;: 1</div><div class="line">            &#125;</div><div class="line">         ]</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们可以看到，两个员工对音乐感兴趣，一个在林业，一个在体育。这些聚合不是预先计算的，它们是从与当前查询匹配的文档即时生成的。<br>然而如果我们使用的是Elasticsearch 5版本以上的话，将会出现如下异常：<br><img src="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/../../../../images/e57.png" alt=""><br>我们可以查看 <em><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/fielddata.html#_fielddata_is_disabled_on_literal_text_literal_fields_by_default" target="_blank" rel="external">Elasticsearch 5.0文档——Fielddata is disabled on text fields by default</a></em><br>大概的意思是：Fielddata可以消耗大量的堆空间，特别是在加载高基数文本字段时。一旦fielddata已经加载到堆中，它在该段的生存期内保持。此外，加载fielddata是一个昂贵的过程，可以导致用户体验延迟命中。<br>所以fielddata默认禁用。如果尝试对文本字段上的脚本进行排序，聚合或访问值，就会看到这个异常，具体使用可以参考手册。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个小例子是一个很好的演示了什么是Elasticsearch。它只是很肤浅的介绍了简单的使用，许多功能被省略，以保持简短。但是这也突出了开始构建高级搜索功能是多么容易。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6185378.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6185378.html</a><br></p>
 ]]></content>
     
     <summary type="html">
@@ -206,7 +204,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/</id>
     <published>2017-02-10T08:28:55.000Z</published>
-    <updated>2017-02-10T10:41:23.000Z</updated>
+    <updated>2017-02-13T04:20:54.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search</div></pre></td></tr></table></figure>
 <p><img src="/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png" alt=""><br><a id="more"></a><br>注：<strong>以下操作均是在kibana中，如图所示</strong><br><strong>hits：</strong></p>
@@ -240,6 +238,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:(mary john) +date:&gt;2014-09-10 +(aggregations geo)</div></pre></td></tr></table></figure>
 <p>编码后的查询字符串变得不太容易阅读<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)</div></pre></td></tr></table></figure></p>
 <p>就像你上面看到的例子，简单查询字符串搜索惊人的强大。允许我们简洁明快的表示复杂的查询。这对于命令行下一次性查询或者开发模式下非常有用。<br>然而，你可以看到简洁带来了隐晦和调试困难。而且它很脆弱——查询字符串中一个细小的语法错误，像-、:、/或”错位就会导致返回错误而不是结果。<br>最后，查询字符串搜索允许任意用户在索引中任何一个字段上运行潜在的慢查询语句，可能暴露私有信息甚至使你的集群瘫痪。<br>取而代之的，生产环境我们一般依赖全功能的请求体搜索API，它能完成前面所有的事情，甚至更多。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6171016.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6171016.html</a><br></p>
 ]]></content>
     
     <summary type="html">
@@ -261,7 +260,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/"/>
     <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-——台服务器部署多个节点/</id>
     <published>2017-02-10T07:49:18.000Z</published>
-    <updated>2017-02-11T14:56:56.000Z</updated>
+    <updated>2017-02-13T04:20:18.000Z</updated>
     
     <content type="html"><![CDATA[<p>一般情况下单台服务器只会部署一个ElasticSearch node，但是在学习过程中，很多情况下会需要实现ElasticSearch的分布式效果，所以需要启动多个节点，但是学习开发环境（不想开多个虚拟机实现多个服务器的效果），所以就想着在一台服务器上部署多个结点（下文以2个结点作为例子），两个节点分别称为实例一、二。<br><a id="more"></a></p>
 <h1 id="1、首先将elasticsearch-5-0-2文件夹再复制一份"><a href="#1、首先将elasticsearch-5-0-2文件夹再复制一份" class="headerlink" title="1、首先将elasticsearch-5.0.2文件夹再复制一份"></a>1、首先将elasticsearch-5.0.2文件夹再复制一份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R elasticsearch-5.0.2 elasticsearch-5.0.2-node-2</div></pre></td></tr></table></figure>
@@ -278,6 +277,7 @@
 <p>[2016-12-11T16:53:02,711][INFO ][o.e.d.z.ZenDiscovery     ] [node-2] failed to send join request to master [{node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300}], reason [RemoteTransportException[[node-1][127.0.0.1:9300][internal:discovery/zen/join]]; nested: IllegalArgumentException[can’t add node {node-2}{vP19PMOyT2ilJKRAqgn78w}{qhDDVzwZQ0GXZXhIMmpGKA}{127.0.0.1}{127.0.0.1:9301}, found existing node {node-1}{vP19PMOyT2ilJKRAqgn78w}{jDULCExERXGHp4VXpbyuJA}{127.0.0.1}{127.0.0.1:9300} with the same id but is a different node instance]; ]<br>[2016-12-11T16:53:02,911][INFO ][o.e.x.m.e.Exporters      ] [node-2] skipping exporter [default_local] as it isn’t ready yet<br>[2016-12-11T16:53:02,912][ERROR][o.e.x.m.AgentService     ] [node-2] exception when exporting documents<br>org.elasticsearch.xpack.monitoring.exporter.ExportException: exporters are either not ready or faulty<br>    at org.elasticsearch.xpack.monitoring.exporter.Exporters.export(Exporters.java:188) ~[x-pack-5.0.2.jar:5.0.2]<br>    at org.elasticsearch.xpack.monitoring.AgentService$ExportingWorker.run(AgentService.java:208) [x-pack-5.0.2.jar:5.0.2]<br>    at java.lang.Thread.run(Thread.java:745) [?:1.8.0_111]</p>
 </blockquote>
 <p>是因为复制的elasticsearch文件夹下包含了data文件中示例一的节点数据，需要把示例二data文件下的文件清空。</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6160186.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6160186.html</a></p>
 ]]></content>
     
     <summary type="html">
@@ -344,7 +344,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94Kibana-X-Pack%E4%BB%8B%E7%BB%8D%E4%BD%BF%E7%94%A8/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/</id>
     <published>2017-02-09T11:20:34.000Z</published>
-    <updated>2017-02-10T10:40:59.000Z</updated>
+    <updated>2017-02-13T04:19:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>Kibana是一个为 ElasticSearch 提供的数据分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。Kibana目前最新的版本5.0.2，回顾一下Kibana 3和Kibana 4的界面。<br>下面的图展示的是Kibana 3的界面，所有的仪表盘直接放置主页。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e21.png" alt=""><br><a id="more"></a><br>下面的图展示的是Kibana 4的界面，和Kibana 3最大的区别是将原来的主体分成三个部分，分别是发现页、可视化、仪表盘。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e22.png" alt=""><br>下面是目前Kibana 5最新版本的界面。相比较Kibana 4除了界面的风格变化，最主要是功能栏上添加了Timeline、Management和Dev Tools选项。<br><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e23.png" alt=""></p>
 <h1 id="Discover"><a href="#Discover" class="headerlink" title="Discover"></a>Discover</h1><blockquote>
@@ -380,6 +380,7 @@
 <p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/kibana-plugin install elastic/sense instead</div></pre></td></tr></table></figure></p>
 <p><img src="/2017/02/09/ES-5-0-2-学习-1-——Kibana-X-Pack介绍使用/../../../../images/e211.png" alt=""></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>内容比较简单，主要是对Kibana工具的整体功能总结，方便接下来对ElasticSearch 5的学习，其中X-Pack主要是添加身份权限的验证，以及原先需要安装其他各种Marvel、Hand等各种功能插件添加到Kibana上使用才能使用的功能。<br>学习链接：<br>X-Pack：<a href="https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html</a><br>Kibana：<a href="https://www.elastic.co/guide/en/kibana/current/introduction.html" target="_blank" rel="external">https://www.elastic.co/guide/en/kibana/current/introduction.html</a></p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6156335.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6156335.html</a></p>
 ]]></content>
     
     <summary type="html">
@@ -471,7 +472,7 @@
     <link href="http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/"/>
     <id>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-学习-1-——安装Elasticsearch、Kibana和X-Pack/</id>
     <published>2017-02-09T08:39:09.000Z</published>
-    <updated>2017-02-10T10:40:34.000Z</updated>
+    <updated>2017-02-13T04:19:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="安装准备："><a href="#安装准备：" class="headerlink" title="安装准备："></a>安装准备：</h1><p>安装Elasticsearch唯一的要求是安装官方新版的Java，包括对应的Jdk。</p>
 <h1 id="安装Elasticsearch"><a href="#安装Elasticsearch" class="headerlink" title="安装Elasticsearch"></a>安装Elasticsearch</h1><p>首先到官网下载最新版本的Elasticsearch压缩包。<br>可以使用命令，注意将最新的可用的下载链接填入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/  elasticsearch-5.0.2.zip</div><div class="line">unzip elasticsearch-5.0.2.zip</div><div class="line">cd elasticsearch-5.0.2</div></pre></td></tr></table></figure></p>
@@ -499,6 +500,7 @@
 <h2 id="Hand"><a href="#Hand" class="headerlink" title="Hand"></a>Hand</h2><p>在学习Elasticsearch的过程中，必不可少需要通过一些工具查看es的运行状态以及数据。如果都是通过rest请求，未免太过麻烦，而且也不够人性化。此时，Head插件可以实现基本信息的查看，rest请求的模拟，数据的检索等等。</p>
 <h2 id="X-pack"><a href="#X-pack" class="headerlink" title="X-pack"></a>X-pack</h2><p>x-pack是elasticsearch的一个扩展包，将安全，警告，监视，图形和报告功能捆绑在一个易于安装的软件包中，也是官方推荐的。</p>
 <h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>kibana是一个与elasticsearch一起工作的开源的分析和可视化的平台。使用kibana可以查询、查看并与存储在elasticsearch索引的数据进行交互操作。使用kibana能执行高级的数据分析，并能以图表、表格和地图的形式查看数据。<br>kibana使得理解大容量的数据变得非常容易。它非常简单，基于浏览器的接口使我们能够快速的创建和分享显示elasticsearch查询结果实时变化的仪表盘。<br><strong><em>在Elasticsearch 5版本之前，一般都是通过安装Kibana，而后将Marvel、Hand等各种功能插件添加到Kibana上使用。在Elasticsearch 5版本之后，一般情况下只需要安装一个官方推荐的X-pack扩展包即可。</em></strong></p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6150681.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6150681.html</a></p>
 ]]></content>
     
     <summary type="html">
