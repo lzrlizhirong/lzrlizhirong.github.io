@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e88.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e89.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e810.png">
-<meta property="og:updated_time" content="2017-02-14T04:16:50.000Z">
+<meta property="og:updated_time" content="2017-02-14T04:20:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(8)--分布式文档存储">
 <meta name="twitter:description" content="学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。">
@@ -642,8 +642,10 @@
 <li>客户端给<em>Node 1</em>发送更新请求。</li>
 <li>它转发请求到主分片所在节点<em>Node 3</em>。</li>
 <li><em>Node 3</em>从主分片检索出文档，修改<em>_source</em>字段的JSON，然后在主分片上重建索引。如果有其他进程修改了文档，它以<em>retry_on_conflict</em>设置的次数重复步骤3，都未成功则放弃。</li>
-<li>如果<em>Node 3</em>成功更新文档，它同时转发文档的新版本到Node 1和Node 2上的复制节点以重建索引。当所有复制节点报告成功，Node 3返回成功给请求节点，然后返回给客户端。<br> <em>update</em> API还接受<em>routing</em>、<em>replication</em>（弃）、<em>consistency</em>（弃）和<em>timout</em>参数。<h2 id="基于文档的复制"><a href="#基于文档的复制" class="headerlink" title="基于文档的复制"></a>基于文档的复制</h2>当主分片转发更改给复制分片时，并不是转发更新请求，而是转发整个文档的新版本。记住这些修改转发到复制节点是异步的，它们并不能保证到达的顺序与发送相同。如果Elasticsearch转发的仅仅是修改请求，修改的顺序可能是错误的，那得到的就是个损坏的文档。<h2 id="多文档模式"><a href="#多文档模式" class="headerlink" title="多文档模式"></a>多文档模式</h2><em>mget</em>和<em>bulk</em> API与单独的文档类似。差别是请求节点知道每个文档所在的分片。它把多文档请求拆成每个分片的对文档请求，然后转发每个参与的节点。</li>
+<li>如果<em>Node 3</em>成功更新文档，它同时转发文档的新版本到Node 1和Node 2上的复制节点以重建索引。当所有复制节点报告成功，Node 3返回成功给请求节点，然后返回给客户端。<br> <em>update</em> API还接受<em>routing</em>、<em>replication</em>（弃）、<em>consistency</em>（弃）和<em>timout</em>参数。</li>
 </ol>
+<h2 id="基于文档的复制"><a href="#基于文档的复制" class="headerlink" title="基于文档的复制"></a>基于文档的复制</h2><p>当主分片转发更改给复制分片时，并不是转发更新请求，而是转发整个文档的新版本。记住这些修改转发到复制节点是异步的，它们并不能保证到达的顺序与发送相同。如果Elasticsearch转发的仅仅是修改请求，修改的顺序可能是错误的，那得到的就是个损坏的文档。</p>
+<h2 id="多文档模式"><a href="#多文档模式" class="headerlink" title="多文档模式"></a>多文档模式</h2><p><em>mget</em>和<em>bulk</em> API与单独的文档类似。差别是请求节点知道每个文档所在的分片。它把多文档请求拆成每个分片的对文档请求，然后转发每个参与的节点。</p>
 <p>一旦接收到每个节点的应答，然后整理这些响应组合为一个单独的响应，最后返回给客户端。<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e89.png" alt=""><br>下面我们将罗列通过一个<em>mget</em>请求检索多个文档的顺序步骤：</p>
 <ol>
 <li>客户端向Node 1发送<em>mget</em>请求。</li>
