@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Elasticsearch,分布式," />
+  <meta name="keywords" content="Elasticsearch,分布式存储," />
 
 
 
@@ -89,26 +89,27 @@
 
 
 
-<meta name="description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
+<meta name="description" content="学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/index.html">
+<meta property="og:title" content="ES-5.0.2-学习(8)--分布式文档存储">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/index.html">
 <meta property="og:site_name" content="八阿哥李四 | BugLess">
-<meta property="og:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e64.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e65.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e66.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png">
-<meta property="og:updated_time" content="2017-02-13T10:24:06.000Z">
+<meta property="og:description" content="学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e81.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e82.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e83.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e84.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e85.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e86.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e87.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e88.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e89.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e810.png">
+<meta property="og:updated_time" content="2017-02-14T04:15:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
-<meta name="twitter:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
+<meta name="twitter:title" content="ES-5.0.2-学习(8)--分布式文档存储">
+<meta name="twitter:description" content="学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e81.png">
 
 
 
@@ -136,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/"/>
 
 
 
 
 
-  <title> ES-5.0.2-学习(6)——分布式集群学习1 | 八阿哥李四 | BugLess </title>
+  <title> ES-5.0.2-学习(8)--分布式文档存储 | 八阿哥李四 | BugLess </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -483,7 +484,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -507,7 +508,7 @@
             
             
               
-                ES-5.0.2-学习(6)——分布式集群学习1
+                ES-5.0.2-学习(8)--分布式文档存储
               
             
           </h1>
@@ -522,8 +523,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T10:21:48+08:00">
-                2017-02-13 10:21:48
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-14T11:40:43+08:00">
+                2017-02-14 11:40:43
               </time>
             
 
@@ -563,8 +564,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/" itemprop="commentCount"></span>
+                <a href="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -595,54 +596,67 @@
       
 
       
-        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=31460216&auto=0&height=66"></iframe><br>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
-<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
-<p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
-<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。</p>
-<h1 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h1><p>如果我们启动一个单独的节点，它还没有数据和索引，这个集群看起来如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png" alt=""><br>只有一个空节点的集群。一个节点(node)就是一个Elasticsearch实例，而一个集群(cluster)由一个或多个节点组成，它们具有相同cluster.name，它们协同工作，分享数据和负载。当加入新的节点或者删除一个节点时，集群就会感知到并平衡数据。</p>
-<p>集群中一个节点会被选举为主节点(master)，它将临时管理集群级别的一些变更，例如新建或删除索引、增加或移除节点等。主节点不参与文档级别的变更或搜索，这意味着在流量增长的时候，该主节点不会成为集群的瓶颈。任何节点都可以成为主节点。我们例子中的集群只有一个节点，所以它会充当主节点的角色。</p>
-<p>作为用户，我们能够与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点上。我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch处理。</p>
-<h1 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h1><p>在Elasticsearch集群中可以监控统计很多信息，但是只有一个是最重要的：集群健康(cluster health)。<br>集群健康有三种状态：green、yellow或red，健康状况在后面会有很多体现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_cluster/health</div></pre></td></tr></table></figure></p>
-<p>在一个没有索引的空集群中运行如上查询，将返回这些信息：</p>
-<blockquote>
-<p>{<br>   “cluster_name”:          “elasticsearch”,<br>   “status”:                “green”,<br>   “timed_out”:             false,<br>   “number_of_nodes”:       1,<br>   “number_of_data_nodes”:  1,<br>   “active_primary_shards”: 0,<br>   “active_shards”:         0,<br>   “relocating_shards”:     0,<br>   “initializing_shards”:   0,<br>   “unassigned_shards”:     0<br>}</p>
-</blockquote>
-<p><strong><em>status</em></strong>： 是我们最感兴趣的字段。status字段提供一个综合的指标来表示集群的的服务状况。三种颜色各自的含义：</p>
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=423703814&auto=0&height=66"></iframe><br>学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。<br><a id="more"></a></p>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><p>首先，我们需要明白，文档和分片之间是如何匹配的，这就是路由。当你索引一个文档，它被存储在单独一个主分片上。Elasticsearch是如何知道文档属于哪个分片的呢？当你创建一个新文档，它是如何知道是应该存储在分片1还是分片2上的呢？</p>
+<p>进程不能是随机的，因为我们将来要检索文档。事实上，它根据一个简单的算法决定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shard = hash(routing) % number_of_primary_shards</div></pre></td></tr></table></figure></p>
+<p><em>routing</em>值是一个任意字符串，它默认是<em>_id</em>但也可以自定义。这个<em>routing</em>字符串通过哈希函数生成一个数字，然后除以主切片的数量得到一个余数(remainder)，余数的范围永远是<em>0</em>到<em>number_of_primary_shards - 1</em>，这个数字就是特定文档所在的分片。</p>
+<p>这也解释了为什么主分片的数量只能在创建索引时定义且不能修改：如果主分片的数量在未来改变了，所有先前的路由值就失效了，文档也就永远找不到了。</p>
+<p>所有的文档API（get、index、delete、bulk、update、mget）都接收一个routing参数，它用来自定义文档到分片的映射。自定义路由值可以确保所有相关文档——例如属于同一个人的文档——被保存在同一分片上。</p>
+<p>例如，可以这样设置参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">POST twitter/tweet?routing=kimchy</div><div class="line">&#123;</div><div class="line">    &quot;user&quot; : &quot;kimchy&quot;,</div><div class="line">    &quot;post_date&quot; : &quot;2009-11-15T14:12:12&quot;,</div><div class="line">    &quot;message&quot; : &quot;trying out Elasticsearch&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="主分片和复制分片如何交互"><a href="#主分片和复制分片如何交互" class="headerlink" title="主分片和复制分片如何交互"></a>主分片和复制分片如何交互</h1><p>在文档确认存储到哪个主分片以后，接下来就是主分片将数据复制到复制分片的任务，为了阐述意图，我们假设有三个节点的集群。它包含一个叫做<em>blogs</em>的索引并拥有两个主分片。每个主分片有两个复制分片。相同的分片不会放在同一个节点上，所以我们的集群是这样的：<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e81.png" alt=""><br>我们能够发送请求给集群中任意一个节点。每个节点都有能力处理任意请求。每个节点都知道任意文档所在的节点，所以也可以将请求转发到需要的节点。下面的例子中，我们将发送所有请求给Node 1，这个节点我们将会称之为请求节点(requesting node)。一般情况下，当我们发送请求，最好的做法是循环通过所有节点请求，这样可以平衡负载。</p>
+<h1 id="新建、索引和删除文档"><a href="#新建、索引和删除文档" class="headerlink" title="新建、索引和删除文档"></a>新建、索引和删除文档</h1><p>新建、索引和删除请求都是写(write)操作，它们必须在主分片上成功完成才能复制到相关的复制分片上。</p>
+<p>下面是在主分片和复制分片上成功新建、索引或删除一个文档必要的顺序步骤：<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e82.png" alt=""></p>
+<ol>
+<li>客户端给Node 1发送新建、索引或删除请求。</li>
+<li>节点使用文档的_id确定文档属于分片0。它转发请求到Node 3，分片0位于这个节点上。</li>
+<li>Node 3在主分片上执行请求，如果成功，它转发请求到相应的位于Node 1和Node 2的复制节点上。当所有的复制节点报告成功，Node 3报告成功到请求的节点，请求的节点再报告给客户端。客户端接收到成功响应的时候，文档的修改已经被应用于主分片和所有的复制分片。你的修改生效了。</li>
+</ol>
+<p>有很多可选的请求参数允许你更改这一过程。你可能想牺牲一些安全来提高性能。这些选项很少使用因为Elasticsearch已经足够快。</p>
+<p><strong><em>注意：</em></strong>下面的参数只对ElasticSearch 5.0以下的版本有效，在ElasticSearch 5.0之后貌似使用wait_for_active_shards代替了consistency。所以之前的参数了解即可，实际可以参考：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/indices-create-index.html" target="_blank" rel="external">Create Index—Wait For Active Shards</a>。</p>
+<h2 id="replication（注意在ElasticSearch-5-0开始被废弃）"><a href="#replication（注意在ElasticSearch-5-0开始被废弃）" class="headerlink" title="replication（注意在ElasticSearch 5.0开始被废弃）"></a>replication（注意在ElasticSearch 5.0开始被废弃）</h2><p>复制默认的值是<em>sync</em>。这将导致主分片得到复制分片的成功响应后才返回。</p>
+<p>如果你设置<em>replication</em>为<em>async</em>，请求在主分片上被执行后就会返回给客户端。它依旧会转发请求给复制节点，但你将不知道复制节点成功与否。</p>
+<p>上面的这个选项不建议使用。默认的<em>sync</em>复制允许Elasticsearch强制反馈传输。<em>async</em>复制可能会因为在不等待其它分片就绪的情况下发送过多的请求而使Elasticsearch过载。</p>
+<h2 id="consistency（注意在ElasticSearch-5-0开始被废弃）"><a href="#consistency（注意在ElasticSearch-5-0开始被废弃）" class="headerlink" title="consistency（注意在ElasticSearch 5.0开始被废弃）"></a>consistency（注意在ElasticSearch 5.0开始被废弃）</h2><p>默认主分片在尝试写入时需要规定数量(<em>quorum</em>)或过半的分片（可以是主节点或复制节点）可用。这是防止数据被写入到错的网络分区。规定的数量计算公式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int( (primary + number_of_replicas) / 2 ) + 1</div></pre></td></tr></table></figure></p>
+<p><em>consistency</em>允许的值为<em>one</em>（只有一个主分片），<em>all</em>（所有主分片和复制分片）或者默认的<em>quorum</em>或过半分片。</p>
+<p>注意<em>number_of_replicas</em>是在索引中的的设置，用来定义复制分片的数量，而不是现在活动的复制节点的数量。如果你定义了索引有3个复制节点，那规定数量是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int( (primary + 3 replicas) / 2 ) + 1 = 3</div></pre></td></tr></table></figure></p>
+<p>但如果你只有2个节点，那你的活动分片不够规定数量，也就不能索引或删除任何文档。</p>
+<p><strong><em>注意：</em></strong></p>
 <ul>
-<li>green：所有主要分片和复制分片都可用。</li>
-<li>yellow：所有主要分片可用，但不是所有复制分片都可用。</li>
-<li>red：不是所有的主要分片都可用。</li>
+<li>新索引默认有1个复制分片，这意味着为了满足<em>quorum</em>的要求需要两个活动的分片。当然，这个默认设置将阻止我们在单一节点集群中进行操作。为了避开这个问题，规定数量只有在<em>number_of_replicas</em>大于一时才生效。</li>
+<li><strong>一个疑惑，是不是<em>primary</em>值一直都只会是1？？？</strong><h2 id="wait-for-active-shards（新参数）"><a href="#wait-for-active-shards（新参数）" class="headerlink" title="wait_for_active_shards（新参数）"></a>wait_for_active_shards（新参数）</h2>在ElasticSearch 5.0中可以用<em>wait_for_active_shards</em>参数表示：等待活动的分片，具体的值和<em>consistency</em>类似，下面用<em>wait_for_active_shards</em>演示一个实际使用的例子。</li>
 </ul>
-<h1 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h1><p>为了将数据添加到Elasticsearch，我们需要索引(index)——一个存储关联数据的地方。实际上，索引只是一个用来指向一个或多个分片(shards)的“逻辑命名空间(logical namespace)”.</p>
-<p>一个分片(shard)是一个最小级别“工作单元(worker unit)”,它只是保存了索引中所有数据的一部分。并且先初步知道分片就是一个Lucene实例，它本身就是一个完整的搜索引擎。我们的文档存储在分片中，并且在分片中被索引，但是我们的应用程序不会直接与它们通信，取而代之的是，直接与索引通信。</p>
-<p>分片是Elasticsearch在集群中分发数据的关键。把分片想象成数据的容器。文档存储在分片中，然后分片分配到你集群中的节点上。当你的集群扩容或缩小，Elasticsearch将会自动在你的节点间迁移分片，以使集群保持平衡。</p>
-<p>分片可以是主分片(primary shard)或者是复制分片(replica shard)。你索引中的每个文档属于一个单独的主分片，所以主分片的数量决定了索引最多能存储多少数据。当索引创建完成的时候，主分片的数量就固定了，但是复制分片的数量可以随时调整。</p>
-<p>复制分片只是主分片的一个副本，它可以防止硬件故障导致的数据丢失，同时可以提供读请求，比如搜索或者从别的分片取回文档。</p>
-<p>让我们在集群中唯一一个空节点上创建一个叫做blogs的索引。默认情况下，一个索引被分配5个主分片，但是为了演示的目的，我们只分配3个主分片和一个复制分片（每个主分片都有一个复制分片）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /blogs</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,</div><div class="line">      &quot;number_of_replicas&quot; : 1</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png" alt=""><br>我们的集群现在看起来就像上图——三个主分片都被分配到Node 1。如果我们现在检查集群健康(cluster-health)，我们将见到以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;yellow&quot;, &lt;1&gt;</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       1,</div><div class="line">   &quot;number_of_data_nodes&quot;:  1,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         3,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     3 &lt;2&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>集群的状态现在是 yellow</li>
-<li>我们的三个复制分片还没有被分配到节点上</li>
-</ul>
-<p>下面我们可以看下，在Kibana监控工具中查看具体情况，如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png" alt=""><br>集群的健康状态yellow表示所有的主分片(primary shards)启动并且正常运行了——集群已经可以正常处理任何请求——但是复制分片(replica shards)还没有全部可用。事实上所有的三个复制分片现在都是unassigned状态——它们还未被分配给节点。在同一个节点上保存相同的数据副本是没有必要的，如果这个节点故障了，那所有的数据副本也会丢失。</p>
-<p>现在我们的集群已经功能完备，但是依旧存在因硬件故障而导致数据丢失的风险。</p>
-<h1 id="添加故障转移"><a href="#添加故障转移" class="headerlink" title="添加故障转移"></a>添加故障转移</h1><p>在单一节点上运行意味着有单点故障的风险——没有数据备份。幸运的是，要防止单点故障，我们唯一需要做的就是启动另一个节点。</p>
-<p>具体启动方式可以查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 。</p>
-<p>如果我们启动了第二个节点，这个集群看起来就像下图。双节点集群——所有的主分片和复制分片都已分配:<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e64.png" alt=""><br>第二个节点已经加入集群，三个复制分片(replica shards)也已经被分配了——分别对应三个主分片，这意味着在丢失任意一个节点的情况下依旧可以保证数据的完整性。</p>
-<p>文档的索引将首先被存储在主分片中，然后并发复制到对应的复制节点上。这可以确保我们的数据在主节点和复制节点上都可以被检索。</p>
-<p><strong><em>cluster-health</em></strong> 现在的状态是 <strong><em>green</em></strong>，这意味着所有的6个分片（三个主分片和三个复制分片）都已可用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;green&quot;,</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       2,</div><div class="line">   &quot;number_of_data_nodes&quot;:  2,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         6,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>集群的状态是green，我们的集群不仅是功能完备的，而且是高可用的。<br>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e65.png" alt=""></p>
-<h1 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h1><p>随着应用需求的增长，我们该如何扩展？如果我们启动第三个节点，我们的集群会重新组织自己，包含3个节点的集群——分片已经被重新分配以平衡负载：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e66.png" alt=""><br>Node 3包含了分别来自Node 1和Node 2的一个分片，这样每个节点就有两个分片，和之前相比少了一个，这意味着每个节点上的分片将获得更多的硬件资源（CPU、RAM、I/O）。</p>
-<p>分片本身就是一个完整的搜索引擎，它可以使用单一节点的所有资源。我们拥有6个分片（3个主分片和三个复制分片），最多可以扩展到6个节点，每个节点上有一个分片，每个分片可以100%使用这个节点的资源。</p>
-<p>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png" alt=""></p>
-<h1 id="继续扩展"><a href="#继续扩展" class="headerlink" title="继续扩展"></a>继续扩展</h1><p>如果我们要扩展到6个以上的节点，要怎么做？</p>
-<p>主分片的数量在创建索引时已经确定。实际上，这个数量定义了能存储到索引里数据的最大数量（实际的数量取决于你的数据、硬件和应用场景）。然而，主分片或者复制分片都可以处理读请求——搜索或文档检索，所以数据的冗余越多，我们能处理的搜索吞吐量就越大。</p>
-<p>复制分片的数量可以在运行中的集群中动态地变更，这允许我们可以根据需求扩大或者缩小规模。让我们把复制分片的数量从原来的1增加到2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PUT /blogs/_settings</div><div class="line">&#123;</div><div class="line">   &quot;number_of_replicas&quot; : 2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png" alt=""><br>从图中可以看出，blogs索引现在有9个分片：3个主分片和6个复制分片。这意味着我们能够扩展到9个节点，再次变成每个节点一个分片。这样使我们的搜索性能相比原始的三节点集群增加“三倍”。</p>
-<p>实际操作也是同样的效果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png" alt=""><br><strong><em>注意：</em></strong>可以看到上面的“三倍”我们用加了引号，因为在同样数量的节点上增加更多的复制分片并不一定提高性能，因为这样做的话平均每个分片的所占有的硬件资源就减少了（大部分请求都聚集到了分片少的节点，导致一个节点吞吐量太大，反而降低性能），你需要增加硬件来提高吞吐量。所以说添加复制分片和添加节点，在保证成本的情况下，需要有一个平衡点。</p>
-<p>不过这些额外的复制节点还是有另外一个好处，使我们有更多的冗余：通过以上对节点的设置，我们能够承受两个节点故障而不丢失数据。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 <a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/" target="_blank" rel="external">ES-5.0.2-学习(7)——分布式集群学习2</a> 继续和大家分享。</p>
-<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6188044.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6188044.html</a></p>
+<p>开始我们先设置一个新的索引：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /active</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,</div><div class="line">      &quot;number_of_replicas&quot; : 3</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们默认先只打开两个节点，等下我们设置<em>wait_for_active_shards</em>值为3，按照上面讲解的我们如果只有两个节点，那么活动的分片最多也就2个，所以是不够的，会等待新的活动节点的到来。（这里我们只能通过少一个节点的方法演示缺少活动分片，因为我们不方便演示出让某个分片处于不活动的状态。）<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e83.png" alt=""><br>因为我们只有两个节点，所以活动的分片最多也只有两个。下面我们执行文档存储操作，并且添加参数<em>wait_for_active_shards=3：</em><br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e84.png" alt=""><br>可以发现，确实开始处于等待状态，没有马上返回结果，下面我们参数开启第三个节点，让索引拥有第三个活动分片：<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e85.png" alt=""><br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e86.png" alt=""><br>可以看到一旦我们的节点开启，文档的存储马上就会返回成功。</p>
+<p>教程中关于这部分网上很多朋友不太理解，我们可以通过查看官方文档和实践去证明自己的想法，希望上面的分析大家可以理解一些，还有不对的地方大家可以一起学习。</p>
+<h2 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h2><p>当分片副本不足时会怎样？Elasticsearch会等待更多的分片出现。默认等待一分钟。如果需要，你可以设置timeout参数让它终止的更早：100表示100毫秒，30s表示30秒。</p>
+<h2 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h2><p>文档能够从主分片或任意一个复制分片被检索。<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e87.png" alt=""><br>下面我们罗列在主分片或复制分片上检索一个文档必要的顺序步骤：</p>
+<ol>
+<li>客户端给Node 1发送get请求。</li>
+<li>节点使用文档的_id确定文档属于分片0。分片0对应的复制分片在三个节点上都有。此时，它转发请求到Node 2。</li>
+<li>Node 2返回文档(document)给Node 1然后返回给客户端。<br>对于读请求，为了平衡负载，请求节点会为每个请求选择不同的分片——它会循环所有分片副本（包括主分片）。</li>
+</ol>
+<p>可能的情况是，一个被索引的文档已经存在于主分片上却还没来得及同步到复制分片上。这时复制分片会报告文档未找到，主分片会成功返回文档。一旦索引请求成功返回给用户，文档则在主分片和复制分片都是可用的。</p>
+<h2 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h2><p><em>update</em> API结合了之前提到的读和写的模式。<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e88.png" alt=""><br>下面我们罗列执行局部更新必要的顺序步骤：</p>
+<ol>
+<li>客户端给<em>Node 1</em>发送更新请求。</li>
+<li>它转发请求到主分片所在节点<em>Node 3</em>。</li>
+<li><em>Node 3</em>从主分片检索出文档，修改<em>_source</em>字段的JSON，然后在主分片上重建索引。如果有其他进程修改了文档，它以<em>retry_on_conflict</em>设置的次数重复步骤3，都未成功则放弃。</li>
+<li>如果<em>Node 3</em>成功更新文档，它同时转发文档的新版本到Node 1和Node 2上的复制节点以重建索引。当所有复制节点报告成功，Node 3返回成功给请求节点，然后返回给客户端。<br> <em>update</em> API还接受<em>routing</em>、<em>replication</em>（弃）、<em>consistency</em>（弃）和<em>timout</em>参数。<h2 id="基于文档的复制"><a href="#基于文档的复制" class="headerlink" title="基于文档的复制"></a>基于文档的复制</h2>当主分片转发更改给复制分片时，并不是转发更新请求，而是转发整个文档的新版本。记住这些修改转发到复制节点是异步的，它们并不能保证到达的顺序与发送相同。如果Elasticsearch转发的仅仅是修改请求，修改的顺序可能是错误的，那得到的就是个损坏的文档。<h2 id="多文档模式"><a href="#多文档模式" class="headerlink" title="多文档模式"></a>多文档模式</h2><em>mget</em>和<em>bulk</em> API与单独的文档类似。差别是请求节点知道每个文档所在的分片。它把多文档请求拆成每个分片的对文档请求，然后转发每个参与的节点。</li>
+</ol>
+<p>一旦接收到每个节点的应答，然后整理这些响应组合为一个单独的响应，最后返回给客户端。<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e89.png" alt=""><br>下面我们将罗列通过一个<em>mget</em>请求检索多个文档的顺序步骤：</p>
+<ol>
+<li>客户端向Node 1发送<em>mget</em>请求。</li>
+<li>Node 1为每个分片构建一个多条数据检索请求，然后转发到这些请求所需的主分片或复制分片上。当所有回复被接收，Node 1构建响应并返回给客户端。</li>
+</ol>
+<p>routing 参数可以被docs中的每个文档设置。<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e810.png" alt=""><br>下面我们将罗列使用一个<em>bulk</em>执行多个<em>create</em>、<em>index</em>、<em>delete</em>和<em>update</em>请求的顺序步骤：</p>
+<ol>
+<li>客户端向Node 1发送<em>bulk</em>请求。</li>
+<li>Node 1为每个分片构建批量请求，然后转发到这些请求所需的主分片上。</li>
+<li>主分片一个接一个的按序执行操作。当一个操作执行完，主分片转发新文档（或者删除部分）给对应的复制节点，然后执行下一个操作。一旦所有复制节点报告所有操作已成功完成，节点就报告success给请求节点，后者(请求节点)整理响应并返回给客户端。</li>
+</ol>
+<p><em>bulk</em> API还可以在最上层使用<em>replication</em>（弃）和<em>consistency</em>（弃）参数，<em>routing</em>参数则在每个请求的元数据中使用。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是关于在分布式系统中，每个分片的文档是被如何索引和查询的。虽然版本的更新有一些参数会更新，但是整体的内部实现应该不会有太大的变化，分享一个学习方法，学习的时候把新旧的版本内容通过对比，不仅可以更好理解知识，而且可以加深印象。更何况旧的不会被很快淘汰，学了又何妨！</p>
+<p>出处：<a href="http://www.cnblogs.com/wxw16/p/6192549.html" target="_blank" rel="external">http://www.cnblogs.com/wxw16/p/6192549.html</a></p>
 
       
     </div>
@@ -668,7 +682,7 @@
           
             <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
           
-            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+            <a href="/tags/分布式存储/" rel="tag"># 分布式存储</a>
           
         </div>
       
@@ -681,8 +695,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/" rel="next" title="ES-5.0.2-学习(5)--第一个ES例子">
-                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(5)--第一个ES例子
+              <a href="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/" rel="next" title="ES-5.0.2-学习(7)——分布式集群学习2">
+                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(7)——分布式集群学习2
               </a>
             
           </div>
@@ -690,10 +704,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/" rel="prev" title="ES-5.0.2-学习(7)——分布式集群学习2">
-                ES-5.0.2-学习(7)——分布式集群学习2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -708,10 +718,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"
-     data-title="ES-5.0.2-学习(6)——分布式集群学习1"
+        <div class="ds-share flat" data-thread-key="2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/"
+     data-title="ES-5.0.2-学习(8)--分布式文档存储"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
+     data-url="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -741,8 +751,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"
-           data-title="ES-5.0.2-学习(6)——分布式集群学习1" data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
+      <div class="ds-thread" data-thread-key="2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/"
+           data-title="ES-5.0.2-学习(8)--分布式文档存储" data-url="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/">
       </div>
     
   </div>
@@ -849,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#空集群"><span class="nav-number">1.</span> <span class="nav-text">空集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群健康"><span class="nav-number">2.</span> <span class="nav-text">集群健康</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加索引"><span class="nav-number">3.</span> <span class="nav-text">添加索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加故障转移"><span class="nav-number">4.</span> <span class="nav-text">添加故障转移</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#横向扩展"><span class="nav-number">5.</span> <span class="nav-text">横向扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继续扩展"><span class="nav-number">6.</span> <span class="nav-text">继续扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#路由"><span class="nav-number">1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主分片和复制分片如何交互"><span class="nav-number">2.</span> <span class="nav-text">主分片和复制分片如何交互</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建、索引和删除文档"><span class="nav-number">3.</span> <span class="nav-text">新建、索引和删除文档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#replication（注意在ElasticSearch-5-0开始被废弃）"><span class="nav-number">3.1.</span> <span class="nav-text">replication（注意在ElasticSearch 5.0开始被废弃）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consistency（注意在ElasticSearch-5-0开始被废弃）"><span class="nav-number">3.2.</span> <span class="nav-text">consistency（注意在ElasticSearch 5.0开始被废弃）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wait-for-active-shards（新参数）"><span class="nav-number">3.3.</span> <span class="nav-text">wait_for_active_shards（新参数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#timeout"><span class="nav-number">3.4.</span> <span class="nav-text">timeout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检索文档"><span class="nav-number">3.5.</span> <span class="nav-text">检索文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新文档"><span class="nav-number">3.6.</span> <span class="nav-text">更新文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于文档的复制"><span class="nav-number">3.7.</span> <span class="nav-text">基于文档的复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多文档模式"><span class="nav-number">3.8.</span> <span class="nav-text">多文档模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
