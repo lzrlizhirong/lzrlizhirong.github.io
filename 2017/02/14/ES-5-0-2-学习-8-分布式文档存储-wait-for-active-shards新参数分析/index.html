@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e88.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e89.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e810.png">
-<meta property="og:updated_time" content="2017-02-14T04:15:52.000Z">
+<meta property="og:updated_time" content="2017-02-14T04:16:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES-5.0.2-学习(8)--分布式文档存储">
 <meta name="twitter:description" content="学完ES分布式集群的工作原理以及一些基本的将数据放入索引然后检索它们的所有方法，我们可以继续学习在分布式系统中，每个分片的文档是被如何索引和查询的。">
@@ -623,8 +623,9 @@
 <p><strong><em>注意：</em></strong></p>
 <ul>
 <li>新索引默认有1个复制分片，这意味着为了满足<em>quorum</em>的要求需要两个活动的分片。当然，这个默认设置将阻止我们在单一节点集群中进行操作。为了避开这个问题，规定数量只有在<em>number_of_replicas</em>大于一时才生效。</li>
-<li><strong>一个疑惑，是不是<em>primary</em>值一直都只会是1？？？</strong><h2 id="wait-for-active-shards（新参数）"><a href="#wait-for-active-shards（新参数）" class="headerlink" title="wait_for_active_shards（新参数）"></a>wait_for_active_shards（新参数）</h2>在ElasticSearch 5.0中可以用<em>wait_for_active_shards</em>参数表示：等待活动的分片，具体的值和<em>consistency</em>类似，下面用<em>wait_for_active_shards</em>演示一个实际使用的例子。</li>
+<li><strong>一个疑惑，是不是<em>primary</em>值一直都只会是1？？？</strong></li>
 </ul>
+<h2 id="wait-for-active-shards（新参数）"><a href="#wait-for-active-shards（新参数）" class="headerlink" title="wait_for_active_shards（新参数）"></a>wait_for_active_shards（新参数）</h2><p>在ElasticSearch 5.0中可以用<em>wait_for_active_shards</em>参数表示：等待活动的分片，具体的值和<em>consistency</em>类似，下面用<em>wait_for_active_shards</em>演示一个实际使用的例子。</p>
 <p>开始我们先设置一个新的索引：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /active</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,</div><div class="line">      &quot;number_of_replicas&quot; : 3</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们默认先只打开两个节点，等下我们设置<em>wait_for_active_shards</em>值为3，按照上面讲解的我们如果只有两个节点，那么活动的分片最多也就2个，所以是不够的，会等待新的活动节点的到来。（这里我们只能通过少一个节点的方法演示缺少活动分片，因为我们不方便演示出让某个分片处于不活动的状态。）<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e83.png" alt=""><br>因为我们只有两个节点，所以活动的分片最多也只有两个。下面我们执行文档存储操作，并且添加参数<em>wait_for_active_shards=3：</em><br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e84.png" alt=""><br>可以发现，确实开始处于等待状态，没有马上返回结果，下面我们参数开启第三个节点，让索引拥有第三个活动分片：<br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e85.png" alt=""><br><img src="/2017/02/14/ES-5-0-2-学习-8-分布式文档存储-wait-for-active-shards新参数分析/../../../../images/e86.png" alt=""><br>可以看到一旦我们的节点开启，文档的存储马上就会返回成功。</p>
 <p>教程中关于这部分网上很多朋友不太理解，我们可以通过查看官方文档和实践去证明自己的想法，希望上面的分析大家可以理解一些，还有不对的地方大家可以一起学习。</p>
