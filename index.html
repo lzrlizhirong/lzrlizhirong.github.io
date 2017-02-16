@@ -474,6 +474,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/16/Mac-Retina解决gitk模糊的问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="李志荣">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="阿荣嘚吧嘚">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="阿荣嘚吧嘚" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/16/Mac-Retina解决gitk模糊的问题/" itemprop="url">
+                  Mac Retina解决gitk模糊的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-16T16:55:28+08:00">
+                2017-02-16 16:55:28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/16/Mac-Retina解决gitk模糊的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/Mac-Retina解决gitk模糊的问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>个人是gitk和Git gui的忠实用户，但是在MAC下安装后，发现极其模糊<br>git在Mac下其实早就适配了高分辨率了，Patch如下：<br><a href="https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch">https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch</a><br>我们只需要把这里面最为关键的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSHighResolutionCapable&lt;/key&gt;</div><div class="line">&lt;true/&gt;</div></pre></td></tr></table></figure></p>
+<p>复制到Info.plist文件里面就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/Wish.app/Contents/Info.plist</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/16/Mac-Retina解决gitk模糊的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -585,16 +743,20 @@
 
       
         
-          
-            <p>gitk 用home-brew, brew install git 以后，如果报错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Error in startup script: unknown color name &quot;lime&quot;</div><div class="line"></div><div class="line"> (processing &quot;-fore&quot; option)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot;</div><div class="line"></div><div class="line"> (procedure &quot;makewindow&quot; line 347)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;makewindow&quot;</div><div class="line"></div><div class="line"> (file &quot;/usr/local/bin/gitk&quot; line 12434)</div></pre></td></tr></table></figure></p>
+          <p>gitk 用home-brew, brew install git 以后，如果报错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Error in startup script: unknown color name &quot;lime&quot;</div><div class="line"></div><div class="line"> (processing &quot;-fore&quot; option)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot;</div><div class="line"></div><div class="line"> (procedure &quot;makewindow&quot; line 347)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;makewindow&quot;</div><div class="line"></div><div class="line"> (file &quot;/usr/local/bin/gitk&quot; line 12434)</div></pre></td></tr></table></figure></p>
 <p>解决方法一：</p>
 <p>brew cask install tcl</p>
 <p>解决方法二：</p>
 <p>编辑gitk文件，把相应的color删除或修改。</p>
 <p>解决方法三：</p>
-<p>在home目录下配一个.gitk文件，将相关color定义一下。</p>
-
-          
+<p>在home目录下配一个.gitk文件，将相关color定义一下。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1895,164 +2057,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="李志荣">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="阿荣嘚吧嘚">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="阿荣嘚吧嘚" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/10/ES-5-0-2-学习-3-简单搜索/" itemprop="url">
-                  ES-5.0.2-学习(4)--简单搜索
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T16:28:55+08:00">
-                2017-02-10 16:28:55
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/10/ES-5-0-2-学习-3-简单搜索/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/ES-5-0-2-学习-3-简单搜索/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search</div></pre></td></tr></table></figure>
-<p><img src="/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png" alt=""><br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/10/ES-5-0-2-学习-3-简单搜索/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2100,7 +2104,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

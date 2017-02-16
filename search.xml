@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Mac Retina解决gitk模糊的问题]]></title>
+      <url>%2F2017%2F02%2F16%2FMac-Retina%E8%A7%A3%E5%86%B3gitk%E6%A8%A1%E7%B3%8A%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+      <content type="text"><![CDATA[个人是gitk和Git gui的忠实用户，但是在MAC下安装后，发现极其模糊git在Mac下其实早就适配了高分辨率了，Patch如下：https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch我们只需要把这里面最为关键的12&lt;key&gt;NSHighResolutionCapable&lt;/key&gt;&lt;true/&gt; 复制到Info.plist文件里面就可以了1vim /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/Wish.app/Contents/Info.plist 然后在前面加上上面的配置。这之后，我们还需要更新一下Wish.app程序我是这样做的：1touch Wish.app 注意，在OS X EI Capitan 版本开启了一个rootless的功能，即使是root用户也无法修改/System目录，我们需要进入安全模式后，执行如下命令关闭rootless 功能才能够修改1csrutil disable 详细了解OS X的rootless mac进入安全模式：开机按住 shift 键即可]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime']]></title>
       <url>%2F2017%2F02%2F16%2FMac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime%2F</url>
       <content type="text"><![CDATA[gitk 用home-brew, brew install git 以后，如果报错误：123456789101112131415Error in startup script: unknown color name &quot;lime&quot; (processing &quot;-fore&quot; option) invoked from within&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot; (procedure &quot;makewindow&quot; line 347) invoked from within&quot;makewindow&quot; (file &quot;/usr/local/bin/gitk&quot; line 12434) 解决方法一： brew cask install tcl 解决方法二： 编辑gitk文件，把相应的color删除或修改。 解决方法三： 在home目录下配一个.gitk文件，将相关color定义一下。]]></content>
