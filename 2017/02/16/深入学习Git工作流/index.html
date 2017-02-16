@@ -161,7 +161,7 @@ git 方便的branch在哪里，团队多人如何协作？冲突了怎么办？�
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/深入学习Git工作流/../../../../images/g58.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/深入学习Git工作流/../../../../images/g59.png">
 <meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/深入学习Git工作流/../../../../images/g60.png">
-<meta property="og:updated_time" content="2017-02-16T04:12:35.000Z">
+<meta property="og:updated_time" content="2017-02-16T06:45:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Git工作流">
 <meta name="twitter:description" content="个人在学习git工作流的过程中，从原有的 SVN 模式很难完全理解git的协作模式，直到有一天我看到了下面的文章，好多遗留在心中的困惑迎刃而解。于是我将这部分资料整理如下：
@@ -672,11 +672,10 @@ git 方便的branch在哪里，团队多人如何协作？冲突了怎么办？�
 <p><strong>PPS：</strong><br>本指南循序渐进地讲解工作流，如果Git用的不多，可以从前面的讲的工作流开始操练。操作过程去感受指南的讲解：解决什么问题、如何解决问题，这样理解就深了，也方便活用。</p>
 <p>Gitflow工作流是经典模型，体现了工作流的经验和精髓。随着项目过程复杂化，会感受到这个工作流中深思熟虑和威力！</p>
 <p>Forking工作流是协作的（GitHub风格）可以先看看Github的Help：Fork A Repo和Using pull requests 。照着操作，给一个Github项目贡献你的提交，有操作经验再看指南容易意会。指南中给了自己实现Fork的方法：Fork就是服务端的克隆。在指南的操练中使用代码托管服务（如GitHub、Bitbucket），可以点一下按钮就让开发者完成仓库的fork操作。</p>
-<p>:see_no_evil: 自己理解粗浅，翻译中不足和不对之处，欢迎建议（提交Issue）和指正（Fork后提交代码）！</p>
-<h1 id="二、Git工作流指南"><a href="#二、Git工作流指南" class="headerlink" title="二、Git工作流指南"></a>二、Git工作流指南</h1><p>:point_right: 工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用变得很头大。这篇指南通过总览公司团队中最常用的几种Git工作流让大家可以上手使用。</p>
+<h1 id="二、Git工作流指南"><a href="#二、Git工作流指南" class="headerlink" title="二、Git工作流指南"></a>二、Git工作流指南</h1><p>工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用变得很头大。这篇指南通过总览公司团队中最常用的几种Git工作流让大家可以上手使用。</p>
 <p>在阅读的过程中请记住，本文中的几种工作流是作为方案指导而不是条例规定。在展示了各种工作流可能的用法后，你可以从不同的工作流中挑选或揉合出一个满足你自己需求的工作流。<br><img src="/2017/02/16/深入学习Git工作流/../../../../images/g1.png" alt=""></p>
 <h2 id="集中式工作流"><a href="#集中式工作流" class="headerlink" title="集中式工作流"></a>集中式工作流</h2><p>如果你的开发团队成员已经很熟悉Subversion，集中式工作流让你无需去适应一个全新流程就可以体验Git带来的收益。这个工作流也可以作为向更Git风格工作流迁移的友好过渡。<br><img src="/2017/02/16/深入学习Git工作流/../../../../images/g2.png" alt=""><br>转到分布式版本控制系统看起来像个令人生畏的任务，但不改变已用的工作流你也可以用上Git带来的收益。团队可以用和Subversion完全不变的方式来开发项目。</p>
-<p>但使用Git加强开发的工作流，Git有相比SVN的几个优势。<br>首先，每个开发可以有属于自己的整个工程的本地拷贝。隔离的环境让各个开发者的工作和项目的其他部分修改独立开来 ——<br>即自由地提交到自己的本地仓库，先完全忽略上游的开发，直到方便的时候再把修改反馈上去。</p>
+<p>但使用Git加强开发的工作流，Git有相比SVN的几个优势。<br>首先，每个开发可以有属于自己的整个工程的本地拷贝。隔离的环境让各个开发者的工作和项目的其他部分修改独立开来 ——即自由地提交到自己的本地仓库，先完全忽略上游的开发，直到方便的时候再把修改反馈上去。</p>
 <p>其次，Git提供了强壮的分支和合并模型。不像SVN，Git的分支设计成可以做为一种用来在仓库之间集成代码和分享修改的『失败安全』的机制。</p>
 <h3 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h3><p>像Subversion一样，集中式工作流以中央仓库作为项目所有修改的单点实体。相比SVN缺省的开发分支trunk，Git叫做master，所有修改提交到这个分支上。本工作流只用到master这一个分支。</p>
 <p>开发者开始先克隆中央仓库。在自己的项目拷贝中像SVN一样的编辑文件和提交修改；但修改是存在本地的，和中央仓库是完全隔离的。开发者可以把和上游的同步延后到一个方便时间点。</p>
