@@ -4,6 +4,55 @@
 
     
   <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/Apache-Beam%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BB%9F%E4%B8%80%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%BC%96%E7%A8%8B%E5%BA%93/</loc>
+    <lastmod>2017-02-16T11:24:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>Apache Beam：一个开源的统一的分布式数据处理编程库</title>
+        <pubTime>2017-02-16T10:55:34.000Z</pubTime>
+        
+        <tag>大数据</tag>
+         
+        <tag>开源技术</tag>
+         
+        <tag>Apache Beam</tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="http://lzrlizhirong.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+             
+              <breadCrumb title="开源技术" url="http://lzrlizhirong.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%BC%80%E6%BA%90%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2017-02-16T09:59:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>git常用命令总结</title>
+        <pubTime>2017-02-16T09:57:47.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://lzrlizhirong.github.io/2017/02/16/Mac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime/</loc>
     <lastmod>2017-02-16T09:01:39.000Z</lastmod>
     <data>

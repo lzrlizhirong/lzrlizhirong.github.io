@@ -1,0 +1,1166 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="大数据,开源技术,Apache Beam," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="阿荣嘚吧嘚" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Apache Beam是一个开源的数据处理编程库，由Google贡献给Apache的项目，前不久刚刚成为Apache TLP项目。它提供了一个高级的、统一的编程模型，允许我们通过构建Pipeline的方式实现批量、流数据处理，并且构建好的Pipeline能够运行在底层不同的执行引擎上。刚刚接触该开源项目时，我的第一感觉就是：在编程API的设计上，数据集及其操作的抽象有点类似Apache Crunc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Beam：一个开源的统一的分布式数据处理编程库">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/index.html">
+<meta property="og:site_name" content="阿荣嘚吧嘚">
+<meta property="og:description" content="Apache Beam是一个开源的数据处理编程库，由Google贡献给Apache的项目，前不久刚刚成为Apache TLP项目。它提供了一个高级的、统一的编程模型，允许我们通过构建Pipeline的方式实现批量、流数据处理，并且构建好的Pipeline能够运行在底层不同的执行引擎上。刚刚接触该开源项目时，我的第一感觉就是：在编程API的设计上，数据集及其操作的抽象有点类似Apache Crunc">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b1.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b2.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b3.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b4.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b5.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b6.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b7.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b8.png">
+<meta property="og:updated_time" content="2017-02-16T11:24:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Beam：一个开源的统一的分布式数据处理编程库">
+<meta name="twitter:description" content="Apache Beam是一个开源的数据处理编程库，由Google贡献给Apache的项目，前不久刚刚成为Apache TLP项目。它提供了一个高级的、统一的编程模型，允许我们通过构建Pipeline的方式实现批量、流数据处理，并且构建好的Pipeline能够运行在底层不同的执行引擎上。刚刚接触该开源项目时，我的第一感觉就是：在编程API的设计上，数据集及其操作的抽象有点类似Apache Crunc">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'ZV0CITSKLL',
+      apiKey: 'e8aec2b563a2153e56afa3a4ec68e61c',
+      indexName: 'lizhirong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索关键字","hits_empty":"暂无匹配结果: ${query}","hits_stats":"耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/"/>
+
+
+
+
+
+  <title> Apache Beam：一个开源的统一的分布式数据处理编程库 | 阿荣嘚吧嘚 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?15c7df6bdcd01ea29a2351319d547221";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1261229289&web_id=1261229289" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">阿荣嘚吧嘚</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">日积跬步,志在千里</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li> <a title="慎点~有劲爆音乐~请带上耳麦~" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()    '>High起来~请带上耳麦~</a></li>
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="李志荣">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="阿荣嘚吧嘚">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="阿荣嘚吧嘚" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Apache Beam：一个开源的统一的分布式数据处理编程库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-16T18:55:34+08:00">
+                2017-02-16 18:55:34
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/开源技术/" itemprop="url" rel="index">
+                    <span itemprop="name">开源技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Apache Beam是一个开源的数据处理编程库，由Google贡献给Apache的项目，前不久刚刚成为Apache TLP项目。它提供了一个高级的、统一的编程模型，允许我们通过构建Pipeline的方式实现批量、流数据处理，并且构建好的Pipeline能够运行在底层不同的执行引擎上。刚刚接触该开源项目时，我的第一感觉就是：在编程API的设计上，数据集及其操作的抽象有点类似Apache Crunch（MapReduce Pipeline编程库）项目；而在支持统一数据处理模型上，能够让人想到Apache Flink项目。如果深入了解Apache Beam，你会发现未来Apache Beam很可能成为数据处理领域唯一一个能够将不同的数据应用统一起来的编程库。<br><a id="more"></a></p>
+<h1 id="Apache-Beam架构概览"><a href="#Apache-Beam架构概览" class="headerlink" title="Apache Beam架构概览"></a>Apache Beam架构概览</h1><p>Apache Beam目前最新版本为0.5.0-SNAPSHOT，最新的Release版本为0.4.0，很多特性还在开发中。在网上找到一个由Andrew Psaltis在2016年6月份演讲的《Apache Beam: The Case for Unifying Streaming API’s》，引用了其中一个Apache Beam的架构图，如下图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b1.png" alt=""><br>上图中，我们可以看到，Apache Beam核心的主要有两层：</p>
+<p><strong>1. Pipeline构建层</strong></p>
+<p>在Pipeline构建层，针对不同的编程语言，构建一组用于定义Pipeline相关抽象，提供编程API，这一层被称为Beam SDKs。最终的用户（具有不同编程语言技能的人员）可以基于这些抽象的Beam SDK来构建数据处理Pipeline。</p>
+<p><strong>2. Runner适配层</strong></p>
+<p>Runner适配层，主要是用来对接底层的计算引擎，用来执行上层用户开发好的Pipeline程序。</p>
+<p>我们先根据官网文档，了解一下Apache Beam的Roadmap。首先，下面的三个特性，或者说是Apache Beam的目标：</p>
+<p><strong>1. 统一（UNIFIED）</strong></p>
+<p>基于单一的编程模型，能够实现批处理（Batch processing）、流处理（Streaming Processing），通常的做法是把待处理的数据集（Dataset）统一，一般会把有界（Bound）数据集作为无界（Unbound）数据集的一种特殊情况来看待，比如Apache Flink便是按照这种方式处理，在差异化的API层之上构建一个统一的API层。</p>
+<p><strong>2. 可移植（PORTABLE）</strong></p>
+<p>在多个不同的计算环境下，都能够执行已经定义好的数据处理Pipeline。也就是说，对数据集处理的定义（即构建的Data Pipeline），与最终所要Deploy的执行环境完全无关。这对实现数据处理的企业是非常友好的，当下数据处理新技术不断涌现，企业数据处理平台也为了能够与时俱进并提高处理效率，当然希望在底层计算平台升级的过程中无需重写上层已定义的Data Pipeline。<br>目前，Apache Beam项目开发整体来看还处在初期，初步决定底层执行环境支持主流的计算平台：Apache Apex、Apache Flink、Apache Spark、Google Cloud Dataflow。实际上，Apache Beam的这种统一编程模型，可以支持任意的计算引擎，通过Data Pipeline层与执行引擎层之间开发一个类似Driver的连接器即可实现。</p>
+<p><strong>3. 可扩展（EXTENSIBLE）</strong></p>
+<p>实现任意可以共享的Beam SDK、IO connector、Transform库。</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>在使用Apache Beam构建数据处理程序，首先需要使用Beam SDK中的类创建一个Driver程序，在Driver程序中创建一个满足我们数据处理需求的Pipeline，Pipeline中包括输入（Inputs）、转换（Transformations）、输出（Outputs）三个核心的组件。然后，根据我们选择的Beam SDK来确定底层使用Pipeline Runner（执行引擎，或计算引擎），将我们定义好的Pipeline运行在Pipeline Runner上。<br>Apache Beam SDKs提供一组抽象，用来简化大规模分布式数据处理。同一个Beam抽象，能够同时适应批量处理、流处理两种数据源。下面，我们了解一下Apache Beam的一些关键抽象：</p>
+<h2 id="1-Pipeline"><a href="#1-Pipeline" class="headerlink" title="1. Pipeline"></a>1. Pipeline</h2><p>一个Pipeline是对一个数据处理任务抽象，它包含了我们在对给定数据集处理的全部逻辑，主要包括从数据源读取数据（可能从多个数据源读取）、在给定的数据集上执行Transform操作（中间可能是一个DAG图，通过多个Transform连接，而Transform的输出和输出都可能是一个数据集）、将Transform的数据结果写入到指定对的存储系统中。</p>
+<h2 id="2-PCollection"><a href="#2-PCollection" class="headerlink" title="2. PCollection"></a>2. PCollection</h2><p>一个PCollection是对分布式数据集的抽象，他可以是输入数据集、中间结果数据集、输出数据集。每一个由PCollection表征的数据集作为输入时，都会存在一个或多个Transform作用在其上（对数据集进行处理的逻辑）。</p>
+<h2 id="3-Transform"><a href="#3-Transform" class="headerlink" title="3. Transform"></a>3. Transform</h2><p>一个Transform表示数据处理过程中一个步骤（Step），对应于Pipeline中一个操作，每一个Transform会以一个或多个PCollection作为输入，经过处理后输出一个或多个PCollection。</p>
+<h2 id="4-Source-and-Sink"><a href="#4-Source-and-Sink" class="headerlink" title="4. Source and Sink"></a>4. Source and Sink</h2><p>Apache Beam提供了Source和Sink的API，用来表示读取和写入数据。Source表示从一个外部的数据源读入数据到Pipeline，而Sink表示经过Pipeline处理后将数据写入到外部存储系统</p>
+<h2 id="5-PipelineRunner"><a href="#5-PipelineRunner" class="headerlink" title="5. PipelineRunner"></a>5. PipelineRunner</h2><p>PipelineRunner是实际用来处理Pipeline逻辑的底层组件，它能够将用户构建的Pipeline翻译成底层计算引擎能够处理的Job，并执行Pipeline的处理逻辑。</p>
+<h1 id="API设计"><a href="#API设计" class="headerlink" title="API设计"></a>API设计</h1><p>Apache Beam还在开发之中，后续对应的API设计可能会有所变化，不过从当前版本来看，基于对数据处理领域对象的抽象，API的设计风格大量使用泛型来定义，具有很高的抽象级别。下面我们分别对感兴趣的的设计来详细说明。</p>
+<h2 id="1-Source"><a href="#1-Source" class="headerlink" title="1. Source"></a>1. Source</h2><p>Source表示数据输入的抽象，在API定义上分成两大类：一类是面向数据批处理的，称为BoundedSource，它能够从输入的数据集读取有限的数据记录，知道数据具有有限性的特点，从而能够对输入数据进行切分，分成一定大小的分片，进而实现数据的并行处理；另一类是面向数据流处理的，称为UnboundedSource，它所表示的数据是连续不断地进行输入，从而能够实现支持流式数据所特有的一些操作，如Checkpointing、Watermarks等。<br>Source对应的类设计，如下类图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b2.png" alt=""><br>目前，Apache Beam支持BoundedSource的数据源主要有：HDFS、MongoDB、Elasticsearch、File等，支持UnboundedSource的数据源主要有：Kinesis、Pubsub、Socker等。未来，任何具有Bounded或Unbounded两类特性的数据源都可以在Apache Beam的抽象基础上实现对应的Source。</p>
+<h2 id="2-Sink"><a href="#2-Sink" class="headerlink" title="2. Sink"></a>2. Sink</h2><p>Sink表示任何经过Pipeline中一个或多个PTransform处理过的PCollection，最终会输出到特定的存储中。与Source对应，其实Sink主要也是具有两种类型：一种是直接写入特定存储的Bounded类型，如文件系统；另一种是写入具有Unbounded特性的存储或系统中，如Flink。在API设计上，Sink的类图如下所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b3.png" alt=""><br>可见，基于Sink的抽象，可以实现任意可以写入的存储系统。</p>
+<h2 id="3-PipelineRunner"><a href="#3-PipelineRunner" class="headerlink" title="3. PipelineRunner"></a>3. PipelineRunner</h2><p>下面，我们来看一下PipelineRunner的类设计以及目前开发中的PipelineRunner，如下图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b4.png" alt=""><br>目前，PipelineRunner有DirectRunner、DataflowRunner、SparkRunner、ApexRunner、FlinkRunner，待这些主流的PipelineRunner稳定以后，如果有其他新的计算引擎框架出现，可以在PipelineRunner这一层进行扩展实现。<br>这些PipelineRunner中，DirectRunner是最简单的PipelineRunner，它非常有用，比如我们实现了一个从HDFS读取数据，但是需要在Spark集群上运行的ETL程序，使用DirectRunner可以在本地非常容易地调试ETL程序，调试到程序的数据处理逻辑没有问题了，再最终在实际的生产环境Spark集群上运行。如果特定的PipelineRunner所对应的计算引擎没有很好的支撑调试功能，使用DirectRunner是非常方便的。</p>
+<h2 id="4-PCollection"><a href="#4-PCollection" class="headerlink" title="4. PCollection"></a>4. PCollection</h2><p>PCollection是对分布式数据集的抽象，主要用作输入、输出、中间结果集。其中，在Apache Beam中对数据及其数据集的抽象有几类，我们画到一张类图上，如下图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b5.png" alt=""><br>PCollection是对数据集的抽象，包括输入输出，而基于Window的数据处理有对应的Window相关的抽象，还有一类就是TupleTag，针对具有CoGroup操作的情况下用来标记对应数据中的Tuple数据，具体如何使用可以后面我们实现的Join的例子。</p>
+<h2 id="5-PTransform"><a href="#5-PTransform" class="headerlink" title="5. PTransform"></a>5. PTransform</h2><p>一个Pipeline是由一个或多个PTransform构建而成的DAG图，其中每一个PTransform都具有输入和输出，所以PTransform是Apache Beam中非常核心的组件，我按照PTransform的做了一下分类，如下类图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b6.png" alt=""><br>通过上图可以看出，PTransform针对不同输入或输出的数据的特征，实现了一个算子（Operator）的集合，而Apache Beam除了期望实现一些通用的PTransform实现来供数据处理的开发人员开箱即用，同时也在API的抽象级别上做的非常Open，如果你想实现自己的PTransform来处理指定数据集，只需要自定义即可。而且，随着社区的活跃及其在实际应用场景中推广和使用，会很快构建一个庞大的PTransform实现库，任何有数据处理需求的开发人员都可以共享这些组件。</p>
+<h2 id="6-Combine"><a href="#6-Combine" class="headerlink" title="6. Combine"></a>6. Combine</h2><p>这里，单独把Combine这类合并数据集的实现拿出来，它的抽象很有趣，主要面向globally 和per-key这两类抽象，实现了一个非常丰富的PTransform算子库，对应的类图如下所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b7.png" alt=""><br>通过上图可以看出，作用在一个数据集上具有Combine特征的基本操作：Max、Min、Top、Mean、Sum、Count等等。</p>
+<h2 id="7-Window"><a href="#7-Window" class="headerlink" title="7. Window"></a>7. Window</h2><p>Window是用来处理某一个Micro batch的数据记录可以进行Merge这种场景的需求，通常用在Streaming处理的情况下。Apache Beam也提供了对Window的抽象，其中对于某一个Window下的数据的处理，是通过WindowFn接口来定义的，与该接口相关的处理类，如下类图所示：<br><img src="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/../../../../images/b8.png" alt=""></p>
+<h1 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a>编程实战</h1><p>首先说明一下，为了简单起见，我直接在代码中显式配置指定PipelineRunner，示例代码片段如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">options.setRunner(DirectRunner.class);</div></pre></td></tr></table></figure></p>
+<p>如果要部署到服务器上，可以通过命令行的方式指定PipelineRunner，比如要在Spark集群上运行，类似如下所示命令行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spark-submit --class org.test.beam.examples.MinimalWordCountBasedSparkRunner 2017-01-18 --master spark://myserver:7077 target/my-beam-apps-0.0.1-SNAPSHOT-shaded.jar --runner=SparkRunner</div></pre></td></tr></table></figure></p>
+<p>下面，我们从几个典型的例子来看（基于Apache Beam软件包的examples有所改动），Apache Beam如何构建Pipeline并运行在指定的PipelineRunner上：</p>
+<h2 id="WordCount（Count-Source-Sink）"><a href="#WordCount（Count-Source-Sink）" class="headerlink" title="WordCount（Count/Source/Sink）"></a>WordCount（Count/Source/Sink）</h2><p>我们根据Apache Beam的MinimalWordCount示例代码开始，看如何构建一个Pipeline，并最终执行它。 MinimalWordCount的实现，代码如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">package org.test.beam.examples;</div><div class="line"></div><div class="line">import org.apache.beam.runners.direct.DirectRunner;</div><div class="line">import org.apache.beam.sdk.Pipeline;</div><div class="line">import org.apache.beam.sdk.io.TextIO;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptions;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptionsFactory;</div><div class="line">import org.apache.beam.sdk.transforms.Count;</div><div class="line">import org.apache.beam.sdk.transforms.DoFn;</div><div class="line">import org.apache.beam.sdk.transforms.MapElements;</div><div class="line">import org.apache.beam.sdk.transforms.ParDo;</div><div class="line">import org.apache.beam.sdk.transforms.SimpleFunction;</div><div class="line">import org.apache.beam.sdk.values.KV;</div><div class="line"></div><div class="line">public class MinimalWordCount &#123;</div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;serial&quot;)</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">        PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">        options.setRunner(DirectRunner.class); // 显式指定PipelineRunner：DirectRunner（Local模式）</div><div class="line"></div><div class="line">        Pipeline pipeline = Pipeline.create(options);</div><div class="line"></div><div class="line">        pipeline.apply(TextIO.Read.from(&quot;/tmp/dataset/apache_beam.txt&quot;)) // 读取本地文件，构建第一个PTransform</div><div class="line">                .apply(&quot;ExtractWords&quot;, ParDo.of(new DoFn&lt;String, String&gt;() &#123; // 对文件中每一行进行处理（实际上Split）</div><div class="line"></div><div class="line">                    @ProcessElement</div><div class="line">                    public void processElement(ProcessContext c) &#123;</div><div class="line">                        for (String word : c.element().split(&quot;[\\s:\\,\\.\\-]+&quot;)) &#123;</div><div class="line">                            if (!word.isEmpty()) &#123;</div><div class="line">                                c.output(word);</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                &#125;))</div><div class="line">                .apply(Count.&lt;String&gt; perElement()) // 统计每一个Word的Count</div><div class="line">                .apply(&quot;ConcatResultKVs&quot;, MapElements.via( // 拼接最后的格式化输出（Key为Word，Value为Count）</div><div class="line">                        new SimpleFunction&lt;KV&lt;String, Long&gt;, String&gt;() &#123;</div><div class="line"></div><div class="line">                    @Override</div><div class="line">                    public String apply(KV&lt;String, Long&gt; input) &#123;</div><div class="line">                        return input.getKey() + &quot;: &quot; + input.getValue();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                &#125;))</div><div class="line">                .apply(TextIO.Write.to(&quot;wordcount&quot;)); // 输出结果</div><div class="line"></div><div class="line">        pipeline.run().waitUntilFinish();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Pipeline的具体含义，可以看上面代码的注释信息。下面，我们考虑以HDFS数据源作为Source，如何构建第一个PTransform，代码片段如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PCollection&lt;KV&lt;LongWritable, Text&gt;&gt; resultCollection = pipeline.apply(HDFSFileSource.readFrom(</div><div class="line">        &quot;hdfs://myserver:8020/data/ds/beam.txt&quot;,</div><div class="line">        TextInputFormat.class, LongWritable.class, Text.class))</div></pre></td></tr></table></figure></p>
+<p>可以看到，返回的是具有键值分别为LongWritable、Text类型的KV对象集合，后续处理和上面处理逻辑类似。如果使用Maven构建Project，需要加上如下依赖（这里beam.version的值可以为最新Release版本0.4.0）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.apache.beam&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;beam-sdks-java-io-hdfs&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;$&#123;beam.version&#125;&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="去重（Distinct）"><a href="#去重（Distinct）" class="headerlink" title="去重（Distinct）"></a>去重（Distinct）</h2><p>去重也是对数据集比较常见的操作，使用Apache Beam来实现，示例代码如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">package org.test.beam.examples;</div><div class="line"></div><div class="line">import org.apache.beam.runners.direct.DirectRunner;</div><div class="line">import org.apache.beam.sdk.Pipeline;</div><div class="line">import org.apache.beam.sdk.io.TextIO;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptions;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptionsFactory;</div><div class="line">import org.apache.beam.sdk.transforms.Distinct;</div><div class="line"></div><div class="line">public class DistinctExample &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line"></div><div class="line">         PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">         options.setRunner(DirectRunner.class); // 显式指定PipelineRunner：DirectRunner（Local模式）</div><div class="line"></div><div class="line">         Pipeline pipeline = Pipeline.create(options);</div><div class="line">         pipeline.apply(TextIO.Read.from(&quot;/tmp/dataset/MY_ID_FILE.txt&quot;))</div><div class="line">             .apply(Distinct.&lt;String&gt; create()) // 创建一个处理String类型的PTransform：Distinct</div><div class="line">             .apply(TextIO.Write.to(&quot;deduped.txt&quot;)); // 输出结果</div><div class="line">         pipeline.run().waitUntilFinish();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="分组（GroupByKey）"><a href="#分组（GroupByKey）" class="headerlink" title="分组（GroupByKey）"></a>分组（GroupByKey）</h2><p>对数据进行分组操作也非常普遍，我们拿一个最基础的PTransform实现GroupByKey来实现一个例子，代码如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">package org..beam.examples;</div><div class="line"></div><div class="line">import org.apache.beam.runners.direct.DirectRunner;</div><div class="line">import org.apache.beam.runners.direct.repackaged.com.google.common.base.Joiner;</div><div class="line">import org.apache.beam.sdk.Pipeline;</div><div class="line">import org.apache.beam.sdk.io.TextIO;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptions;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptionsFactory;</div><div class="line">import org.apache.beam.sdk.transforms.DoFn;</div><div class="line">import org.apache.beam.sdk.transforms.GroupByKey;</div><div class="line">import org.apache.beam.sdk.transforms.MapElements;</div><div class="line">import org.apache.beam.sdk.transforms.ParDo;</div><div class="line">import org.apache.beam.sdk.transforms.SimpleFunction;</div><div class="line">import org.apache.beam.sdk.values.KV;</div><div class="line"></div><div class="line">public class GroupByKeyExample &#123;</div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;serial&quot;)</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">        PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">        options.setRunner(DirectRunner.class); // 显式指定PipelineRunner：DirectRunner（Local模式）</div><div class="line"></div><div class="line">        Pipeline pipeline = Pipeline.create(options);</div><div class="line"></div><div class="line">        pipeline.apply(TextIO.Read.from(&quot;/tmp/dataset/MY_INFO_FILE.txt&quot;))</div><div class="line">            .apply(&quot;ExtractFields&quot;, ParDo.of(new DoFn&lt;String, KV&lt;String, String&gt;&gt;() &#123;</div><div class="line"></div><div class="line">                @ProcessElement</div><div class="line">                public void processElement(ProcessContext c) &#123;</div><div class="line">                    // file format example: 35451605324179    3G    CMCC</div><div class="line">                    String[] values = c.element().split(&quot;\t&quot;);</div><div class="line">                    if(values.length == 3) &#123;</div><div class="line">                        c.output(KV.of(values[1], values[0]));</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;))</div><div class="line">            .apply(&quot;GroupByKey&quot;, GroupByKey.&lt;String, String&gt;create()) // 创建一个GroupByKey实例的PTransform</div><div class="line">            .apply(&quot;ConcatResults&quot;, MapElements.via(</div><div class="line">                    new SimpleFunction&lt;KV&lt;String, Iterable&lt;String&gt;&gt;, String&gt;() &#123;</div><div class="line"></div><div class="line">                        @Override</div><div class="line">                        public String apply(KV&lt;String, Iterable&lt;String&gt;&gt; input) &#123;</div><div class="line">                            return new StringBuffer()</div><div class="line">                                    .append(input.getKey()).append(&quot;\t&quot;)</div><div class="line">                                    .append(Joiner.on(&quot;,&quot;).join(input.getValue()))</div><div class="line">                                    .toString();</div><div class="line">                        &#125;</div><div class="line"></div><div class="line"></div><div class="line">            &#125;))</div><div class="line">            .apply(TextIO.Write.to(&quot;grouppedResults&quot;));</div><div class="line"></div><div class="line">        pipeline.run().waitUntilFinish();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用DirectRunner运行，输出文件名称类似于grouppedResults-00000-of-00002、grouppedResults-00001-of-00002等等。</p>
+<h2 id="连接（Join）"><a href="#连接（Join）" class="headerlink" title="连接（Join）"></a>连接（Join）</h2><p>最后，我们通过实现一个Join的例子，其中，用户的基本信息包含ID和名称，对应文件格式如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">35451605324179    Jack</div><div class="line">35236905298306    Jim</div><div class="line">35236905519469    John</div><div class="line">35237005022314    Linda</div></pre></td></tr></table></figure></p>
+<p>另一个文件是用户使用手机的部分信息，文件格式如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">35451605324179    3G    中国移动</div><div class="line">35236905298306    2G    中国电信</div><div class="line">35236905519469    4G    中国移动</div></pre></td></tr></table></figure></p>
+<p>我们希望通过Join操作后，能够知道用户使用的什么网络（用户名+网络），使用Apache Beam实现，具体实现代码如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">package org.test.beam.examples;</div><div class="line"></div><div class="line">import org.apache.beam.runners.direct.DirectRunner;</div><div class="line">import org.apache.beam.sdk.Pipeline;</div><div class="line">import org.apache.beam.sdk.io.TextIO;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptions;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptionsFactory;</div><div class="line">import org.apache.beam.sdk.transforms.DoFn;</div><div class="line">import org.apache.beam.sdk.transforms.MapElements;</div><div class="line">import org.apache.beam.sdk.transforms.ParDo;</div><div class="line">import org.apache.beam.sdk.transforms.SimpleFunction;</div><div class="line">import org.apache.beam.sdk.transforms.join.CoGbkResult;</div><div class="line">import org.apache.beam.sdk.transforms.join.CoGroupByKey;</div><div class="line">import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;</div><div class="line">import org.apache.beam.sdk.values.KV;</div><div class="line">import org.apache.beam.sdk.values.PCollection;</div><div class="line">import org.apache.beam.sdk.values.TupleTag;</div><div class="line"></div><div class="line">public class JoinExample &#123;</div><div class="line"></div><div class="line">    @SuppressWarnings(&quot;serial&quot;)</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">        PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">        options.setRunner(DirectRunner.class);  // 显式指定PipelineRunner：DirectRunner（Local模式）</div><div class="line"></div><div class="line">        Pipeline pipeline = Pipeline.create(options);</div><div class="line"></div><div class="line">        // create ID info collection</div><div class="line">        final PCollection&lt;KV&lt;String, String&gt;&gt; idInfoCollection = pipeline</div><div class="line">                .apply(TextIO.Read.from(&quot;/tmp/dataset/MY_ID_INFO_FILE.txt&quot;))</div><div class="line">                .apply(&quot;CreateUserIdInfoPairs&quot;, MapElements.via(</div><div class="line">                        new SimpleFunction&lt;String, KV&lt;String, String&gt;&gt;() &#123;</div><div class="line"></div><div class="line">                    @Override</div><div class="line">                    public KV&lt;String, String&gt; apply(String input) &#123;</div><div class="line">                        // line format example: 35451605324179    Jack</div><div class="line">                        String[] values = input.split(&quot;\t&quot;);</div><div class="line">                        return KV.of(values[0], values[1]);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                &#125;));</div><div class="line"></div><div class="line">        // create operation collection</div><div class="line">        final PCollection&lt;KV&lt;String, String&gt;&gt; opCollection = pipeline</div><div class="line">                .apply(TextIO.Read.from(&quot;/tmp/dataset/MY_ID_OP_INFO_FILE.txt&quot;))</div><div class="line">                .apply(&quot;CreateIdOperationPairs&quot;, MapElements.via(</div><div class="line">                        new SimpleFunction&lt;String, KV&lt;String, String&gt;&gt;() &#123;</div><div class="line"></div><div class="line">                    @Override</div><div class="line">                    public KV&lt;String, String&gt; apply(String input) &#123;</div><div class="line">                        // line format example: 35237005342309    3G    CMCC</div><div class="line">                        String[] values = input.split(&quot;\t&quot;);</div><div class="line">                        return KV.of(values[0], values[1]);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                &#125;));</div><div class="line"></div><div class="line">        final TupleTag&lt;String&gt; idInfoTag = new TupleTag&lt;String&gt;();</div><div class="line">        final TupleTag&lt;String&gt; opInfoTag = new TupleTag&lt;String&gt;();</div><div class="line"></div><div class="line">        final PCollection&lt;KV&lt;String, CoGbkResult&gt;&gt; cogrouppedCollection = KeyedPCollectionTuple</div><div class="line">                .of(idInfoTag, idInfoCollection)</div><div class="line">                .and(opInfoTag, opCollection)</div><div class="line">                .apply(CoGroupByKey.&lt;String&gt;create());</div><div class="line"></div><div class="line">        final PCollection&lt;KV&lt;String, String&gt;&gt; finalResultCollection = cogrouppedCollection</div><div class="line">                .apply(&quot;CreateJoinedIdInfoPairs&quot;, ParDo.of(new DoFn&lt;KV&lt;String, CoGbkResult&gt;, KV&lt;String, String&gt;&gt;() &#123;</div><div class="line"></div><div class="line">                @ProcessElement</div><div class="line">                public void processElement(ProcessContext c) &#123;</div><div class="line">                    KV&lt;String, CoGbkResult&gt; e = c.element();</div><div class="line">                    String id = e.getKey();</div><div class="line">                    String name = e.getValue().getOnly(idInfoTag);</div><div class="line">                    for (String opInfo : c.element().getValue().getAll(opInfoTag)) &#123;</div><div class="line">                      // Generate a string that combines information from both collection values</div><div class="line">                      c.output(KV.of(id, &quot;\t&quot; + name + &quot;\t&quot; + opInfo));</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">        &#125;));</div><div class="line"></div><div class="line">        PCollection&lt;String&gt; formattedResults = finalResultCollection</div><div class="line">                .apply(&quot;FormatFinalResults&quot;, ParDo.of(new DoFn&lt;KV&lt;String, String&gt;, String&gt;() &#123;</div><div class="line">                  @ProcessElement</div><div class="line">                  public void processElement(ProcessContext c) &#123;</div><div class="line">                    c.output(c.element().getKey() + &quot;\t&quot; + c.element().getValue());</div><div class="line">                  &#125;</div><div class="line">                &#125;));</div><div class="line"></div><div class="line">         formattedResults.apply(TextIO.Write.to(&quot;joinedResults&quot;));</div><div class="line">         pipeline.run().waitUntilFinish();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><ul>
+<li><a href="https://beam.apache.org/" target="_blank" rel="external">https://beam.apache.org/</a></li>
+<li><a href="https://beam.apache.org/get-started/quickstart/" target="_blank" rel="external">https://beam.apache.org/get-started/quickstart/</a></li>
+<li><a href="https://beam.apache.org/get-started/beam-overview" target="_blank" rel="external">https://beam.apache.org/get-started/beam-overview</a></li>
+<li><a href="https://beam.apache.org/documentation/programming-guide/" target="_blank" rel="external">https://beam.apache.org/documentation/programming-guide/</a></li>
+<li><a href="https://www.infoq.com/presentations/apache-beam" target="_blank" rel="external">https://www.infoq.com/presentations/apache-beam</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+            <a href="/tags/开源技术/" rel="tag"># 开源技术</a>
+          
+            <a href="/tags/Apache-Beam/" rel="tag"># Apache Beam</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/16/git常用命令总结/" rel="next" title="git常用命令总结">
+                <i class="fa fa-chevron-left"></i> git常用命令总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/"
+     data-title="Apache Beam：一个开源的统一的分布式数据处理编程库"
+     data-content=""
+     data-url="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/"
+           data-title="Apache Beam：一个开源的统一的分布式数据处理编程库" data-url="http://lzrlizhirong.github.io/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李志荣" />
+          <p class="site-author-name" itemprop="name">李志荣</p>
+          <p class="site-description motion-element" itemprop="description">青春就是疯狂的奔跑，然后华丽的跌倒，站起来，再跑……</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Beam架构概览"><span class="nav-number">1.</span> <span class="nav-text">Apache Beam架构概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Pipeline"><span class="nav-number">2.1.</span> <span class="nav-text">1. Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-PCollection"><span class="nav-number">2.2.</span> <span class="nav-text">2. PCollection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Transform"><span class="nav-number">2.3.</span> <span class="nav-text">3. Transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Source-and-Sink"><span class="nav-number">2.4.</span> <span class="nav-text">4. Source and Sink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-PipelineRunner"><span class="nav-number">2.5.</span> <span class="nav-text">5. PipelineRunner</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API设计"><span class="nav-number">3.</span> <span class="nav-text">API设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Source"><span class="nav-number">3.1.</span> <span class="nav-text">1. Source</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Sink"><span class="nav-number">3.2.</span> <span class="nav-text">2. Sink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-PipelineRunner"><span class="nav-number">3.3.</span> <span class="nav-text">3. PipelineRunner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-PCollection"><span class="nav-number">3.4.</span> <span class="nav-text">4. PCollection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-PTransform"><span class="nav-number">3.5.</span> <span class="nav-text">5. PTransform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Combine"><span class="nav-number">3.6.</span> <span class="nav-text">6. Combine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Window"><span class="nav-number">3.7.</span> <span class="nav-text">7. Window</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程实战"><span class="nav-number">4.</span> <span class="nav-text">编程实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WordCount（Count-Source-Sink）"><span class="nav-number">4.1.</span> <span class="nav-text">WordCount（Count/Source/Sink）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去重（Distinct）"><span class="nav-number">4.2.</span> <span class="nav-text">去重（Distinct）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组（GroupByKey）"><span class="nav-number">4.3.</span> <span class="nav-text">分组（GroupByKey）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接（Join）"><span class="nav-number">4.4.</span> <span class="nav-text">连接（Join）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考内容"><span class="nav-number">5.</span> <span class="nav-text">参考内容</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015-2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李志荣</span>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">访客总数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv">总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lzrlizhirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+  
+
+</body>
+</html>
