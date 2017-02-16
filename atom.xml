@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-16T06:45:59.000Z</updated>
+  <updated>2017-02-16T07:43:35.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -16,11 +16,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mac下brew安装gitk遇到错误Error in startup script: unknown color name &#39;lime&#39;</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/16/Mac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/</id>
+    <published>2017-02-16T07:41:56.000Z</published>
+    <updated>2017-02-16T07:43:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>gitk 用home-brew, brew install git 以后，如果报错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Error in startup script: unknown color name &quot;lime&quot;</div><div class="line"></div><div class="line"> (processing &quot;-fore&quot; option)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot;</div><div class="line"></div><div class="line"> (procedure &quot;makewindow&quot; line 347)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;makewindow&quot;</div><div class="line"></div><div class="line"> (file &quot;/usr/local/bin/gitk&quot; line 12434)</div></pre></td></tr></table></figure></p>
+<p>解决方法一：</p>
+<p>brew cask install tcl</p>
+<p>解决方法二：</p>
+<p>编辑gitk文件，把相应的color删除或修改。</p>
+<p>解决方法三：</p>
+<p>在home目录下配一个.gitk文件，将相关color定义一下。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;gitk 用home-brew, brew install git 以后，如果报错误：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/di
+    
+    </summary>
+    
+      <category term="工具" scheme="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="git" scheme="http://lzrlizhirong.github.io/tags/git/"/>
+    
+      <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>深入学习Git工作流</title>
     <link href="http://lzrlizhirong.github.io/2017/02/16/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Git%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
     <id>http://lzrlizhirong.github.io/2017/02/16/深入学习Git工作流/</id>
     <published>2017-02-16T03:07:31.000Z</published>
-    <updated>2017-02-16T06:45:59.000Z</updated>
+    <updated>2017-02-16T07:04:14.000Z</updated>
     
     <content type="html"><![CDATA[<p>个人在学习git工作流的过程中，从原有的 SVN 模式很难完全理解git的协作模式，直到有一天我看到了下面的文章，好多遗留在心中的困惑迎刃而解。于是我将这部分资料整理如下：</p>
 <ul>
@@ -49,7 +80,7 @@
 <h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><p>中央仓库代表了正式项目，所以提交历史应该被尊重且是稳定不变的。如果开发者本地的提交历史和中央仓库有分歧，Git会拒绝push提交否则会覆盖已经在中央库的正式提交。<br><img src="/2017/02/16/深入学习Git工作流/../../../../images/g4.png" alt=""><br>在开发者提交自己功能修改到中央库前，需要先fetch在中央库的新增提交，rebase自己提交到中央库提交历史之上。<br>这样做的意思是在说，『我要把自己的修改加到别人已经完成的修改上。』最终的结果是一个完美的线性历史，就像以前的SVN的工作流中一样。</p>
 <p>如果本地修改和上游提交有冲突，Git会暂停rebase过程，给你手动解决冲突的机会。Git解决合并冲突，用和生成提交一样的git status和git add命令，很一致方便。还有一点，如果解决冲突时遇到麻烦，Git可以很简单中止整个rebase操作，重来一次（或者让别人来帮助解决）。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>让我们一起逐步分解来看看一个常见的小团队如何用这个工作流来协作的。有两个开发者小明和小红，看他们是如何开发自己的功能并提交到中央仓库上的。</p>
-<h4 id="有人先初始化好中央仓库"><a href="#有人先初始化好中央仓库" class="headerlink" title="有人先初始化好中央仓库"></a>有人先初始化好中央仓库</h4><p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g6.png" alt=""><br>第一步，有人在服务器上创建好中央仓库。如果是新项目，你可以初始化一个空仓库；否则你要导入已有的Git或SVN仓库。</p>
+<h4 id="先初始化好中央仓库"><a href="#先初始化好中央仓库" class="headerlink" title="先初始化好中央仓库"></a>先初始化好中央仓库</h4><p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g6.png" alt=""><br>第一步，在服务器上创建好中央仓库。如果是新项目，你可以初始化一个空仓库；否则你要导入已有的Git或SVN仓库。</p>
 <p>中央仓库应该是个裸仓库（bare repository），即没有工作目录（working directory）的仓库。可以用下面的命令创建：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh user@host</div><div class="line">git init --bare /path/to/repo.git</div></pre></td></tr></table></figure></p>
 <p>确保写上有效的user（SSH的用户名），host（服务器的域名或IP地址），/path/to/repo.git（你想存放仓库的位置）。<br>注意，为了表示是一个裸仓库，按照约定加上.git扩展名到仓库名上。</p>
 <h4 id="所有人克隆中央仓库"><a href="#所有人克隆中央仓库" class="headerlink" title="所有人克隆中央仓库"></a>所有人克隆中央仓库</h4><p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g7.png" alt=""><br>下一步，各个开发者创建整个项目的本地拷贝。通过git clone命令完成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone ssh://user@host/path/to/repo.git</div></pre></td></tr></table></figure></p>
@@ -65,7 +96,7 @@
 <h4 id="小红在小明的提交之上rebase"><a href="#小红在小明的提交之上rebase" class="headerlink" title="小红在小明的提交之上rebase"></a>小红在小明的提交之上rebase</h4><p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g12.png" alt=""><br>小红用git pull合并上游的修改到自己的仓库中。<br>这条命令类似svn update——拉取所有上游提交命令到小红的本地仓库，并尝试和她的本地修改合并：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase origin master</div></pre></td></tr></table></figure></p>
 <p>–rebase选项告诉Git把小红的提交移到同步了中央仓库修改后的master分支的顶部，如下图所示：<br><img src="/2017/02/16/深入学习Git工作流/../../../../images/g13.png" alt=""><br>如果你忘加了这个选项，pull操作仍然可以完成，但每次pull操作要同步中央仓库中别人修改时，提交历史会以一个多余的『合并提交』结尾。<br>对于集中式工作流，最好是使用rebase而不是生成一个合并提交。</p>
 <h4 id="小红解决合并冲突"><a href="#小红解决合并冲突" class="headerlink" title="小红解决合并冲突"></a>小红解决合并冲突</h4><p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g14.png" alt=""><br>rebase操作过程是把本地提交一次一个地迁移到更新了的中央仓库master分支之上。<br>这意味着可能要解决在迁移某个提交时出现的合并冲突，而不是解决包含了所有提交的大型合并时所出现的冲突。<br>这样的方式让你尽可能保持每个提交的聚焦和项目历史的整洁。反过来，简化了哪里引入Bug的分析，如果有必要，回滚修改也可以做到对项目影响最小。</p>
-<p>如果小红和小明的功能是相关的，不大可能在rebase过程中有冲突。如果有，Git在合并有冲突的提交处暂停rebase过程，输出下面的信息并带上相关的指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CONFLICT (content): Merge conflict in &lt;some-file&gt;</div></pre></td></tr></table></figure></p>
+<p>如果小红和小明的功能是互不相关的，不大可能在rebase过程中有冲突。如果有，Git在合并有冲突的提交处暂停rebase过程，输出下面的信息并带上相关的指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CONFLICT (content): Merge conflict in &lt;some-file&gt;</div></pre></td></tr></table></figure></p>
 <p><img src="/2017/02/16/深入学习Git工作流/../../../../images/g15.png" alt=""><br>Git很赞的一点是，任何人可以解决他自己的冲突。在这个例子中，小红可以简单的运行git status命令来查看哪里有问题。<br>冲突文件列在Unmerged paths（未合并路径）一节中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Unmerged paths:</div><div class="line"># (use &quot;git reset HEAD &lt;some-file&gt;...&quot; to unstage)</div><div class="line"># (use &quot;git add/rm &lt;some-file&gt;...&quot; as appropriate to mark resolution)</div><div class="line">#</div><div class="line"># both modified: &lt;some-file&gt;</div></pre></td></tr></table></figure></p>
 <p>接着小红编辑这些文件。修改完成后，用老套路暂存这些文件，并让git rebase完成剩下的事：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add &lt;some-file&gt; </div><div class="line">git rebase --continue</div></pre></td></tr></table></figure></p>
 <p>要做的就这些了。Git会继续一个一个地合并后面的提交，如其它的提交有冲突就重复这个过程。</p>
@@ -223,9 +254,9 @@
       <category term="工具" scheme="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
       <category term="git" scheme="http://lzrlizhirong.github.io/tags/git/"/>
+    
+      <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -399,9 +430,9 @@
       <category term="工具" scheme="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="mac" scheme="http://lzrlizhirong.github.io/tags/mac/"/>
-    
       <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="mac" scheme="http://lzrlizhirong.github.io/tags/mac/"/>
     
   </entry>
   
