@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-16T11:24:55.000Z</updated>
+  <updated>2017-02-20T08:02:44.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,135 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>再识SpringBoot微框架--简单案例</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/20/%E5%86%8D%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E6%90%AD%E5%BB%BA%E6%A1%88%E4%BE%8B/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/20/再识SpringBoot微框架-搭建案例/</id>
+    <published>2017-02-20T04:26:57.000Z</published>
+    <updated>2017-02-20T08:02:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h1><p>让所有Spring开发变得更快，且让更多的人更快的进行Spring入门体验，提供“starter” POM来简化我们的Maven配置（也就是说使用Spring Boot只有配合maven/gradle等这种依赖管理工具才能发挥它的能力），不像以前，构建一个springmvc项目需要进行好多配置等。</p>
+<p>提供一些非功能性的常见的大型项目类特性（如内嵌服务器、安全、度量、健康检查、外部化配置），如可以直接地内嵌Tomcat/Jetty（不需要单独去部署war包）</p>
+<p>绝无代码生成，且无需XML配置<br><a id="more"></a></p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>首先使用Maven创建一个普通Maven应用即可，不必是web的。</p>
+<h1 id="添加Spring-Boot相关POM配置"><a href="#添加Spring-Boot相关POM配置" class="headerlink" title="添加Spring Boot相关POM配置"></a>添加Spring Boot相关POM配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</div><div class="line"></div><div class="line">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line"></div><div class="line">  &lt;groupId&gt;cn.com&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;testboot&lt;/artifactId&gt;</div><div class="line">  &lt;packaging&gt;jar&lt;/packaging&gt;</div><div class="line">  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</div><div class="line"></div><div class="line">  &lt;name&gt;spring-boot-demo&lt;/name&gt;</div><div class="line">  &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;</div><div class="line"></div><div class="line">  &lt;parent&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.4.0.RELEASE&lt;/version&gt;</div><div class="line">    &lt;relativePath/&gt;</div><div class="line">  &lt;/parent&gt;</div><div class="line"></div><div class="line">  &lt;properties&gt;</div><div class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</div><div class="line">    &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</div><div class="line">    &lt;java.version&gt;1.8&lt;/java.version&gt;</div><div class="line">  &lt;/properties&gt;</div><div class="line"></div><div class="line">  &lt;dependencyManagement&gt;</div><div class="line">    &lt;dependencies&gt;</div><div class="line">      &lt;!-- Camel BOM --&gt;</div><div class="line">      &lt;dependency&gt;</div><div class="line">        &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;camel-parent&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;2.18.2&lt;/version&gt;</div><div class="line">        &lt;scope&gt;import&lt;/scope&gt;</div><div class="line">        &lt;type&gt;pom&lt;/type&gt;</div><div class="line">      &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div><div class="line">  &lt;/dependencyManagement&gt;</div><div class="line"></div><div class="line">  &lt;dependencies&gt;</div><div class="line"></div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;camel-core&lt;/artifactId&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line"></div><div class="line">    &lt;!-- logging --&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;</div><div class="line">      &lt;scope&gt;runtime&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;</div><div class="line">      &lt;scope&gt;runtime&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;</div><div class="line">      &lt;scope&gt;runtime&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line"></div><div class="line">    &lt;!-- testing --&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;camel-test&lt;/artifactId&gt;</div><div class="line">      &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line"></div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line"></div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</div><div class="line">      &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line"></div><div class="line">  &lt;/dependencies&gt;</div><div class="line"></div><div class="line">  &lt;build&gt;</div><div class="line">    &lt;defaultGoal&gt;install&lt;/defaultGoal&gt;</div><div class="line"></div><div class="line">    &lt;plugins&gt;</div><div class="line">      &lt;plugin&gt;</div><div class="line">        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;3.5.1&lt;/version&gt;</div><div class="line">        &lt;configuration&gt;</div><div class="line">          &lt;source&gt;1.8&lt;/source&gt;</div><div class="line">          &lt;target&gt;1.8&lt;/target&gt;</div><div class="line">        &lt;/configuration&gt;</div><div class="line">      &lt;/plugin&gt;</div><div class="line">      &lt;plugin&gt;</div><div class="line">        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;3.0.1&lt;/version&gt;</div><div class="line">        &lt;configuration&gt;</div><div class="line">          &lt;encoding&gt;UTF-8&lt;/encoding&gt;</div><div class="line">        &lt;/configuration&gt;</div><div class="line">      &lt;/plugin&gt;</div><div class="line"></div><div class="line">      &lt;!-- Allows the example to be run via &apos;mvn compile exec:java&apos; --&gt;</div><div class="line">      &lt;plugin&gt;</div><div class="line">        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;1.5.0&lt;/version&gt;</div><div class="line">        &lt;configuration&gt;</div><div class="line">          &lt;mainClass&gt;cn.com.MainApp&lt;/mainClass&gt;</div><div class="line">          &lt;includePluginDependencies&gt;false&lt;/includePluginDependencies&gt;</div><div class="line">        &lt;/configuration&gt;</div><div class="line">      &lt;/plugin&gt;</div><div class="line"></div><div class="line">    &lt;/plugins&gt;</div><div class="line">  &lt;/build&gt;</div><div class="line"></div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
+<p>继承spring-boot-starter-parent后我们可以继承一些默认的依赖，这样就无需添加一堆相应的依赖，把依赖配置最小化；spring-boot-starter-web提供了对web的支持，spring-boot-maven-plugin提供了直接运行项目的插件，我们可以直接mvn spring-boot:run运行。</p>
+<h1 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">package cn.com.testboot.entity;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lizhirong on 2017/2/20.</div><div class="line"> */</div><div class="line">public class User &#123;</div><div class="line">    private Long id;</div><div class="line">    private String name;</div><div class="line">    public Long getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line">    public void setId(Long id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line">    public String getName() &#123;</div><div class="line">        return name;</div><div class="line">    &#125;</div><div class="line">    public void setName(String name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        if (this == o) return true;</div><div class="line">        if (o == null || getClass() != o.getClass()) return false;</div><div class="line">        User user = (User) o;</div><div class="line">        if (id != null ? !id.equals(user.id) : user.id != null) return false;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public int hashCode() &#123;</div><div class="line">        return id != null ? id.hashCode() : 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">package cn.com.testboot.controller;</div><div class="line"></div><div class="line">import cn.com.testboot.entity.User;</div><div class="line">import org.springframework.web.bind.annotation.PathVariable;</div><div class="line">import org.springframework.web.bind.annotation.RequestMapping;</div><div class="line">import org.springframework.web.bind.annotation.RestController;</div><div class="line">/**</div><div class="line"> * Created by root on 2017/2/20.</div><div class="line"> */</div><div class="line"></div><div class="line">//@EnableAutoConfiguration</div><div class="line">@RestController</div><div class="line">@RequestMapping(&quot;/user&quot;)</div><div class="line">public class UserController &#123;</div><div class="line">    @RequestMapping(&quot;/&#123;id&#125;&quot;)</div><div class="line">    public User view(@PathVariable(&quot;id&quot;) Long id) &#123;</div><div class="line">        User user = new User();</div><div class="line">        user.setId(id);</div><div class="line">        user.setName(&quot;zhang&quot;);</div><div class="line">        return user;</div><div class="line">    &#125;</div><div class="line">    //public static void main(String[] args) &#123;</div><div class="line">    //    SpringApplication.run(UserController.class);</div><div class="line">    //&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><ol>
+<li>第一种方式<br>通过在UserController中加上@EnableAutoConfiguration开启自动配置，然后通过SpringApplication.run(UserController.class);运行这个控制器；这种方式只运行一个控制器比较方便；</li>
+<li>第二种方式<br>通过@Configuration+@ComponentScan开启注解扫描并自动注册相应的注解Bean</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package cn.com.testboot;</div><div class="line"></div><div class="line"></div><div class="line">import org.springframework.boot.SpringApplication;</div><div class="line">import org.springframework.boot.autoconfigure.EnableAutoConfiguration;</div><div class="line">import org.springframework.context.annotation.ComponentScan;</div><div class="line">import org.springframework.context.annotation.Configuration;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by root on 2017/2/20.</div><div class="line"> */</div><div class="line">@Configuration</div><div class="line">@ComponentScan</div><div class="line">@EnableAutoConfiguration</div><div class="line">public class Application &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        SpringApplication.run(Application.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到此，一个基本的REST风格的web应用就构建完成了。<br>地址栏输入 <a href="http://localhost:8080/user/1" target="_blank" rel="external">http://localhost:8080/user/1</a> 即可看到json结果。</p>
+<p>如果大家查看其依赖，会发现自动添加了需要相应的依赖（不管你用or不用），但是开发一个应用确实变得非常快速，对于想学习or体验Spring的新手，快速建立项目模型等可以考虑用这种方式。当然如果不想依赖这么多的jar包，可以去掉parent，然后自己添加依赖。 </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;目的：&quot;&gt;&lt;a href=&quot;#目的：&quot; class=&quot;headerlink&quot; title=&quot;目的：&quot;&gt;&lt;/a&gt;目的：&lt;/h1&gt;&lt;p&gt;让所有Spring开发变得更快，且让更多的人更快的进行Spring入门体验，提供“starter” POM来简化我们的Maven配置（也就是说使用Spring Boot只有配合maven/gradle等这种依赖管理工具才能发挥它的能力），不像以前，构建一个springmvc项目需要进行好多配置等。&lt;/p&gt;
+&lt;p&gt;提供一些非功能性的常见的大型项目类特性（如内嵌服务器、安全、度量、健康检查、外部化配置），如可以直接地内嵌Tomcat/Jetty（不需要单独去部署war包）&lt;/p&gt;
+&lt;p&gt;绝无代码生成，且无需XML配置&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/tags/SpringBoot/"/>
+    
+      <category term="微服务" scheme="http://lzrlizhirong.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初试SpringBoot微框架</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/20/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/</id>
+    <published>2017-02-20T03:53:22.000Z</published>
+    <updated>2017-02-20T04:25:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Spring-Boot是什么，解决哪些问题"><a href="#1-Spring-Boot是什么，解决哪些问题" class="headerlink" title="1. Spring Boot是什么，解决哪些问题"></a>1. Spring Boot是什么，解决哪些问题</h1><blockquote>
+<p>   1) Spring Boot使编码变简单<br>     2) Spring Boot使配置变简单<br>     3) Spring Boot使部署变简单<br>     4) Spring Boot使监控变简单</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="2-Spring-Boot在平台中的定位，相关技术如何融合"><a href="#2-Spring-Boot在平台中的定位，相关技术如何融合" class="headerlink" title="2. Spring Boot在平台中的定位，相关技术如何融合"></a>2. Spring Boot在平台中的定位，相关技术如何融合</h1><blockquote>
+<p>   1) SpringBoot与SEDA +MicroService + RESTful<br>     2) SpringBoot与Mock</p>
+</blockquote>
+<h1 id="3-采用了SpringBoot之后，技术管理应该如何进行"><a href="#3-采用了SpringBoot之后，技术管理应该如何进行" class="headerlink" title="3. 采用了SpringBoot之后，技术管理应该如何进行"></a>3. 采用了SpringBoot之后，技术管理应该如何进行</h1><p>首先，我们来看一下spring boot是什么，它帮助我们解决了哪些问题：<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb1.jpeg" alt=""><br>SpringBoot是伴随着Spring4.0诞生的；</p>
+<p>从字面理解，Boot是引导的意思，因此SpringBoot帮助开发者快速搭建Spring框架；</p>
+<p>SpringBoot帮助开发者快速启动一个Web容器；</p>
+<p>SpringBoot继承了原有Spring框架的优秀基因；</p>
+<p>SpringBoot简化了使用Spring的过程。</p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb2.jpeg" alt=""><br>Spring由于其繁琐的配置，一度被人认为“配置地狱”，各种XML、Annotation配置，让人眼花缭乱，而且如果出错了也很难找出原因。</p>
+<p>Spring Boot更多的是采用Java Config的方式，对Spring进行配置。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb3.jpeg" alt=""></p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb4.jpeg" alt=""></p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb5.jpeg" alt=""><br>可以看到，采用了spring-boot-start-actuator之后，直接以REST的方式，获取进程的运行期性能参数。</p>
+<p>当然这些metrics有些是有敏感数据的，spring-boot-start-actuator为此提供了一些Basic Authentication认证的方案，这些方案在实际应用过程中也是不足的。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb6.jpeg" alt=""></p>
+<p>Spring Boot作为一个微框架，离微服务的实现还是有距离的。</p>
+<p>没有提供相应的服务发现和注册的配套功能，自身的acturator所提供的监控功能，也需要与现有的监控对接。没有配套的安全管控方案，对于REST的落地，还需要自行结合实际进行URI的规范化工作。</p>
+<p>下面，我们研究一下Spring Boot在平台中的定位，相关技术如何融合。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb7.jpeg" alt=""></p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb8.jpeg" alt=""><br>上图比较复杂，整体是采用SEDA，也就是Stage-EDA。可以看到，整体是以处理顺序进行展示的，响应过程类似。在处理过程中，主要会有前置过滤，核心功能处理，后置过滤几大部分。</p>
+<p>图中的过滤器都是可插拔式的，并且可以根据实际场景进行扩展开发。每个过滤器都是Stage，比如ClientInstance合法性检查、调用鉴权、解密、限流等等。</p>
+<p>一个请求Stage与Stage的转换，实现上是切换不同的线程池，并以EDA的方式驱动。</p>
+<p>对于业务逻辑的开发者而言，只需要关心CORE部分的业务逻辑实现，其他的非功能都由框架进行统一实现。</p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb9.jpeg" alt=""></p>
+<p>Mock不应当再是测试的专有名词了，当然对于测试这个角色而言，mockito这样的工具，依然可以为他们提升不少效率。</p>
+<p>SpringBoot为创建REST服务提供了简便的途径，相比之下，采用阿里的dubbo在做多团队、多进程联调时，mock的难度就陡增。</p>
+<p>Mock是解耦并行开发的利器，在理性的情况下，软件从开发期Mock联调，到开发与开发的真实联调，只需要切换一个依赖的域名即可，比如：<br>mockURI:<a href="http://mock.service.net/v1/function?param1=value1" target="_blank" rel="external">http://mock.service.net/v1/function?param1=value1</a><br>devURI:<a href="http://dev.service.net/v1/function?param1=value1" target="_blank" rel="external">http://dev.service.net/v1/function?param1=value1</a></p>
+<p>而上述的域名切换，只需要在开发期定义好一个配置项，在做环境切换的时候自动注入即可，省时、省心、省力。</p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb10.jpeg" alt=""><br>如上图和docker的集成可以有AB两种方案：</p>
+<ul>
+<li>A方案的核心是，把docker作为操作系统环境的交付基线，也就是不同的fat jar 使用相同的操作系统版本、相同的JVM环境。但对于docker image来说都是一样的。</li>
+<li>B方案的核心是，不同的fat jar，独立的编译为docker image，在启动时直接启动带有特定版本的image。</li>
+</ul>
+<p>A相比与B方案的特点是对于docker registry（也就是docker的镜像仓库）的依赖性较低，对于前期编译过程的要求也较低。</p>
+<p>采用了Spring Boot之后，技术管理应该如何进行？<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb11.jpeg" alt=""><br>正因为Spring Boot是与Spring一脉相承的，所以对于广大的Java开发者而言，对于Spring的学习成本几乎为零。</p>
+<p>在实践Spring Boot时学习重点，或者说思维方式改变的重点在于：</p>
+<ol>
+<li>对于REST的理解，这一点尤为重要，需要从设计、开发多个角色达成共识，很多时候都是对于HTTP 1.1协议以及REST的精髓不理解，导致REST被「盲用」而产生一些不好的效果。</li>
+<li>对于YAML的理解和对于JavaConfig的理解，这两点相对较为简单，本质上是简化了xml文件，并提供等价的配置表述能力。</li>
+</ol>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb12.jpeg" alt=""></p>
+<blockquote>
+<ol>
+<li>丰富的工具链为SpringBoot的推广带来了利好。</li>
+<li>SpringBoot的工具链主要来自于两个方面：<br>1) 原有Spring积累的工具链；<br>2) SpringMVC或者其他REST框架使用HTTP协议，使得HTTP丰富的工具成为SpringBoot天然的资源。</li>
+</ol>
+</blockquote>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb13.jpeg" alt=""></p>
+<p>SpringBoot自身对于前面提到的配置文件：“application.yml”提供了多个「Profile」，可以便于开发者描述不同环境的配置，这些配置例如数据库的连接地址、用户名和密码。</p>
+<p>但是对于企业用户而言，把不同环境的配置，写到同一个配置文件中，是极其不安全的，是一个非常危险的动作。</p>
+<p>有一个经常被提及的例子是，随着开源的进行，很多互联网公司，都由于把相关的代码提交到github之类的开源代码社区，并且没有对代码进行严格的配置审查，导致一些”password”被公开。有些不良用心的人，就利用搜索工具，专门去挖掘这些关键字，进而导致数据库被「拖库」。</p>
+<p>所以对于企业用户，更多的应该是采用集中式的配置管理系统，将不同环境的配置严格区分地存放。</p>
+<p>虽然SpringBoot的actuator自身提供了基于「用户名+口令」的最简单的认证方式，但它保护的是对框架自身运行期的性能指标敏感数据的最基本的保护。这种保护在实际应用过程中，「用户名+口令」的管理是缺乏的，「用户名+口令」的安全配置过程是缺失的。</p>
+<p>SpringBoot也不提供对于我们自己开发的功能的任何防护功能。</p>
+<p>一般来讲，一个安全的信道（信息传输的通道），需要通信双方在进行正式的信息传输之前对对方进行身份认证，服务提供方还需要在此基础之上，对请求方的请求进行权限的校验，以确保业务安全。这些内容也需要基于SpringBoot进行外围的安全扩展，例如采用前面提到的S-EDA进行进程级别的安全管控。这些还需要配套的安全服务提供支持。</p>
+<p>一般来说，只要企业与互联网对接，那么随便一个面向消费者的「市场活动」，就有可能为企业带来井喷的流量。</p>
+<p>传统企业内，更多的系统是管理信息类的支撑系统，这类系统在设计时的主要用户是企业内部员工以及有限的外部供应商。这类系统存在于企业内部的时间一直很长，功能耦合也很多，在功能解耦前，是非常不适合的，或者说绝对不可以直接为互联网的用户进行服务的。</p>
+<p>SpringBoot自身并没有提供这样的流控措施，所以需要结合前面提到的S-EDA进行流量的控制，并结合下层的水平扩展能力（例如，Kubernets）进行流量负载合理的动态扩容。</p>
+<p>另外，在长业务流程的设计上，也尽可能地采用异步的方式，比如接口调用返回的是一个「受理号」，而不是业务的处理结果，避免井喷业务到来时，同步调用所带来的阻塞导致系统迅速崩溃，这些也都是SpringBoot自身并不解决的问题。</p>
+<p>以上是我分享的主要内容，下面我们总结一下：</p>
+<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb14.jpeg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-Spring-Boot是什么，解决哪些问题&quot;&gt;&lt;a href=&quot;#1-Spring-Boot是什么，解决哪些问题&quot; class=&quot;headerlink&quot; title=&quot;1. Spring Boot是什么，解决哪些问题&quot;&gt;&lt;/a&gt;1. Spring Boot是什么，解决哪些问题&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;   1) Spring Boot使编码变简单&lt;br&gt;     2) Spring Boot使配置变简单&lt;br&gt;     3) Spring Boot使部署变简单&lt;br&gt;     4) Spring Boot使监控变简单&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/tags/SpringBoot/"/>
+    
+      <category term="微服务" scheme="http://lzrlizhirong.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>Apache Beam：一个开源的统一的分布式数据处理编程库</title>
