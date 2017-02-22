@@ -89,16 +89,33 @@
 
 
 
-<meta name="description" content="说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：">
+<meta name="description" content="说明：本地项目分为两种情况：
+
+自己本地创建的项目，从未与github产生关联；
+从github上clone到本地的；
+
+若是第1种情况，直接按下面的步骤操作即可；若是第2种情况，又分两种情况：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="本地新项目同步到github的详细步骤">
 <meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/21/本地新项目同步到github的详细步骤/index.html">
 <meta property="og:site_name" content="阿荣嘚吧嘚">
-<meta property="og:description" content="说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：">
-<meta property="og:updated_time" content="2017-02-21T04:02:09.000Z">
+<meta property="og:description" content="说明：本地项目分为两种情况：
+
+自己本地创建的项目，从未与github产生关联；
+从github上clone到本地的；
+
+若是第1种情况，直接按下面的步骤操作即可；若是第2种情况，又分两种情况：">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/21/本地新项目同步到github的详细步骤/../../../../images/g111.png">
+<meta property="og:updated_time" content="2017-02-22T02:29:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="本地新项目同步到github的详细步骤">
-<meta name="twitter:description" content="说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：">
+<meta name="twitter:description" content="说明：本地项目分为两种情况：
+
+自己本地创建的项目，从未与github产生关联；
+从github上clone到本地的；
+
+若是第1种情况，直接按下面的步骤操作即可；若是第2种情况，又分两种情况：">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/21/本地新项目同步到github的详细步骤/../../../../images/g111.png">
 
 
 
@@ -585,7 +602,16 @@
       
 
       
-        <p>说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：<br><a id="more"></a></p>
+        <p>说明：本地项目分为两种情况：</p>
+<ol>
+<li>自己本地创建的项目，从未与github产生关联；</li>
+<li>从github上clone到本地的；</li>
+</ol>
+<p>若是第1种情况，直接按下面的步骤操作即可；<br>若是第2种情况，又分两种情况：<br><a id="more"></a></p>
+<ol>
+<li>若想要保留之前的commit记录，可直接修改项目根目录下的.git/config 文件，将下图中的url改为自己的github仓库地址即可，然后直接 add、commit、push 即可；<br><img src="/2017/02/21/本地新项目同步到github的详细步骤/../../../../images/g111.png" alt=""></li>
+<li>若不想保留之前的commit记录，首先要把本地项目根目录下的 .git 文件夹删掉，然后再按下面的步骤操作。</li>
+</ol>
 <h1 id="1-初始化项目"><a href="#1-初始化项目" class="headerlink" title="1.初始化项目"></a>1.初始化项目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
 <p>初始化之后会生成新的 .git 文件</p>
 <h1 id="2-将代码add到本地库中"><a href="#2-将代码add到本地库中" class="headerlink" title="2.将代码add到本地库中"></a>2.将代码add到本地库中</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &quot;初始化项目&quot;</div></pre></td></tr></table></figure>

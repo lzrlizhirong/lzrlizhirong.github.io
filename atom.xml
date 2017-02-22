@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-21T04:02:09.000Z</updated>
+  <updated>2017-02-22T02:29:33.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -20,9 +20,18 @@
     <link href="http://lzrlizhirong.github.io/2017/02/21/%E6%9C%AC%E5%9C%B0%E6%96%B0%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%AD%A5%E5%88%B0github%E7%9A%84%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4/"/>
     <id>http://lzrlizhirong.github.io/2017/02/21/本地新项目同步到github的详细步骤/</id>
     <published>2017-02-21T03:42:07.000Z</published>
-    <updated>2017-02-21T04:02:09.000Z</updated>
+    <updated>2017-02-22T02:29:33.000Z</updated>
     
-    <content type="html"><![CDATA[<p>说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<p>说明：本地项目分为两种情况：</p>
+<ol>
+<li>自己本地创建的项目，从未与github产生关联；</li>
+<li>从github上clone到本地的；</li>
+</ol>
+<p>若是第1种情况，直接按下面的步骤操作即可；<br>若是第2种情况，又分两种情况：<br><a id="more"></a></p>
+<ol>
+<li>若想要保留之前的commit记录，可直接修改项目根目录下的.git/config 文件，将下图中的url改为自己的github仓库地址即可，然后直接 add、commit、push 即可；<br><img src="/2017/02/21/本地新项目同步到github的详细步骤/../../../../images/g111.png" alt=""></li>
+<li>若不想保留之前的commit记录，首先要把本地项目根目录下的 .git 文件夹删掉，然后再按下面的步骤操作。</li>
+</ol>
 <h1 id="1-初始化项目"><a href="#1-初始化项目" class="headerlink" title="1.初始化项目"></a>1.初始化项目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
 <p>初始化之后会生成新的 .git 文件</p>
 <h1 id="2-将代码add到本地库中"><a href="#2-将代码add到本地库中" class="headerlink" title="2.将代码add到本地库中"></a>2.将代码add到本地库中</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &quot;初始化项目&quot;</div></pre></td></tr></table></figure>
@@ -32,7 +41,12 @@
     
     <summary type="html">
     
-      &lt;p&gt;说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作：&lt;br&gt;&lt;/p&gt;
+      &lt;p&gt;说明：本地项目分为两种情况：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自己本地创建的项目，从未与github产生关联；&lt;/li&gt;
+&lt;li&gt;从github上clone到本地的；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;若是第1种情况，直接按下面的步骤操作即可；&lt;br&gt;若是第2种情况，又分两种情况：&lt;br&gt;&lt;/p&gt;
     
     </summary>
     

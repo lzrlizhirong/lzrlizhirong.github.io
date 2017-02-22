@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[本地新项目同步到github的详细步骤]]></title>
       <url>%2F2017%2F02%2F21%2F%E6%9C%AC%E5%9C%B0%E6%96%B0%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%AD%A5%E5%88%B0github%E7%9A%84%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4%2F</url>
-      <content type="text"><![CDATA[说明：若你的项目是从github上同步到本地的，要想更改到自己的github上，首先要把本地项目下的 .git 文件夹删掉，然后再按下面的步骤操作： 1.初始化项目1git init 初始化之后会生成新的 .git 文件 2.将代码add到本地库中12git add .git commit -m &quot;初始化项目&quot; 3.创建github上的仓库，并与本地项目关联起来123git remote rm origingit remote add origin https://github.com/lzrlizhirong/cmdb.gitgit push -u origin master 然后在github上就可以看到同步上去的代码了]]></content>
+      <content type="text"><![CDATA[说明：本地项目分为两种情况： 自己本地创建的项目，从未与github产生关联； 从github上clone到本地的； 若是第1种情况，直接按下面的步骤操作即可；若是第2种情况，又分两种情况： 若想要保留之前的commit记录，可直接修改项目根目录下的.git/config 文件，将下图中的url改为自己的github仓库地址即可，然后直接 add、commit、push 即可； 若不想保留之前的commit记录，首先要把本地项目根目录下的 .git 文件夹删掉，然后再按下面的步骤操作。 1.初始化项目1git init 初始化之后会生成新的 .git 文件 2.将代码add到本地库中12git add .git commit -m &quot;初始化项目&quot; 3.创建github上的仓库，并与本地项目关联起来123git remote rm origingit remote add origin https://github.com/lzrlizhirong/cmdb.gitgit push -u origin master 然后在github上就可以看到同步上去的代码了]]></content>
     </entry>
 
     
