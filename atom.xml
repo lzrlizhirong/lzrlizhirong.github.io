@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-22T02:29:33.000Z</updated>
+  <updated>2017-02-22T03:01:02.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,97 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三识SpringBoot微框架--启动器Starter详解</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/22/%E4%B8%89%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E5%90%AF%E5%8A%A8%E5%99%A8Starter%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/22/三识SpringBoot微框架-启动器Starter详解/</id>
+    <published>2017-02-22T02:44:39.000Z</published>
+    <updated>2017-02-22T03:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>spring boot 配置时需要在pom文件中添加starter模块，那么starter是什么？有什么作用？分为哪几种？下面将进行详细讲解：</p>
+<p>starter模块，简单的说，就是一系列的依赖包组合。例如web starter模块，就是包含了Spring Boot预定义的一些Web开发的常用依赖，如：</p>
+<ul>
+<li>spring-web, spring-webmvc         即Spring WebMvc框架</li>
+<li>tomcat-embed-*            即内嵌Tomcat容器</li>
+<li>jackson           即处理json数据</li>
+<li>spring-*          即Spring框架</li>
+<li>spring-boot-autoconfigure         即Spring Boot提供的自动配置功能</li>
+</ul>
+<p>换句话说，当你添加了相应的starter模块，就相当于添加了相应的所有必须的依赖包。<br><a id="more"></a></p>
+<p>spring Boot应用启动器基本的一共有44种，具体如下：</p>
+<p><strong>1）spring-boot-starter</strong><br>这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。</p>
+<p><strong>2）spring-boot-starter-actuator</strong><br>帮助监控和管理应用。</p>
+<p><strong>3）spring-boot-starter-amqp</strong><br>通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol）。</p>
+<p><strong>4）spring-boot-starter-aop</strong><br>支持面向切面的编程即AOP，包括spring-aop和AspectJ。</p>
+<p><strong>5）spring-boot-starter-artemis</strong><br>通过Apache Artemis支持JMS的API（Java Message Service API）。</p>
+<p><strong>6）spring-boot-starter-batch</strong><br>支持Spring Batch，包括HSQLDB数据库。</p>
+<p><strong>7）spring-boot-starter-cache</strong><br>支持Spring的Cache抽象。</p>
+<p><strong>8）spring-boot-starter-cloud-connectors</strong><br>支持Spring Cloud Connectors，简化了在像Cloud Foundry或Heroku这样的云平台上连接服务。</p>
+<p><strong>9）spring-boot-starter-data-elasticsearch</strong><br>支持ElasticSearch搜索和分析引擎，包括spring-data-elasticsearch。</p>
+<p><strong>10）spring-boot-starter-data-gemfire</strong><br>支持GemFire分布式数据存储，包括spring-data-gemfire。</p>
+<p><strong>11）spring-boot-starter-data-jpa</strong><br>支持JPA（Java Persistence API），包括spring-data-jpa、spring-orm、hibernate。</p>
+<p><strong>12）spring-boot-starter-data-MongoDB</strong><br>支持MongoDB数据，包括spring-data-mongodb。</p>
+<p><strong>13）spring-boot-starter-data-rest</strong><br>通过spring-data-rest-webmvc，支持通过REST暴露Spring Data数据仓库。</p>
+<p><strong>14）spring-boot-starter-data-solr</strong><br>支持Apache Solr搜索平台，包括spring-data-solr。</p>
+<p><strong>15）spring-boot-starter-freemarker</strong><br>支持FreeMarker模板引擎。</p>
+<p><strong>16）spring-boot-starter-groovy-templates</strong><br>支持Groovy模板引擎。</p>
+<p><strong>17）spring-boot-starter-hateoas</strong><br>通过spring-hateoas支持基于HATEOAS的RESTful Web服务。</p>
+<p><strong>18）spring-boot-starter-hornetq</strong><br>通过HornetQ支持JMS。</p>
+<p><strong>19）spring-boot-starter-integration</strong><br>支持通用的spring-integration模块。</p>
+<p><strong>20）spring-boot-starter-jdbc</strong><br>支持JDBC数据库。</p>
+<p><strong>21）spring-boot-starter-jersey</strong><br>支持Jersey RESTful Web服务框架。</p>
+<p><strong>22）spring-boot-starter-jta-atomikos</strong><br>通过Atomikos支持JTA分布式事务处理。</p>
+<p><strong>23）spring-boot-starter-jta-bitronix</strong><br>通过Bitronix支持JTA分布式事务处理。</p>
+<p><strong>24）spring-boot-starter-mail</strong><br>支持javax.mail模块。</p>
+<p><strong>25）spring-boot-starter-mobile</strong><br>支持spring-mobile。</p>
+<p><strong>26）spring-boot-starter-mustache</strong><br>支持Mustache模板引擎。</p>
+<p><strong>27）spring-boot-starter-Redis</strong><br>支持Redis键值存储数据库，包括spring-redis。</p>
+<p><strong>28）spring-boot-starter-security</strong><br>支持spring-security。</p>
+<p><strong>29）spring-boot-starter-social-facebook</strong><br>支持spring-social-facebook</p>
+<p><strong>30）spring-boot-starter-social-linkedin</strong><br>支持pring-social-linkedin</p>
+<p><strong>31）spring-boot-starter-social-twitter</strong><br>支持pring-social-twitter</p>
+<p><strong>32）spring-boot-starter-test</strong><br>支持常规的测试依赖，包括JUnit、Hamcrest、Mockito以及spring-test模块。</p>
+<p><strong>33）spring-boot-starter-thymeleaf</strong><br>支持Thymeleaf模板引擎，包括与Spring的集成。</p>
+<p><strong>34）spring-boot-starter-velocity</strong><br>支持Velocity模板引擎。</p>
+<p><strong>35）spring-boot-starter-web</strong><br>支持全栈式Web开发，包括Tomcat和spring-webmvc。</p>
+<p><strong>36）spring-boot-starter-websocket</strong><br>支持WebSocket开发。</p>
+<p><strong>37）spring-boot-starter-ws</strong><br>支持Spring Web Services。</p>
+<p><strong>Spring Boot应用启动器面向生产环境的还有2种，具体如下：</strong></p>
+<p><strong>1）spring-boot-starter-actuator</strong><br>增加了面向产品上线相关的功能，比如测量和监控。</p>
+<p><strong>2）spring-boot-starter-remote-shell</strong><br>增加了远程ssh shell的支持。</p>
+<p><strong>最后，Spring Boot应用启动器还有一些替换技术的启动器，具体如下：</strong></p>
+<p><strong>1）spring-boot-starter-jetty</strong><br>引入了Jetty HTTP引擎（用于替换Tomcat）。</p>
+<p><strong>2）spring-boot-starter-log4j</strong><br>支持Log4J日志框架。</p>
+<p><strong>3）spring-boot-starter-logging
+</strong>引入了Spring Boot默认的日志框架Logback。</p>
+<p><strong>4）spring-boot-starter-tomcat</strong><br>引入了Spring Boot默认的HTTP引擎Tomcat。</p>
+<p><strong>5）spring-boot-starter-undertow</strong><br>引入了Undertow HTTP引擎（用于替换Tomcat）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;spring boot 配置时需要在pom文件中添加starter模块，那么starter是什么？有什么作用？分为哪几种？下面将进行详细讲解：&lt;/p&gt;
+&lt;p&gt;starter模块，简单的说，就是一系列的依赖包组合。例如web starter模块，就是包含了Spring Boot预定义的一些Web开发的常用依赖，如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;spring-web, spring-webmvc         即Spring WebMvc框架&lt;/li&gt;
+&lt;li&gt;tomcat-embed-*            即内嵌Tomcat容器&lt;/li&gt;
+&lt;li&gt;jackson           即处理json数据&lt;/li&gt;
+&lt;li&gt;spring-*          即Spring框架&lt;/li&gt;
+&lt;li&gt;spring-boot-autoconfigure         即Spring Boot提供的自动配置功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;换句话说，当你添加了相应的starter模块，就相当于添加了相应的所有必须的依赖包。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/tags/SpringBoot/"/>
+    
+      <category term="微服务" scheme="http://lzrlizhirong.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>本地新项目同步到github的详细步骤</title>
@@ -1182,54 +1273,6 @@
       <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
     
       <category term="kibana" scheme="http://lzrlizhirong.github.io/tags/kibana/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为了保持逼格，不要停止写作</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/10/%E4%B8%BA%E4%BA%86%E4%BF%9D%E6%8C%81%E9%80%BC%E6%A0%BC%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%81%9C%E6%AD%A2%E5%86%99%E4%BD%9C/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/10/为了保持逼格，不要停止写作/</id>
-    <published>2017-02-10T02:52:09.000Z</published>
-    <updated>2017-02-14T06:40:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>“逼格”一词，网络上常见的解释是“装逼的格调”，听起来有一些嘲讽的味道。但我认为，“逼格”应该是一种大隐隐于市的淡定，一种出淤泥而不染的清高，一种观望世事变迁而不为之动容的气质，一种身处外部世界的混乱却依然能听从内部世界的召唤的能力。<br><a id="more"></a><br>你觉得我这番解释是装逼也无所谓，因为我的理想一直以来就是做一个有逼格的人。</p>
-<p>追求逼格的过程不是一蹴而就的，更不是一劳永逸的，而更像是逆水行舟，一刻都万万不可以松懈。忍不住让我想起柏邦妮说过的一句话：“哪有什么胜利可言，挺住就是一切。”</p>
-<p>所以，追求逼格可以被看做是一种坚持不懈的抗争，一种保护内部世界的完整饱足而不被外部世界侵蚀的抗争。这种抗争，本身就足以令人肃然起敬。如此看来，逼格恰恰存在于追求逼格的过程之中。</p>
-<p>保护内部世界之完整饱足的方法有很多，而我独爱写作。我一直信奉，虽然不是每个人都可以把写作当成自己的职业，但所有人都一定可以把写作当成自己的一种状态。</p>
-<p>在我眼中，世间的写作不过两种，对内的和对外的。今天来聊聊我理想中的写作吧。</p>
-<p>对内的写作，是内部世界在巩固自己的版图，是往下扎根。典型的形式包括写日记——你是作者，你也是唯一的读者。如果，你在落笔的当下决定，读者除了你自己还可以包括其他人，即使再少数的其他人都好，那都不能被归为“对内的写作”了。当然，如果你已经完成了写作的这个部分，只不过在之后的阅读过程中觉得，公布出来被他人看见也无妨，那又另当别论。这里讨论的，只是写作这个动作进行之时的内心向度。</p>
-<p>对内的写作应该是繁杂凌乱的、忠诚于自己所念所想的，应该完完全全原汁原味地呈现一个自由的内心世界，所以没有必要进行自我审查。想起以前学摄影的时候，教授叮嘱我们拿起相机就一定要无所顾忌、疯狂地拍，把照片导出来之后才开始进行筛选，千万不要把创作和编辑的过程混在一块儿，千万不要在拍的时候就缩手缩脚，或者直接在相机上删掉所谓的不满意的照片。同理，对内的写作应该是零编辑、只关注在创作之上的，这是至关重要的资本原始积累，所以格局一定要大。</p>
-<p>对内的写作是一个认识自己的过程，所以要诚实地面对内心的所有情感，尤其是那些不足为外人道也的阴暗的部分。比如说，跟你走得很近的人里有一个你很鄙视的人，但是你又不得不装作和ta相处起来很愉快，那你不妨可以在对内的写作过程中梳理这种情感。挖掘自己的邪恶天赋，并承认它们，是帮助自己成长为一个丰富的人的必经之路。</p>
-<p>对内的写作也是一个用来讨好自己的过程。在我以前还很热衷于写日记的时候，我的日记本是一本红色软皮抄。我喜欢它封面的颜色，更喜欢它米色的空白内页。内页纸张的触感很好，而且不会晕墨，真的是难能可贵的品质。我喜欢用墨蓝或者深绿的墨水写日记，尤其喜欢用英雄616钢笔。偏好的场所包括图书馆的静音区和自己的房间。我尤其喜欢物理意义上的下笔，虽然有的时候也在电脑上写日记，但总感觉动笔的信息量更大，毕竟笔迹可以直白地展示当时的心理状态，而且我总喜欢看自己在不同时期的笔迹的变化。这些癖好让我觉得对内的写作是一种仪式，是一种褒奖，是一种可以独享的时光。那本红色软皮抄用完之后我仿佛丧失了写日记的兴趣，因为再也没有找到媲美它的日记本了，不得不说，很可惜。</p>
-<p>对外的写作，是内部世界朝外部的扩张。我个人主张它必须是功利的。所谓功利，是指功效和实用性，说直白一点就是，既然你选择了对外写作，就应该对你传播的这些信息负责，让它们尽可能高效地被读者所接收。所以对外的写作应该是方便理解的、易于消化的。要呈现这种特性，在对外写作的过程中就务必有相当一部分的精力花在编辑之上。如果说对内的写作单纯需要用心，对外的写作则更需要用脑。</p>
-<p>写到这里，不得不提写作与朗读之间的密不可分的关系。</p>
-<p>我在上写作课的时候，教授给我们讲过这样一个有趣的故事。说是有一个写作界的大神，看人很准，曾经试过一连好几年的普利策获奖者都是他曾经相中过表扬过的新人。于是有人去问大神，他眼光为什么这么厉害。大神说，我去编辑部里面看啊，看到那些写稿子的时候嘴里在念念有词的人，我就知道他们有戏了。</p>
-<p>教授给我们讲这个故事，意图是要让我们爱上朗读自己的作品，不但如此，更要用朗读的方式去体会其他优秀的写作。朗读，实际上是一场非常严肃的检阅。从编辑方面的效用来看，在朗读的过程中，很容易就能挑出错别字、语病、累赘用词等等小毛病，也可以发现段落间逻辑衔接有没有跳脱这样的结构上的问题。</p>
-<p>曾经有人评价我的行文是轻松的、不费力的，大概也是因为我总是以口语化的要求来规范自己的写作吧。也有人曾经给我提意见说，你能不能不要念，专心写，因为你的文笔远胜于你的口头表达，要念出来的话等于限制了你文采的发挥。我当然承认，为了口语化理念的贯彻，不得不让渡出一部分高深的辞藻和逻辑。但口语化的理念可以让写作者更多地采用主谓宾的语序，减少繁杂的修饰语，抛弃冗长的句式结构，实际上是一种更生活、更亲近的表达方式。这种亲近可以让写作者的内部世界建立与外部世界友好的交流，而信息的顺畅流通恰好又可以维持一个更饱满鲜活的内部世界。出于这种理念，我个人也非常不喜欢故作傲慢和刻意艰涩的写作，总让人感到一种封闭和敌意。</p>
-<p>我本科的最后一年花了整整两个学期在上写作课，但结果却是对写作像一个新朋友一样。 我并不恐慌，相反的，我对这个变化感到无比的兴奋。想到之前写作课教授给我们援引过的一句话，那是美国著名诗人、作家卡尔·桑德堡在72岁的时候说的： </p>
-<blockquote>
-<p>I’m still studying verbs and the mystery of how they connect nouns. I am more suspicious of adjectives than at any other time in all my born days. “我仍旧在学习动词，以及它们和名词连接的奥秘。现在的我比任何时候都更怀疑形容词。” </p>
-</blockquote>
-<p>就像是一个幼儿园小朋友在堆积木的时候的有趣的发现。真是一种有美感的状态。</p>
-<p>我希望，我也能活出那样的一天。</p>
-<p>转自新浪微博 <em><a href="http://weibo.com/rainfieldfifi" target="_blank" rel="external">@恢复吃素的F小姐。</a></em></p>
-<p>说一个我认为最有逼格的故事吧：<br>某日跟某死党微信对话如下:<br><img src="/2017/02/10/为了保持逼格，不要停止写作/../../../../images/W1.png" alt=""><img src="/2017/02/10/为了保持逼格，不要停止写作/../../../../images/W2.png" alt=""><img src="/2017/02/10/为了保持逼格，不要停止写作/../../../../images/W3.png" alt=""></p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="240" src="//music.163.com/outchain/player?type=0&id=600358672&auto=0&height=430"></iframe>
-
-
-
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;“逼格”一词，网络上常见的解释是“装逼的格调”，听起来有一些嘲讽的味道。但我认为，“逼格”应该是一种大隐隐于市的淡定，一种出淤泥而不染的清高，一种观望世事变迁而不为之动容的气质，一种身处外部世界的混乱却依然能听从内部世界的召唤的能力。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="杂文" scheme="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/"/>
-    
-    
-      <category term="写作" scheme="http://lzrlizhirong.github.io/tags/%E5%86%99%E4%BD%9C/"/>
     
   </entry>
   
