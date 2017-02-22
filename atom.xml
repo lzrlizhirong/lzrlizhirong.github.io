@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-22T09:51:05.000Z</updated>
+  <updated>2017-02-22T10:24:27.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>经验贴--kudu在小米的实践应用</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/</id>
+    <published>2017-02-22T10:06:45.000Z</published>
+    <updated>2017-02-22T10:24:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。</p>
+<h1 id="2-小米使用kudu的背景"><a href="#2-小米使用kudu的背景" class="headerlink" title="2.小米使用kudu的背景"></a>2.小米使用kudu的背景</h1><p>小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。<br><a id="more"></a><br>在kudu之前，我们的大数据分析pipeline大概是有这几种：</p>
+<blockquote>
+<ol>
+<li>数据源-&gt; scribe打日志到HDFS -&gt; MR/Hive/Spark -&gt; HDFS Parquet -&gt; Impala -&gt; 结果service<br>这个数据流一般用来分析各种日志。</li>
+<li>数据源 -&gt; 实时更新HBase/Mysql -&gt; 每天批量导出Parquet-&gt; Impala -&gt; 结果serve<br>这个数据流一般用来分析状态数据，也就是一般需要随机更新的数据，比如用户profile之类。</li>
+</ol>
+</blockquote>
+<p>这两条数据流主要由几个问题：</p>
+<blockquote>
+<ol>
+<li>数据从生成到能够被高效查询的列存储，整个数据流延迟比较大，一般是小时级别到一天；</li>
+<li>很多数据的日志到达时间和逻辑时间是不一致的，一般存在一些随机延迟。</li>
+</ol>
+</blockquote>
+<p>比如很多mobile app统计应用，这些tracing event发生后，很可能过一段时间才被后端tracing server收集到。</p>
+<p>我们经常看到一些hive查询，分析一天或者一小时的数据，但是要读2-3天或者多个小时的日志，然后过滤出实际想要的记录。</p>
+<p>对于一些实时分析需求，有一些可以通过流处理来解决，不过他肯定没用SQL方便，另外流式处理只能做固定的数据分析，对ad-hoc查询无能为力</p>
+<p>kudu的特点正好可以来配合impala搭建实时ad-hoc分析应用。</p>
+<p>改进后的数据流大概是这个样子：</p>
+<blockquote>
+<ol>
+<li>数据源 -&gt; kafka -&gt; ETL(Storm) -&gt; kudu -&gt; Impala</li>
+<li>数据源 -&gt; kudu -&gt; Impala</li>
+</ol>
+</blockquote>
+<p>数据流1 主要是为需要进一步做ETL的应用使用的，另外kafka可以当做一个buffer，当写吞吐有毛刺时，kafka可以做一个缓冲。</p>
+<p>如果应用有严格的实时需求，就是只要数据源写入就必须能够查到，就需要使用数据流2。</p>
+<h1 id="3-引入kudu的目的"><a href="#3-引入kudu的目的" class="headerlink" title="3.引入kudu的目的"></a>3.引入kudu的目的</h1><p>引入kudu主要是用来替换 HDFS+parquet的。</p>
+<h1 id="4-kudu的列存和parquet列存有啥区别？"><a href="#4-kudu的列存和parquet列存有啥区别？" class="headerlink" title="4.kudu的列存和parquet列存有啥区别？"></a>4.kudu的列存和parquet列存有啥区别？</h1><p>从功能上说，kudu的列存除了提供跟parquet接近的scan速度，还支持随机读写。支持随机写，数据就可以实时灌入存储中，达到实时查询的效果；但是parquet文件只能批量写，所以一般只能定期生成，所以增大了延迟。kudu的存储类似hbase的lsm存储。</p>
+<h1 id="5-为什么说kudu的scan会比kylin快呢"><a href="#5-为什么说kudu的scan会比kylin快呢" class="headerlink" title="5.为什么说kudu的scan会比kylin快呢"></a>5.为什么说kudu的scan会比kylin快呢</h1><p>kylin是存储在hbase上的，kudu的scan为什么比hbase快，简单的说kudu是真正的列存储，hbase只是列簇存储。kudu是有schema的，每一列的数据是在文件中已数组的形式保存的，而hbase存储在hfile里面的还是sort好的(rowkey, column, timestamp, value)对，scan是开销要多很多，具体需要看kudu的paper了，在这里文字不好解释。</p>
+<h1 id="6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢"><a href="#6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢" class="headerlink" title="6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢"></a>6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢</h1><p>我们在71个节点的集群做了测试，随机写性能：随机写26亿条记录：每个节点大概4W 随机写性能。</p>
+<p>大概的情况如下：</p>
+<blockquote>
+<p><strong>71 Node cluster</strong><br><strong><em>Hardware</em></strong><br>CPU: E5-2620 2.1GHz <em> 24 core  Memory: 64GB<br>Network: 1Gb  Disk: 12 HDD<br><strong><em>Software</em></strong><br>Hadoop2.6/Impala 2.1/Kudu<br><em>*<em>3个大表，其中一个大表每天：</em></em></em><br>~2.6 Billion rows<br>~270 bytes/row<br>17 columns, 5 key columns</p>
+</blockquote>
+<p>storm到kudu，按照每天26亿数据来算，每秒大概30000条记录吧。<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm1.jpeg" alt=""><br>这个是我们的应用挑出的6个查询，做的查询性能对比。同样6个查询，查询parquet和查询kudu做的对比。当时kudu的设计目标是接近parquet的scan性能，惊喜的是，目前kudu的scan性能在生产环境下有时还比parquet快一些。</p>
+<h1 id="7-像hbase有coprocessor，kudu有类似的计算功能吗？"><a href="#7-像hbase有coprocessor，kudu有类似的计算功能吗？" class="headerlink" title="7.像hbase有coprocessor，kudu有类似的计算功能吗？"></a>7.像hbase有coprocessor，kudu有类似的计算功能吗？</h1><p>kudud。kudu有predicatepushdown，目前有impala使用时，scan时是把一些过滤提交给kudu去做的。</p>
+<h1 id="8-你们是想用kudu替换hbase还是一起搭配用？"><a href="#8-你们是想用kudu替换hbase还是一起搭配用？" class="headerlink" title="8.你们是想用kudu替换hbase还是一起搭配用？"></a>8.你们是想用kudu替换hbase还是一起搭配用？</h1><p>感觉这两个工具目前用来解决不同的问题，hbase还是用来做OLTP类存储跟Mysql类似，kudu则用来升级我们现有的数据分析数据流，主要还是OLAP的workload。</p>
+<h1 id="9-Kudu支持随机增加列吗？"><a href="#9-Kudu支持随机增加列吗？" class="headerlink" title="9.Kudu支持随机增加列吗？"></a>9.Kudu支持随机增加列吗？</h1><p>只要不是primarykey的列，是可以随时增加的，而且不像mysql增加列时影响其他操作，kudu altertable是异步的，而且对性能影响不大。hbase是无schema的，所以可以成千上万个列，kudu不行的，列的数量也不能过多。我们目前也就试过30多列的，一些300+列的表还没有测试过。</p>
+<h1 id="10-Kudu目前有稳定版吗"><a href="#10-Kudu目前有稳定版吗" class="headerlink" title="10.Kudu目前有稳定版吗"></a>10.Kudu目前有稳定版吗</h1><p>目前beta版本，不推荐现在在生产环境使用。(写此篇博客时(2017.2.22)已发布1.2.0版本)<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm2.png" alt=""></p>
+<h1 id="11-能否介绍一下小米使用kudu过程中踩过的坑？"><a href="#11-能否介绍一下小米使用kudu过程中踩过的坑？" class="headerlink" title="11.能否介绍一下小米使用kudu过程中踩过的坑？"></a>11.能否介绍一下小米使用kudu过程中踩过的坑？</h1><p>目前踩的坑都还在开发阶段，其实都不算什么，而且从大方向上看，我们还是相信kudu这种方式对比之前的数据流优势很明显，对吞吐不是非常高的应用，这种方案是发展方向。其实我们在老的数据流上碰到很多问题，之前提到的数据延迟，数据无序，多个组件之间的兼容性，数据无schema导致灌入数据时缺少验证，其实都希望引入kudu后能够解决。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot; title=&quot;1.前言&quot;&gt;&lt;/a&gt;1.前言&lt;/h1&gt;&lt;p&gt;本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。&lt;/p&gt;
+&lt;h1 id=&quot;2-小米使用kudu的背景&quot;&gt;&lt;a href=&quot;#2-小米使用kudu的背景&quot; class=&quot;headerlink&quot; title=&quot;2.小米使用kudu的背景&quot;&gt;&lt;/a&gt;2.小米使用kudu的背景&lt;/h1&gt;&lt;p&gt;小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="NoSQL" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
+    
+    
+      <category term="kudu" scheme="http://lzrlizhirong.github.io/tags/kudu/"/>
+    
+      <category term="NoSQL" scheme="http://lzrlizhirong.github.io/tags/NoSQL/"/>
+    
+  </entry>
   
   <entry>
     <title>kudu学习资料总结</title>
@@ -1229,65 +1298,6 @@
     <summary type="html">
     
       &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;330&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=436514312&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;br&gt;想要知道ElasticSearch是如何使用的，最快的方式就是通过一个简单的例子，第一个例子将会包括基本概念如索引、搜索、和聚合等，需求是关于公司管理员工的一些业务。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
-    
-    
-      <category term="Elasticsearch" scheme="http://lzrlizhirong.github.io/tags/Elasticsearch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ES-5.0.2-学习(4)--简单搜索</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-学习-3-简单搜索/</id>
-    <published>2017-02-10T08:28:55.000Z</published>
-    <updated>2017-02-20T02:32:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search</div></pre></td></tr></table></figure>
-<p><img src="/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png" alt=""><br><a id="more"></a><br>注：<strong>以下操作均是在kibana中，如图所示</strong><br><strong>hits：</strong></p>
-<blockquote>
-<ol>
-<li>total 总数</li>
-<li>hits 前10条数据</li>
-<li>hits 数组中的每个结果都包含_index、_type和文档的_id字段，被加入到_source字段中这意味着在搜索结果中我们将可以直接使用全部文档。</li>
-<li>每个节点都有一个_score字段，这是相关性得分(relevance score)，它衡量了文档与查询的匹配程度。默认的，返回的结果中关联性最大的文档排在首位；这意味着，它是按照_score降序排列的。没有指定任何查询，所以所有文档的相关性是一样的，因此所有结果的_score都是取得一个中间值1。  </li>
-</ol>
-</blockquote>
-<p><strong>took：</strong>整个搜索请求花费的毫秒数。<br><strong>_shards：</strong>节点告诉我们参与查询的分片数（total字段），有多少是成功的（successful），有多少的是失败的（failed）。<br><strong>time_out：</strong>告诉我们查询超时与否。一般的，搜索请求不会超时。如果响应速度比完整的结果更重要，你可以定义timeout参数为10或者10ms（10毫秒），或者1s（1秒）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?timeout=10ms</div></pre></td></tr></table></figure></p>
-<p>Elasticsearch将返回在请求超时前收集到的结果。<br><strong>注意：</strong> <strong><em>timeout不会停止执行查询，它仅仅告诉你目前顺利返回结果的节点然后关闭连接。在后台，其他分片可能依旧执行查询，尽管结果已经被发送。<br>使用超时是因为对于你的业务需求来说非常重要，而不是因为你想中断执行长时间运行的查询。</em></strong></p>
-<h1 id="多索引和多类别"><a href="#多索引和多类别" class="headerlink" title="多索引和多类别"></a>多索引和多类别</h1><p>在所有索引的所有类型中搜索：<em>/_search</em><br>在索引gb的所有类型中搜索：<em>/gb/_search</em><br>在索引gb和us的所有类型中搜索：<em>/gb,us/_search</em><br>在以g或u开头的索引的所有类型中搜索：/g*,u*/_search<br>在索引gb的类型user中搜索：<em>/gb/user/_search</em><br>在索引gb和us的类型为user和tweet中搜索：<em>/gb,us/user,tweet/_search</em><br>在所有索引的user和tweet中搜索：<em>/_all/user,tweet/_search</em><br>当你搜索包含单一索引时，Elasticsearch转发搜索请求到这个索引的主分片或每个分片的复制分片上，然后聚集每个分片的结果。搜索包含多个索引也是同样的方式——只不过会有更多的分片被关联。</p>
-<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><p>如果你想每页显示5个结果，页码从1到3，那请求如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET /_search?size=5</div><div class="line">GET /_search?size=5&amp;from=5</div><div class="line">GET /_search?size=5&amp;from=10</div></pre></td></tr></table></figure></p>
-<p>应该当心分页太深或者一次请求太多的结果。结果在返回前会被排序。但是记住一个搜索请求常常涉及多个分片。每个分片生成自己排好序的结果，它们接着需要集中起来排序以确保整体排序正确。<br>现在假设我们请求第1000页——结果10001到10010。工作方式都相同，不同的是每个分片都必须产生顶端的10010个结果。然后请求节点排序这50050个结果并丢弃50040个！</p>
-<h1 id="简易搜索"><a href="#简易搜索" class="headerlink" title="简易搜索"></a>简易搜索</h1><p>search API有两种表单：一种是“简易版”的查询字符串(query string)将所有参数通过查询字符串定义，另一种版本使用JSON完整的表示请求体(request body)，这种富搜索语言叫做结构化查询语句（DSL）。<br>查询字符串搜索对于在命令行下运行特定情况下查询特别有用。例如这个语句查询所有类型为tweet并在tweet字段中包含elasticsearch字符的文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_all/tweet/_search?q=tweet:elasticsearch</div></pre></td></tr></table></figure></p>
-<p>下一个语句查找name字段中包含”john”和tweet字段包含”mary”的结果。实际的查询只需要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:john +tweet:mary</div></pre></td></tr></table></figure></p>
-<p>但是url编码需要将查询字符串参数变得更加神秘：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?q=%2Bname%3Ajohn+%2Btweet%3Amary</div></pre></td></tr></table></figure></p>
-<p>“+”前缀表示语句匹配条件必须被满足。类似的”-“前缀表示条件必须不被满足。所有条件如果没有+或-表示是可选的——匹配越多，相关的文档就越多。</p>
-<h1 id="all字段"><a href="#all字段" class="headerlink" title="_all字段"></a>_all字段</h1><p>返回包含”mary”字符的所有文档的简单搜索：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_search?q=mary</div></pre></td></tr></table></figure></p>
-<p>当你索引一个文档，Elasticsearch把所有字符串字段值连接起来放在一个大字符串中，它被索引为一个特殊的字段_all。例如，当索引这个文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;tweet&quot;:    &quot;However did I manage before Elasticsearch?&quot;,</div><div class="line">    &quot;date&quot;:     &quot;2014-09-14&quot;,</div><div class="line">    &quot;name&quot;:     &quot;Mary Jones&quot;,</div><div class="line">    &quot;user_id&quot;:  1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这好比我们增加了一个叫做_all的额外字段值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;However did I manage before Elasticsearch? 2014-09-14 Mary Jones 1&quot;</div></pre></td></tr></table></figure></p>
-<p>若没有指定字段，查询字符串搜索（即q=xxx）使用_all字段搜索。</p>
-<h1 id="更复杂的语句"><a href="#更复杂的语句" class="headerlink" title="更复杂的语句"></a>更复杂的语句</h1><p>下一个搜索的语句：<br>_all field</p>
-<ul>
-<li>name字段包含”mary”或”john”</li>
-<li>date晚于2014-09-10</li>
-<li>_all字段包含”aggregations”或”geo”</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+name:(mary john) +date:&gt;2014-09-10 +(aggregations geo)</div></pre></td></tr></table></figure>
-<p>编码后的查询字符串变得不太容易阅读<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)</div></pre></td></tr></table></figure></p>
-<p>就像你上面看到的例子，简单查询字符串搜索惊人的强大。允许我们简洁明快的表示复杂的查询。这对于命令行下一次性查询或者开发模式下非常有用。<br>然而，你可以看到简洁带来了隐晦和调试困难。而且它很脆弱——查询字符串中一个细小的语法错误，像-、:、/或”错位就会导致返回错误而不是结果。<br>最后，查询字符串搜索允许任意用户在索引中任何一个字段上运行潜在的慢查询语句，可能暴露私有信息甚至使你的集群瘫痪。<br>取而代之的，生产环境我们一般依赖全功能的请求体搜索API，它能完成前面所有的事情，甚至更多。</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="240" src="//music.163.com/outchain/player?type=0&id=600358672&auto=0&height=430"></iframe>
-
-
-
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;空搜索&quot;&gt;&lt;a href=&quot;#空搜索&quot; class=&quot;headerlink&quot; title=&quot;空搜索&quot;&gt;&lt;/a&gt;空搜索&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;GET /_search&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;/2017/02/10/ES-5-0-2-学习-3-简单搜索/../../../../images/e41.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     

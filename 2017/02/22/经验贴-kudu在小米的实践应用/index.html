@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git,工具," />
+  <meta name="keywords" content="kudu,NoSQL," />
 
 
 
@@ -89,16 +89,22 @@
 
 
 
-<meta name="description" content="gitk 用home-brew, brew install git 以后，如果报错误：123456789101112131415Error in startup script: unknown color name &amp;quot;lime&amp;quot; (processing &amp;quot;-fore&amp;quot; option) invoked from within&amp;quot;$ctext tag c">
+<meta name="description" content="1.前言本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。
+2.小米使用kudu的背景小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime'">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/index.html">
+<meta property="og:title" content="经验贴--kudu在小米的实践应用">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/index.html">
 <meta property="og:site_name" content="阿荣嘚吧嘚">
-<meta property="og:description" content="gitk 用home-brew, brew install git 以后，如果报错误：123456789101112131415Error in startup script: unknown color name &amp;quot;lime&amp;quot; (processing &amp;quot;-fore&amp;quot; option) invoked from within&amp;quot;$ctext tag c">
-<meta property="og:updated_time" content="2017-02-16T09:01:39.000Z">
+<meta property="og:description" content="1.前言本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。
+2.小米使用kudu的背景小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm1.jpeg">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm2.png">
+<meta property="og:updated_time" content="2017-02-22T10:24:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime'">
-<meta name="twitter:description" content="gitk 用home-brew, brew install git 以后，如果报错误：123456789101112131415Error in startup script: unknown color name &amp;quot;lime&amp;quot; (processing &amp;quot;-fore&amp;quot; option) invoked from within&amp;quot;$ctext tag c">
+<meta name="twitter:title" content="经验贴--kudu在小米的实践应用">
+<meta name="twitter:description" content="1.前言本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。
+2.小米使用kudu的背景小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm1.jpeg">
 
 
 
@@ -126,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/"/>
 
 
 
 
 
-  <title> Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime' | 阿荣嘚吧嘚 </title>
+  <title> 经验贴--kudu在小米的实践应用 | 阿荣嘚吧嘚 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -473,7 +479,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -497,7 +503,7 @@
             
             
               
-                Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime'
+                经验贴--kudu在小米的实践应用
               
             
           </h1>
@@ -512,8 +518,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-16T15:41:56+08:00">
-                2017-02-16 15:41:56
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-22T18:06:45+08:00">
+                2017-02-22 18:06:45
               </time>
             
 
@@ -535,8 +541,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/NoSQL/" itemprop="url" rel="index">
+                    <span itemprop="name">NoSQL</span>
                   </a>
                 </span>
 
@@ -553,8 +570,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/" itemprop="commentCount"></span>
+                <a href="/2017/02/22/经验贴-kudu在小米的实践应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/22/经验贴-kudu在小米的实践应用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -585,13 +602,48 @@
       
 
       
-        <p>gitk 用home-brew, brew install git 以后，如果报错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Error in startup script: unknown color name &quot;lime&quot;</div><div class="line"></div><div class="line"> (processing &quot;-fore&quot; option)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot;</div><div class="line"></div><div class="line"> (procedure &quot;makewindow&quot; line 347)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;makewindow&quot;</div><div class="line"></div><div class="line"> (file &quot;/usr/local/bin/gitk&quot; line 12434)</div></pre></td></tr></table></figure></p>
-<p>解决方法一：</p>
-<p>brew cask install tcl</p>
-<p>解决方法二：</p>
-<p>编辑gitk文件，把相应的color删除或修改。</p>
-<p>解决方法三：</p>
-<p>在home目录下配一个.gitk文件，将相关color定义一下。<br><a id="more"></a></p>
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。</p>
+<h1 id="2-小米使用kudu的背景"><a href="#2-小米使用kudu的背景" class="headerlink" title="2.小米使用kudu的背景"></a>2.小米使用kudu的背景</h1><p>小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。<br><a id="more"></a><br>在kudu之前，我们的大数据分析pipeline大概是有这几种：</p>
+<blockquote>
+<ol>
+<li>数据源-&gt; scribe打日志到HDFS -&gt; MR/Hive/Spark -&gt; HDFS Parquet -&gt; Impala -&gt; 结果service<br>这个数据流一般用来分析各种日志。</li>
+<li>数据源 -&gt; 实时更新HBase/Mysql -&gt; 每天批量导出Parquet-&gt; Impala -&gt; 结果serve<br>这个数据流一般用来分析状态数据，也就是一般需要随机更新的数据，比如用户profile之类。</li>
+</ol>
+</blockquote>
+<p>这两条数据流主要由几个问题：</p>
+<blockquote>
+<ol>
+<li>数据从生成到能够被高效查询的列存储，整个数据流延迟比较大，一般是小时级别到一天；</li>
+<li>很多数据的日志到达时间和逻辑时间是不一致的，一般存在一些随机延迟。</li>
+</ol>
+</blockquote>
+<p>比如很多mobile app统计应用，这些tracing event发生后，很可能过一段时间才被后端tracing server收集到。</p>
+<p>我们经常看到一些hive查询，分析一天或者一小时的数据，但是要读2-3天或者多个小时的日志，然后过滤出实际想要的记录。</p>
+<p>对于一些实时分析需求，有一些可以通过流处理来解决，不过他肯定没用SQL方便，另外流式处理只能做固定的数据分析，对ad-hoc查询无能为力</p>
+<p>kudu的特点正好可以来配合impala搭建实时ad-hoc分析应用。</p>
+<p>改进后的数据流大概是这个样子：</p>
+<blockquote>
+<ol>
+<li>数据源 -&gt; kafka -&gt; ETL(Storm) -&gt; kudu -&gt; Impala</li>
+<li>数据源 -&gt; kudu -&gt; Impala</li>
+</ol>
+</blockquote>
+<p>数据流1 主要是为需要进一步做ETL的应用使用的，另外kafka可以当做一个buffer，当写吞吐有毛刺时，kafka可以做一个缓冲。</p>
+<p>如果应用有严格的实时需求，就是只要数据源写入就必须能够查到，就需要使用数据流2。</p>
+<h1 id="3-引入kudu的目的"><a href="#3-引入kudu的目的" class="headerlink" title="3.引入kudu的目的"></a>3.引入kudu的目的</h1><p>引入kudu主要是用来替换 HDFS+parquet的。</p>
+<h1 id="4-kudu的列存和parquet列存有啥区别？"><a href="#4-kudu的列存和parquet列存有啥区别？" class="headerlink" title="4.kudu的列存和parquet列存有啥区别？"></a>4.kudu的列存和parquet列存有啥区别？</h1><p>从功能上说，kudu的列存除了提供跟parquet接近的scan速度，还支持随机读写。支持随机写，数据就可以实时灌入存储中，达到实时查询的效果；但是parquet文件只能批量写，所以一般只能定期生成，所以增大了延迟。kudu的存储类似hbase的lsm存储。</p>
+<h1 id="5-为什么说kudu的scan会比kylin快呢"><a href="#5-为什么说kudu的scan会比kylin快呢" class="headerlink" title="5.为什么说kudu的scan会比kylin快呢"></a>5.为什么说kudu的scan会比kylin快呢</h1><p>kylin是存储在hbase上的，kudu的scan为什么比hbase快，简单的说kudu是真正的列存储，hbase只是列簇存储。kudu是有schema的，每一列的数据是在文件中已数组的形式保存的，而hbase存储在hfile里面的还是sort好的(rowkey, column, timestamp, value)对，scan是开销要多很多，具体需要看kudu的paper了，在这里文字不好解释。</p>
+<h1 id="6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢"><a href="#6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢" class="headerlink" title="6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢"></a>6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢</h1><p>我们在71个节点的集群做了测试，随机写性能：随机写26亿条记录：每个节点大概4W 随机写性能。</p>
+<p>大概的情况如下：</p>
+<blockquote>
+<p><strong>71 Node cluster</strong><br><strong><em>Hardware</em></strong><br>CPU: E5-2620 2.1GHz <em> 24 core  Memory: 64GB<br>Network: 1Gb  Disk: 12 HDD<br><strong><em>Software</em></strong><br>Hadoop2.6/Impala 2.1/Kudu<br><em>*<em>3个大表，其中一个大表每天：</em></em></em><br>~2.6 Billion rows<br>~270 bytes/row<br>17 columns, 5 key columns</p>
+</blockquote>
+<p>storm到kudu，按照每天26亿数据来算，每秒大概30000条记录吧。<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm1.jpeg" alt=""><br>这个是我们的应用挑出的6个查询，做的查询性能对比。同样6个查询，查询parquet和查询kudu做的对比。当时kudu的设计目标是接近parquet的scan性能，惊喜的是，目前kudu的scan性能在生产环境下有时还比parquet快一些。</p>
+<h1 id="7-像hbase有coprocessor，kudu有类似的计算功能吗？"><a href="#7-像hbase有coprocessor，kudu有类似的计算功能吗？" class="headerlink" title="7.像hbase有coprocessor，kudu有类似的计算功能吗？"></a>7.像hbase有coprocessor，kudu有类似的计算功能吗？</h1><p>kudud。kudu有predicatepushdown，目前有impala使用时，scan时是把一些过滤提交给kudu去做的。</p>
+<h1 id="8-你们是想用kudu替换hbase还是一起搭配用？"><a href="#8-你们是想用kudu替换hbase还是一起搭配用？" class="headerlink" title="8.你们是想用kudu替换hbase还是一起搭配用？"></a>8.你们是想用kudu替换hbase还是一起搭配用？</h1><p>感觉这两个工具目前用来解决不同的问题，hbase还是用来做OLTP类存储跟Mysql类似，kudu则用来升级我们现有的数据分析数据流，主要还是OLAP的workload。</p>
+<h1 id="9-Kudu支持随机增加列吗？"><a href="#9-Kudu支持随机增加列吗？" class="headerlink" title="9.Kudu支持随机增加列吗？"></a>9.Kudu支持随机增加列吗？</h1><p>只要不是primarykey的列，是可以随时增加的，而且不像mysql增加列时影响其他操作，kudu altertable是异步的，而且对性能影响不大。hbase是无schema的，所以可以成千上万个列，kudu不行的，列的数量也不能过多。我们目前也就试过30多列的，一些300+列的表还没有测试过。</p>
+<h1 id="10-Kudu目前有稳定版吗"><a href="#10-Kudu目前有稳定版吗" class="headerlink" title="10.Kudu目前有稳定版吗"></a>10.Kudu目前有稳定版吗</h1><p>目前beta版本，不推荐现在在生产环境使用。(写此篇博客时(2017.2.22)已发布1.2.0版本)<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm2.png" alt=""></p>
+<h1 id="11-能否介绍一下小米使用kudu过程中踩过的坑？"><a href="#11-能否介绍一下小米使用kudu过程中踩过的坑？" class="headerlink" title="11.能否介绍一下小米使用kudu过程中踩过的坑？"></a>11.能否介绍一下小米使用kudu过程中踩过的坑？</h1><p>目前踩的坑都还在开发阶段，其实都不算什么，而且从大方向上看，我们还是相信kudu这种方式对比之前的数据流优势很明显，对吞吐不是非常高的应用，这种方案是发展方向。其实我们在老的数据流上碰到很多问题，之前提到的数据延迟，数据无序，多个组件之间的兼容性，数据无schema导致灌入数据时缺少验证，其实都希望引入kudu后能够解决。</p>
 
       
     </div>
@@ -615,9 +667,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/kudu/" rel="tag"># kudu</a>
           
-            <a href="/tags/工具/" rel="tag"># 工具</a>
+            <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
           
         </div>
       
@@ -630,8 +682,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/16/深入学习Git工作流/" rel="next" title="深入学习Git工作流">
-                <i class="fa fa-chevron-left"></i> 深入学习Git工作流
+              <a href="/2017/02/22/kudu学习资料总结/" rel="next" title="kudu学习资料总结">
+                <i class="fa fa-chevron-left"></i> kudu学习资料总结
               </a>
             
           </div>
@@ -639,10 +691,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/16/Mac-Retina解决gitk模糊的问题/" rel="prev" title="Mac Retina解决gitk模糊的问题">
-                Mac Retina解决gitk模糊的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -657,10 +705,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/"
-     data-title="Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime'"
+        <div class="ds-share flat" data-thread-key="2017/02/22/经验贴-kudu在小米的实践应用/"
+     data-title="经验贴--kudu在小米的实践应用"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/">
+     data-url="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -690,8 +738,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/"
-           data-title="Mac下brew安装gitk遇到错误Error in startup script: unknown color name 'lime'" data-url="http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/">
+      <div class="ds-thread" data-thread-key="2017/02/22/经验贴-kudu在小米的实践应用/"
+           data-title="经验贴--kudu在小米的实践应用" data-url="http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/">
       </div>
     
   </div>
@@ -715,8 +763,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -779,6 +836,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-小米使用kudu的背景"><span class="nav-number">2.</span> <span class="nav-text">2.小米使用kudu的背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-引入kudu的目的"><span class="nav-number">3.</span> <span class="nav-text">3.引入kudu的目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-kudu的列存和parquet列存有啥区别？"><span class="nav-number">4.</span> <span class="nav-text">4.kudu的列存和parquet列存有啥区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-为什么说kudu的scan会比kylin快呢"><span class="nav-number">5.</span> <span class="nav-text">5.为什么说kudu的scan会比kylin快呢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢"><span class="nav-number">6.</span> <span class="nav-text">6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-像hbase有coprocessor，kudu有类似的计算功能吗？"><span class="nav-number">7.</span> <span class="nav-text">7.像hbase有coprocessor，kudu有类似的计算功能吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-你们是想用kudu替换hbase还是一起搭配用？"><span class="nav-number">8.</span> <span class="nav-text">8.你们是想用kudu替换hbase还是一起搭配用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-Kudu支持随机增加列吗？"><span class="nav-number">9.</span> <span class="nav-text">9.Kudu支持随机增加列吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-Kudu目前有稳定版吗"><span class="nav-number">10.</span> <span class="nav-text">10.Kudu目前有稳定版吗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-能否介绍一下小米使用kudu过程中踩过的坑？"><span class="nav-number">11.</span> <span class="nav-text">11.能否介绍一下小米使用kudu过程中踩过的坑？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
