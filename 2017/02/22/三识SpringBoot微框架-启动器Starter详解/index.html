@@ -101,13 +101,15 @@ spring-web, spring-webmvc         即Spring WebMvc">
 starter模块，简单的说，就是一系列的依赖包组合。例如web starter模块，就是包含了Spring Boot预定义的一些Web开发的常用依赖，如：
 
 spring-web, spring-webmvc         即Spring WebMvc">
-<meta property="og:updated_time" content="2017-02-22T03:01:02.000Z">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/22/三识SpringBoot微框架-启动器Starter详解/../../../../images/g112.png">
+<meta property="og:updated_time" content="2017-02-22T03:15:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三识SpringBoot微框架--启动器Starter详解">
 <meta name="twitter:description" content="spring boot 配置时需要在pom文件中添加starter模块，那么starter是什么？有什么作用？分为哪几种？下面将进行详细讲解：
 starter模块，简单的说，就是一系列的依赖包组合。例如web starter模块，就是包含了Spring Boot预定义的一些Web开发的常用依赖，如：
 
 spring-web, spring-webmvc         即Spring WebMvc">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/22/三识SpringBoot微框架-启动器Starter详解/../../../../images/g112.png">
 
 
 
@@ -603,9 +605,8 @@ spring-web, spring-webmvc         即Spring WebMvc">
 <li>spring-*          即Spring框架</li>
 <li>spring-boot-autoconfigure         即Spring Boot提供的自动配置功能</li>
 </ul>
-<p>换句话说，当你添加了相应的starter模块，就相当于添加了相应的所有必须的依赖包。<br><a id="more"></a></p>
-<p>spring Boot应用启动器基本的一共有44种，具体如下：</p>
-<p><strong>1）spring-boot-starter</strong><br>这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。</p>
+<p>换句话说，当你添加了相应的starter模块，就相当于添加了相应的所有必须的依赖包。<br>注：可以在引入对应的starter启动器后使用 mvn dependency:tree 查看引入的依赖关系。<br>如下图所示：<br><a id="more"></a><br><img src="/2017/02/22/三识SpringBoot微框架-启动器Starter详解/../../../../images/g112.png" alt=""></p>
+<h1 id="spring-Boot应用启动器基本的一共有44种，具体如下："><a href="#spring-Boot应用启动器基本的一共有44种，具体如下：" class="headerlink" title="spring Boot应用启动器基本的一共有44种，具体如下："></a>spring Boot应用启动器基本的一共有44种，具体如下：</h1><p><strong>1）spring-boot-starter</strong><br>这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。</p>
 <p><strong>2）spring-boot-starter-actuator</strong><br>帮助监控和管理应用。</p>
 <p><strong>3）spring-boot-starter-amqp</strong><br>通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol）。</p>
 <p><strong>4）spring-boot-starter-aop</strong><br>支持面向切面的编程即AOP，包括spring-aop和AspectJ。</p>
@@ -700,6 +701,10 @@ spring-web, spring-webmvc         即Spring WebMvc">
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/02/22/kudu学习资料总结/" rel="prev" title="kudu学习资料总结">
+                kudu学习资料总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -771,8 +776,17 @@ spring-web, spring-webmvc         即Spring WebMvc">
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -785,7 +799,7 @@ spring-web, spring-webmvc         即Spring WebMvc">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -794,7 +808,7 @@ spring-web, spring-webmvc         即Spring WebMvc">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -803,7 +817,7 @@ spring-web, spring-webmvc         即Spring WebMvc">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -835,6 +849,22 @@ spring-web, spring-webmvc         即Spring WebMvc">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-Boot应用启动器基本的一共有44种，具体如下："><span class="nav-number">1.</span> <span class="nav-text">spring Boot应用启动器基本的一共有44种，具体如下：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
