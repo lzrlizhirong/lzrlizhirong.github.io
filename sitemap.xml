@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/flume-kafka-spark-streaming%E6%95%B4%E5%90%88/</loc>
+    
+    <lastmod>2017-02-23T08:47:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85kudu/</loc>
+    
+    <lastmod>2017-02-23T08:40:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85impala/</loc>
+    
+    <lastmod>2017-02-23T08:36:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://lzrlizhirong.github.io/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/</loc>
     
     <lastmod>2017-02-22T10:24:27.000Z</lastmod>

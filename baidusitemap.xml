@@ -4,6 +4,75 @@
 
     
   <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/flume-kafka-spark-streaming%E6%95%B4%E5%90%88/</loc>
+    <lastmod>2017-02-23T08:47:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>flume+kafka+spark streaming整合</title>
+        <pubTime>2017-02-22T14:24:04.000Z</pubTime>
+        
+        <tag>flume</tag>
+         
+        <tag>kafka</tag>
+         
+        <tag>spark streaming</tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="http://lzrlizhirong.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85kudu/</loc>
+    <lastmod>2017-02-23T08:40:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>安装kudu</title>
+        <pubTime>2017-02-23T02:17:55.000Z</pubTime>
+        
+        <tag>kudu</tag>
+         
+        <tag>NoSQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+          
+             
+              <breadCrumb title="NoSQL" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85impala/</loc>
+    <lastmod>2017-02-23T08:36:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>安装impala</title>
+        <pubTime>2017-02-23T08:21:20.000Z</pubTime>
+        
+        <tag>impala</tag>
+         
+         
+           
+             
+              <breadCrumb title="impala" url="http://lzrlizhirong.github.io/categories/impala/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://lzrlizhirong.github.io/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/</loc>
     <lastmod>2017-02-22T10:24:27.000Z</lastmod>
     <data>
