@@ -106,14 +106,14 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    <!-- scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: 'undefined',
       author: '博主'
-    },
+    }, -->
     algolia: {
       applicationID: 'ZV0CITSKLL',
       apiKey: 'e8aec2b563a2153e56afa3a4ec68e61c',
@@ -207,6 +207,7 @@
 </div>
 
 <nav class="site-nav">
+  <!--  -->
   
 
   
@@ -267,7 +268,9 @@
         <li class="menu-item menu-item-search">
           
             <a href="javascript:;" class="popup-trigger">
-          
+	   
+	   <!-- 增加下面语句 -->
+           
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
@@ -430,28 +433,25 @@
 
   
     <div class="site-search">
-      
-  
-  <div class="algolia-popup popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
+      <!--
 
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-  </div>
+-->
 
 
+   <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+<!-- 增加下面语句 -->
 
 
     </div>
@@ -865,6 +865,10 @@
 
   
   
+    
+
+  
+  
   
   <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
 
@@ -873,10 +877,9 @@
   <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
   
 
-  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
 
 
   
-
 </body>
 </html>
