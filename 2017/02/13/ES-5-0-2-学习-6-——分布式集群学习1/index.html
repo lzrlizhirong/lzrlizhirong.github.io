@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SpringBoot,微服务," />
+  <meta name="keywords" content="Elasticsearch,分布式," />
 
 
 
@@ -89,34 +89,26 @@
 
 
 
-<meta name="description" content="1. Spring Boot是什么，解决哪些问题
-   1) Spring Boot使编码变简单     2) Spring Boot使配置变简单     3) Spring Boot使部署变简单     4) Spring Boot使监控变简单">
+<meta name="description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初试SpringBoot微框架">
-<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/index.html">
+<meta property="og:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/index.html">
 <meta property="og:site_name" content="阿荣嘚吧嘚">
-<meta property="og:description" content="1. Spring Boot是什么，解决哪些问题
-   1) Spring Boot使编码变简单     2) Spring Boot使配置变简单     3) Spring Boot使部署变简单     4) Spring Boot使监控变简单">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb1.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb2.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb3.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb4.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb5.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb6.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb7.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb8.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb9.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb10.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb11.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb12.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb13.jpeg">
-<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb14.jpeg">
-<meta property="og:updated_time" content="2017-02-20T04:25:08.000Z">
+<meta property="og:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e64.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e65.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e66.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png">
+<meta property="og:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png">
+<meta property="og:updated_time" content="2017-02-24T06:12:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初试SpringBoot微框架">
-<meta name="twitter:description" content="1. Spring Boot是什么，解决哪些问题
-   1) Spring Boot使编码变简单     2) Spring Boot使配置变简单     3) Spring Boot使部署变简单     4) Spring Boot使监控变简单">
-<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/../../../../images/sb1.jpeg">
+<meta name="twitter:title" content="ES-5.0.2-学习(6)——分布式集群学习1">
+<meta name="twitter:description" content="在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 ES-5.0.2-学习(3)——单台服务器部署多个节点 搭建学习。">
+<meta name="twitter:image" content="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png">
 
 
 
@@ -144,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/"/>
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"/>
 
 
 
 
 
-  <title> 初试SpringBoot微框架 | 阿荣嘚吧嘚 </title>
+  <title> ES-5.0.2-学习(6)——分布式集群学习1 | 阿荣嘚吧嘚 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -475,7 +467,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李志荣">
@@ -499,7 +491,7 @@
             
             
               
-                初试SpringBoot微框架
+                ES-5.0.2-学习(6)——分布式集群学习1
               
             
           </h1>
@@ -514,8 +506,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-20T11:53:22+08:00">
-                2017-02-20 11:53:22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T10:21:48+08:00">
+                2017-02-13 10:21:48
               </time>
             
 
@@ -537,8 +529,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">Elasticsearch</span>
                   </a>
                 </span>
 
@@ -555,8 +547,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/20/SpringBoot学习笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/20/SpringBoot学习笔记/" itemprop="commentCount"></span>
+                <a href="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -587,68 +579,50 @@
       
 
       
-        <h1 id="1-Spring-Boot是什么，解决哪些问题"><a href="#1-Spring-Boot是什么，解决哪些问题" class="headerlink" title="1. Spring Boot是什么，解决哪些问题"></a>1. Spring Boot是什么，解决哪些问题</h1><blockquote>
-<p>   1) Spring Boot使编码变简单<br>     2) Spring Boot使配置变简单<br>     3) Spring Boot使部署变简单<br>     4) Spring Boot使监控变简单</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="2-Spring-Boot在平台中的定位，相关技术如何融合"><a href="#2-Spring-Boot在平台中的定位，相关技术如何融合" class="headerlink" title="2. Spring Boot在平台中的定位，相关技术如何融合"></a>2. Spring Boot在平台中的定位，相关技术如何融合</h1><blockquote>
-<p>   1) SpringBoot与SEDA +MicroService + RESTful<br>     2) SpringBoot与Mock</p>
-</blockquote>
-<h1 id="3-采用了SpringBoot之后，技术管理应该如何进行"><a href="#3-采用了SpringBoot之后，技术管理应该如何进行" class="headerlink" title="3. 采用了SpringBoot之后，技术管理应该如何进行"></a>3. 采用了SpringBoot之后，技术管理应该如何进行</h1><p>首先，我们来看一下spring boot是什么，它帮助我们解决了哪些问题：<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb1.jpeg" alt=""><br>SpringBoot是伴随着Spring4.0诞生的；</p>
-<p>从字面理解，Boot是引导的意思，因此SpringBoot帮助开发者快速搭建Spring框架；</p>
-<p>SpringBoot帮助开发者快速启动一个Web容器；</p>
-<p>SpringBoot继承了原有Spring框架的优秀基因；</p>
-<p>SpringBoot简化了使用Spring的过程。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb2.jpeg" alt=""><br>Spring由于其繁琐的配置，一度被人认为“配置地狱”，各种XML、Annotation配置，让人眼花缭乱，而且如果出错了也很难找出原因。</p>
-<p>Spring Boot更多的是采用Java Config的方式，对Spring进行配置。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb3.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb4.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb5.jpeg" alt=""><br>可以看到，采用了spring-boot-start-actuator之后，直接以REST的方式，获取进程的运行期性能参数。</p>
-<p>当然这些metrics有些是有敏感数据的，spring-boot-start-actuator为此提供了一些Basic Authentication认证的方案，这些方案在实际应用过程中也是不足的。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb6.jpeg" alt=""></p>
-<p>Spring Boot作为一个微框架，离微服务的实现还是有距离的。</p>
-<p>没有提供相应的服务发现和注册的配套功能，自身的acturator所提供的监控功能，也需要与现有的监控对接。没有配套的安全管控方案，对于REST的落地，还需要自行结合实际进行URI的规范化工作。</p>
-<p>下面，我们研究一下Spring Boot在平台中的定位，相关技术如何融合。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb7.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb8.jpeg" alt=""><br>上图比较复杂，整体是采用SEDA，也就是Stage-EDA。可以看到，整体是以处理顺序进行展示的，响应过程类似。在处理过程中，主要会有前置过滤，核心功能处理，后置过滤几大部分。</p>
-<p>图中的过滤器都是可插拔式的，并且可以根据实际场景进行扩展开发。每个过滤器都是Stage，比如ClientInstance合法性检查、调用鉴权、解密、限流等等。</p>
-<p>一个请求Stage与Stage的转换，实现上是切换不同的线程池，并以EDA的方式驱动。</p>
-<p>对于业务逻辑的开发者而言，只需要关心CORE部分的业务逻辑实现，其他的非功能都由框架进行统一实现。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb9.jpeg" alt=""></p>
-<p>Mock不应当再是测试的专有名词了，当然对于测试这个角色而言，mockito这样的工具，依然可以为他们提升不少效率。</p>
-<p>SpringBoot为创建REST服务提供了简便的途径，相比之下，采用阿里的dubbo在做多团队、多进程联调时，mock的难度就陡增。</p>
-<p>Mock是解耦并行开发的利器，在理性的情况下，软件从开发期Mock联调，到开发与开发的真实联调，只需要切换一个依赖的域名即可，比如：<br>mockURI:<a href="http://mock.service.net/v1/function?param1=value1" target="_blank" rel="external">http://mock.service.net/v1/function?param1=value1</a><br>devURI:<a href="http://dev.service.net/v1/function?param1=value1" target="_blank" rel="external">http://dev.service.net/v1/function?param1=value1</a></p>
-<p>而上述的域名切换，只需要在开发期定义好一个配置项，在做环境切换的时候自动注入即可，省时、省心、省力。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb10.jpeg" alt=""><br>如上图和docker的集成可以有AB两种方案：</p>
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=31460216&auto=0&height=66"></iframe><br>在使用中我们把文档存入ElasticSearch，但是如果能够了解ElasticSearch内部是如何存储的，将会对我们学习ElasticSearch有很清晰的认识。本文中的所使用的ElasticSearch集群环境，可以通过查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 搭建学习。<br><a id="more"></a><br>ElasticSearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。</p>
+<p>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。</p>
+<p>下面的例子主要围绕着集群(cluster)、节点(node)和分片(shard)讲解，相信学习以后，对于学习Elasticsearch会有很大收获。</p>
+<h1 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h1><p>如果我们启动一个单独的节点，它还没有数据和索引，这个集群看起来如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e61.png" alt=""><br>只有一个空节点的集群。一个节点(node)就是一个Elasticsearch实例，而一个集群(cluster)由一个或多个节点组成，它们具有相同cluster.name，它们协同工作，分享数据和负载。当加入新的节点或者删除一个节点时，集群就会感知到并平衡数据。</p>
+<p>集群中一个节点会被选举为主节点(master)，它将临时管理集群级别的一些变更，例如新建或删除索引、增加或移除节点等。主节点不参与文档级别的变更或搜索，这意味着在流量增长的时候，该主节点不会成为集群的瓶颈。任何节点都可以成为主节点。我们例子中的集群只有一个节点，所以它会充当主节点的角色。</p>
+<p>作为用户，我们能够与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点上。我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch处理。</p>
+<h1 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h1><p>在Elasticsearch集群中可以监控统计很多信息，但是只有一个是最重要的：集群健康(cluster health)。<br>集群健康有三种状态：green、yellow或red，健康状况在后面会有很多体现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /_cluster/health</div></pre></td></tr></table></figure></p>
+<p>在一个没有索引的空集群中运行如上查询，将返回这些信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;green&quot;, </div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       1,</div><div class="line">   &quot;number_of_data_nodes&quot;:  1,</div><div class="line">   &quot;active_primary_shards&quot;: 0,</div><div class="line">   &quot;active_shards&quot;:         0,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>status</strong>： 是我们最感兴趣的字段。status字段提供一个综合的指标来表示集群的的服务状况。三种颜色各自的含义：</p>
 <ul>
-<li>A方案的核心是，把docker作为操作系统环境的交付基线，也就是不同的fat jar 使用相同的操作系统版本、相同的JVM环境。但对于docker image来说都是一样的。</li>
-<li>B方案的核心是，不同的fat jar，独立的编译为docker image，在启动时直接启动带有特定版本的image。</li>
+<li>green：所有主要分片和复制分片都可用。</li>
+<li>yellow：所有主要分片可用，但不是所有复制分片都可用。</li>
+<li>red：不是所有的主要分片都可用。</li>
 </ul>
-<p>A相比与B方案的特点是对于docker registry（也就是docker的镜像仓库）的依赖性较低，对于前期编译过程的要求也较低。</p>
-<p>采用了Spring Boot之后，技术管理应该如何进行？<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb11.jpeg" alt=""><br>正因为Spring Boot是与Spring一脉相承的，所以对于广大的Java开发者而言，对于Spring的学习成本几乎为零。</p>
-<p>在实践Spring Boot时学习重点，或者说思维方式改变的重点在于：</p>
-<ol>
-<li>对于REST的理解，这一点尤为重要，需要从设计、开发多个角色达成共识，很多时候都是对于HTTP 1.1协议以及REST的精髓不理解，导致REST被「盲用」而产生一些不好的效果。</li>
-<li>对于YAML的理解和对于JavaConfig的理解，这两点相对较为简单，本质上是简化了xml文件，并提供等价的配置表述能力。</li>
-</ol>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb12.jpeg" alt=""></p>
-<blockquote>
-<ol>
-<li>丰富的工具链为SpringBoot的推广带来了利好。</li>
-<li>SpringBoot的工具链主要来自于两个方面：<br>1) 原有Spring积累的工具链；<br>2) SpringMVC或者其他REST框架使用HTTP协议，使得HTTP丰富的工具成为SpringBoot天然的资源。</li>
-</ol>
-</blockquote>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb13.jpeg" alt=""></p>
-<p>SpringBoot自身对于前面提到的配置文件：“application.yml”提供了多个「Profile」，可以便于开发者描述不同环境的配置，这些配置例如数据库的连接地址、用户名和密码。</p>
-<p>但是对于企业用户而言，把不同环境的配置，写到同一个配置文件中，是极其不安全的，是一个非常危险的动作。</p>
-<p>有一个经常被提及的例子是，随着开源的进行，很多互联网公司，都由于把相关的代码提交到github之类的开源代码社区，并且没有对代码进行严格的配置审查，导致一些”password”被公开。有些不良用心的人，就利用搜索工具，专门去挖掘这些关键字，进而导致数据库被「拖库」。</p>
-<p>所以对于企业用户，更多的应该是采用集中式的配置管理系统，将不同环境的配置严格区分地存放。</p>
-<p>虽然SpringBoot的actuator自身提供了基于「用户名+口令」的最简单的认证方式，但它保护的是对框架自身运行期的性能指标敏感数据的最基本的保护。这种保护在实际应用过程中，「用户名+口令」的管理是缺乏的，「用户名+口令」的安全配置过程是缺失的。</p>
-<p>SpringBoot也不提供对于我们自己开发的功能的任何防护功能。</p>
-<p>一般来讲，一个安全的信道（信息传输的通道），需要通信双方在进行正式的信息传输之前对对方进行身份认证，服务提供方还需要在此基础之上，对请求方的请求进行权限的校验，以确保业务安全。这些内容也需要基于SpringBoot进行外围的安全扩展，例如采用前面提到的S-EDA进行进程级别的安全管控。这些还需要配套的安全服务提供支持。</p>
-<p>一般来说，只要企业与互联网对接，那么随便一个面向消费者的「市场活动」，就有可能为企业带来井喷的流量。</p>
-<p>传统企业内，更多的系统是管理信息类的支撑系统，这类系统在设计时的主要用户是企业内部员工以及有限的外部供应商。这类系统存在于企业内部的时间一直很长，功能耦合也很多，在功能解耦前，是非常不适合的，或者说绝对不可以直接为互联网的用户进行服务的。</p>
-<p>SpringBoot自身并没有提供这样的流控措施，所以需要结合前面提到的S-EDA进行流量的控制，并结合下层的水平扩展能力（例如，Kubernets）进行流量负载合理的动态扩容。</p>
-<p>另外，在长业务流程的设计上，也尽可能地采用异步的方式，比如接口调用返回的是一个「受理号」，而不是业务的处理结果，避免井喷业务到来时，同步调用所带来的阻塞导致系统迅速崩溃，这些也都是SpringBoot自身并不解决的问题。</p>
-<p>以上是我分享的主要内容，下面我们总结一下：</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb14.jpeg" alt=""></p>
+<h1 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h1><p>为了将数据添加到Elasticsearch，我们需要索引(index)——一个存储关联数据的地方。实际上，索引只是一个用来指向一个或多个分片(shards)的“逻辑命名空间(logical namespace)”.</p>
+<p>一个分片(shard)是一个最小级别“工作单元(worker unit)”,它只是保存了索引中所有数据的一部分。并且先初步知道分片就是一个Lucene实例，它本身就是一个完整的搜索引擎。我们的文档存储在分片中，并且在分片中被索引，但是我们的应用程序不会直接与它们通信，取而代之的是，直接与索引通信。</p>
+<p>分片是Elasticsearch在集群中分发数据的关键。把分片想象成数据的容器。文档存储在分片中，然后分片分配到你集群中的节点上。当你的集群扩容或缩小，Elasticsearch将会自动在你的节点间迁移分片，以使集群保持平衡。</p>
+<p>分片可以是主分片(primary shard)或者是复制分片(replica shard)。你索引中的每个文档属于一个单独的主分片，所以主分片的数量决定了索引最多能存储多少数据。当索引创建完成的时候，主分片的数量就固定了，但是复制分片的数量可以随时调整。</p>
+<p>复制分片只是主分片的一个副本，它可以防止硬件故障导致的数据丢失，同时可以提供读请求，比如搜索或者从别的分片取回文档。</p>
+<p>让我们在集群中唯一一个空节点上创建一个叫做blogs的索引。默认情况下，一个索引被分配5个主分片，但是为了演示的目的，我们只分配3个主分片和一个复制分片（每个主分片都有一个复制分片）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PUT /blogs</div><div class="line">&#123;</div><div class="line">   &quot;settings&quot; : &#123;</div><div class="line">      &quot;number_of_shards&quot; : 3,</div><div class="line">      &quot;number_of_replicas&quot; : 1</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e62.png" alt=""><br>我们的集群现在看起来就像上图~~三个主分片都被分配到Node 1。如果我们现在检查集群健康(cluster-health)，我们将见到以下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;yellow&quot;, &lt;1&gt;</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       1,</div><div class="line">   &quot;number_of_data_nodes&quot;:  1,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         3,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     3</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>集群的状态现在是 yellow</li>
+<li>我们的三个复制分片还没有被分配到节点上</li>
+</ul>
+<p>下面我们可以看下，在Kibana监控工具中查看具体情况，如下图：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e63.png" alt=""><br>集群的健康状态yellow表示所有的主分片(primary shards)启动并且正常运行了——集群已经可以正常处理任何请求——但是复制分片(replica shards)还没有全部可用。事实上所有的三个复制分片现在都是unassigned状态——它们还未被分配给节点。在同一个节点上保存相同的数据副本是没有必要的，如果这个节点故障了，那所有的数据副本也会丢失。</p>
+<p>现在我们的集群已经功能完备，但是依旧存在因硬件故障而导致数据丢失的风险。</p>
+<h1 id="添加故障转移"><a href="#添加故障转移" class="headerlink" title="添加故障转移"></a>添加故障转移</h1><p>在单一节点上运行意味着有单点故障的风险——没有数据备份。幸运的是，要防止单点故障，我们唯一需要做的就是启动另一个节点。</p>
+<p>具体启动方式可以查看 <em><a href="http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="external">ES-5.0.2-学习(3)——单台服务器部署多个节点</a></em> 。</p>
+<p>如果我们启动了第二个节点，这个集群看起来就像下图。双节点集群——所有的主分片和复制分片都已分配:<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e64.png" alt=""><br>第二个节点已经加入集群，三个复制分片(replica shards)也已经被分配了——分别对应三个主分片，这意味着在丢失任意一个节点的情况下依旧可以保证数据的完整性。</p>
+<p>文档的索引将首先被存储在主分片中，然后并发复制到对应的复制节点上。这可以确保我们的数据在主节点和复制节点上都可以被检索。</p>
+<p><strong>cluster-health</strong> 现在的状态是 <strong>green</strong>，这意味着所有的6个分片（三个主分片和三个复制分片）都已可用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   &quot;cluster_name&quot;:          &quot;elasticsearch&quot;,</div><div class="line">   &quot;status&quot;:                &quot;green&quot;,</div><div class="line">   &quot;timed_out&quot;:             false,</div><div class="line">   &quot;number_of_nodes&quot;:       2,</div><div class="line">   &quot;number_of_data_nodes&quot;:  2,</div><div class="line">   &quot;active_primary_shards&quot;: 3,</div><div class="line">   &quot;active_shards&quot;:         6,</div><div class="line">   &quot;relocating_shards&quot;:     0,</div><div class="line">   &quot;initializing_shards&quot;:   0,</div><div class="line">   &quot;unassigned_shards&quot;:     0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>集群的状态是green，我们的集群不仅是功能完备的，而且是高可用的。<br>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e65.png" alt=""></p>
+<h1 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h1><p>随着应用需求的增长，我们该如何扩展？如果我们启动第三个节点，集群会重新组织，包含3个节点的集群，分片已经被重新分配以平衡负载：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e66.png" alt=""><br>Node 3包含了分别来自Node 1和Node 2的一个分片，这样每个节点就有两个分片，和之前相比少了一个，这意味着每个节点上的分片将获得更多的硬件资源（CPU、RAM、I/O）。</p>
+<p>分片本身就是一个完整的搜索引擎，它可以使用单一节点的所有资源。我们拥有6个分片（3个主分片和三个复制分片），最多可以扩展到6个节点，每个节点上有一个分片，每个分片可以100%使用这个节点的资源。</p>
+<p>同样我们可以看下实际的操作结果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e67.png" alt=""></p>
+<h1 id="继续扩展"><a href="#继续扩展" class="headerlink" title="继续扩展"></a>继续扩展</h1><p>如果我们要扩展到6个以上的节点，要怎么做？</p>
+<p>主分片的数量在创建索引时已经确定。实际上，这个数量定义了能存储到索引里数据的最大数量（实际的数量取决于你的数据、硬件和应用场景）。然而，主分片或者复制分片都可以处理读请求——搜索或文档检索，所以数据的冗余越多，我们能处理的搜索吞吐量就越大。</p>
+<p>复制分片的数量可以在运行中的集群中动态地变更，这允许我们可以根据需求扩大或者缩小规模。让我们把复制分片的数量从原来的1增加到2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PUT /blogs/_settings</div><div class="line">&#123;</div><div class="line">   &quot;number_of_replicas&quot; : 2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e68.png" alt=""><br>从图中可以看出，blogs索引现在有9个分片：3个主分片和6个复制分片。这意味着我们能够扩展到9个节点，再次变成每个节点一个分片。这样使我们的搜索性能相比原始的三节点集群增加“三倍”。</p>
+<p>实际操作也是同样的效果：<br><img src="/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/../../../../images/e69.png" alt=""><br><strong><em>注意：</em></strong>可以看到上面的“三倍”我们用加了引号，因为在同样数量的节点上增加更多的复制分片并不一定提高性能，因为这样做的话平均每个分片的所占有的硬件资源就减少了（大部分请求都聚集到了分片少的节点，导致一个节点吞吐量太大，反而降低性能），你需要增加硬件来提高吞吐量。所以说添加复制分片和添加节点，在保证成本的情况下，需要有一个平衡点。</p>
+<p>不过这些额外的复制节点还是有另外一个好处，使我们有更多的冗余：通过以上对节点的设置，我们能够承受两个节点故障而不丢失数据。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于ES分布式集群如果对节点、分片的处理基本学习完毕，可以感受到ES分布式集群的自动化，对于用户来说几乎完全透明化。但是，一个分布式集群主要看它的高性能、高并发和高可用。上面的内容虽然体现了一些，但是还包括对故障的处理能力，这部分将在 <a href="http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/" target="_blank" rel="external">ES-5.0.2-学习(7)——分布式集群学习2</a> 继续和大家分享。</p>
 
       
     </div>
@@ -672,9 +646,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+            <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
           
-            <a href="/tags/微服务/" rel="tag"># 微服务</a>
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
           
         </div>
       
@@ -687,8 +661,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/16/Apache-Beam：一个开源的统一的分布式数据处理编程库/" rel="next" title="Apache Beam：一个开源的统一的分布式数据处理编程库">
-                <i class="fa fa-chevron-left"></i> Apache Beam：一个开源的统一的分布式数据处理编程库
+              <a href="/2017/02/10/ES-5-0-2-学习-3-第一个ES例子/" rel="next" title="ES-5.0.2-学习(5)--第一个ES例子">
+                <i class="fa fa-chevron-left"></i> ES-5.0.2-学习(5)--第一个ES例子
               </a>
             
           </div>
@@ -697,8 +671,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/20/再识SpringBoot微框架-搭建案例/" rel="prev" title="再识SpringBoot微框架--简单案例">
-                再识SpringBoot微框架--简单案例 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/13/ES-5-0-2-学习-7-——分布式集群学习2/" rel="prev" title="ES-5.0.2-学习(7)——分布式集群学习2">
+                ES-5.0.2-学习(7)——分布式集群学习2 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -714,10 +688,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/20/SpringBoot学习笔记/"
-     data-title="初试SpringBoot微框架"
+        <div class="ds-share flat" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"
+     data-title="ES-5.0.2-学习(6)——分布式集群学习1"
      data-content=""
-     data-url="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/">
+     data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -747,8 +721,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/20/SpringBoot学习笔记/"
-           data-title="初试SpringBoot微框架" data-url="http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/">
+      <div class="ds-thread" data-thread-key="2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/"
+           data-title="ES-5.0.2-学习(6)——分布式集群学习1" data-url="http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-学习-6-——分布式集群学习1/">
       </div>
     
   </div>
@@ -855,7 +829,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Spring-Boot是什么，解决哪些问题"><span class="nav-number">1.</span> <span class="nav-text">1. Spring Boot是什么，解决哪些问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Spring-Boot在平台中的定位，相关技术如何融合"><span class="nav-number">2.</span> <span class="nav-text">2. Spring Boot在平台中的定位，相关技术如何融合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-采用了SpringBoot之后，技术管理应该如何进行"><span class="nav-number">3.</span> <span class="nav-text">3. 采用了SpringBoot之后，技术管理应该如何进行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#空集群"><span class="nav-number">1.</span> <span class="nav-text">空集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群健康"><span class="nav-number">2.</span> <span class="nav-text">集群健康</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加索引"><span class="nav-number">3.</span> <span class="nav-text">添加索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加故障转移"><span class="nav-number">4.</span> <span class="nav-text">添加故障转移</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#横向扩展"><span class="nav-number">5.</span> <span class="nav-text">横向扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继续扩展"><span class="nav-number">6.</span> <span class="nav-text">继续扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
