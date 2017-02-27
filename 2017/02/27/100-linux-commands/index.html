@@ -1,0 +1,1155 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="参差行者" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件123456-a  列出包括.a开头的隐藏文件的所有文件-A  通-a，但不列出&amp;quot;.&amp;quot;和&amp;quot;..&amp;quot;-l  列出文件的详细信息-c  根据ctime排序显示-t  根据文件修改时间排序---color[=WHEN] 用色彩辨别文件类型 WHEN 可以是&amp;apos;never&amp;apos;、&amp;apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100个Linux常用命令总结">
+<meta property="og:url" content="http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/index.html">
+<meta property="og:site_name" content="参差行者">
+<meta property="og:description" content="1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件123456-a  列出包括.a开头的隐藏文件的所有文件-A  通-a，但不列出&amp;quot;.&amp;quot;和&amp;quot;..&amp;quot;-l  列出文件的详细信息-c  根据ctime排序显示-t  根据文件修改时间排序---color[=WHEN] 用色彩辨别文件类型 WHEN 可以是&amp;apos;never&amp;apos;、&amp;apos;">
+<meta property="og:updated_time" content="2017-02-27T11:31:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="100个Linux常用命令总结">
+<meta name="twitter:description" content="1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件123456-a  列出包括.a开头的隐藏文件的所有文件-A  通-a，但不列出&amp;quot;.&amp;quot;和&amp;quot;..&amp;quot;-l  列出文件的详细信息-c  根据ctime排序显示-t  根据文件修改时间排序---color[=WHEN] 用色彩辨别文件类型 WHEN 可以是&amp;apos;never&amp;apos;、&amp;apos;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'ZV0CITSKLL',
+      apiKey: 'e8aec2b563a2153e56afa3a4ec68e61c',
+      indexName: 'lizhirong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/"/>
+
+
+
+
+
+  <title> 100个Linux常用命令总结 | 参差行者 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?15c7df6bdcd01ea29a2351319d547221";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1261229289&web_id=1261229289" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">参差行者</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">日积跬步,志在千里</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li> <a title="慎点~有劲爆音乐~请带上耳麦~" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()    '></a></li>
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+   <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="参差行者">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="参差行者">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="参差行者" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                100个Linux常用命令总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T19:05:33+08:00">
+                2017-02-27 19:05:33
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/27/100-linux-commands/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/27/100-linux-commands/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-ls-选项-目录名-列出相关目录下的所有目录和文件"><a href="#1-ls-选项-目录名-列出相关目录下的所有目录和文件" class="headerlink" title="1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件"></a>1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-a  列出包括.a开头的隐藏文件的所有文件</div><div class="line">-A  通-a，但不列出&quot;.&quot;和&quot;..&quot;</div><div class="line">-l  列出文件的详细信息</div><div class="line">-c  根据ctime排序显示</div><div class="line">-t  根据文件修改时间排序</div><div class="line">---color[=WHEN] 用色彩辨别文件类型 WHEN 可以是&apos;never&apos;、&apos;always&apos;或&apos;auto&apos;其中之一</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<pre><code>白色：表示普通文件
+蓝色：表示目录
+绿色：表示可执行文件
+红色：表示压缩文件
+浅蓝色：链接文件
+红色闪烁：表示链接的文件有问题
+黄色：表示设备文件
+灰色：表示其它文件   
+</code></pre><h1 id="2-mv-选项-源文件或目录-目录或多个源文件-移动或重命名文件"><a href="#2-mv-选项-源文件或目录-目录或多个源文件-移动或重命名文件" class="headerlink" title="2.mv [选项] 源文件或目录 目录或多个源文件 | 移动或重命名文件"></a>2.mv [选项] 源文件或目录 目录或多个源文件 | 移动或重命名文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-b  覆盖前做备份</div><div class="line">-f  如存在不询问而强制覆盖</div><div class="line">-i  如存在则询问是否覆盖</div><div class="line">-u  较新才覆盖</div><div class="line">-t  将多个源文件移动到统一目录下，目录参数在前，文件参数在后</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">eg:</div><div class="line">    mv a /tmp/ 将文件a移动到 /tmp目录下</div><div class="line">    mv a b 将a命名为b</div><div class="line">    mv /home/zenghao test1.txt test2.txt test3.txt</div></pre></td></tr></table></figure>
+<h1 id="3-cp-选项-源文件或目录-目录或多个源文件-将源文件复制至目标文件，或将多个源文件复制至目标目录。"><a href="#3-cp-选项-源文件或目录-目录或多个源文件-将源文件复制至目标文件，或将多个源文件复制至目标目录。" class="headerlink" title="3.cp [选项] 源文件或目录 目录或多个源文件 | 将源文件复制至目标文件，或将多个源文件复制至目标目录。"></a>3.cp [选项] 源文件或目录 目录或多个源文件 | 将源文件复制至目标文件，或将多个源文件复制至目标目录。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-r -R 递归复制该目录及其子目录内容</div><div class="line">-p  连同档案属性一起复制过去</div><div class="line">-f  不询问而强制复制</div><div class="line">-s  生成快捷方式</div><div class="line">-a  将档案的所有特性都一起复制</div></pre></td></tr></table></figure>
+<h1 id="4-scp-参数-原路径-目标路径-在Linux服务器之间复制文件和目录"><a href="#4-scp-参数-原路径-目标路径-在Linux服务器之间复制文件和目录" class="headerlink" title="4.scp [参数] [原路径] [目标路径] | 在Linux服务器之间复制文件和目录"></a>4.scp [参数] [原路径] [目标路径] | 在Linux服务器之间复制文件和目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-v  详细显示输出的具体情况</div><div class="line">-r  递归复制整个目录</div></pre></td></tr></table></figure>
+<h2 id="1-复制文件："><a href="#1-复制文件：" class="headerlink" title="(1) 复制文件："></a>(1) 复制文件：</h2><p>命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">scp local_file remote_username@remote_ip:remote_folder  </div><div class="line">或者  </div><div class="line">scp local_file remote_username@remote_ip:remote_file  </div><div class="line">或者  </div><div class="line">scp local_file remote_ip:remote_folder  </div><div class="line">或者  </div><div class="line">scp local_file remote_ip:remote_file</div></pre></td></tr></table></figure></p>
+<p>第1,2个指定了用户名，命令执行后需要输入用户密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名<br>第3,4个没有指定用户名，命令执行后需要输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名   </p>
+<h2 id="2-复制目录："><a href="#2-复制目录：" class="headerlink" title="(2) 复制目录："></a>(2) 复制目录：</h2><p>命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scp -r local_folder remote_username@remote_ip:remote_folder  </div><div class="line">或者  </div><div class="line">scp -r local_folder remote_ip:remote_folder</div></pre></td></tr></table></figure></p>
+<p>第1个指定了用户名，命令执行后需要输入用户密码；<br>第2个没有指定用户名，命令执行后需要输入用户名和密码；<br>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从 本地 复制到 远程</div><div class="line">scp /home/daisy/full.tar.gz root@172.19.2.75:/home/root </div><div class="line">从 远程 复制到 本地</div><div class="line">scp root@/172.19.2.75:/home/root/full.tar.gz /home/daisy/full.tar.gz</div></pre></td></tr></table></figure></p>
+<h1 id="5-rm-选项-文件-删除文件"><a href="#5-rm-选项-文件-删除文件" class="headerlink" title="5.rm [选项] 文件 | 删除文件"></a>5.rm [选项] 文件 | 删除文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-r  删除文件夹</div><div class="line">-f  删除不提示</div><div class="line">-i  删除提示</div><div class="line">-v  详细显示进行步骤</div></pre></td></tr></table></figure>
+<h1 id="6-touch-选项-文件-创建空文件或更新文件时间"><a href="#6-touch-选项-文件-创建空文件或更新文件时间" class="headerlink" title="6.touch [选项] 文件 | 创建空文件或更新文件时间"></a>6.touch [选项] 文件 | 创建空文件或更新文件时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-a  只修改存取时间</div><div class="line">-m  值修改变动时间</div><div class="line">-r  eg:touch -r a b ,使b的时间和a相同</div><div class="line">-t  指定特定的时间 eg:touch -t 201211142234.50 log.log </div><div class="line">    -t time [[CC]YY]MMDDhhmm[.SS],C:年前两位</div></pre></td></tr></table></figure>
+<h1 id="7-pwd-查看当前所在路径"><a href="#7-pwd-查看当前所在路径" class="headerlink" title="7.pwd 查看当前所在路径"></a>7.pwd 查看当前所在路径</h1><h1 id="8-cd-改变当前目录"><a href="#8-cd-改变当前目录" class="headerlink" title="8.cd 改变当前目录"></a>8.cd 改变当前目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\- ：返回上层目录</div><div class="line">.. :返回上层目录</div><div class="line">回车  ：返回主目录</div><div class="line">/   :根目录</div></pre></td></tr></table></figure>
+<h1 id="9-mkdir-选项-目录…-创建新目录"><a href="#9-mkdir-选项-目录…-创建新目录" class="headerlink" title="9.mkdir [选项] 目录… | 创建新目录"></a>9.mkdir [选项] 目录… | 创建新目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-p  递归创建目录，若父目录不存在则依次创建</div><div class="line">-m  自定义创建目录的权限  eg:mkdir -m 777 hehe</div><div class="line">-v  显示创建目录的详细信息</div></pre></td></tr></table></figure>
+<h1 id="10-rmdir-删除空目录"><a href="#10-rmdir-删除空目录" class="headerlink" title="10.rmdir 删除空目录"></a>10.rmdir 删除空目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-v  显示执行过程</div><div class="line">-p  若自父母删除后父目录为空则一并删除</div></pre></td></tr></table></figure>
+<h1 id="11-rm-选项-文件…-一个或多个文件或目录"><a href="#11-rm-选项-文件…-一个或多个文件或目录" class="headerlink" title="11.rm [选项] 文件… | 一个或多个文件或目录"></a>11.rm [选项] 文件… | 一个或多个文件或目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-f  忽略不存在的文件，不给出提示</div><div class="line">-i  交互式删除</div><div class="line">-r  将列出的目录及其子目录递归删除</div><div class="line">-v  列出详细信息</div></pre></td></tr></table></figure>
+<h1 id="12-echo：显示内容"><a href="#12-echo：显示内容" class="headerlink" title="12.echo：显示内容"></a>12.echo：显示内容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-n  输出后不换行</div><div class="line">-e  遇到转义字符特殊处理  </div><div class="line">    eg:</div><div class="line">        echo &quot;he\nhe&quot;   显示he\nhe</div><div class="line">        ehco -e &quot;he\nhe&quot;    显示he(换行了)he</div></pre></td></tr></table></figure>
+<h1 id="13-cat-选项-文件-一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件"><a href="#13-cat-选项-文件-一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件" class="headerlink" title="13.cat [选项] [文件]..| 一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件"></a>13.cat [选项] [文件]..| 一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-n  编号文件内容再输出</div><div class="line">-E  在结束行提示$</div></pre></td></tr></table></figure>
+<h1 id="14-tac-反向显示"><a href="#14-tac-反向显示" class="headerlink" title="14.tac | 反向显示"></a>14.tac | 反向显示</h1><h1 id="15-more-按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件"><a href="#15-more-按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件" class="headerlink" title="15.more | 按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件"></a>15.more | 按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+n  从第n行开始显示</div><div class="line">-n  每次查看n行数据</div><div class="line">+/String    搜寻String字符串位置，从其前两行开始查看</div><div class="line">-c  清屏再显示</div><div class="line">-p  换页时清屏</div></pre></td></tr></table></figure>
+<h1 id="16-less-可前后移动地逐屏查看文章内容，在查看前不会加载整个文件"><a href="#16-less-可前后移动地逐屏查看文章内容，在查看前不会加载整个文件" class="headerlink" title="16.less | 可前后移动地逐屏查看文章内容，在查看前不会加载整个文件"></a>16.less | 可前后移动地逐屏查看文章内容，在查看前不会加载整个文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-m  显示类似于more命令的百分比</div><div class="line">-N  显示行号</div><div class="line">/   字符串：向下搜索“字符串”的功能</div><div class="line">?   字符串：向上搜索“字符串”的功能</div><div class="line">n   重复前一个搜索（与 / 或 ? 有关）</div><div class="line">N   反向重复前一个搜索（与 / 或 ? 有关）</div><div class="line">b   向后翻一页</div><div class="line">d   向后翻半页</div></pre></td></tr></table></figure>
+<h1 id="17-nl-选项-…-文件-…-将输出内容自动加上行号"><a href="#17-nl-选项-…-文件-…-将输出内容自动加上行号" class="headerlink" title="17.nl [选项]… [文件]… | 将输出内容自动加上行号"></a>17.nl [选项]… [文件]… | 将输出内容自动加上行号</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-b </div><div class="line">-b a 不论是否有空行，都列出行号（类似 cat -n) </div><div class="line">-b t 空行则不列行号（默认） </div><div class="line">-n 有ln rn rz三个参数，分别为再最左方显示，最右方显示不加0，最右方显示加0</div></pre></td></tr></table></figure>
+<h1 id="18-head-参数-…-文件-…-显示档案开头，默认开头10行"><a href="#18-head-参数-…-文件-…-显示档案开头，默认开头10行" class="headerlink" title="18.head [参数]… [文件]… | 显示档案开头，默认开头10行"></a>18.head [参数]… [文件]… | 显示档案开头，默认开头10行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-v  显示文件名</div><div class="line">-c number   显示前number个字符,若number为负数,则显示除最后number个字符的所有内容</div><div class="line">-number/n (+)number     显示前number行内容，</div><div class="line">-n number   若number为负数，则显示除最后number行数据的所有内容</div></pre></td></tr></table></figure>
+<h1 id="19-tail-必要参数-选择参数-文件-显示文件结尾内容"><a href="#19-tail-必要参数-选择参数-文件-显示文件结尾内容" class="headerlink" title="19.tail [必要参数] [选择参数] [文件] | 显示文件结尾内容"></a>19.tail [必要参数] [选择参数] [文件] | 显示文件结尾内容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-v  显示详细的处理信息</div><div class="line">-q  不显示处理信息</div><div class="line">-num/-n (-)num      显示最后num行内容</div><div class="line">-n +num 从第num行开始显示后面的数据</div><div class="line">-c  显示最后c个字符</div><div class="line">-f  循环读取</div></pre></td></tr></table></figure>
+<h1 id="20-vi-编辑文件"><a href="#20-vi-编辑文件" class="headerlink" title="20.vi 编辑文件"></a>20.vi 编辑文件</h1><p>:w filename 将文章以指定的文件名保存起来<br>:wq 保存并退出<br>:q! 不保存而强制退出<br>命令行模式功能键</p>
+<h2 id="1）插入模式"><a href="#1）插入模式" class="headerlink" title="1）插入模式"></a>1）插入模式</h2><p>按「i」切换进入插入模式「insert mode」，按”i”进入插入模式后是从光标当前位置开始输入文件；<br>按「a」进入插入模式后，是从目前光标所在位置的下一个位置开始输入文字；<br>按「o」进入插入模式后，是插入新的一行，从行首开始输入文字。</p>
+<h2 id="2）从插入模式切换为命令行模式"><a href="#2）从插入模式切换为命令行模式" class="headerlink" title="2）从插入模式切换为命令行模式"></a>2）从插入模式切换为命令行模式</h2><p>  按「ESC」键。</p>
+<h2 id="3）移动光标"><a href="#3）移动光标" class="headerlink" title="3）移动光标"></a>3）移动光标</h2><p>　　vi可以直接用键盘上的光标来上下左右移动，但正规的vi是用小写英文字母「h」、「j」、「k」、「l」，分别控制光标左、下、上、右移一格。<br>　　按「ctrl」+「b」：屏幕往”后”移动一页。<br>　　按「ctrl」+「f」：屏幕往”前”移动一页。<br>　　按「ctrl」+「u」：屏幕往”后”移动半页。<br>　　按「ctrl」+「d」：屏幕往”前”移动半页。<br>　　按数字「0」：移到文章的开头。<br>　　按「G」：移动到文章的最后。<br>　　按「$」：移动到光标所在行的”行尾”。<br>　　按「^」：移动到光标所在行的”行首”<br>　　按「w」：光标跳到下个字的开头<br>　　按「e」：光标跳到下个字的字尾<br>　　按「b」：光标回到上个字的开头<br>　　按「#l」：光标移到该行的第#个位置，如：5l,56l。</p>
+<h2 id="4）删除文字"><a href="#4）删除文字" class="headerlink" title="4）删除文字"></a>4）删除文字</h2><p>　　「x」：每按一次，删除光标所在位置的”后面”一个字符。<br>　　「#x」：例如，「6x」表示删除光标所在位置的”后面”6个字符。<br>　　「X」：大写的X，每按一次，删除光标所在位置的”前面”一个字符。<br>　　「#X」：例如，「20X」表示删除光标所在位置的”前面”20个字符。<br>　　「dd」：删除光标所在行。<br>　　「#dd」：从光标所在行开始删除#行</p>
+<h2 id="5）复制"><a href="#5）复制" class="headerlink" title="5）复制"></a>5）复制</h2><p>　　「yw」：将光标所在之处到字尾的字符复制到缓冲区中。<br>　　「#yw」：复制#个字到缓冲区<br>　　「yy」：复制光标所在行到缓冲区。<br>　　「#yy」：例如，「6yy」表示拷贝从光标所在的该行”往下数”6行文字。<br>　　「p」：将缓冲区内的字符贴到光标所在位置。注意：所有与”y”有关的复制命令都必须与”p”配合才能完成复制与粘贴功能。</p>
+<h2 id="6）替换"><a href="#6）替换" class="headerlink" title="6）替换"></a>6）替换</h2><p>　　「r」：替换光标所在处的字符。<br>　　「R」：替换光标所到之处的字符，直到按下「ESC」键为止。</p>
+<h2 id="7）回复上一次操作"><a href="#7）回复上一次操作" class="headerlink" title="7）回复上一次操作"></a>7）回复上一次操作</h2><p>　　「u」：如果您误执行一个命令，可以马上按下「u」，回到上一个操作。按多次”u”可以执行多次回复。</p>
+<h2 id="8）更改"><a href="#8）更改" class="headerlink" title="8）更改"></a>8）更改</h2><p>　　「cw」：更改光标所在处的字到字尾处<br>　　「c#w」：例如，「c3w」表示更改3个字</p>
+<h2 id="9）跳至指定的行"><a href="#9）跳至指定的行" class="headerlink" title="9）跳至指定的行"></a>9）跳至指定的行</h2><p>　　「ctrl」+「g」列出光标所在行的行号。<br>　　「#G」：例如，「15G」，表示移动光标至文章的第15行行首。</p>
+<h1 id="21-which-可执行文件名称-查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置"><a href="#21-which-可执行文件名称-查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置" class="headerlink" title="21.which 可执行文件名称 | 查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置"></a>21.which 可执行文件名称 | 查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置</h1><h1 id="22-whereis-bmsu-BMS-目录名-f-文件名-定位可执行文件、源代码文件、帮助文件在文件系统中的位置"><a href="#22-whereis-bmsu-BMS-目录名-f-文件名-定位可执行文件、源代码文件、帮助文件在文件系统中的位置" class="headerlink" title="22.whereis [-bmsu] [BMS 目录名 -f ] 文件名| 定位可执行文件、源代码文件、帮助文件在文件系统中的位置"></a>22.whereis [-bmsu] [BMS 目录名 -f ] 文件名| 定位可执行文件、源代码文件、帮助文件在文件系统中的位置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-b   定位可执行文件。</div><div class="line">-m   定位帮助文件。</div><div class="line">-s   定位源代码文件。</div><div class="line">-u   搜索默认路径下除可执行文件、源代码文件、帮助文件以外的其它文件。</div><div class="line">-B   指定搜索可执行文件的路径。</div><div class="line">-M   指定搜索帮助文件的路径。</div><div class="line">-S   指定搜索源代码文件的路径。</div></pre></td></tr></table></figure>
+<h1 id="23-locate-通过搜寻数据库快速搜寻档案"><a href="#23-locate-通过搜寻数据库快速搜寻档案" class="headerlink" title="23.locate | 通过搜寻数据库快速搜寻档案"></a>23.locate | 通过搜寻数据库快速搜寻档案</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-r  使用正规运算式做寻找的条件</div></pre></td></tr></table></figure>
+<h1 id="24-find-find-PATH-option-action-在文件树种查找文件，并作出相应的处理"><a href="#24-find-find-PATH-option-action-在文件树种查找文件，并作出相应的处理" class="headerlink" title="24.find find [PATH] [option] [action] | 在文件树种查找文件，并作出相应的处理"></a>24.find find [PATH] [option] [action] | 在文件树种查找文件，并作出相应的处理</h1><p>选项与参数：</p>
+<h2 id="1-与时间有关的选项：共有-atime-ctime-与-mtime-和-amin-cmin与-mmin，以-mtime-说明"><a href="#1-与时间有关的选项：共有-atime-ctime-与-mtime-和-amin-cmin与-mmin，以-mtime-说明" class="headerlink" title="1). 与时间有关的选项：共有 -atime, -ctime 与 -mtime 和-amin,-cmin与-mmin，以 -mtime 说明"></a>1). 与时间有关的选项：共有 -atime, -ctime 与 -mtime 和-amin,-cmin与-mmin，以 -mtime 说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-mtime n ：n 为数字，意义为在 n 天之前的『一天之内』被更动过内容的档案；</div><div class="line">-mtime +n ：列出在 n 天之前(不含 n 天本身)被更动过内容的档案档名；</div><div class="line">-mtime -n ：列出在 n 天之内(含 n 天本身)被更动过内容的档案档名。</div><div class="line">-newer file ：file 为一个存在的档案，列出比 file 还要新的档案档名</div></pre></td></tr></table></figure>
+<h2 id="2-与使用者或组名有关的参数："><a href="#2-与使用者或组名有关的参数：" class="headerlink" title="2). 与使用者或组名有关的参数："></a>2). 与使用者或组名有关的参数：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-uid n ：n 为数字，这个数字是用户的账号 ID，亦即 UID</div><div class="line">-gid n ：n 为数字，这个数字是组名的 ID，亦即 GID</div><div class="line">-user name ：name 为使用者账号名称！例如 dmtsai</div><div class="line">-group name：name 为组名，例如 users ；</div><div class="line">-nouser ：寻找档案的拥有者不存在 /etc/passwd 的人！</div><div class="line">-nogroup ：寻找档案的拥有群组不存在于 /etc/group 的档案！</div></pre></td></tr></table></figure>
+<h2 id="3-与档案权限及名称有关的参数："><a href="#3-与档案权限及名称有关的参数：" class="headerlink" title="3). 与档案权限及名称有关的参数："></a>3). 与档案权限及名称有关的参数：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-name filename：搜寻文件名为 filename 的档案（可使用通配符）</div><div class="line">-size [+-]SIZE：搜寻比 SIZE 还要大(+)或小(-)的档案。这个 SIZE 的规格有：</div><div class="line">        c: 代表 byte</div><div class="line">        k: 代表 1024bytes。所以，要找比 50KB还要大的档案，就是『 -size +50k 』</div><div class="line">-type TYPE ：搜寻档案的类型为 TYPE 的，类型主要有：</div><div class="line">        一般正规档案 (f)</div><div class="line">        装置档案 (b, c)</div><div class="line">        目录 (d)</div><div class="line">        连结档 (l)</div><div class="line">        socket (s)</div><div class="line">        FIFO (p)</div><div class="line">-perm mode ：搜寻档案权限『刚好等于』 mode的档案，这个mode为类似chmod的属性值，举例来说，-rwsr-xr-x 的属性为4755！</div><div class="line">-perm -mode ：搜寻档案权限『必须要全部囊括 mode 的权限』的档案，举例来说,我们要搜寻-rwxr--r-- 亦即 0744 的档案，使用-perm -0744，当一个档案的权限为 -rwsr-xr-x ，亦即4755 时，也会被列出来，因为 -rwsr-xr-x 的属性已经囊括了 -rwxr--r-- 的属性了。</div><div class="line">-perm +mode ：搜寻档案权限『包含任一 mode 的权限』的档案，举例来说，我们搜寻-rwxr-xr-x ，亦即 -perm +755 时，但一个文件属性为 -rw-------也会被列出来，因为他有 -rw.... 的属性存在！</div></pre></td></tr></table></figure>
+<h1 id="25-grep-‘正则表达式’-文件名-用正则表达式搜索文本，并把匹配的行打印出来"><a href="#25-grep-‘正则表达式’-文件名-用正则表达式搜索文本，并把匹配的行打印出来" class="headerlink" title="25.grep ‘正则表达式’ 文件名 | 用正则表达式搜索文本，并把匹配的行打印出来"></a>25.grep ‘正则表达式’ 文件名 | 用正则表达式搜索文本，并把匹配的行打印出来</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-c  只输出匹配行的计数。</div><div class="line">-I  不区分大小写(只适用于单字符)。</div><div class="line">-l  只显示文件名</div><div class="line">-v  显示不包含匹配文本的所有行。</div><div class="line">-n  显示匹配行数据及其行号</div></pre></td></tr></table></figure>
+<h1 id="26-gzip-cdtv-檔名-压缩、解压缩，源文件都不再存在"><a href="#26-gzip-cdtv-檔名-压缩、解压缩，源文件都不再存在" class="headerlink" title="26.gzip [-cdtv#] 檔名 | 压缩、解压缩，源文件都不再存在"></a>26.gzip [-cdtv#] 檔名 | 压缩、解压缩，源文件都不再存在</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-d  进行解压缩</div><div class="line">-c  将压缩的数据输出到屏幕上</div><div class="line">-v  :显示原档案/压缩文件案的压缩比等信息</div><div class="line">-#  ：压缩等级，-1最快，但压缩比最差，=9最慢，但压缩比最好</div></pre></td></tr></table></figure>
+<h1 id="27-gunzip-解压缩"><a href="#27-gunzip-解压缩" class="headerlink" title="27.gunzip | 解压缩"></a>27.gunzip | 解压缩</h1><h1 id="28-bzip2-压缩、解压缩"><a href="#28-bzip2-压缩、解压缩" class="headerlink" title="28.bzip2 | 压缩、解压缩"></a>28.bzip2 | 压缩、解压缩</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-d  :解压</div><div class="line">-z  :压缩</div><div class="line">-k  :保留源文件</div><div class="line">-c ：将压缩的过程产生的数据输出到屏幕上！</div><div class="line">-v ：可以显示出原档案/压缩文件案的压缩比等信息；</div><div class="line">-# ：与 gzip 同样的，都是在计算压缩比的参数， -9 最佳， -1 最快！</div></pre></td></tr></table></figure>
+<h1 id="29-bzcat-读取数据而无需解压"><a href="#29-bzcat-读取数据而无需解压" class="headerlink" title="29.bzcat 读取数据而无需解压"></a>29.bzcat 读取数据而无需解压</h1><h1 id="30-tar-主选项-辅选项-文件或者目录-多个目录或档案打包、压缩成一个大档案"><a href="#30-tar-主选项-辅选项-文件或者目录-多个目录或档案打包、压缩成一个大档案" class="headerlink" title="30.tar [主选项+辅选项] 文件或者目录 | 多个目录或档案打包、压缩成一个大档案"></a>30.tar [主选项+辅选项] 文件或者目录 | 多个目录或档案打包、压缩成一个大档案</h1><p>主选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-c  建立打包档案，可搭配 -v 来察看过程中被打包的档名(filename)</div><div class="line">-t  察看打包档案的内容含有哪些档名，重点在察看『档名』就是了；</div><div class="line">-x  解打包或解压缩的功能，可以搭配 -C (大写) 在特定目录解开</div></pre></td></tr></table></figure></p>
+<p>辅选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-j  透过 bzip2 的支持进行压缩/解压缩：此时档名最好为 \*.tar.bz2</div><div class="line">-z  透过 gzip 的支持进行压缩/解压缩：此时档名最好为 \*.tar.gz</div><div class="line">-v  在压缩/解压缩的过程中，将正在处理的文件名显示出来！</div><div class="line">-f filename -f 后面要立刻接要被处理的档名！</div><div class="line">-C 目录   这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</div><div class="line">--exclude FILE：在压缩打包过程中忽略某文件 eg: tar --exclude /home/zenghao -zcvf myfile.tar.gz /home/* /etc</div><div class="line">-p  保留备份数据的原本权限与属性，常用于备份(-c)重要的配置文件</div><div class="line">-P(大写）  保留绝对路径，亦即允许备份数据中含有根目录存在之意；</div></pre></td></tr></table></figure></p>
+<p>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">压 缩：tar -jcvf filename.tar.bz2 要被压缩的档案或目录名称</div><div class="line">查 询：tar -jtvf filename.tar.bz2</div><div class="line">解压缩：tar -jxvf filename.tar.bz2 -C 欲解压缩的目录</div></pre></td></tr></table></figure></p>
+<h1 id="31-exit-退出当前shell"><a href="#31-exit-退出当前shell" class="headerlink" title="31.exit 退出当前shell"></a>31.exit 退出当前shell</h1><h1 id="32-logout-退出登录shell"><a href="#32-logout-退出登录shell" class="headerlink" title="32.logout 退出登录shell"></a>32.logout 退出登录shell</h1><h1 id="33-shutdown-h-now"><a href="#33-shutdown-h-now" class="headerlink" title="33.shutdown -h now"></a>33.shutdown -h now</h1><h1 id="34-users-显示当前登录系统地用户"><a href="#34-users-显示当前登录系统地用户" class="headerlink" title="34.users 显示当前登录系统地用户"></a>34.users 显示当前登录系统地用户</h1><h1 id="35-who-登录在本机的用户与来源"><a href="#35-who-登录在本机的用户与来源" class="headerlink" title="35.who 登录在本机的用户与来源"></a>35.who 登录在本机的用户与来源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-H或--heading 　显示各栏位的标题信息列。</div></pre></td></tr></table></figure>
+<h1 id="36-w-登录在本机的用户及其运行的程序"><a href="#36-w-登录在本机的用户及其运行的程序" class="headerlink" title="36.w 登录在本机的用户及其运行的程序"></a>36.w 登录在本机的用户及其运行的程序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-s 　使用简洁格式列表，不显示用户登入时间，终端机阶段作业和程序所耗费的CPU时间。</div><div class="line">-h 　不显示各栏位的标题信息列。</div></pre></td></tr></table></figure>
+<h1 id="37-write-给当前联机的用户发消息"><a href="#37-write-给当前联机的用户发消息" class="headerlink" title="37.write 给当前联机的用户发消息"></a>37.write 给当前联机的用户发消息</h1><h1 id="38-wall-给所有登录再本机的用户发消息"><a href="#38-wall-给所有登录再本机的用户发消息" class="headerlink" title="38.wall 给所有登录再本机的用户发消息"></a>38.wall 给所有登录再本机的用户发消息</h1><h1 id="39-last-查看用户的登陆日志"><a href="#39-last-查看用户的登陆日志" class="headerlink" title="39.last 查看用户的登陆日志"></a>39.last 查看用户的登陆日志</h1><h1 id="40-lastlog-查看每个用户最后的登陆时间"><a href="#40-lastlog-查看每个用户最后的登陆时间" class="headerlink" title="40.lastlog 查看每个用户最后的登陆时间"></a>40.lastlog 查看每个用户最后的登陆时间</h1><h1 id="41-finger-选项-使用者-用户-主机-查看用户信息"><a href="#41-finger-选项-使用者-用户-主机-查看用户信息" class="headerlink" title="41.finger [选项] [使用者] [用户@主机] | 查看用户信息"></a>41.finger [选项] [使用者] [用户@主机] | 查看用户信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-s 显示用户的注册名、实际姓名、终端名称、写状态、停滞时间、登录时间等信息</div><div class="line">-l 除了用-s选项显示的信息外，还显示用户主目录、登录shell、邮件状态等信息，以及用户主目录下的.plan、.project和.forward文件的内容。</div><div class="line">-p 除了不显示.plan文件和.project文件以外，与-l选项相同</div></pre></td></tr></table></figure>
+<h1 id="42-hostname-查看主机名"><a href="#42-hostname-查看主机名" class="headerlink" title="42.hostname 查看主机名"></a>42.hostname 查看主机名</h1><h1 id="43-alias-ii-“ls-l”-添加别名"><a href="#43-alias-ii-“ls-l”-添加别名" class="headerlink" title="43.alias ii = “ls -l” | 添加别名"></a>43.alias ii = “ls -l” | 添加别名</h1><h1 id="44-unalias-ii-清除别名"><a href="#44-unalias-ii-清除别名" class="headerlink" title="44.unalias ii | 清除别名"></a>44.unalias ii | 清除别名</h1><h1 id="45-useradd-u-UID-g-初始群组-G-次要群组-c-说明栏-d-家目录绝对路径-s-shell-使用者账号名-新增用户"><a href="#45-useradd-u-UID-g-初始群组-G-次要群组-c-说明栏-d-家目录绝对路径-s-shell-使用者账号名-新增用户" class="headerlink" title="45.useradd [-u UID] [-g 初始群组] [-G 次要群组] [-c 说明栏] [-d 家目录绝对路径] [-s shell] 使用者账号名 | 新增用户"></a>45.useradd [-u UID] [-g 初始群组] [-G 次要群组] [-c 说明栏] [-d 家目录绝对路径] [-s shell] 使用者账号名 | 新增用户</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-M  不建立用户家目录！(系统账号默认值)</div><div class="line">-m  建立用户家目录！(一般账号默认值)</div><div class="line">-r  建立一个系统的账号，这个账号的 UID 会有限制 </div><div class="line">-e  账号失效日期，格式为『YYYY-MM-DD』</div><div class="line">-D  查看useradd的各项默认值</div></pre></td></tr></table></figure>
+<h1 id="46-passwd-修改密码"><a href="#46-passwd-修改密码" class="headerlink" title="46.passwd | 修改密码"></a>46.passwd | 修改密码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-l  使密码失效</div><div class="line">-u  与-l相对，用户解锁</div><div class="line">-S  列出登陆用户passwd文件内的相关参数</div><div class="line">-n  后面接天数，shadow 的第 4 字段，多久不可修改密码天数</div><div class="line">-x  后面接天数，shadow 的第 5 字段，多久内必须要更动密码</div><div class="line">-w  后面接天数，shadow 的第 6 字段，密码过期前的警告天数</div><div class="line">-i  后面接『日期』，shadow 的第 7 字段，密码失效日期</div><div class="line">使用管道刘设置密码：echo &quot;zeng&quot; | passwd --stdin zenghao</div></pre></td></tr></table></figure>
+<h1 id="47-userdel-删除用户"><a href="#47-userdel-删除用户" class="headerlink" title="47.userdel 删除用户"></a>47.userdel 删除用户</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-r  用户文件一并删除</div></pre></td></tr></table></figure>
+<h1 id="48-chage-ldEImMW-账号名-修改用户密码的相关属性"><a href="#48-chage-ldEImMW-账号名-修改用户密码的相关属性" class="headerlink" title="48.chage [-ldEImMW] 账号名 | 修改用户密码的相关属性"></a>48.chage [-ldEImMW] 账号名 | 修改用户密码的相关属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-l  列出该账号的详细密码参数；</div><div class="line">-d  后面接日期，修改 shadow 第三字段(最近一次更改密码的日期)，格式YYYY-MM-DD</div><div class="line">-E  后面接日期，修改 shadow 第八字段(账号失效日)，格式 YYYY-MM-DD</div><div class="line">-I  后面接天数，修改 shadow 第七字段(密码失效日期)</div><div class="line">-m  后面接天数，修改 shadow 第四字段(密码最短保留天数)</div><div class="line">-M  后面接天数，修改 shadow 第五字段(密码多久需要进行变更)</div><div class="line">-W  后面接天数，修改 shadow 第六字段(密码过期前警告日期)</div></pre></td></tr></table></figure>
+<h1 id="49-usermod-cdegGlsuLU-username-修改用户的相关属性"><a href="#49-usermod-cdegGlsuLU-username-修改用户的相关属性" class="headerlink" title="49.usermod [-cdegGlsuLU] username | 修改用户的相关属性"></a>49.usermod [-cdegGlsuLU] username | 修改用户的相关属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-c  后面接账号的说明，即 /etc/passwd 第五栏的说明栏，可以加入一些账号的说明。</div><div class="line">-d  后面接账号的家目录，即修改 /etc/passwd 的第六栏；</div><div class="line">-e  后面接日期，格式是 YYYY-MM-DD 也就是在 /etc/shadow 内的第八个字段数据啦！</div><div class="line">-f  后面接天数为 shadow 的第七字段。</div><div class="line">-g  后面接初始群组，修改 /etc/passwd 的第四个字段，亦即是GID的字段！</div><div class="line">-G  后面接次要群组，修改这个使用者能够支持的群组</div><div class="line">-l  后面接账号名称。亦即是修改账号名称， /etc/passwd 的第一栏！</div><div class="line">-s  后面接 Shell 的实际档案，例如 /bin/bash 或 /bin/csh 等等。</div><div class="line">-u  后面接 UID 数字啦！即 /etc/passwd 第三栏的资料；</div><div class="line">-L  冻结密码</div><div class="line">-U  解冻密码</div></pre></td></tr></table></figure>
+<h1 id="50-id-username-查看用户相关的id信息，还可以用来判断用户是否存在"><a href="#50-id-username-查看用户相关的id信息，还可以用来判断用户是否存在" class="headerlink" title="50.id [username] | 查看用户相关的id信息，还可以用来判断用户是否存在"></a>50.id [username] | 查看用户相关的id信息，还可以用来判断用户是否存在</h1><h1 id="51-groups-查看登陆用户支持的群组，-第一个输出的群组为有效群组"><a href="#51-groups-查看登陆用户支持的群组，-第一个输出的群组为有效群组" class="headerlink" title="51.groups 查看登陆用户支持的群组， 第一个输出的群组为有效群组"></a>51.groups 查看登陆用户支持的群组， 第一个输出的群组为有效群组</h1><h1 id="52-newgrp-切换有效群组"><a href="#52-newgrp-切换有效群组" class="headerlink" title="52.newgrp 切换有效群组"></a>52.newgrp 切换有效群组</h1><h1 id="53-groupadd-g-gid-组名-添加组"><a href="#53-groupadd-g-gid-组名-添加组" class="headerlink" title="53.groupadd [-g gid] 组名 | 添加组"></a>53.groupadd [-g gid] 组名 | 添加组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-g  设定添加组的特定组id</div></pre></td></tr></table></figure>
+<h1 id="54-groupmod-g-gid-n-group-name-群组名-修改组信息"><a href="#54-groupmod-g-gid-n-group-name-群组名-修改组信息" class="headerlink" title="54.groupmod [-g gid] [-n group_name] 群组名 | 修改组信息"></a>54.groupmod [-g gid] [-n group_name] 群组名 | 修改组信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-g  修改既有的 GID 数字</div><div class="line">-n  修改既有的组名</div></pre></td></tr></table></figure>
+<h1 id="55-groupdel-groupname-删除群组"><a href="#55-groupdel-groupname-删除群组" class="headerlink" title="55.groupdel [groupname] | 删除群组"></a>55.groupdel [groupname] | 删除群组</h1><h1 id="56-gpasswd-群组管理员功能"><a href="#56-gpasswd-群组管理员功能" class="headerlink" title="56.gpasswd | 群组管理员功能"></a>56.gpasswd | 群组管理员功能</h1><p>root管理员动作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-gpasswd groupname 设定密码</div><div class="line">-gpasswd [-A user1,...] [-M user3,...] groupname</div><div class="line">    -A  将 groupname 的主控权交由后面的使用者管理(该群组的管理员)</div><div class="line">    -M  将某些账号加入这个群组当中</div><div class="line">-gpasswd [-r] groupname</div><div class="line">    -r  将 groupname 的密码移除</div></pre></td></tr></table></figure></p>
+<p>群组管理员动作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- gpasswd [-ad] user groupname </div><div class="line">    -a  将某位使用者加入到 groupname 这个群组当中</div><div class="line">    -d  将某位使用者移除出 groupname 这个群组当中</div></pre></td></tr></table></figure></p>
+<h1 id="57-chfn修改个人信息"><a href="#57-chfn修改个人信息" class="headerlink" title="57.chfn修改个人信息"></a>57.chfn修改个人信息</h1><h1 id="58-mount-t-vfstype-o-options-device-dir"><a href="#58-mount-t-vfstype-o-options-device-dir" class="headerlink" title="58.mount [-t vfstype] [-o options] device dir"></a>58.mount [-t vfstype] [-o options] device dir</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-ro 采用只读方式挂接设备</div><div class="line">-rw 采用读写方式挂接设备</div><div class="line">eg:mount /home/mydisk.iso /tmp/mnt 通过mnt访问mydisk内的内容</div></pre></td></tr></table></figure>
+<h1 id="59-umount-取消挂载"><a href="#59-umount-取消挂载" class="headerlink" title="59.umount 取消挂载"></a>59.umount 取消挂载</h1><h1 id="60-cut"><a href="#60-cut" class="headerlink" title="60.cut"></a>60.cut</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-b ：以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志。</div><div class="line">-c ：以字符为单位进行分割。</div><div class="line">-d ：自定义分隔符，默认为制表符。</div><div class="line">-f  ：与-d一起使用，指定显示哪个区域。</div></pre></td></tr></table></figure>
+<h1 id="61-sort"><a href="#61-sort" class="headerlink" title="61.sort"></a>61.sort</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-n   依照数值的大小排序。</div><div class="line">-o&lt;输出文件&gt;   将排序后的结果存入指定的文件。</div><div class="line">-r   以相反的顺序来排序。</div><div class="line">-t&lt;分隔字符&gt;   指定排序时所用的栏位分隔字符。</div><div class="line">-k  选择以哪个区间进行排序。</div></pre></td></tr></table></figure>
+<h1 id="62-wc-统计指定文件中的字节数、字数、行数-并将统计结果显示输出"><a href="#62-wc-统计指定文件中的字节数、字数、行数-并将统计结果显示输出" class="headerlink" title="62.wc 统计指定文件中的字节数、字数、行数, 并将统计结果显示输出"></a>62.wc 统计指定文件中的字节数、字数、行数, 并将统计结果显示输出</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-l filename 报告行数</div><div class="line">-c filename 报告字节数</div><div class="line">-m filename 报告字符数</div><div class="line">-w filename 报告单词数</div></pre></td></tr></table></figure>
+<h1 id="63-uniq-去除文件中相邻的重复行"><a href="#63-uniq-去除文件中相邻的重复行" class="headerlink" title="63.uniq 去除文件中相邻的重复行"></a>63.uniq 去除文件中相邻的重复行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">清空/新建文件，将内容重定向输入进去 </div><div class="line">&amp;&gt; 正确、错误都重定向过去</div></pre></td></tr></table></figure>
+<h1 id="64-set-显示环境变量和普通变量"><a href="#64-set-显示环境变量和普通变量" class="headerlink" title="64.set 显示环境变量和普通变量"></a>64.set 显示环境变量和普通变量</h1><h1 id="65-env-显示环境变量"><a href="#65-env-显示环境变量" class="headerlink" title="65.env 显示环境变量"></a>65.env 显示环境变量</h1><h1 id="66-export-把普通变量变成环境变量"><a href="#66-export-把普通变量变成环境变量" class="headerlink" title="66.export 把普通变量变成环境变量"></a>66.export 把普通变量变成环境变量</h1><h1 id="67-unset-删除一个环境变量"><a href="#67-unset-删除一个环境变量" class="headerlink" title="67.unset 删除一个环境变量"></a>67.unset 删除一个环境变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aaa()&#123;&#125; 定义函数</div></pre></td></tr></table></figure>
+<h1 id="68-read"><a href="#68-read" class="headerlink" title="68.read"></a>68.read</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-p  接提示字符</div><div class="line">-t  接等待的秒数</div></pre></td></tr></table></figure>
+<h1 id="69-declare、typeset"><a href="#69-declare、typeset" class="headerlink" title="69.declare、typeset"></a>69.declare、typeset</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-i 声明为整数</div><div class="line">-a 声明为数组</div><div class="line">-f 声明为函数</div><div class="line">-r 声明为只读</div></pre></td></tr></table></figure>
+<h1 id="70-ulimit-限制使用者的某些系统资源"><a href="#70-ulimit-限制使用者的某些系统资源" class="headerlink" title="70.ulimit 限制使用者的某些系统资源"></a>70.ulimit 限制使用者的某些系统资源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-f  此 shell 可以建立的最大档案容量 (一般可能设定为 2GB)单位为 Kbytes eg: ulimit -f 1024 限制使用者仅能建立 1MBytes 以下的容量的档案</div></pre></td></tr></table></figure>
+<h1 id="71-df-选项-文件-显示指定磁盘文件的可用空间-如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示"><a href="#71-df-选项-文件-显示指定磁盘文件的可用空间-如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示" class="headerlink" title="71.df [选项] [文件] | 显示指定磁盘文件的可用空间,如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示"></a>71.df [选项] [文件] | 显示指定磁盘文件的可用空间,如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-a  显示全部文件系统</div><div class="line">-h  文件大小友好显示</div><div class="line">-l  只显示本地文件系统</div><div class="line">-i  显示inode信息</div><div class="line">-T  显示文件系统类型</div></pre></td></tr></table></figure>
+<h1 id="72-du-选项-文件-显示每个文件和目录的磁盘使用空间"><a href="#72-du-选项-文件-显示每个文件和目录的磁盘使用空间" class="headerlink" title="72.du [选项] [文件] | 显示每个文件和目录的磁盘使用空间"></a>72.du [选项] [文件] | 显示每个文件和目录的磁盘使用空间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-h  方便阅读的方式</div><div class="line">-s  只显示总和的大小</div></pre></td></tr></table></figure>
+<h1 id="73-ln-参数-源文件或目录-目标文件或目录-某一个文件在另外一个位置建立一个同步的链接"><a href="#73-ln-参数-源文件或目录-目标文件或目录-某一个文件在另外一个位置建立一个同步的链接" class="headerlink" title="73.ln [参数] [源文件或目录] [目标文件或目录] | 某一个文件在另外一个位置建立一个同步的链接"></a>73.ln [参数] [源文件或目录] [目标文件或目录] | 某一个文件在另外一个位置建立一个同步的链接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-s  建立软连接   </div><div class="line">-v  显示详细的处理过程</div></pre></td></tr></table></figure>
+<h1 id="74-diff-参数-文件1或目录1-文件2或目录2-比较单个文件或者目录内容"><a href="#74-diff-参数-文件1或目录1-文件2或目录2-比较单个文件或者目录内容" class="headerlink" title="74.diff [参数] [文件1或目录1] [文件2或目录2] | 比较单个文件或者目录内容"></a>74.diff [参数] [文件1或目录1] [文件2或目录2] | 比较单个文件或者目录内容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-b 　不检查空格字符的不同。</div><div class="line">-B 　不检查空白行。</div><div class="line">-i  不检查大小写</div><div class="line">-q  仅显示差异而不显示详细信息</div><div class="line">eg: diff a b &gt; parch.log 比较两个文件的不同并产生补丁</div></pre></td></tr></table></figure>
+<h1 id="75-date-参数-…-格式-显示或设定系统的日期与时间"><a href="#75-date-参数-…-格式-显示或设定系统的日期与时间" class="headerlink" title="75.date [参数]… [+格式] | 显示或设定系统的日期与时间"></a>75.date [参数]… [+格式] | 显示或设定系统的日期与时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">%H 小时(以00-23来表示)。 </div><div class="line">%M 分钟(以00-59来表示)。 </div><div class="line">%P AM或PM。</div><div class="line">%D 日期(含年月日)</div><div class="line">%U 该年中的周数。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">date -s “2015-10-17 01:01:01″ //时间设定</div><div class="line">date +%Y%m%d         //显示前天年月日</div><div class="line">date +%Y%m%d --date=&quot;+1 day/month/year&quot;  //显示前一天/月/年的日期</div><div class="line">date +%Y%m%d --date=&quot;-1 day/month/year&quot;  //显示后一天/月/年的日期</div><div class="line">date -d &apos;2 weeks&apos; 2周后的日期</div></pre></td></tr></table></figure>
+<h1 id="76-cal-参数-月份-年份-查看日历"><a href="#76-cal-参数-月份-年份-查看日历" class="headerlink" title="76.cal [参数] 月份] [年份] | 查看日历"></a>76.cal [参数] 月份] [年份] | 查看日历</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-1  显示当月的月历</div><div class="line">-3  显示前、当、后一个月的日历</div><div class="line">-m  显示星期一为一个星期的第一天</div><div class="line">-s  （默认）星期天为第一天</div><div class="line">-j  显示当月是一年中的第几天的日历</div><div class="line">-y  显示当前年份的日历</div></pre></td></tr></table></figure>
+<h1 id="77-ps-列出当前进程的快照"><a href="#77-ps-列出当前进程的快照" class="headerlink" title="77.ps | 列出当前进程的快照"></a>77.ps | 列出当前进程的快照</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">a   显示所有的进程</div><div class="line">-a  显示同一终端下的所有程序</div><div class="line">e   显示环境变量</div><div class="line">f   显示进程间的关系</div><div class="line">-H  显示树状结构</div><div class="line">r   显示当前终端的程序</div><div class="line">T   显示当前终端的所有程序</div><div class="line">-au 显示更详细的信息</div><div class="line">-aux    显示所有包含其他使用者的行程 </div><div class="line">-u  指定用户的所有进程</div></pre></td></tr></table></figure>
+<h1 id="78-top-参数-显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等"><a href="#78-top-参数-显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等" class="headerlink" title="78.top [参数] | 显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等"></a>78.top [参数] | 显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等</h1><h1 id="79-kill-参数-进程号-杀死进程"><a href="#79-kill-参数-进程号-杀死进程" class="headerlink" title="79.kill [参数] [进程号] | 杀死进程"></a>79.kill [参数] [进程号] | 杀死进程</h1><h1 id="80-free-参数-显示Linux系统中空闲的、已用的物理内存及swap内存-及被内核使用的buffer"><a href="#80-free-参数-显示Linux系统中空闲的、已用的物理内存及swap内存-及被内核使用的buffer" class="headerlink" title="80.free [参数] | 显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer"></a>80.free [参数] | 显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer</h1><h1 id="81-vmstat-对操作系统的虚拟内存、进程、CPU活动进行监控"><a href="#81-vmstat-对操作系统的虚拟内存、进程、CPU活动进行监控" class="headerlink" title="81.vmstat | 对操作系统的虚拟内存、进程、CPU活动进行监控"></a>81.vmstat | 对操作系统的虚拟内存、进程、CPU活动进行监控</h1><h1 id="82-iostat-参数-时间t-次数n-每隔t时间刷新一次，最多刷新n次）-对系统的磁盘操作活动进行监视-汇报磁盘活动统计情况，同时也会汇报出CPU使用情况"><a href="#82-iostat-参数-时间t-次数n-每隔t时间刷新一次，最多刷新n次）-对系统的磁盘操作活动进行监视-汇报磁盘活动统计情况，同时也会汇报出CPU使用情况" class="headerlink" title="82.iostat [参数] [时间t] [次数n](每隔t时间刷新一次，最多刷新n次）| 对系统的磁盘操作活动进行监视,汇报磁盘活动统计情况，同时也会汇报出CPU使用情况"></a>82.iostat [参数] [时间t] [次数n](每隔t时间刷新一次，最多刷新n次）| 对系统的磁盘操作活动进行监视,汇报磁盘活动统计情况，同时也会汇报出CPU使用情况</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-p[磁盘] 显示磁盘和分区的情况</div></pre></td></tr></table></figure>
+<h1 id="83-watch-参数-命令-重复执行某一命令以观察变化"><a href="#83-watch-参数-命令-重复执行某一命令以观察变化" class="headerlink" title="83.watch [参数] [命令] |重复执行某一命令以观察变化"></a>83.watch [参数] [命令] |重复执行某一命令以观察变化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-n  时隔多少秒刷新</div><div class="line">-d  高亮显示动态变化</div></pre></td></tr></table></figure>
+<h1 id="84-at-参数-时间-在一个指定的时间执行一个指定任务，只能执行一次"><a href="#84-at-参数-时间-在一个指定的时间执行一个指定任务，只能执行一次" class="headerlink" title="84.at [参数] [时间] | 在一个指定的时间执行一个指定任务，只能执行一次"></a>84.at [参数] [时间] | 在一个指定的时间执行一个指定任务，只能执行一次</h1><p>HH:MM[am|pm] + number [minutes|hours|days|weeks] 强制在某年某月某日的某时刻进行该项任务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">atq 查看系统未执行的任务</div><div class="line">atrm n 删除编号为n的任务</div><div class="line">at -c n 显示编号为n的任务的内容</div></pre></td></tr></table></figure></p>
+<h1 id="85-crontab-定时任务调度"><a href="#85-crontab-定时任务调度" class="headerlink" title="85.crontab | 定时任务调度"></a>85.crontab | 定时任务调度</h1><p>file    载入crontab<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-e  编辑某个用户的crontab文件内容</div><div class="line">-l  显示某个用户的crontab文件内容</div><div class="line">-r  删除某个用户的crontab文件</div></pre></td></tr></table></figure></p>
+<h1 id="86-ifconfig-网络设备-参数-查看和配置网络设备"><a href="#86-ifconfig-网络设备-参数-查看和配置网络设备" class="headerlink" title="86.ifconfig [网络设备] [参数] | 查看和配置网络设备"></a>86.ifconfig [网络设备] [参数] | 查看和配置网络设备</h1><h1 id="87-route-显示和操作IP路由表"><a href="#87-route-显示和操作IP路由表" class="headerlink" title="87.route | 显示和操作IP路由表"></a>87.route | 显示和操作IP路由表</h1><h1 id="88-ping-参数-主机名或IP地址-测试与目标主机的连通性"><a href="#88-ping-参数-主机名或IP地址-测试与目标主机的连通性" class="headerlink" title="88.ping [参数] [主机名或IP地址] | 测试与目标主机的连通性"></a>88.ping [参数] [主机名或IP地址] | 测试与目标主机的连通性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-q  只显示最后的结果</div></pre></td></tr></table></figure>
+<h1 id="89-netstat-显示与IP、TCP、UDP和ICMP协议相关的统计数据"><a href="#89-netstat-显示与IP、TCP、UDP和ICMP协议相关的统计数据" class="headerlink" title="89.netstat | 显示与IP、TCP、UDP和ICMP协议相关的统计数据"></a>89.netstat | 显示与IP、TCP、UDP和ICMP协议相关的统计数据</h1><h1 id="90-telnet-参数-主机-用于远程登录，采用明文传送报文，安全性不好"><a href="#90-telnet-参数-主机-用于远程登录，采用明文传送报文，安全性不好" class="headerlink" title="90.telnet [参数] [主机] | 用于远程登录，采用明文传送报文，安全性不好"></a>90.telnet [参数] [主机] | 用于远程登录，采用明文传送报文，安全性不好</h1><h1 id="91-rcp-参数-源文件-目标文件-远程文件拷贝"><a href="#91-rcp-参数-源文件-目标文件-远程文件拷贝" class="headerlink" title="91.rcp [参数] [源文件] [目标文件] | 远程文件拷贝"></a>91.rcp [参数] [源文件] [目标文件] | 远程文件拷贝</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-r  递归复制</div><div class="line">-p  保留源文件的属性</div><div class="line">usage: rcp –r remote_hostname:remote_dir local_dir</div></pre></td></tr></table></figure>
+<h1 id="92-wget-参数-URL地址-直接从网络上下载文件"><a href="#92-wget-参数-URL地址-直接从网络上下载文件" class="headerlink" title="92.wget [参数] [URL地址] | 直接从网络上下载文件"></a>92.wget [参数] [URL地址] | 直接从网络上下载文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-o FILE 把记录写到FILE文件中    eg : wget -O a.txt URL</div><div class="line">wget --limit-rate=300k URL  限速下载</div></pre></td></tr></table></figure>
+<h1 id="93-awk"><a href="#93-awk" class="headerlink" title="93.awk"></a>93.awk</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-F 分隔符  以分隔符分隔内容</div><div class="line">&#123;&#125;  要执行的脚本内容 eg:cat /etc/passwd |awk  -F &apos;:&apos;  &apos;&#123;print $1&quot;\t&quot;$7&#125;&apos;</div></pre></td></tr></table></figure>
+<h1 id="94-sed-对数据行进行替换、删除、新增、选取等操作"><a href="#94-sed-对数据行进行替换、删除、新增、选取等操作" class="headerlink" title="94.sed 对数据行进行替换、删除、新增、选取等操作"></a>94.sed 对数据行进行替换、删除、新增、选取等操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a   新增，在新的下一行出现</div><div class="line">c   取代，取代 n1,n2 之间的行 eg: sed &apos;1,2c Hi&apos; ab</div><div class="line">d   删除</div><div class="line">i   插入，在新的上一行出现</div></pre></td></tr></table></figure>
+<h1 id="95-paste-合并文件，需确保合并的两文件行数相同"><a href="#95-paste-合并文件，需确保合并的两文件行数相同" class="headerlink" title="95.paste 合并文件，需确保合并的两文件行数相同"></a>95.paste 合并文件，需确保合并的两文件行数相同</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-d  指定不同于空格或tab键的域分隔符</div><div class="line">-s  按行合并，单独一个文件为一行</div></pre></td></tr></table></figure>
+<h1 id="96-su-参数-user-切换登陆"><a href="#96-su-参数-user-切换登陆" class="headerlink" title="96.su [参数] user | 切换登陆"></a>96.su [参数] user | 切换登陆</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-l  切换时连同环境变量、工作目录一起改变</div><div class="line">-c command  执行command变回原来的使用者</div></pre></td></tr></table></figure>
+<h1 id="97-sudo-以特定用户的权限执行特定命令"><a href="#97-sudo-以特定用户的权限执行特定命令" class="headerlink" title="97.sudo | 以特定用户的权限执行特定命令"></a>97.sudo | 以特定用户的权限执行特定命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-l  列出当前用户可执行的命令</div><div class="line">-u username#uid 以指定用户执行命令</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/26/Spark快速大数据分析/" rel="next" title="Spark快速大数据分析">
+                <i class="fa fa-chevron-left"></i> Spark快速大数据分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/27/100-linux-commands/"
+     data-title="100个Linux常用命令总结"
+     data-content=""
+     data-url="http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/27/100-linux-commands/"
+           data-title="100个Linux常用命令总结" data-url="http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="参差行者" />
+          <p class="site-author-name" itemprop="name">参差行者</p>
+          <p class="site-description motion-element" itemprop="description">参差多态乃幸福的本源。我走遍万水千山，只为寻找最美的求婚地点。</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-ls-选项-目录名-列出相关目录下的所有目录和文件"><span class="nav-number">1.</span> <span class="nav-text">1.ls [选项] [目录名 | 列出相关目录下的所有目录和文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-mv-选项-源文件或目录-目录或多个源文件-移动或重命名文件"><span class="nav-number">2.</span> <span class="nav-text">2.mv [选项] 源文件或目录 目录或多个源文件 | 移动或重命名文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-cp-选项-源文件或目录-目录或多个源文件-将源文件复制至目标文件，或将多个源文件复制至目标目录。"><span class="nav-number">3.</span> <span class="nav-text">3.cp [选项] 源文件或目录 目录或多个源文件 | 将源文件复制至目标文件，或将多个源文件复制至目标目录。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-scp-参数-原路径-目标路径-在Linux服务器之间复制文件和目录"><span class="nav-number">4.</span> <span class="nav-text">4.scp [参数] [原路径] [目标路径] | 在Linux服务器之间复制文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-复制文件："><span class="nav-number">4.1.</span> <span class="nav-text">(1) 复制文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-复制目录："><span class="nav-number">4.2.</span> <span class="nav-text">(2) 复制目录：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-rm-选项-文件-删除文件"><span class="nav-number">5.</span> <span class="nav-text">5.rm [选项] 文件 | 删除文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-touch-选项-文件-创建空文件或更新文件时间"><span class="nav-number">6.</span> <span class="nav-text">6.touch [选项] 文件 | 创建空文件或更新文件时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-pwd-查看当前所在路径"><span class="nav-number">7.</span> <span class="nav-text">7.pwd 查看当前所在路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-cd-改变当前目录"><span class="nav-number">8.</span> <span class="nav-text">8.cd 改变当前目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-mkdir-选项-目录…-创建新目录"><span class="nav-number">9.</span> <span class="nav-text">9.mkdir [选项] 目录… | 创建新目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-rmdir-删除空目录"><span class="nav-number">10.</span> <span class="nav-text">10.rmdir 删除空目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-rm-选项-文件…-一个或多个文件或目录"><span class="nav-number">11.</span> <span class="nav-text">11.rm [选项] 文件… | 一个或多个文件或目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-echo：显示内容"><span class="nav-number">12.</span> <span class="nav-text">12.echo：显示内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-cat-选项-文件-一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件"><span class="nav-number">13.</span> <span class="nav-text">13.cat [选项] [文件]..| 一次显示整个文件或从键盘创建一个文件或将几个文件合并成一个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-tac-反向显示"><span class="nav-number">14.</span> <span class="nav-text">14.tac | 反向显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-more-按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件"><span class="nav-number">15.</span> <span class="nav-text">15.more | 按页查看文章内容，从前向后读取文件，因此在启动时就加载整个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-less-可前后移动地逐屏查看文章内容，在查看前不会加载整个文件"><span class="nav-number">16.</span> <span class="nav-text">16.less | 可前后移动地逐屏查看文章内容，在查看前不会加载整个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-nl-选项-…-文件-…-将输出内容自动加上行号"><span class="nav-number">17.</span> <span class="nav-text">17.nl [选项]… [文件]… | 将输出内容自动加上行号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-head-参数-…-文件-…-显示档案开头，默认开头10行"><span class="nav-number">18.</span> <span class="nav-text">18.head [参数]… [文件]… | 显示档案开头，默认开头10行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-tail-必要参数-选择参数-文件-显示文件结尾内容"><span class="nav-number">19.</span> <span class="nav-text">19.tail [必要参数] [选择参数] [文件] | 显示文件结尾内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-vi-编辑文件"><span class="nav-number">20.</span> <span class="nav-text">20.vi 编辑文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）插入模式"><span class="nav-number">20.1.</span> <span class="nav-text">1）插入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）从插入模式切换为命令行模式"><span class="nav-number">20.2.</span> <span class="nav-text">2）从插入模式切换为命令行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）移动光标"><span class="nav-number">20.3.</span> <span class="nav-text">3）移动光标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4）删除文字"><span class="nav-number">20.4.</span> <span class="nav-text">4）删除文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5）复制"><span class="nav-number">20.5.</span> <span class="nav-text">5）复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6）替换"><span class="nav-number">20.6.</span> <span class="nav-text">6）替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7）回复上一次操作"><span class="nav-number">20.7.</span> <span class="nav-text">7）回复上一次操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8）更改"><span class="nav-number">20.8.</span> <span class="nav-text">8）更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9）跳至指定的行"><span class="nav-number">20.9.</span> <span class="nav-text">9）跳至指定的行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-which-可执行文件名称-查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置"><span class="nav-number">21.</span> <span class="nav-text">21.which 可执行文件名称 | 查看可执行文件的位置，在PATH变量指定的路径中查看系统命令是否存在及其位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-whereis-bmsu-BMS-目录名-f-文件名-定位可执行文件、源代码文件、帮助文件在文件系统中的位置"><span class="nav-number">22.</span> <span class="nav-text">22.whereis [-bmsu] [BMS 目录名 -f ] 文件名| 定位可执行文件、源代码文件、帮助文件在文件系统中的位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#23-locate-通过搜寻数据库快速搜寻档案"><span class="nav-number">23.</span> <span class="nav-text">23.locate | 通过搜寻数据库快速搜寻档案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-find-find-PATH-option-action-在文件树种查找文件，并作出相应的处理"><span class="nav-number">24.</span> <span class="nav-text">24.find find [PATH] [option] [action] | 在文件树种查找文件，并作出相应的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-与时间有关的选项：共有-atime-ctime-与-mtime-和-amin-cmin与-mmin，以-mtime-说明"><span class="nav-number">24.1.</span> <span class="nav-text">1). 与时间有关的选项：共有 -atime, -ctime 与 -mtime 和-amin,-cmin与-mmin，以 -mtime 说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-与使用者或组名有关的参数："><span class="nav-number">24.2.</span> <span class="nav-text">2). 与使用者或组名有关的参数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-与档案权限及名称有关的参数："><span class="nav-number">24.3.</span> <span class="nav-text">3). 与档案权限及名称有关的参数：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#25-grep-‘正则表达式’-文件名-用正则表达式搜索文本，并把匹配的行打印出来"><span class="nav-number">25.</span> <span class="nav-text">25.grep ‘正则表达式’ 文件名 | 用正则表达式搜索文本，并把匹配的行打印出来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26-gzip-cdtv-檔名-压缩、解压缩，源文件都不再存在"><span class="nav-number">26.</span> <span class="nav-text">26.gzip [-cdtv#] 檔名 | 压缩、解压缩，源文件都不再存在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#27-gunzip-解压缩"><span class="nav-number">27.</span> <span class="nav-text">27.gunzip | 解压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-bzip2-压缩、解压缩"><span class="nav-number">28.</span> <span class="nav-text">28.bzip2 | 压缩、解压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#29-bzcat-读取数据而无需解压"><span class="nav-number">29.</span> <span class="nav-text">29.bzcat 读取数据而无需解压</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#30-tar-主选项-辅选项-文件或者目录-多个目录或档案打包、压缩成一个大档案"><span class="nav-number">30.</span> <span class="nav-text">30.tar [主选项+辅选项] 文件或者目录 | 多个目录或档案打包、压缩成一个大档案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#31-exit-退出当前shell"><span class="nav-number">31.</span> <span class="nav-text">31.exit 退出当前shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#32-logout-退出登录shell"><span class="nav-number">32.</span> <span class="nav-text">32.logout 退出登录shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#33-shutdown-h-now"><span class="nav-number">33.</span> <span class="nav-text">33.shutdown -h now</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#34-users-显示当前登录系统地用户"><span class="nav-number">34.</span> <span class="nav-text">34.users 显示当前登录系统地用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#35-who-登录在本机的用户与来源"><span class="nav-number">35.</span> <span class="nav-text">35.who 登录在本机的用户与来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#36-w-登录在本机的用户及其运行的程序"><span class="nav-number">36.</span> <span class="nav-text">36.w 登录在本机的用户及其运行的程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#37-write-给当前联机的用户发消息"><span class="nav-number">37.</span> <span class="nav-text">37.write 给当前联机的用户发消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#38-wall-给所有登录再本机的用户发消息"><span class="nav-number">38.</span> <span class="nav-text">38.wall 给所有登录再本机的用户发消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#39-last-查看用户的登陆日志"><span class="nav-number">39.</span> <span class="nav-text">39.last 查看用户的登陆日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#40-lastlog-查看每个用户最后的登陆时间"><span class="nav-number">40.</span> <span class="nav-text">40.lastlog 查看每个用户最后的登陆时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#41-finger-选项-使用者-用户-主机-查看用户信息"><span class="nav-number">41.</span> <span class="nav-text">41.finger [选项] [使用者] [用户@主机] | 查看用户信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-hostname-查看主机名"><span class="nav-number">42.</span> <span class="nav-text">42.hostname 查看主机名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#43-alias-ii-“ls-l”-添加别名"><span class="nav-number">43.</span> <span class="nav-text">43.alias ii = “ls -l” | 添加别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-unalias-ii-清除别名"><span class="nav-number">44.</span> <span class="nav-text">44.unalias ii | 清除别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#45-useradd-u-UID-g-初始群组-G-次要群组-c-说明栏-d-家目录绝对路径-s-shell-使用者账号名-新增用户"><span class="nav-number">45.</span> <span class="nav-text">45.useradd [-u UID] [-g 初始群组] [-G 次要群组] [-c 说明栏] [-d 家目录绝对路径] [-s shell] 使用者账号名 | 新增用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#46-passwd-修改密码"><span class="nav-number">46.</span> <span class="nav-text">46.passwd | 修改密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#47-userdel-删除用户"><span class="nav-number">47.</span> <span class="nav-text">47.userdel 删除用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#48-chage-ldEImMW-账号名-修改用户密码的相关属性"><span class="nav-number">48.</span> <span class="nav-text">48.chage [-ldEImMW] 账号名 | 修改用户密码的相关属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#49-usermod-cdegGlsuLU-username-修改用户的相关属性"><span class="nav-number">49.</span> <span class="nav-text">49.usermod [-cdegGlsuLU] username | 修改用户的相关属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#50-id-username-查看用户相关的id信息，还可以用来判断用户是否存在"><span class="nav-number">50.</span> <span class="nav-text">50.id [username] | 查看用户相关的id信息，还可以用来判断用户是否存在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#51-groups-查看登陆用户支持的群组，-第一个输出的群组为有效群组"><span class="nav-number">51.</span> <span class="nav-text">51.groups 查看登陆用户支持的群组， 第一个输出的群组为有效群组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#52-newgrp-切换有效群组"><span class="nav-number">52.</span> <span class="nav-text">52.newgrp 切换有效群组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#53-groupadd-g-gid-组名-添加组"><span class="nav-number">53.</span> <span class="nav-text">53.groupadd [-g gid] 组名 | 添加组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#54-groupmod-g-gid-n-group-name-群组名-修改组信息"><span class="nav-number">54.</span> <span class="nav-text">54.groupmod [-g gid] [-n group_name] 群组名 | 修改组信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#55-groupdel-groupname-删除群组"><span class="nav-number">55.</span> <span class="nav-text">55.groupdel [groupname] | 删除群组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#56-gpasswd-群组管理员功能"><span class="nav-number">56.</span> <span class="nav-text">56.gpasswd | 群组管理员功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#57-chfn修改个人信息"><span class="nav-number">57.</span> <span class="nav-text">57.chfn修改个人信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#58-mount-t-vfstype-o-options-device-dir"><span class="nav-number">58.</span> <span class="nav-text">58.mount [-t vfstype] [-o options] device dir</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#59-umount-取消挂载"><span class="nav-number">59.</span> <span class="nav-text">59.umount 取消挂载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#60-cut"><span class="nav-number">60.</span> <span class="nav-text">60.cut</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#61-sort"><span class="nav-number">61.</span> <span class="nav-text">61.sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#62-wc-统计指定文件中的字节数、字数、行数-并将统计结果显示输出"><span class="nav-number">62.</span> <span class="nav-text">62.wc 统计指定文件中的字节数、字数、行数, 并将统计结果显示输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#63-uniq-去除文件中相邻的重复行"><span class="nav-number">63.</span> <span class="nav-text">63.uniq 去除文件中相邻的重复行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#64-set-显示环境变量和普通变量"><span class="nav-number">64.</span> <span class="nav-text">64.set 显示环境变量和普通变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#65-env-显示环境变量"><span class="nav-number">65.</span> <span class="nav-text">65.env 显示环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#66-export-把普通变量变成环境变量"><span class="nav-number">66.</span> <span class="nav-text">66.export 把普通变量变成环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#67-unset-删除一个环境变量"><span class="nav-number">67.</span> <span class="nav-text">67.unset 删除一个环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#68-read"><span class="nav-number">68.</span> <span class="nav-text">68.read</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#69-declare、typeset"><span class="nav-number">69.</span> <span class="nav-text">69.declare、typeset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#70-ulimit-限制使用者的某些系统资源"><span class="nav-number">70.</span> <span class="nav-text">70.ulimit 限制使用者的某些系统资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#71-df-选项-文件-显示指定磁盘文件的可用空间-如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示"><span class="nav-number">71.</span> <span class="nav-text">71.df [选项] [文件] | 显示指定磁盘文件的可用空间,如果没有文件名被指定，则所有当前被挂载的文件系统的可用空间将被显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#72-du-选项-文件-显示每个文件和目录的磁盘使用空间"><span class="nav-number">72.</span> <span class="nav-text">72.du [选项] [文件] | 显示每个文件和目录的磁盘使用空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#73-ln-参数-源文件或目录-目标文件或目录-某一个文件在另外一个位置建立一个同步的链接"><span class="nav-number">73.</span> <span class="nav-text">73.ln [参数] [源文件或目录] [目标文件或目录] | 某一个文件在另外一个位置建立一个同步的链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#74-diff-参数-文件1或目录1-文件2或目录2-比较单个文件或者目录内容"><span class="nav-number">74.</span> <span class="nav-text">74.diff [参数] [文件1或目录1] [文件2或目录2] | 比较单个文件或者目录内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#75-date-参数-…-格式-显示或设定系统的日期与时间"><span class="nav-number">75.</span> <span class="nav-text">75.date [参数]… [+格式] | 显示或设定系统的日期与时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#76-cal-参数-月份-年份-查看日历"><span class="nav-number">76.</span> <span class="nav-text">76.cal [参数] 月份] [年份] | 查看日历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#77-ps-列出当前进程的快照"><span class="nav-number">77.</span> <span class="nav-text">77.ps | 列出当前进程的快照</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#78-top-参数-显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等"><span class="nav-number">78.</span> <span class="nav-text">78.top [参数] | 显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#79-kill-参数-进程号-杀死进程"><span class="nav-number">79.</span> <span class="nav-text">79.kill [参数] [进程号] | 杀死进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#80-free-参数-显示Linux系统中空闲的、已用的物理内存及swap内存-及被内核使用的buffer"><span class="nav-number">80.</span> <span class="nav-text">80.free [参数] | 显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#81-vmstat-对操作系统的虚拟内存、进程、CPU活动进行监控"><span class="nav-number">81.</span> <span class="nav-text">81.vmstat | 对操作系统的虚拟内存、进程、CPU活动进行监控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#82-iostat-参数-时间t-次数n-每隔t时间刷新一次，最多刷新n次）-对系统的磁盘操作活动进行监视-汇报磁盘活动统计情况，同时也会汇报出CPU使用情况"><span class="nav-number">82.</span> <span class="nav-text">82.iostat [参数] [时间t] [次数n](每隔t时间刷新一次，最多刷新n次）| 对系统的磁盘操作活动进行监视,汇报磁盘活动统计情况，同时也会汇报出CPU使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#83-watch-参数-命令-重复执行某一命令以观察变化"><span class="nav-number">83.</span> <span class="nav-text">83.watch [参数] [命令] |重复执行某一命令以观察变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#84-at-参数-时间-在一个指定的时间执行一个指定任务，只能执行一次"><span class="nav-number">84.</span> <span class="nav-text">84.at [参数] [时间] | 在一个指定的时间执行一个指定任务，只能执行一次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#85-crontab-定时任务调度"><span class="nav-number">85.</span> <span class="nav-text">85.crontab | 定时任务调度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#86-ifconfig-网络设备-参数-查看和配置网络设备"><span class="nav-number">86.</span> <span class="nav-text">86.ifconfig [网络设备] [参数] | 查看和配置网络设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#87-route-显示和操作IP路由表"><span class="nav-number">87.</span> <span class="nav-text">87.route | 显示和操作IP路由表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#88-ping-参数-主机名或IP地址-测试与目标主机的连通性"><span class="nav-number">88.</span> <span class="nav-text">88.ping [参数] [主机名或IP地址] | 测试与目标主机的连通性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#89-netstat-显示与IP、TCP、UDP和ICMP协议相关的统计数据"><span class="nav-number">89.</span> <span class="nav-text">89.netstat | 显示与IP、TCP、UDP和ICMP协议相关的统计数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#90-telnet-参数-主机-用于远程登录，采用明文传送报文，安全性不好"><span class="nav-number">90.</span> <span class="nav-text">90.telnet [参数] [主机] | 用于远程登录，采用明文传送报文，安全性不好</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#91-rcp-参数-源文件-目标文件-远程文件拷贝"><span class="nav-number">91.</span> <span class="nav-text">91.rcp [参数] [源文件] [目标文件] | 远程文件拷贝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#92-wget-参数-URL地址-直接从网络上下载文件"><span class="nav-number">92.</span> <span class="nav-text">92.wget [参数] [URL地址] | 直接从网络上下载文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#93-awk"><span class="nav-number">93.</span> <span class="nav-text">93.awk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#94-sed-对数据行进行替换、删除、新增、选取等操作"><span class="nav-number">94.</span> <span class="nav-text">94.sed 对数据行进行替换、删除、新增、选取等操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#95-paste-合并文件，需确保合并的两文件行数相同"><span class="nav-number">95.</span> <span class="nav-text">95.paste 合并文件，需确保合并的两文件行数相同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#96-su-参数-user-切换登陆"><span class="nav-number">96.</span> <span class="nav-text">96.su [参数] user | 切换登陆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#97-sudo-以特定用户的权限执行特定命令"><span class="nav-number">97.</span> <span class="nav-text">97.sudo | 以特定用户的权限执行特定命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015-2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">参差行者</span>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lzrlizhirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
+
+
+  
+  
+
+</body>
+</html>
