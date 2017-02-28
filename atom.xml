@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-28T04:02:37.000Z</updated>
+  <updated>2017-02-28T10:16:01.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>------------------------------- welcome -------------------------------</title>
+    <link href="http://lzrlizhirong.github.io/2117/02/28/welcome/"/>
+    <id>http://lzrlizhirong.github.io/2117/02/28/welcome/</id>
+    <published>2117-02-28T09:57:09.000Z</published>
+    <updated>2017-02-28T10:16:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<center><img src="/2117/02/28/welcome/../../../../images/stay.png" alt=""></center>
+
+<a id="more"></a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;center&gt;&lt;img src=&quot;/2117/02/28/welcome/../../../../images/stay.png&quot; alt=&quot;&quot;&gt;&lt;/center&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SQL优化大全</title>
@@ -1102,40 +1123,6 @@
       <category term="git" scheme="http://lzrlizhirong.github.io/tags/git/"/>
     
       <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac Retina解决gitk模糊的问题</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/16/Mac-Retina%E8%A7%A3%E5%86%B3gitk%E6%A8%A1%E7%B3%8A%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/16/Mac-Retina解决gitk模糊的问题/</id>
-    <published>2017-02-16T08:55:28.000Z</published>
-    <updated>2017-02-16T09:00:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>个人是gitk和Git gui的忠实用户，但是在MAC下安装后，发现极其模糊<br>git在Mac下其实早就适配了高分辨率了，Patch如下：<br><a href="https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch" target="_blank" rel="external">https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch</a><br>我们只需要把这里面最为关键的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSHighResolutionCapable&lt;/key&gt;</div><div class="line">&lt;true/&gt;</div></pre></td></tr></table></figure></p>
-<p>复制到Info.plist文件里面就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/Wish.app/Contents/Info.plist</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>然后在前面加上上面的配置。<br>这之后，我们还需要更新一下Wish.app程序<br>我是这样做的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch Wish.app</div></pre></td></tr></table></figure></p>
-<p>注意，在OS X EI Capitan 版本开启了一个rootless的功能，即使是root用户也无法修改/System目录，我们需要进入安全模式后，执行如下命令关闭rootless 功能才能够修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">csrutil disable</div></pre></td></tr></table></figure></p>
-<p><a href="http://apple.stackexchange.com/questions/193368/what-is-the-rootless-feature-in-el-capitan-really" target="_blank" rel="external">详细了解OS X的rootless</a></p>
-<p>mac进入安全模式：<br>开机按住 <strong><em>shift</em></strong> 键即可</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;个人是gitk和Git gui的忠实用户，但是在MAC下安装后，发现极其模糊&lt;br&gt;git在Mac下其实早就适配了高分辨率了，Patch如下：&lt;br&gt;&lt;a href=&quot;https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch&quot;&gt;https://gist.githubusercontent.com/cynthia/5f2355a87c2f15d96dbe/raw/6727e73a007b0efabf55dd065e588467ffccc016/wish_app_info_plist.patch&lt;/a&gt;&lt;br&gt;我们只需要把这里面最为关键的&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;key&amp;gt;NSHighResolutionCapable&amp;lt;/key&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;true/&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;复制到Info.plist文件里面就可以了&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vim /System/Library/Frameworks/Tk.framework/Versions/Current/Resources/Wish.app/Contents/Info.plist&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="git" scheme="http://lzrlizhirong.github.io/tags/git/"/>
-    
-      <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="mac" scheme="http://lzrlizhirong.github.io/tags/mac/"/>
     
   </entry>
   

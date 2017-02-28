@@ -3,9 +3,24 @@
 
 
     
+  <url>
+    <loc>http://lzrlizhirong.github.io/2117/02/28/welcome/</loc>
+    <lastmod>2017-02-28T10:16:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>------------------------------- welcome -------------------------------</title>
+        <pubTime>2117-02-28T09:57:09.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
-    <loc>http://lizhirong.club/2017/02/28/make-SQL-to-be-better/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/28/make-SQL-to-be-better/</loc>
     <lastmod>2017-02-28T04:02:37.000Z</lastmod>
     <data>
         <display>
@@ -19,10 +34,10 @@
          
            
              
-              <breadCrumb title="数据库" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+              <breadCrumb title="数据库" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
              
-              <breadCrumb title="sql" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/sql/"/>
+              <breadCrumb title="sql" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/sql/"/>
           
         </display>
     </data>
@@ -30,7 +45,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/27/100-linux-commands/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/27/100-linux-commands/</loc>
     <lastmod>2017-02-27T11:31:49.000Z</lastmod>
     <data>
         <display>
@@ -42,7 +57,7 @@
          
            
              
-              <breadCrumb title="linux" url="http://lizhirong.club/categories/linux/"/>
+              <breadCrumb title="linux" url="http://lzrlizhirong.github.io/categories/linux/"/>
           
         </display>
     </data>
@@ -50,7 +65,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/26/Spark%E5%BF%AB%E9%80%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/26/Spark%E5%BF%AB%E9%80%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</loc>
     <lastmod>2017-02-27T11:04:10.000Z</lastmod>
     <data>
         <display>
@@ -69,7 +84,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/26/%E6%8E%A8%E8%8D%90%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/26/%E6%8E%A8%E8%8D%90%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2017-02-27T11:03:46.000Z</lastmod>
     <data>
         <display>
@@ -83,7 +98,7 @@
          
            
              
-              <breadCrumb title="架构" url="http://lizhirong.club/categories/%E6%9E%B6%E6%9E%84/"/>
+              <breadCrumb title="架构" url="http://lzrlizhirong.github.io/categories/%E6%9E%B6%E6%9E%84/"/>
           
         </display>
     </data>
@@ -93,7 +108,7 @@
     
     
   <url>
-    <loc>http://lizhirong.club/2017/02/24/why-do-so-many-people-think-that-travel-to-tibet-will-be-able-to-find-the-true-meaning-of-life/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/24/why-do-so-many-people-think-that-travel-to-tibet-will-be-able-to-find-the-true-meaning-of-life/</loc>
     <lastmod>2017-02-24T07:27:07.000Z</lastmod>
     <data>
         <display>
@@ -107,10 +122,10 @@
          
            
              
-              <breadCrumb title="杂文" url="http://lizhirong.club/categories/%E6%9D%82%E6%96%87/"/>
+              <breadCrumb title="杂文" url="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/"/>
           
              
-              <breadCrumb title="旅行" url="http://lizhirong.club/categories/%E6%9D%82%E6%96%87/%E6%97%85%E8%A1%8C/"/>
+              <breadCrumb title="旅行" url="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/%E6%97%85%E8%A1%8C/"/>
           
         </display>
     </data>
@@ -118,7 +133,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/24/why-do-people-travel/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/24/why-do-people-travel/</loc>
     <lastmod>2017-02-24T07:13:46.000Z</lastmod>
     <data>
         <display>
@@ -132,7 +147,7 @@
          
            
              
-              <breadCrumb title="杂文" url="http://lizhirong.club/categories/%E6%9D%82%E6%96%87/"/>
+              <breadCrumb title="杂文" url="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/"/>
           
         </display>
     </data>
@@ -140,7 +155,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-6-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A01/</loc>
     <lastmod>2017-02-24T06:12:58.000Z</lastmod>
     <data>
         <display>
@@ -154,7 +169,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -162,7 +177,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/08/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/08/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2017-02-24T02:53:30.000Z</lastmod>
     <data>
         <display>
@@ -174,7 +189,7 @@
          
            
              
-              <breadCrumb title="杂文" url="http://lizhirong.club/categories/%E6%9D%82%E6%96%87/"/>
+              <breadCrumb title="杂文" url="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/"/>
           
         </display>
     </data>
@@ -182,7 +197,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/23/%E5%AE%89%E8%A3%85impala/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85impala/</loc>
     <lastmod>2017-02-24T02:52:24.000Z</lastmod>
     <data>
         <display>
@@ -194,7 +209,7 @@
          
            
              
-              <breadCrumb title="impala" url="http://lizhirong.club/categories/impala/"/>
+              <breadCrumb title="impala" url="http://lzrlizhirong.github.io/categories/impala/"/>
           
         </display>
     </data>
@@ -202,7 +217,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/22/flume-kafka-spark-streaming%E6%95%B4%E5%90%88/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/flume-kafka-spark-streaming%E6%95%B4%E5%90%88/</loc>
     <lastmod>2017-02-23T08:47:48.000Z</lastmod>
     <data>
         <display>
@@ -218,7 +233,7 @@
          
            
              
-              <breadCrumb title="大数据" url="http://lizhirong.club/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+              <breadCrumb title="大数据" url="http://lzrlizhirong.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
           
         </display>
     </data>
@@ -226,7 +241,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/23/%E5%AE%89%E8%A3%85kudu/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/23/%E5%AE%89%E8%A3%85kudu/</loc>
     <lastmod>2017-02-23T08:40:56.000Z</lastmod>
     <data>
         <display>
@@ -240,10 +255,10 @@
          
            
              
-              <breadCrumb title="数据库" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+              <breadCrumb title="数据库" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
              
-              <breadCrumb title="NoSQL" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
+              <breadCrumb title="NoSQL" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
           
         </display>
     </data>
@@ -251,7 +266,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/</loc>
     <lastmod>2017-02-22T10:24:27.000Z</lastmod>
     <data>
         <display>
@@ -265,10 +280,10 @@
          
            
              
-              <breadCrumb title="数据库" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+              <breadCrumb title="数据库" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
              
-              <breadCrumb title="NoSQL" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
+              <breadCrumb title="NoSQL" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
           
         </display>
     </data>
@@ -276,7 +291,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/22/kudu%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/kudu%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2017-02-22T09:51:05.000Z</lastmod>
     <data>
         <display>
@@ -290,10 +305,10 @@
          
            
              
-              <breadCrumb title="数据库" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+              <breadCrumb title="数据库" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
              
-              <breadCrumb title="NoSQL" url="http://lizhirong.club/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
+              <breadCrumb title="NoSQL" url="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
           
         </display>
     </data>
@@ -301,7 +316,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/22/%E4%B8%89%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E5%90%AF%E5%8A%A8%E5%99%A8Starter%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/22/%E4%B8%89%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E5%90%AF%E5%8A%A8%E5%99%A8Starter%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2017-02-22T03:15:59.000Z</lastmod>
     <data>
         <display>
@@ -315,7 +330,7 @@
          
            
              
-              <breadCrumb title="SpringBoot" url="http://lizhirong.club/categories/SpringBoot/"/>
+              <breadCrumb title="SpringBoot" url="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
           
         </display>
     </data>
@@ -323,7 +338,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/21/%E6%9C%AC%E5%9C%B0%E6%96%B0%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%AD%A5%E5%88%B0github%E7%9A%84%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/21/%E6%9C%AC%E5%9C%B0%E6%96%B0%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%AD%A5%E5%88%B0github%E7%9A%84%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4/</loc>
     <lastmod>2017-02-22T02:29:33.000Z</lastmod>
     <data>
         <display>
@@ -335,7 +350,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -343,7 +358,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/16/Apache-Beam%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BB%9F%E4%B8%80%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%BC%96%E7%A8%8B%E5%BA%93/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/Apache-Beam%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BB%9F%E4%B8%80%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%BC%96%E7%A8%8B%E5%BA%93/</loc>
     <lastmod>2017-02-21T04:03:32.000Z</lastmod>
     <data>
         <display>
@@ -359,7 +374,7 @@
          
            
              
-              <breadCrumb title="大数据" url="http://lizhirong.club/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+              <breadCrumb title="大数据" url="http://lzrlizhirong.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
           
         </display>
     </data>
@@ -367,7 +382,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/20/%E9%80%9A%E8%BF%87edu-cn%E9%82%AE%E7%AE%B1%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E8%AF%95%E7%94%A8jetbrains%E5%85%A8%E5%A5%97%E4%BA%A7%E5%93%81/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/20/%E9%80%9A%E8%BF%87edu-cn%E9%82%AE%E7%AE%B1%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E8%AF%95%E7%94%A8jetbrains%E5%85%A8%E5%A5%97%E4%BA%A7%E5%93%81/</loc>
     <lastmod>2017-02-21T04:02:44.000Z</lastmod>
     <data>
         <display>
@@ -381,7 +396,7 @@
          
            
              
-              <breadCrumb title="idea" url="http://lizhirong.club/categories/idea/"/>
+              <breadCrumb title="idea" url="http://lzrlizhirong.github.io/categories/idea/"/>
           
         </display>
     </data>
@@ -389,7 +404,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/15/%E6%8F%90%E9%AB%98%E5%91%BD%E4%BB%A4%E6%95%88%E7%8E%87%E4%B9%8B%E5%88%A9%E5%99%A8oh-my-zsh/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/15/%E6%8F%90%E9%AB%98%E5%91%BD%E4%BB%A4%E6%95%88%E7%8E%87%E4%B9%8B%E5%88%A9%E5%99%A8oh-my-zsh/</loc>
     <lastmod>2017-02-21T04:02:31.000Z</lastmod>
     <data>
         <display>
@@ -401,7 +416,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -409,7 +424,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/16/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Git%E5%B7%A5%E4%BD%9C%E6%B5%81/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Git%E5%B7%A5%E4%BD%9C%E6%B5%81/</loc>
     <lastmod>2017-02-21T04:02:25.000Z</lastmod>
     <data>
         <display>
@@ -421,7 +436,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -429,7 +444,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/21/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E8%A7%A3%E9%94%81iPhone/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/21/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E8%A7%A3%E9%94%81iPhone/</loc>
     <lastmod>2017-02-21T03:17:47.000Z</lastmod>
     <data>
         <display>
@@ -441,7 +456,7 @@
          
            
              
-              <breadCrumb title="趣闻杂谈" url="http://lizhirong.club/categories/%E8%B6%A3%E9%97%BB%E6%9D%82%E8%B0%88/"/>
+              <breadCrumb title="趣闻杂谈" url="http://lzrlizhirong.github.io/categories/%E8%B6%A3%E9%97%BB%E6%9D%82%E8%B0%88/"/>
           
         </display>
     </data>
@@ -449,7 +464,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/20/%E5%86%8D%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E6%90%AD%E5%BB%BA%E6%A1%88%E4%BE%8B/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/20/%E5%86%8D%E8%AF%86SpringBoot%E5%BE%AE%E6%A1%86%E6%9E%B6-%E6%90%AD%E5%BB%BA%E6%A1%88%E4%BE%8B/</loc>
     <lastmod>2017-02-20T08:02:44.000Z</lastmod>
     <data>
         <display>
@@ -463,7 +478,7 @@
          
            
              
-              <breadCrumb title="SpringBoot" url="http://lizhirong.club/categories/SpringBoot/"/>
+              <breadCrumb title="SpringBoot" url="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
           
         </display>
     </data>
@@ -471,7 +486,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/20/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/20/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-02-20T04:25:08.000Z</lastmod>
     <data>
         <display>
@@ -485,7 +500,7 @@
          
            
              
-              <breadCrumb title="SpringBoot" url="http://lizhirong.club/categories/SpringBoot/"/>
+              <breadCrumb title="SpringBoot" url="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
           
         </display>
     </data>
@@ -493,7 +508,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/14/ES-5-0-2-%E5%AD%A6%E4%B9%A0-8-%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E6%A1%A3%E5%AD%98%E5%82%A8-wait-for-active-shards%E6%96%B0%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/14/ES-5-0-2-%E5%AD%A6%E4%B9%A0-8-%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E6%A1%A3%E5%AD%98%E5%82%A8-wait-for-active-shards%E6%96%B0%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90/</loc>
     <lastmod>2017-02-20T02:33:04.000Z</lastmod>
     <data>
         <display>
@@ -507,7 +522,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -515,7 +530,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/13/ES-5-0-2-%E5%AD%A6%E4%B9%A0-7-%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%AD%A6%E4%B9%A02/</loc>
     <lastmod>2017-02-20T02:32:56.000Z</lastmod>
     <data>
         <display>
@@ -529,7 +544,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -537,7 +552,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2017-02-20T02:32:42.000Z</lastmod>
     <data>
         <display>
@@ -549,7 +564,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -557,7 +572,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AC%AC%E4%B8%80%E4%B8%AAES%E4%BE%8B%E5%AD%90/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E7%AC%AC%E4%B8%80%E4%B8%AAES%E4%BE%8B%E5%AD%90/</loc>
     <lastmod>2017-02-20T02:32:36.000Z</lastmod>
     <data>
         <display>
@@ -569,7 +584,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -577,7 +592,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/10/ES-5-0-2-%E5%AD%A6%E4%B9%A0-3-%E2%80%94%E2%80%94%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2017-02-20T02:32:28.000Z</lastmod>
     <data>
         <display>
@@ -591,7 +606,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -599,7 +614,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94Kibana-X-Pack%E4%BB%8B%E7%BB%8D%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94Kibana-X-Pack%E4%BB%8B%E7%BB%8D%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2017-02-20T02:32:22.000Z</lastmod>
     <data>
         <display>
@@ -615,7 +630,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -623,7 +638,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/09/ES-5-0-2-%E5%AD%A6%E4%B9%A0-1-%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85Elasticsearch%E3%80%81Kibana%E5%92%8CX-Pack/</loc>
     <lastmod>2017-02-20T02:32:15.000Z</lastmod>
     <data>
         <display>
@@ -639,7 +654,7 @@
          
            
              
-              <breadCrumb title="Elasticsearch" url="http://lizhirong.club/categories/Elasticsearch/"/>
+              <breadCrumb title="Elasticsearch" url="http://lzrlizhirong.github.io/categories/Elasticsearch/"/>
           
         </display>
     </data>
@@ -647,7 +662,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/15/iterm2%E6%8A%80%E5%B7%A7/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/15/iterm2%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2017-02-17T04:06:23.000Z</lastmod>
     <data>
         <display>
@@ -661,7 +676,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -669,7 +684,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/16/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2017-02-16T09:59:09.000Z</lastmod>
     <data>
         <display>
@@ -683,7 +698,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -691,7 +706,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/16/Mac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/Mac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime/</loc>
     <lastmod>2017-02-16T09:01:39.000Z</lastmod>
     <data>
         <display>
@@ -705,7 +720,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -713,7 +728,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/16/Mac-Retina%E8%A7%A3%E5%86%B3gitk%E6%A8%A1%E7%B3%8A%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/16/Mac-Retina%E8%A7%A3%E5%86%B3gitk%E6%A8%A1%E7%B3%8A%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2017-02-16T09:00:46.000Z</lastmod>
     <data>
         <display>
@@ -729,7 +744,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -737,7 +752,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/15/Mac%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/15/Mac%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     <lastmod>2017-02-15T03:27:49.000Z</lastmod>
     <data>
         <display>
@@ -751,7 +766,7 @@
          
            
              
-              <breadCrumb title="工具" url="http://lizhirong.club/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="工具" url="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -759,7 +774,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/10/%E4%B8%BA%E4%BA%86%E4%BF%9D%E6%8C%81%E9%80%BC%E6%A0%BC%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%81%9C%E6%AD%A2%E5%86%99%E4%BD%9C/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/10/%E4%B8%BA%E4%BA%86%E4%BF%9D%E6%8C%81%E9%80%BC%E6%A0%BC%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%81%9C%E6%AD%A2%E5%86%99%E4%BD%9C/</loc>
     <lastmod>2017-02-14T06:40:41.000Z</lastmod>
     <data>
         <display>
@@ -771,7 +786,7 @@
          
            
              
-              <breadCrumb title="杂文" url="http://lizhirong.club/categories/%E6%9D%82%E6%96%87/"/>
+              <breadCrumb title="杂文" url="http://lzrlizhirong.github.io/categories/%E6%9D%82%E6%96%87/"/>
           
         </display>
     </data>
@@ -779,7 +794,7 @@
 
     
   <url>
-    <loc>http://lizhirong.club/2017/02/09/Markdown%E2%80%94%E2%80%94%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</loc>
+    <loc>http://lzrlizhirong.github.io/2017/02/09/Markdown%E2%80%94%E2%80%94%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2017-02-14T06:39:28.000Z</lastmod>
     <data>
         <display>
@@ -791,7 +806,7 @@
          
            
              
-              <breadCrumb title="Markdown" url="http://lizhirong.club/categories/Markdown/"/>
+              <breadCrumb title="Markdown" url="http://lzrlizhirong.github.io/categories/Markdown/"/>
           
         </display>
     </data>
