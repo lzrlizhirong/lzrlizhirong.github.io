@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://lzrlizhirong.github.io/"/>
-  <updated>2017-02-27T11:31:49.000Z</updated>
+  <updated>2017-02-28T04:02:37.000Z</updated>
   <id>http://lzrlizhirong.github.io/</id>
   
   <author>
@@ -14,6 +14,145 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL优化大全</title>
+    <link href="http://lzrlizhirong.github.io/2017/02/28/make-SQL-to-be-better/"/>
+    <id>http://lzrlizhirong.github.io/2017/02/28/make-SQL-to-be-better/</id>
+    <published>2017-02-28T02:36:31.000Z</published>
+    <updated>2017-02-28T04:02:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-优化SQL步骤"><a href="#1-优化SQL步骤" class="headerlink" title="1. 优化SQL步骤"></a>1. 优化SQL步骤</h1><hr>
+<h2 id="1-1-通过-show-status和应用特点了解各种-SQL的执行频率"><a href="#1-1-通过-show-status和应用特点了解各种-SQL的执行频率" class="headerlink" title="1.1. 通过 show status和应用特点了解各种 SQL的执行频率"></a><font color="blue">1.1. 通过 show status和应用特点了解各种 SQL的执行频率</font></h2><p>　　通过 SHOW STATUS 可以提供服务器状态信息，也可以使用 mysqladmin extende d-status 命令获得。 SHOW STATUS 可以根据需要显示 session 级别的统计结果和 global级别的统计结果。<br>　　如显示当前session： <strong><em><font color="red">SHOW STATUS like “Com_%”; 全局级别：show global status;</font></em></strong><br><a id="more"></a><br>以下几个参数对 Myisam 和 Innodb 存储引擎都计数：</p>
+<blockquote>
+<ol>
+<li>Com_select 执行 select 操作的次数，一次查询只累加 1 ；</li>
+<li>Com_insert 执行 insert 操作的次数，对于批量插入的 insert 操作，只累加一次 ；</li>
+<li>Com_update 执行 update 操作的次数；</li>
+<li>Com_delete 执行 delete 操作的次数；</li>
+</ol>
+</blockquote>
+<p>以下几个参数是针对 Innodb 存储引擎计数的，累加的算法也略有不同：</p>
+<blockquote>
+<ol>
+<li>Innodb_rows_read select 查询返回的行数；</li>
+<li>Innodb_rows_inserted 执行 Insert 操作插入的行数；</li>
+<li>Innodb_rows_updated 执行 update 操作更新的行数；</li>
+<li>Innodb_rows_deleted 执行 delete 操作删除的行数；</li>
+</ol>
+</blockquote>
+<p>　　通过以上几个参数，可以很容易的了解当前数据库的应用是以插入更新为主还 是以查询操作为主，以及各种类型的 SQL大致的执行比例是多少。对于更新操作的计 数，是对执行次数的计数，不论提交还是回滚都会累加。<br>　　对于事务型的应用，通过 Com_commit 和 Com_rollback 可以了解事务提交和回 滚的情况，对于回滚操作非常频繁的数据库，可能意味着应用编写存在问题。此外，以下几个参数便于我们了解数据库的基本情况：</p>
+<blockquote>
+<ol>
+<li>Connections 试图连接 MySQL 服务器的次数</li>
+<li>Uptime 服务器工作时间</li>
+<li>Slow_queries 慢查询的次数</li>
+</ol>
+</blockquote>
+<h2 id="1-2-定位执行效率较低的SQL语句"><a href="#1-2-定位执行效率较低的SQL语句" class="headerlink" title="1.2. 定位执行效率较低的SQL语句"></a><font color="blue">1.2. 定位执行效率较低的SQL语句</font></h2><p>　　可以通过以下两种方式定位执行效率较低的 SQL 语句：</p>
+<blockquote>
+<ol>
+<li><strong><font color="green">可以通过慢查询日志定位那些执行效率较低的 sql 语句</font></strong>，用 –log-slow-queries[=file_name] 选项启动时， mysqld 写一个包含所有执行时间超过long_query_time 秒的 SQL 语句的日志文件。可以链接到管理维护中的相关章节。</li>
+<li><strong><font color="green">使用 show processlist查看当前MYSQL的线程</font></strong>，命令慢查询日志在查询结束以后才纪录，所以在应用反映执行效率出现问题的时候查 询慢查询日志并不能定位问题，可以使用 show processlist 命令查看当前 MySQL 在进行的线程，包括线程的状态，是否锁表等等，可以实时的查看 SQL 执行情况， 同时对一些锁表操作进行优化。</li>
+</ol>
+</blockquote>
+<h2 id="1-3-通过EXPLAIN-分析低效-SQL的执行计划："><a href="#1-3-通过EXPLAIN-分析低效-SQL的执行计划：" class="headerlink" title="1.3. 通过EXPLAIN 分析低效 SQL的执行计划："></a><font color="blue">1.3. 通过EXPLAIN 分析低效 SQL的执行计划：</font></h2><p>　　通过以上步骤查询到效率低的 SQL 后，我们可以通过 explain 或者 desc 获取MySQL 如何执行 SELECT 语句的信息，包括 select 语句执行过程表如何连接和连接 的次序。</p>
+<h1 id="2-MySQL索引"><a href="#2-MySQL索引" class="headerlink" title="2. MySQL索引"></a>2. MySQL索引</h1><hr>
+<h2 id="2-1-mysql如何使用索引"><a href="#2-1-mysql如何使用索引" class="headerlink" title="2.1. mysql如何使用索引"></a><font color="blue">2.1. mysql如何使用索引</font></h2><p>　　索引用于快速找出在某个列中有一特定值的行。对相关列使用索引是提高SELECT 操作性能的最佳途径。<br>　　查询要使用索引最主要的条件是查询条件中需要使用索引关键字，如果是多列 索引，那么只有查询条件使用了多列关键字最左边的前缀时（<font color="red">前缀索引</font>），才可以使用索引，否则 将不能使用索引。<br>　　下列情况下， Mysql 不会使用已有的索引：</p>
+<blockquote>
+<p>1、如果 mysql 估计使用索引比全表扫描更慢，则不使用索引。例如：如果 key_part 1均匀分布在 1 和 100 之间，下列查询中使用索引就不是很好：<code>SELECT * FROM table_name where key_part1 &gt; 1 and key_part1 &lt; 90</code><br>2、如果使用 heap 表并且 where 条件中不用＝索引列，<font color="red">其他 &gt; 、 &lt; 、 &gt;= 、 &lt;= 均不使 用索引（MyISAM和innodb表使用索引）</font>；<br>3、使用or分割的条件，如果or前的条件中的列有索引，后面的列中没有索引，那么涉及到的索引都不会使用。<br>4、如果创建复合索引，如果条件中使用的列不是索引列的第一部分；<font color="red">（不是前缀索引）</font><br>5、<font color="red">如果 like 是以％开始</font>；<br>6、对 where 后边条件为字符串的一定要加引号，字符串如果为数字 mysql 会自动转 为字符串，但是不使用索引。</p>
+</blockquote>
+<h2 id="2-2-查看索引使用情况"><a href="#2-2-查看索引使用情况" class="headerlink" title="2.2. 查看索引使用情况"></a><font color="blue">2.2. 查看索引使用情况</font></h2><p>　　如果索引正在工作， Handler_read_key 的值将很高，这个值代表了一个行被索引值读的次数，很低的值表明增加索引得到的性能改善不高，因为索引并不经常使 用。<br>　　Handler_read_rnd_next 的值高则意味着查询运行低效，并且应该建立索引补救。这个值的含义是在数据文件中读下一行的请求数。如果你正进行大量的表扫描，<br>　　该值较高。通常说明表索引不正确或写入的查询没有利用索引。<br>　　语法：<br>　　<font color="red">mysql&gt; show status like ‘Handler_read%’;</font></p>
+<h1 id="3-具体优化查询语句"><a href="#3-具体优化查询语句" class="headerlink" title="3. 具体优化查询语句"></a>3. 具体优化查询语句</h1><hr>
+<h2 id="1-避免全表扫描"><a href="#1-避免全表扫描" class="headerlink" title="1. 避免全表扫描"></a><font color="blue">1. 避免全表扫描</font></h2><hr>
+<p>　　对查询进行优化，应尽量避免全表扫描，首先应考虑在 <font color="red">where 及 order by 涉及的列上建立索引</font></p>
+<ul>
+<li>尝试下面的技巧以避免优化器错选了表扫描：</li>
+<li>使用ANALYZE TABLEtbl_name为扫描的表更新关键字分布。</li>
+<li>对扫描的表使用FORCEINDEX告知MySQL，相对于使用给定的索引表扫描将非常耗时。<font color="red">SELECT * FROM t1, t2 FORCE INDEX (index_for_column)   WHERE t1.col_name=t2.col_name；</font></li>
+<li>用<strong>–max-seeks-for-key=1000</strong>选项启动<strong>mysqld</strong>或使用<strong>SET max_seeks_for_key=1000</strong>告知优化器假设关键字扫描不会超过1,000次关键字搜索。</li>
+</ul>
+<h3 id="1-where中避免null值判断"><a href="#1-where中避免null值判断" class="headerlink" title="1). where中避免null值判断"></a><font color="red">1). where中避免null值判断</font></h3><p>　　否则将导致引擎放弃使用索引而进行全表扫描，如：<code>select id from t where num is null</code><br>　　NULL对于大多数数据库都需要特殊处理，MySQL也不例外，它需要更多的代码，更多的检查和特殊的索引逻辑，有些开发人员完全没有意识到，创建表时NULL是默认值，但大多数时候应该使用NOT NULL，或者使用一个特殊的值，如0，-1作为默  认值。<br>　　不能用null作索引，任何包含null值的列都将不会被包含在索引中。即使索引有多列这样的情况下，只要这些列中有一列含有null，该列    就会从索引中排除。也就是说如果某列存在空值，即使对该列建索引也不会提高性能。 任何在where子句中使用is null或is not null的语句优化器是不允许使用索引的。<br>　　此例可以在num上设置默认值0，确保表中num列没有null值，然后这样查询： <code>select id    from t where num=0</code></p>
+<h3 id="2-where中避免-或-lt-gt-操作符"><a href="#2-where中避免-或-lt-gt-操作符" class="headerlink" title="2).where中避免!=或&lt;&gt;操作符"></a><font color="red">2).where中避免!=或&lt;&gt;操作符</font></h3><p>　　否则将引擎放弃使用索引而进行全表扫描。<br>　　MySQL只有对以下操作符才使用索引：<font color="orange">&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN，以及某些时候的LIKE。 </font><br>　　可以在LIKE操作中使用索引的情形是指另一个操作数不是以<font color="orange">通配符（%或者_）开头</font>的情形。例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT id FROM  t WHERE col LIKE &apos;Mich%&apos;; #  这个查询将使用索引，</div><div class="line">SELECT id FROM  t WHERE col  LIKE &apos;%ike&apos;;   #这个查询不会使用索引。</div></pre></td></tr></table></figure></p>
+<h3 id="3-where中避免or"><a href="#3-where中避免or" class="headerlink" title="3).where中避免or"></a><font color="red">3).where中避免or</font></h3><p>　　否则将导致引擎放弃使用索引而进行全表扫描，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select id from t where num=10 or num=20</div></pre></td></tr></table></figure></p>
+<p>　　可以使用<font color="green">UNION</font>合并查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　select id from t where num=10 union all select id from t where num=20</div></pre></td></tr></table></figure></p>
+<p>　　在某些情况下，<font color="green">or条件</font>可以避免全表扫描的。</p>
+<blockquote>
+<p>1 .where 语句里面如果带有or条件, myisam表能用到索引， innodb不行。<br>2 .必须所有的or条件都必须是独立索引           </p>
+</blockquote>
+<h3 id="4-in和not-in会导致全表扫描"><a href="#4-in和not-in会导致全表扫描" class="headerlink" title="4) .in和not in会导致全表扫描"></a><font color="red">4) .in和not in会导致全表扫描</font></h3><p>　　如：<font color="green">select id from t where num in(1,2,3)</font><br>对于连续的数值，<font color="red">能用 between 就不要用 in ：</font><font color="green">Select id from t where num between 1 and 3</font></p>
+<h3 id="5-下面的查询也将导致全表扫描："><a href="#5-下面的查询也将导致全表扫描：" class="headerlink" title="5).下面的查询也将导致全表扫描："></a><font color="red">5).下面的查询也将导致全表扫描：</font></h3><ul>
+<li>select id from t where name like <font color="blue">‘%abc%’</font></li>
+<li>select id from t where name like <font color="blue">‘%abc’</font></li>
+</ul>
+<p>　　若要提高效率，可以考虑全文检索。<br>　　而select id from t where name like <font color="blue">‘abc%’ </font>才用到索引</p>
+<h3 id="6-where中使用参数，也会导致全表扫描"><a href="#6-where中使用参数，也会导致全表扫描" class="headerlink" title="6).where中使用参数，也会导致全表扫描"></a><font color="red">6).where中使用参数，也会导致全表扫描</font></h3><p>　　因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推 迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：<br>　　<font color="green">select id from t where num=@num </font><br>可以改为强制查询使用索引：<br>　　<font color="green">select id from t with(index(索引名)) where num=@num</font></p>
+<h3 id="7-where中避免对字段进行表达式操作"><a href="#7-where中避免对字段进行表达式操作" class="headerlink" title="7). where中避免对字段进行表达式操作"></a><font color="red">7). where中避免对字段进行表达式操作</font></h3><p>　　这将导致引擎放弃使用索引而进行全表扫描。如：<font color="green">select id from t where num/2=100</font><br>　　应改为:  <font color="green">select id from t where num=100*2</font></p>
+<h3 id="8-where中避免对字段进行函数操作"><a href="#8-where中避免对字段进行函数操作" class="headerlink" title="8). where中避免对字段进行函数操作"></a><font color="red">8). where中避免对字段进行函数操作</font></h3><p>　　这将导致引擎放弃使用索引而进行全表扫描。如：</p>
+<font color="green">select id from t where substring(name,1,3)=’abc’  –name</font><br><font color="green">select id from t where datediff(day,createdate,’2005-11-30’)=0–‘2005-11-30’ </font><br>　　生成的id 应改为:<br><font color="green">select id from t where name like ‘abc%’</font><br><font color="green">select id from t where createdate&gt;=’2005-11-30’ and createdate&lt;’2005-12-1’</font>
+
+<h3 id="9-where子句避免“-”左边进行函数、算术运算或其他表达式运算"><a href="#9-where子句避免“-”左边进行函数、算术运算或其他表达式运算" class="headerlink" title="9).where子句避免“=”左边进行函数、算术运算或其他表达式运算"></a><font color="red">9).where子句避免“=”左边进行函数、算术运算或其他表达式运算</font></h3><p>　　否则系统将可能无法正确使用索引。</p>
+<h3 id="10-索引字段不是复合索引的前缀索引"><a href="#10-索引字段不是复合索引的前缀索引" class="headerlink" title="10). 索引字段不是复合索引的前缀索引"></a><font color="red">10). 索引字段不是复合索引的前缀索引</font></h3><p>　　例如 在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。</p>
+<h2 id="2-其他一些注意优化"><a href="#2-其他一些注意优化" class="headerlink" title="2 .其他一些注意优化"></a><font color="blue">2 .其他一些注意优化</font></h2><hr>
+<h3 id="1-不要写一些没有意义的查询"><a href="#1-不要写一些没有意义的查询" class="headerlink" title="1). 不要写一些没有意义的查询"></a><font color="red">1). 不要写一些没有意义的查询</font></h3><p>　　如需要生成一个空表结构：<br>　　<font color="green">select col1,col2 into #t from t where 1=0</font><br>　　这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样：<font color="green">create table #t(…)</font></p>
+<h3 id="2-很多时候用-exists-代替-in-是一个好的选择"><a href="#2-很多时候用-exists-代替-in-是一个好的选择" class="headerlink" title="2). 很多时候用 exists 代替 in 是一个好的选择"></a><font color="red">2). 很多时候用 exists 代替 in 是一个好的选择</font></h3><p>　　<font color="green">select num from a where num in(select num from b)</font><br>　　用下面的语句替换：<br>　　<font color="green">select num from a where exists(select 1 from b where num=a.num)</font></p>
+<h3 id="3-并不是所有索引对查询都有效"><a href="#3-并不是所有索引对查询都有效" class="headerlink" title="3). 并不是所有索引对查询都有效"></a><font color="red">3). 并不是所有索引对查询都有效</font></h3><p>　　SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。</p>
+<h3 id="4-索引并不是越多越好"><a href="#4-索引并不是越多越好" class="headerlink" title="4). 索引并不是越多越好"></a><font color="red">4). 索引并不是越多越好</font></h3><p>　　索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</p>
+<h3 id="5-避免更新-clustered-索引数据列"><a href="#5-避免更新-clustered-索引数据列" class="headerlink" title="5).避免更新 clustered 索引数据列"></a><font color="red">5).避免更新 clustered 索引数据列</font></h3><p>　　因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。</p>
+<h3 id="6-尽量使用数字型字段"><a href="#6-尽量使用数字型字段" class="headerlink" title="6).尽量使用数字型字段"></a><font color="red">6).尽量使用数字型字段</font></h3><p>　　若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</p>
+<h3 id="7-使用-varchar-nvarchar-代替-char-nchar"><a href="#7-使用-varchar-nvarchar-代替-char-nchar" class="headerlink" title="7).使用 varchar/nvarchar 代替 char/nchar "></a><font color="red">7).使用 varchar/nvarchar 代替 char/nchar </font></h3><p>　　因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p>
+<h3 id="8-避免“-“返回所有"><a href="#8-避免“-“返回所有" class="headerlink" title="8).避免“*“返回所有 "></a><font color="red">8).避免“*“返回所有 </font></h3><p>　　用具体的字段列表代替“*”，不要返回用不到的任何字段。</p>
+<h2 id="3-临时表的问题"><a href="#3-临时表的问题" class="headerlink" title="3. 临时表的问题"></a><font color="blue">3. 临时表的问题</font></h2><hr>
+<h3 id="1-尽量使用表变量来代替临时表"><a href="#1-尽量使用表变量来代替临时表" class="headerlink" title="1). 尽量使用表变量来代替临时表"></a><font color="red">1). 尽量使用表变量来代替临时表</font></h3><p>　　如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。 </p>
+<h3 id="2-避免频繁创建和删除临时表，以减少系统表资源的消耗"><a href="#2-避免频繁创建和删除临时表，以减少系统表资源的消耗" class="headerlink" title="2).避免频繁创建和删除临时表，以减少系统表资源的消耗"></a><font color="red">2).避免频繁创建和删除临时表，以减少系统表资源的消耗</font></h3><h3 id="3-临时表并不是不可使用"><a href="#3-临时表并不是不可使用" class="headerlink" title="3).临时表并不是不可使用"></a><font color="red">3).临时表并不是不可使用</font></h3><p>　　适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。</p>
+<h3 id="4-避免造成大量-log"><a href="#4-避免造成大量-log" class="headerlink" title="4).避免造成大量 log"></a><font color="red">4).避免造成大量 log</font></h3><p>　　如：在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度<br>　　如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</p>
+<h3 id="5-及时删除临时表"><a href="#5-及时删除临时表" class="headerlink" title="5). 及时删除临时表"></a><font color="red">5). 及时删除临时表</font></h3><p>　　如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</p>
+<h2 id="4-游标的问题"><a href="#4-游标的问题" class="headerlink" title="4. 游标的问题"></a><font color="blue">4. 游标的问题</font></h2><hr>
+<h3 id="1-尽量避免使用游标"><a href="#1-尽量避免使用游标" class="headerlink" title="1).尽量避免使用游标"></a><font color="red">1).尽量避免使用游标</font></h3><p>　　因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。 </p>
+<h3 id="2-使用基于游标的方法或临时表方法之前"><a href="#2-使用基于游标的方法或临时表方法之前" class="headerlink" title="2).使用基于游标的方法或临时表方法之前"></a><font color="red">2).使用基于游标的方法或临时表方法之前</font></h3><p>　　应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。</p>
+<h3 id="3-游标并不是不可使用"><a href="#3-游标并不是不可使用" class="headerlink" title="3).游标并不是不可使用"></a><font color="red">3).游标并不是不可使用</font></h3><p>　　对小型数据集使用 FAST_FORWARD 游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。</p>
+<h3 id="4-存储过程和触发器"><a href="#4-存储过程和触发器" class="headerlink" title="4).存储过程和触发器"></a><font color="red">4).存储过程和触发器</font></h3><p>　　在所有的存储过程和触发器的开始处设置 SET NOCOUNT ON ，在结束时设置 SET NOCOUNT OFF 。<br>　　无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。</p>
+<h2 id="5-事务的问题"><a href="#5-事务的问题" class="headerlink" title="5. 事务的问题"></a><font color="blue">5. 事务的问题</font></h2><hr>
+<h3 id="1-尽量避免大事务操作，提高系统并发能力。"><a href="#1-尽量避免大事务操作，提高系统并发能力。" class="headerlink" title="1).尽量避免大事务操作，提高系统并发能力。"></a><font color="red">1).尽量避免大事务操作，提高系统并发能力。</font></h3><h2 id="6-数据量的问题"><a href="#6-数据量的问题" class="headerlink" title="6. 数据量的问题"></a><font color="blue">6. 数据量的问题</font></h2><hr>
+<h3 id="1-尽量避免向客户端返回大数据量"><a href="#1-尽量避免向客户端返回大数据量" class="headerlink" title="1).尽量避免向客户端返回大数据量"></a><font color="red">1).尽量避免向客户端返回大数据量</font></h3><p>　　尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p>
+<h2 id="7-COUNT优化"><a href="#7-COUNT优化" class="headerlink" title="7. COUNT优化"></a><font color="blue">7. COUNT优化</font></h2><hr>
+<h3 id="1-count-优于count-1-和count-primary-key"><a href="#1-count-优于count-1-和count-primary-key" class="headerlink" title="1) count(*) 优于count(1)和count(primary_key)"></a><font color="red">1) count(*) 优于count(1)和count(primary_key)</font></h3><p>　　很多人为了统计记录条数，就使用 count(1) 和 count(primary_key) 而不是 count(*) ，他们认为这样性能更好，其实这是一个误区。对于有些场景，这样做可能性能会更差，应为数据库对 count(*) 计数操作做了一些特别的优化。</p>
+<h3 id="2）count-column-和-count-是不一样的"><a href="#2）count-column-和-count-是不一样的" class="headerlink" title="2）count(column) 和 count(*) 是不一样的"></a><font color="red">2）count(column) 和 count(*) 是不一样的</font></h3><p>　　这个误区甚至在很多的资深工程师或者是 DBA 中都普遍存在，很多人都会认为这是理所当然的。实际上，count(column) 和 count(*) 是一个完全不一样的操作，所代表的意义也完全不一样。<br>　　count(column) 是表示结果集中有多少个column字段不为空的记录<br>　　count(*) 是表示整个结果集有多少条记录</p>
+<h2 id="8-优化order-by语句"><a href="#8-优化order-by语句" class="headerlink" title="8. 优化order by语句"></a><font color="blue">8. 优化order by语句</font></h2><hr>
+<p>　　<font color="red">基于索引的排序</font><br>　　MySQL的弱点之一是它的排序。虽然MySQL可以在1秒中查询大约15,000条记录，但由于MySQL在查询时最多只能使用一个索引。因此，如果WHERE条件已经占用了索引，那么在排序中就不使用索引了，这将大大降低查询的速度。我们可以看看如下的SQL语句:<br>　　<font color="green">SELECT * FROM SALES WHERE NAME = “name” ORDER BY SALE_DATE DESC;</font><br>　　在以上的SQL的WHERE子句中已经使用了NAME字段上的索引，因此，在对SALE_DATE进行排序时将不再使用索引。为了解决这个问题，我们可以对SALES表建立复合索引:<br>　　<font color="green">ALTER TABLE SALES DROP INDEX NAME, ADD INDEX (NAME,SALE_DATE)</font><br>　　这样再使用上述的SELECT语句进行查询时速度就会大副提升。但要注意，在使用这个方法时，要确保WHERE子句中没有排序字段，在上例中就是不能用SALE_DATE进行查询，否则虽然排序快了，但是SALE_DATE字段上没有单独的索引，因此查询又会慢下来。</p>
+<p>　　在某些情况中， MySQL可以使用一个索引来满足 ORDER BY子句，而不需要额外的排序。 where条件和order by使用相同的索引，并且order by 的顺序和索引顺序相 同，并且order by的字段都是升序或者都是降序。例如：下列sql可以使用索引。</p>
+<p>　　<font color="green">SELECT <em> FROM t1 ORDER BY key_part1,key_part2,… ;</em></font><br>　　<font color="green">SELECT  FROM t1 WHERE key_part1=1 ORDER BY key_part1 DESC, key_part2 DESC;</font><br>　　<font color="green">SELECT <em> FROM t1 ORDER BY key_part1 DESC, key_part2 DESC;</em></font><br>　　但是以下情况不使用索引：<br>　　<font color="green">SELECT  FROM t1 ORDER BY key_part1 DESC, key_part2 ASC ； –order by 的字段混合 ASC 和 DESC</font><br>　　<font color="green">SELECT <em> FROM t1 WHERE key2=constant ORDER BY key1 ；</em></font>– 用于查询行的关键字与 ORDER BY 中所使用的不相同<br>　　<font color="green">SELECT  FROM t1 ORDER BY key1, key2 ；</font>– 对不同的关键字使用 ORDER BY ：</p>
+<h2 id="9-优化GROUP-BY"><a href="#9-优化GROUP-BY" class="headerlink" title="9. 优化GROUP BY"></a><font color="blue">9. 优化GROUP BY</font></h2><hr>
+<p>　　默认情况下， MySQL 排序所有 GROUP BY col1 ， col2 ， …. 。查询的方法如同在查询中指定 ORDER BY col1 ， col2 ， … 。如果显式包括一个包含相同的列的 ORDER BY<br>子句， MySQL 可以毫不减速地对它进行优化，尽管仍然进行排序。如果查询包括 GROUP BY 但你想要避免排序结果的消耗，你可以指定 ORDER BY NULL禁止排序。<br>　　例如 ：<br>　　<font color="green">INSERT INTO foo  SELECT a, COUNT(*) FROM bar GROUP BY a ORDER BY NULL;</font></p>
+<h2 id="10-优化-OR"><a href="#10-优化-OR" class="headerlink" title="10. 优化 OR "></a><font color="blue">10. 优化 OR </font></h2><hr>
+<p>具体详解看：<strong><a href="">mysql or条件可以使用索引而避免全表</a></strong> </p>
+<h1 id="4-SQL核心语句-非常实用的几个技巧"><a href="#4-SQL核心语句-非常实用的几个技巧" class="headerlink" title="4. SQL核心语句(非常实用的几个技巧)"></a>4. SQL核心语句(非常实用的几个技巧)</h1><hr>
+<h2 id="1-插入数据"><a href="#1-插入数据" class="headerlink" title="1) 插入数据"></a>1) 插入数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">INSERT mytable (first_column,second_column,third_column)  </div><div class="line">VALUES (&apos;some data&apos;,&apos;some more data&apos;,&apos;yet more data&apos;) ,  </div><div class="line">VALUES (&apos;some data&apos;,&apos;some more data&apos;,&apos;yet more data&apos;) ,  </div><div class="line">VALUES (&apos;some data&apos;,&apos;some more data&apos;,&apos;yet more data&apos;)</div></pre></td></tr></table></figure>
+<h2 id="2）-清空数据表"><a href="#2）-清空数据表" class="headerlink" title="2）.清空数据表"></a>2）.清空数据表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TRUNCATE TABLE  `mytable`</div></pre></td></tr></table></figure>
+<p><font color="red">注意：</font>删除表中的所有记录，应使用TRUNCATE TABLE语句。注意这里为什么要用TRUNCATE TABLE语句代替DELETE语句:当你使用TRUNCATE TABLE语句时，记录的删除是不作记录的。也就是说，这意味着TRUNCATE TABLE要比DELETE快得多。</p>
+<h2 id="3）用SELECT创建记录和表"><a href="#3）用SELECT创建记录和表" class="headerlink" title="3）用SELECT创建记录和表"></a>3）用SELECT创建记录和表</h2><p> 　　INSERT语句与DELETE语句和UPDATE语句有一点不同，它一次只操作一个记录。然而，有一个方法可以使INSERT 语句一次添加多个记录。要作到这一点，你需要把INSERT语句与SELECT语句结合起来，象这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INSERT mytable(first_column,second_column)  </div><div class="line">SELECT another_first,another_second  FROM anothertable WHERE another_first=&apos;Copy Me!&apos;;</div></pre></td></tr></table></figure></p>
+<p> 　　这个语句从anothertable拷贝记录到mytable.只有表anothertable中字段another_first的值为’Copy Me!’的记录才被拷贝。<br>　　当为一个表中的记录建立备份时，这种形式的INSERT语句是非常有用的。在删除一个表中的记录之前，你可以先用这种方法把它们拷贝到另一个表中。<br>　　如果你需要拷贝整个表，你可以使用SELECT INTO语句。例如，下面的语句创建了一个名为newtable的新表，该表包含表mytable的所有数据:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * INTO newtable FROM mytable;</div></pre></td></tr></table></figure></p>
+<p>　　你也可以指定只有特定的字段被用来创建这个新表。要做到这一点，只需在字段列表中指定你想要拷贝的字段。另外，你可以使用WHERE子句来限制拷贝到新表中的记录。下面的例子只拷贝字段second_columnd的值等于’Copy Me!’的记录的first_column字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT first_column INTO newtable  </div><div class="line">FROM mytable  </div><div class="line">WHERE second_column=&apos;Copy Me!&apos;;</div></pre></td></tr></table></figure></p>
+<p> 　　使用SQL修改已经建立的表是很困难的。例如，如果你向一个表中添加了一个字段，没有容易的办法来去除它。另外，如果你不小心把一个字段的数据类型给错了，你将没有办法改变它。但是，使用本节中讲述的SQL语句，你可以绕过这两个问题。<br>　　例如，假设你想从一个表中删除一个字段。使用SELECT INTO语句，你可以创建该表的一个拷贝，但不包含要删除的字段。这使你既删除了该字段，又保留了不想删除的数据。<br>　　如果你想改变一个字段的数据类型，你可以创建一个包含正确数据类型字段的新表。创建好该表后，你就可以结合使用UPDATE语句和SELECT语句，把原来表中的所有数据拷贝到新表中。通过这种方法，你既可以修改表的结构，又能保存原有的数据。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-优化SQL步骤&quot;&gt;&lt;a href=&quot;#1-优化SQL步骤&quot; class=&quot;headerlink&quot; title=&quot;1. 优化SQL步骤&quot;&gt;&lt;/a&gt;1. 优化SQL步骤&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;1-1-通过-show-status和应用特点了解各种-SQL的执行频率&quot;&gt;&lt;a href=&quot;#1-1-通过-show-status和应用特点了解各种-SQL的执行频率&quot; class=&quot;headerlink&quot; title=&quot;1.1. 通过 show status和应用特点了解各种 SQL的执行频率&quot;&gt;&lt;/a&gt;&lt;font color=&quot;blue&quot;&gt;1.1. 通过 show status和应用特点了解各种 SQL的执行频率&lt;/font&gt;&lt;/h2&gt;&lt;p&gt;　　通过 SHOW STATUS 可以提供服务器状态信息，也可以使用 mysqladmin extende d-status 命令获得。 SHOW STATUS 可以根据需要显示 session 级别的统计结果和 global级别的统计结果。&lt;br&gt;　　如显示当前session： &lt;strong&gt;&lt;em&gt;&lt;font color=&quot;red&quot;&gt;SHOW STATUS like “Com_%”; 全局级别：show global status;&lt;/font&gt;&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="sql" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/sql/"/>
+    
+    
+      <category term="数据库" scheme="http://lzrlizhirong.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="sql" scheme="http://lzrlizhirong.github.io/tags/sql/"/>
+    
+  </entry>
   
   <entry>
     <title>100个Linux常用命令总结</title>
@@ -997,43 +1136,6 @@
       <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="mac" scheme="http://lzrlizhirong.github.io/tags/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下brew安装gitk遇到错误Error in startup script: unknown color name &#39;lime&#39;</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/16/Mac%E4%B8%8Bbrew%E5%AE%89%E8%A3%85gitk%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AFError-in-startup-script-unknown-color-name-lime/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/16/Mac下brew安装gitk遇到错误Error-in-startup-script-unknown-color-name-lime/</id>
-    <published>2017-02-16T07:41:56.000Z</published>
-    <updated>2017-02-16T09:01:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>gitk 用home-brew, brew install git 以后，如果报错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Error in startup script: unknown color name &quot;lime&quot;</div><div class="line"></div><div class="line"> (processing &quot;-fore&quot; option)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&quot;</div><div class="line"></div><div class="line"> (procedure &quot;makewindow&quot; line 347)</div><div class="line"></div><div class="line"> invoked from within</div><div class="line"></div><div class="line">&quot;makewindow&quot;</div><div class="line"></div><div class="line"> (file &quot;/usr/local/bin/gitk&quot; line 12434)</div></pre></td></tr></table></figure></p>
-<p>解决方法一：</p>
-<p>brew cask install tcl</p>
-<p>解决方法二：</p>
-<p>编辑gitk文件，把相应的color删除或修改。</p>
-<p>解决方法三：</p>
-<p>在home目录下配一个.gitk文件，将相关color定义一下。<br><a id="more"></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;gitk 用home-brew, brew install git 以后，如果报错误：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Error in startup script: unknown color name &amp;quot;lime&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; (processing &amp;quot;-fore&amp;quot; option)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; invoked from within&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;quot;$ctext tag conf m2 -fore [lindex $mergecolors 2]&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; (procedure &amp;quot;makewindow&amp;quot; line 347)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; invoked from within&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;quot;makewindow&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; (file &amp;quot;/usr/local/bin/gitk&amp;quot; line 12434)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;解决方法一：&lt;/p&gt;
-&lt;p&gt;brew cask install tcl&lt;/p&gt;
-&lt;p&gt;解决方法二：&lt;/p&gt;
-&lt;p&gt;编辑gitk文件，把相应的color删除或修改。&lt;/p&gt;
-&lt;p&gt;解决方法三：&lt;/p&gt;
-&lt;p&gt;在home目录下配一个.gitk文件，将相关color定义一下。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://lzrlizhirong.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="git" scheme="http://lzrlizhirong.github.io/tags/git/"/>
-    
-      <category term="工具" scheme="http://lzrlizhirong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
