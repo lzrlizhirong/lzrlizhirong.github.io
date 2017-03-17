@@ -37,6 +37,29 @@
   </entry>
   
   <entry>
+    <title>Regular-Expression</title>
+    <link href="http://lzrlizhirong.github.io/2017/03/17/Regular-Expression/"/>
+    <id>http://lzrlizhirong.github.io/2017/03/17/Regular-Expression/</id>
+    <published>2017-03-17T02:40:50.000Z</published>
+    <updated>2017-03-17T02:43:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>正则表达式相关的材料收集，持续更新….<br><a id="more"></a><br><img src="/2017/03/17/Regular-Expression/../../../../images/zz01.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;正则表达式相关的材料收集，持续更新….&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="正则表达式" scheme="http://lzrlizhirong.github.io/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="正则表达式" scheme="http://lzrlizhirong.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>柔软的时光</title>
     <link href="http://lzrlizhirong.github.io/2017/03/03/the-soft-time/"/>
     <id>http://lzrlizhirong.github.io/2017/03/03/the-soft-time/</id>
@@ -1069,94 +1092,6 @@
       &lt;h1 id=&quot;目的：&quot;&gt;&lt;a href=&quot;#目的：&quot; class=&quot;headerlink&quot; title=&quot;目的：&quot;&gt;&lt;/a&gt;目的：&lt;/h1&gt;&lt;p&gt;让所有Spring开发变得更快，且让更多的人更快的进行Spring入门体验，提供“starter” POM来简化我们的Maven配置（也就是说使用Spring Boot只有配合maven/gradle等这种依赖管理工具才能发挥它的能力），不像以前，构建一个springmvc项目需要进行好多配置等。&lt;/p&gt;
 &lt;p&gt;提供一些非功能性的常见的大型项目类特性（如内嵌服务器、安全、度量、健康检查、外部化配置），如可以直接地内嵌Tomcat/Jetty（不需要单独去部署war包）&lt;/p&gt;
 &lt;p&gt;绝无代码生成，且无需XML配置&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://lzrlizhirong.github.io/tags/SpringBoot/"/>
-    
-      <category term="微服务" scheme="http://lzrlizhirong.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初试SpringBoot微框架</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/20/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/20/SpringBoot学习笔记/</id>
-    <published>2017-02-20T03:53:22.000Z</published>
-    <updated>2017-02-20T04:25:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Spring-Boot是什么，解决哪些问题"><a href="#1-Spring-Boot是什么，解决哪些问题" class="headerlink" title="1. Spring Boot是什么，解决哪些问题"></a>1. Spring Boot是什么，解决哪些问题</h1><blockquote>
-<p>   1) Spring Boot使编码变简单<br>     2) Spring Boot使配置变简单<br>     3) Spring Boot使部署变简单<br>     4) Spring Boot使监控变简单</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="2-Spring-Boot在平台中的定位，相关技术如何融合"><a href="#2-Spring-Boot在平台中的定位，相关技术如何融合" class="headerlink" title="2. Spring Boot在平台中的定位，相关技术如何融合"></a>2. Spring Boot在平台中的定位，相关技术如何融合</h1><blockquote>
-<p>   1) SpringBoot与SEDA +MicroService + RESTful<br>     2) SpringBoot与Mock</p>
-</blockquote>
-<h1 id="3-采用了SpringBoot之后，技术管理应该如何进行"><a href="#3-采用了SpringBoot之后，技术管理应该如何进行" class="headerlink" title="3. 采用了SpringBoot之后，技术管理应该如何进行"></a>3. 采用了SpringBoot之后，技术管理应该如何进行</h1><p>首先，我们来看一下spring boot是什么，它帮助我们解决了哪些问题：<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb1.jpeg" alt=""><br>SpringBoot是伴随着Spring4.0诞生的；</p>
-<p>从字面理解，Boot是引导的意思，因此SpringBoot帮助开发者快速搭建Spring框架；</p>
-<p>SpringBoot帮助开发者快速启动一个Web容器；</p>
-<p>SpringBoot继承了原有Spring框架的优秀基因；</p>
-<p>SpringBoot简化了使用Spring的过程。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb2.jpeg" alt=""><br>Spring由于其繁琐的配置，一度被人认为“配置地狱”，各种XML、Annotation配置，让人眼花缭乱，而且如果出错了也很难找出原因。</p>
-<p>Spring Boot更多的是采用Java Config的方式，对Spring进行配置。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb3.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb4.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb5.jpeg" alt=""><br>可以看到，采用了spring-boot-start-actuator之后，直接以REST的方式，获取进程的运行期性能参数。</p>
-<p>当然这些metrics有些是有敏感数据的，spring-boot-start-actuator为此提供了一些Basic Authentication认证的方案，这些方案在实际应用过程中也是不足的。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb6.jpeg" alt=""></p>
-<p>Spring Boot作为一个微框架，离微服务的实现还是有距离的。</p>
-<p>没有提供相应的服务发现和注册的配套功能，自身的acturator所提供的监控功能，也需要与现有的监控对接。没有配套的安全管控方案，对于REST的落地，还需要自行结合实际进行URI的规范化工作。</p>
-<p>下面，我们研究一下Spring Boot在平台中的定位，相关技术如何融合。<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb7.jpeg" alt=""></p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb8.jpeg" alt=""><br>上图比较复杂，整体是采用SEDA，也就是Stage-EDA。可以看到，整体是以处理顺序进行展示的，响应过程类似。在处理过程中，主要会有前置过滤，核心功能处理，后置过滤几大部分。</p>
-<p>图中的过滤器都是可插拔式的，并且可以根据实际场景进行扩展开发。每个过滤器都是Stage，比如ClientInstance合法性检查、调用鉴权、解密、限流等等。</p>
-<p>一个请求Stage与Stage的转换，实现上是切换不同的线程池，并以EDA的方式驱动。</p>
-<p>对于业务逻辑的开发者而言，只需要关心CORE部分的业务逻辑实现，其他的非功能都由框架进行统一实现。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb9.jpeg" alt=""></p>
-<p>Mock不应当再是测试的专有名词了，当然对于测试这个角色而言，mockito这样的工具，依然可以为他们提升不少效率。</p>
-<p>SpringBoot为创建REST服务提供了简便的途径，相比之下，采用阿里的dubbo在做多团队、多进程联调时，mock的难度就陡增。</p>
-<p>Mock是解耦并行开发的利器，在理性的情况下，软件从开发期Mock联调，到开发与开发的真实联调，只需要切换一个依赖的域名即可，比如：<br>mockURI:<a href="http://mock.service.net/v1/function?param1=value1" target="_blank" rel="external">http://mock.service.net/v1/function?param1=value1</a><br>devURI:<a href="http://dev.service.net/v1/function?param1=value1" target="_blank" rel="external">http://dev.service.net/v1/function?param1=value1</a></p>
-<p>而上述的域名切换，只需要在开发期定义好一个配置项，在做环境切换的时候自动注入即可，省时、省心、省力。</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb10.jpeg" alt=""><br>如上图和docker的集成可以有AB两种方案：</p>
-<ul>
-<li>A方案的核心是，把docker作为操作系统环境的交付基线，也就是不同的fat jar 使用相同的操作系统版本、相同的JVM环境。但对于docker image来说都是一样的。</li>
-<li>B方案的核心是，不同的fat jar，独立的编译为docker image，在启动时直接启动带有特定版本的image。</li>
-</ul>
-<p>A相比与B方案的特点是对于docker registry（也就是docker的镜像仓库）的依赖性较低，对于前期编译过程的要求也较低。</p>
-<p>采用了Spring Boot之后，技术管理应该如何进行？<br><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb11.jpeg" alt=""><br>正因为Spring Boot是与Spring一脉相承的，所以对于广大的Java开发者而言，对于Spring的学习成本几乎为零。</p>
-<p>在实践Spring Boot时学习重点，或者说思维方式改变的重点在于：</p>
-<ol>
-<li>对于REST的理解，这一点尤为重要，需要从设计、开发多个角色达成共识，很多时候都是对于HTTP 1.1协议以及REST的精髓不理解，导致REST被「盲用」而产生一些不好的效果。</li>
-<li>对于YAML的理解和对于JavaConfig的理解，这两点相对较为简单，本质上是简化了xml文件，并提供等价的配置表述能力。</li>
-</ol>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb12.jpeg" alt=""></p>
-<blockquote>
-<ol>
-<li>丰富的工具链为SpringBoot的推广带来了利好。</li>
-<li>SpringBoot的工具链主要来自于两个方面：<br>1) 原有Spring积累的工具链；<br>2) SpringMVC或者其他REST框架使用HTTP协议，使得HTTP丰富的工具成为SpringBoot天然的资源。</li>
-</ol>
-</blockquote>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb13.jpeg" alt=""></p>
-<p>SpringBoot自身对于前面提到的配置文件：“application.yml”提供了多个「Profile」，可以便于开发者描述不同环境的配置，这些配置例如数据库的连接地址、用户名和密码。</p>
-<p>但是对于企业用户而言，把不同环境的配置，写到同一个配置文件中，是极其不安全的，是一个非常危险的动作。</p>
-<p>有一个经常被提及的例子是，随着开源的进行，很多互联网公司，都由于把相关的代码提交到github之类的开源代码社区，并且没有对代码进行严格的配置审查，导致一些”password”被公开。有些不良用心的人，就利用搜索工具，专门去挖掘这些关键字，进而导致数据库被「拖库」。</p>
-<p>所以对于企业用户，更多的应该是采用集中式的配置管理系统，将不同环境的配置严格区分地存放。</p>
-<p>虽然SpringBoot的actuator自身提供了基于「用户名+口令」的最简单的认证方式，但它保护的是对框架自身运行期的性能指标敏感数据的最基本的保护。这种保护在实际应用过程中，「用户名+口令」的管理是缺乏的，「用户名+口令」的安全配置过程是缺失的。</p>
-<p>SpringBoot也不提供对于我们自己开发的功能的任何防护功能。</p>
-<p>一般来讲，一个安全的信道（信息传输的通道），需要通信双方在进行正式的信息传输之前对对方进行身份认证，服务提供方还需要在此基础之上，对请求方的请求进行权限的校验，以确保业务安全。这些内容也需要基于SpringBoot进行外围的安全扩展，例如采用前面提到的S-EDA进行进程级别的安全管控。这些还需要配套的安全服务提供支持。</p>
-<p>一般来说，只要企业与互联网对接，那么随便一个面向消费者的「市场活动」，就有可能为企业带来井喷的流量。</p>
-<p>传统企业内，更多的系统是管理信息类的支撑系统，这类系统在设计时的主要用户是企业内部员工以及有限的外部供应商。这类系统存在于企业内部的时间一直很长，功能耦合也很多，在功能解耦前，是非常不适合的，或者说绝对不可以直接为互联网的用户进行服务的。</p>
-<p>SpringBoot自身并没有提供这样的流控措施，所以需要结合前面提到的S-EDA进行流量的控制，并结合下层的水平扩展能力（例如，Kubernets）进行流量负载合理的动态扩容。</p>
-<p>另外，在长业务流程的设计上，也尽可能地采用异步的方式，比如接口调用返回的是一个「受理号」，而不是业务的处理结果，避免井喷业务到来时，同步调用所带来的阻塞导致系统迅速崩溃，这些也都是SpringBoot自身并不解决的问题。</p>
-<p>以上是我分享的主要内容，下面我们总结一下：</p>
-<p><img src="/2017/02/20/SpringBoot学习笔记/../../../../images/sb14.jpeg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;1-Spring-Boot是什么，解决哪些问题&quot;&gt;&lt;a href=&quot;#1-Spring-Boot是什么，解决哪些问题&quot; class=&quot;headerlink&quot; title=&quot;1. Spring Boot是什么，解决哪些问题&quot;&gt;&lt;/a&gt;1. Spring Boot是什么，解决哪些问题&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;   1) Spring Boot使编码变简单&lt;br&gt;     2) Spring Boot使配置变简单&lt;br&gt;     3) Spring Boot使部署变简单&lt;br&gt;     4) Spring Boot使监控变简单&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     
