@@ -89,16 +89,19 @@
 
 
 
-<meta name="description" content="题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
+<meta name="description" content="1.Two Sum(两数之和)
+题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-Two Sum(两数之和)">
+<meta property="og:title" content="LeetCode-1.Two Sum(两数之和)">
 <meta property="og:url" content="http://lzrlizhirong.github.io/2018/03/29/LeetCode-Two-Sum-两数之和/index.html">
 <meta property="og:site_name" content="参差行者">
-<meta property="og:description" content="题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
-<meta property="og:updated_time" content="2018-03-29T08:02:18.000Z">
+<meta property="og:description" content="1.Two Sum(两数之和)
+题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
+<meta property="og:updated_time" content="2018-03-29T08:19:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode-Two Sum(两数之和)">
-<meta name="twitter:description" content="题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
+<meta name="twitter:title" content="LeetCode-1.Two Sum(两数之和)">
+<meta name="twitter:description" content="1.Two Sum(两数之和)
+题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。">
 
 
 
@@ -132,7 +135,7 @@
 
 
 
-  <title> LeetCode-Two Sum(两数之和) | 参差行者 </title>
+  <title> LeetCode-1.Two Sum(两数之和) | 参差行者 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -481,7 +484,7 @@
             
             
               
-                LeetCode-Two Sum(两数之和)
+                LeetCode-1.Two Sum(两数之和)
               
             
           </h1>
@@ -564,7 +567,8 @@
       
 
       
-        <p><font color="red">题目:</font><br>给定一个整数数列，找出其中和为特定值的那两个数。<br>你可以假设每个输入都只会有一种答案，同样的元素不能被重用。<br><a id="more"></a><br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">给定 nums = [2, 7, 11, 15], target = 9</div><div class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</div><div class="line">所以返回 [0, 1]</div></pre></td></tr></table></figure></p>
+        <p><strong>1.Two Sum(两数之和)</strong></p>
+<p><font color="red">题目:</font><br>给定一个整数数列，找出其中和为特定值的那两个数。<br>你可以假设每个输入都只会有一种答案，同样的元素不能被重用。<br><a id="more"></a><br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">给定 nums = [2, 7, 11, 15], target = 9</div><div class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</div><div class="line">所以返回 [0, 1]</div></pre></td></tr></table></figure></p>
 <p>英文版：<br>Given an array of integers, return indices of the two numbers such that they add up to a specific target.<br>You may assume that each input would have exactly one solution.<br>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Given nums = [2, 7, 11, 15], target = 9,</div><div class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</div><div class="line">return [0, 1].</div></pre></td></tr></table></figure></p>
 <p><font color="red">思路：</font><br>这道题一看就知道用暴力搜索肯定没问题，而且猜到OJ肯定不会允许用暴力搜索这么简单的方法，于是去试了一下，果然是Time Limit Exceeded，这个算法的时间复杂度是O(n^2)。<br>那么只能想个O(n)的算法来实现，整个实现步骤为：先遍历一遍数组，建立map数据，然后再遍历一遍，开始查找，找到则记录index。<br>代码如下：</p>
 <p><font color="red">解法一：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int[] twoSum(int[] nums, int target) &#123;</div><div class="line">        HashMap&lt;Integer, Integer&gt; m = new HashMap&lt;Integer, Integer&gt;();</div><div class="line">        int[] res = new int[2];</div><div class="line">        for (int i = 0; i &lt; nums.length; ++i) &#123;</div><div class="line">            m.put(nums[i], i);</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; nums.length; ++i) &#123;</div><div class="line">            int t = target - nums[i];</div><div class="line">            if (m.containsKey(t) &amp;&amp; m.get(t) != i) &#123;</div><div class="line">                res[0] = i;</div><div class="line">                res[1] = m.get(t);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -620,8 +624,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/29/LeetCode刷题笔记总纲/" rel="prev" title="LeetCode刷题笔记总纲">
-                LeetCode刷题笔记总纲 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/29/LeetCode-Remove-Duplicates-from-Sorted-Array-从排序数组中删除重复项/" rel="prev" title="LeetCode-26.Remove Duplicates from Sorted Array(从排序数组中删除重复项)">
+                LeetCode-26.Remove Duplicates from Sorted Array(从排序数组中删除重复项) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -638,7 +642,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2018/03/29/LeetCode-Two-Sum-两数之和/"
-     data-title="LeetCode-Two Sum(两数之和)"
+     data-title="LeetCode-1.Two Sum(两数之和)"
      data-content=""
      data-url="http://lzrlizhirong.github.io/2018/03/29/LeetCode-Two-Sum-两数之和/">
   <div class="ds-share-inline">
@@ -671,7 +675,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2018/03/29/LeetCode-Two-Sum-两数之和/"
-           data-title="LeetCode-Two Sum(两数之和)" data-url="http://lzrlizhirong.github.io/2018/03/29/LeetCode-Two-Sum-两数之和/">
+           data-title="LeetCode-1.Two Sum(两数之和)" data-url="http://lzrlizhirong.github.io/2018/03/29/LeetCode-Two-Sum-两数之和/">
       </div>
     
   </div>
@@ -709,7 +713,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
