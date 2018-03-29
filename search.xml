@@ -12,19 +12,26 @@
     <entry>
       <title><![CDATA[LeetCode刷题笔记总纲]]></title>
       <url>%2F2019%2F03%2F29%2FLeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2%2F</url>
-      <content type="text"><![CDATA[本文主要记录博主LeetCode上刷题的历程，会总结解题思路及难点要点。数组类1、Two Sum两数之和26、Remove Duplicates from Sorted Array从排序数组中删除重复项]]></content>
+      <content type="text"><![CDATA[本文主要记录博主LeetCode上刷题的历程，会总结解题思路及难点要点。数组类001、Two Sum两数之和026、Remove Duplicates from Sorted Array从排序数组中删除重复项027、Remove Element移除元素]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[26.从排序数组中删除重复项]]></title>
+      <title><![CDATA[LeetCode-027.移除元素]]></title>
+      <url>%2F2018%2F03%2F29%2FLeetCode-027-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%2F</url>
+      <content type="text"><![CDATA[题目:给定一个数组和一个值，在这个数组中原地移除指定值和返回移除后新的数组长度。不要为其他数组分配额外空间，你必须使用 O(1) 的额外内存原地修改这个输入数组。元素的顺序可以改变。超过返回的新的数组长度以外的数据无论是什么都没关系。示例:12给定 nums = [3,2,2,3]，val = 3，你的函数应该返回 长度 = 2，数组的前两个元素是 2。 英文版：Remove ElementGiven an array and a value, remove all instances of that value in place and return the new length.The order of elements can be changed. It doesn’t matter what you leave beyond the new length.Example:123Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1]. 思路：这道题让我们移除一个数组中和给定值相同的数字，并返回新的数组的长度。是一道比较容易的题，我们只需要一个变量用来计数，然后遍历原数组，如果当前的值和给定值不同，我们就把当前值覆盖计数变量的位置，并将计数变量加1。代码如下：123456789class Solution &#123; public int removeElement(int[] nums, int val) &#123; int newLength = 0; for (int i = 0; i &lt; nums.length; ++i) &#123; if (nums[i] != val) nums[newLength++] = nums[i]; &#125; return newLength; &#125;&#125; 返回LeetCode刷题笔记总纲]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[026.从排序数组中删除重复项]]></title>
       <url>%2F2018%2F03%2F29%2FLeetCode-Remove-Duplicates-from-Sorted-Array-%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9%2F</url>
       <content type="text"><![CDATA[题目:给定一个有序数组，你需要原地删除其中的重复内容，使每个元素只出现一次,并返回新的长度。不要另外定义一个数组，您必须通过用 O(1) 额外内存原地修改输入的数组来做到这一点。示例:123给定数组: nums = [1,1,2],你的函数应该返回新长度 2, 并且原数组nums的前两个元素必须是1和2不需要理会新的数组长度后面的元素 英文版：Remove Duplicates from Sorted ArrayGiven a sorted array, remove the duplicates in place such that each element appear only once and return the new length.Do not allocate extra space for another array, you must do this in place with constant memory.Example:12Given input array A = [1,1,2],Your function should return length = 2, and A is now [1,2]. 思路：这道题要我们从有序数组中去除重复项，和之前那道 Remove Duplicates from Sorted List(移除有序链表中的重复项)的题很类似，但是要简单一些，因为毕竟数组的值可以通过下标直接访问，而链表不行。那么这道题的解题思路是，我们使用快慢指针来记录遍历的坐标，最开始时两个指针都指向第一个数字，如果两个指针指的数字相同，则快指针向前走一步，如果不同，则两个指针都向前走一步，这样当快指针走完整个数组后，慢指针当前的坐标加1就是数组中不同数字的个数.代码如下： 解法一：123456789101112class Solution &#123;public: int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123; if (nums.length == 0) return 0; int pre = 0, cur = 0, n = nums.length; while (cur &lt; n) &#123; if (nums[pre] == nums[cur]) ++cur; else nums[++pre] = nums[cur++]; &#125; return pre + 1; &#125;&#125; 我们也可以用for循环来写，这里的j就是上面解法中的pre，i就是cur，所以本质上都是一样的。 解法二：12345678910class Solution &#123; public int removeDuplicates(int[] nums) &#123; if (nums.length == 0) return 0; int j = 0, n = nums.length; for (int i = 0; i &lt; n; ++i) &#123; if (nums[i] != nums[j]) nums[++j] = nums[i]; &#125; return j + 1; &#125;&#125; 类似题目：Remove Duplicates from Sorted ListRemove Duplicates from Sorted List IIRemove Duplicates from Sorted Array IIRemove Element 返回LeetCode刷题笔记总纲]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[1.两数之和]]></title>
+      <title><![CDATA[001.两数之和]]></title>
       <url>%2F2018%2F03%2F29%2FLeetCode-Two-Sum-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%2F</url>
       <content type="text"><![CDATA[题目:给定一个整数数列，找出其中和为特定值的那两个数。你可以假设每个输入都只会有一种答案，同样的元素不能被重用。示例:123给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1] 英文版：Two SumGiven an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would have exactly one solution.Example:123Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1]. 思路：这道题一看就知道用暴力搜索肯定没问题，而且猜到OJ肯定不会允许用暴力搜索这么简单的方法，于是去试了一下，果然是Time Limit Exceeded，这个算法的时间复杂度是O(n^2)。那么只能想个O(n)的算法来实现，整个实现步骤为：先遍历一遍数组，建立map数据，然后再遍历一遍，开始查找，找到则记录index。代码如下： 解法一：123456789101112131415161718public class Solution &#123; public int[] twoSum(int[] nums, int target) &#123; HashMap&lt;Integer, Integer&gt; m = new HashMap&lt;Integer, Integer&gt;(); int[] res = new int[2]; for (int i = 0; i &lt; nums.length; ++i) &#123; m.put(nums[i], i); &#125; for (int i = 0; i &lt; nums.length; ++i) &#123; int t = target - nums[i]; if (m.containsKey(t) &amp;&amp; m.get(t) != i) &#123; res[0] = i; res[1] = m.get(t); break; &#125; &#125; return res; &#125;&#125; 可以写的更加简洁一些，把两个for循环合并成一个。 解法二：123456789101112131415public class Solution &#123; public int[] twoSum(int[] nums, int target) &#123; HashMap&lt;Integer, Integer&gt; m = new HashMap&lt;Integer, Integer&gt;(); int[] res = new int[2]; for (int i = 0; i &lt; nums.length; ++i) &#123; if (m.containsKey(target - nums[i])) &#123; res[0] = i; res[1] = m.get(target - nums[i]); break; &#125; m.put(nums[i], i); &#125; return res; &#125;&#125; 类似题目：4Sum3Sum Smaller3Sum Closest3SumTwo Sum III - Data structure designTwo Sum II - Input array is sorted 返回LeetCode刷题笔记总纲]]></content>
     </entry>
