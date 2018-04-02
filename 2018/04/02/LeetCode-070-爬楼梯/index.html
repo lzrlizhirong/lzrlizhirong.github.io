@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/index.html">
 <meta property="og:site_name" content="李志荣">
 <meta property="og:description" content="题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.">
-<meta property="og:updated_time" content="2018-04-02T08:01:03.000Z">
+<meta property="og:updated_time" content="2018-04-02T08:02:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="070.爬楼梯">
 <meta name="twitter:description" content="题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.">
@@ -574,7 +574,7 @@
 <p>我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。</p>
 <p><font color="red">解法二：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        int a = 1, b = 1;</div><div class="line">        while (n-- &gt; 0) &#123;</div><div class="line">            b += a; </div><div class="line">            a = b - a;</div><div class="line">        &#125;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
-<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
+<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-746-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><a href="http://lizhirong.club/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/" target="_blank" rel="external"><font color="red">返回LeetCode刷题笔记总纲</font></a></p>
 
       

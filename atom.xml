@@ -41,7 +41,7 @@
     <link href="http://lzrlizhirong.github.io/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/"/>
     <id>http://lzrlizhirong.github.io/2019/03/29/LeetCode刷题笔记总纲/</id>
     <published>2019-03-29T07:19:30.000Z</published>
-    <updated>2018-04-02T07:59:55.000Z</updated>
+    <updated>2018-04-02T08:02:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要记录在LeetCode上刷题的历程，会总结解题思路及难点要点。<br>坚持每天至少更新一题！<br><a id="more"></a><br><strong><font color="red">数组</font></strong><br>001、<a href="http://lizhirong.club/2018/03/29/LeetCode-Two-Sum-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_blank" rel="external">Two Sum 两数之和</a><br>026、<a href="http://lizhirong.club/2018/03/29/LeetCode-Remove-Duplicates-from-Sorted-Array-%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/" target="_blank" rel="external">Remove Duplicates from Sorted Array 从排序数组中删除重复项</a><br>027、<a href="http://lizhirong.club/2018/03/29/LeetCode-027-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" target="_blank" rel="external">Remove Element 移除元素</a><br>035、搜索插入位置<br>053、最大子序和<br>066、加一<br>088、合并两个有序数组<br>118、帕斯卡三角形<br>119、帕斯卡三角形 II<br>121、买卖股票的最佳时机<br>122、买卖股票的最佳时机 II<br>167、两数之和 II - 输入有序数组<br>169、求众数<br>189、旋转数组<br>217、存在重复<br>219、存在重复 II<br>268、缺失数字<br>283、移动零<br>414、第三大的数<br>448、找到所有数组中消失的数字<br>485、最大连续1的个数<br>532、K-diff Pairs in an Array<br>561、数组拆分 I<br>566、重塑矩阵<br>581、最短无序连续子数组<br>605、种花问题<br>628、三个数的最大乘积<br>643、子数组最大平均数 I<br>661、图片平滑器<br>665、非递减数列<br>674、最长连续递增序列<br>695、岛屿的最大面积<br>697、Degree of an Array<br>717、1比特与2比特字符<br>724、寻找数组的中心索引<br>746、使用最小花费爬楼梯<br>747、至少是其他数字两倍的最大数<br>766、托普利茨矩阵 </p>
 <p><strong><font color="red">哈希表</font></strong><br>001、<a href="http://lizhirong.club/2018/03/29/LeetCode-Two-Sum-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_blank" rel="external">Two Sum 两数之和</a><br>136、只出现一次的数字<br>202、快乐数<br>204、计数质数<br>205、同构字符串<br>217、存在重复<br>219、存在重复 II<br>242、有效的字母异位词<br>290、单词模式<br>349、两个数组的交集<br>350、两个数组的交集 II<br>387、字符串中的第一个唯一字符<br>389、找不同<br>409、最长回文串<br>438、Find All Anagrams in a String<br>447、Number of Boomerangs<br>463、Island Perimeter<br>500、键盘行<br>575、Distribute Candies<br>594、最长和谐子序列<br>599、两个列表的最小索引总和<br>645、Set Mismatch<br>690、Employee Importance<br>720、词典中最长的单词<br>771、宝石与石头</p>
@@ -56,7 +56,7 @@
 <p><strong><font color="red">双指针</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">二分查找</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">分治算法</font></strong><br>待续、、、、</p>
-<p><strong><font color="red">动态规划</font></strong><br>070、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Climbing Stairs 爬楼梯</a><br>746、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
+<p><strong><font color="red">动态规划</font></strong><br>070、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Climbing Stairs 爬楼梯</a><br>746、<a href="http://lizhirong.club/2018/04/02/LeetCode-746-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><strong><font color="red">回溯算法</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">贪心算法</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">深度优先搜索</font></strong><br>待续、、、、</p>
@@ -135,7 +135,7 @@
     <link href="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/"/>
     <id>http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/</id>
     <published>2018-04-02T06:15:10.000Z</published>
-    <updated>2018-04-02T08:01:03.000Z</updated>
+    <updated>2018-04-02T08:02:42.000Z</updated>
     
     <content type="html"><![CDATA[<p><font color="red">题目:</font><br>你正在爬楼梯。需要 n 步你才能到达顶部。<br>每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？<br>注意：给定 n 将是一个正整数.<br><a id="more"></a><br>示例1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输入： 2</div><div class="line">输出： 2</div><div class="line">说明： 有两种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步</div><div class="line">2.  2 步</div></pre></td></tr></table></figure></p>
 <p>示例2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">输入： 3</div><div class="line">输出： 3</div><div class="line">说明： 有三种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步 + 1 步</div><div class="line">2.  1 步 + 2 步</div><div class="line">3.  2 步 + 1 步</div></pre></td></tr></table></figure></p>
@@ -147,7 +147,7 @@
 <p>我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。</p>
 <p><font color="red">解法二：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        int a = 1, b = 1;</div><div class="line">        while (n-- &gt; 0) &#123;</div><div class="line">            b += a; </div><div class="line">            a = b - a;</div><div class="line">        &#125;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
-<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
+<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-746-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><a href="http://lizhirong.club/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/" target="_blank" rel="external"><font color="red">返回LeetCode刷题笔记总纲</font></a></p>
 ]]></content>
     
