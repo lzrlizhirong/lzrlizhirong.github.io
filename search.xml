@@ -17,6 +17,13 @@
 
     
     <entry>
+      <title><![CDATA[LeetCode-070.爬楼梯]]></title>
+      <url>%2F2018%2F04%2F02%2FLeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF%2F</url>
+      <content type="text"><![CDATA[题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.示例1:123456输入： 2输出： 2说明： 有两种方法可以爬到顶端。1. 1 步 + 1 步2. 2 步 示例2:1234567输入： 3输出： 3说明： 有三种方法可以爬到顶端。1. 1 步 + 1 步 + 1 步2. 1 步 + 2 步3. 2 步 + 1 步 英文版：Climbing StairsYou are climbing a stair case. It takes n steps to reach to the top.Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top? 思路：这个爬梯子问题最开始看的时候没搞懂是让干啥的，后来看了别人的分析后，才知道实际上跟斐波那契数列非常相似，假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第n-1层一步上来的，要不就是从n-2层2步上来的，所以递推公式非常容易的就得出了：dp[n] = dp[n-1] + dp[n-2]。由于斐波那契额数列的求解可以用递归，所以我最先尝试了递归，拿到OJ上运行，显示Time Limit Exceeded，就是说运行时间超了，因为递归计算了很多分支，效率很低，这里需要用动态规划 (Dynamic Programming) 来提高效率。代码如下： 解法一：123456789101112public class Solution &#123; public int climbStairs(int n) &#123; if (n &lt;= 1) return 1; int[] dp = new int[n]; dp[0] = 1; //爬到第一层的方法，只有一种 dp[1] = 2; //爬到第二层的方法，有两种，要么是一次一步爬上去，要么是直接两步上去 for (int i = 2; i &lt; n; ++i) &#123; dp[i] = dp[i - 1] + dp[i - 2]; &#125; return dp[n - 1]; &#125;&#125; 我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。 解法二：12345678910public class Solution &#123; public int climbStairs(int n) &#123; int a = 1, b = 1; while (n-- &gt; 0) &#123; b += a; a = b - a; &#125; return a; &#125;&#125; 参考资料：https://discuss.leetcode.com/topic/17002/3-4-short-lines-in-every-languagehttps://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly 返回LeetCode刷题笔记总纲]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[027.移除元素]]></title>
       <url>%2F2018%2F03%2F29%2FLeetCode-027-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%2F</url>
       <content type="text"><![CDATA[题目:给定一个数组和一个值，在这个数组中原地移除指定值和返回移除后新的数组长度。不要为其他数组分配额外空间，你必须使用 O(1) 的额外内存原地修改这个输入数组。元素的顺序可以改变。超过返回的新的数组长度以外的数据无论是什么都没关系。示例:12给定 nums = [3,2,2,3]，val = 3，你的函数应该返回 长度 = 2，数组的前两个元素是 2。 英文版：Remove ElementGiven an array and a value, remove all instances of that value in place and return the new length.The order of elements can be changed. It doesn’t matter what you leave beyond the new length.Example:123Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1]. 思路：这道题让我们移除一个数组中和给定值相同的数字，并返回新的数组的长度。是一道比较容易的题，我们只需要一个变量用来计数，然后遍历原数组，如果当前的值和给定值不同，我们就把当前值覆盖计数变量的位置，并将计数变量加1。代码如下：123456789class Solution &#123; public int removeElement(int[] nums, int val) &#123; int newLength = 0; for (int i = 0; i &lt; nums.length; ++i) &#123; if (nums[i] != val) nums[newLength++] = nums[i]; &#125; return newLength; &#125;&#125; 返回LeetCode刷题笔记总纲]]></content>
