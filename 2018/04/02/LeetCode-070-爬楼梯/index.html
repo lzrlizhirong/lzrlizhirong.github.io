@@ -91,13 +91,13 @@
 
 <meta name="description" content="题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-070.爬楼梯">
+<meta property="og:title" content="070.爬楼梯">
 <meta property="og:url" content="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/index.html">
 <meta property="og:site_name" content="李志荣">
 <meta property="og:description" content="题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.">
-<meta property="og:updated_time" content="2018-04-02T06:45:02.000Z">
+<meta property="og:updated_time" content="2018-04-02T08:01:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode-070.爬楼梯">
+<meta name="twitter:title" content="070.爬楼梯">
 <meta name="twitter:description" content="题目:你正在爬楼梯。需要 n 步你才能到达顶部。每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？注意：给定 n 将是一个正整数.">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title> LeetCode-070.爬楼梯 | 李志荣 </title>
+  <title> 070.爬楼梯 | 李志荣 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -481,7 +481,7 @@
             
             
               
-                LeetCode-070.爬楼梯
+                070.爬楼梯
               
             
           </h1>
@@ -566,12 +566,15 @@
       
         <p><font color="red">题目:</font><br>你正在爬楼梯。需要 n 步你才能到达顶部。<br>每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？<br>注意：给定 n 将是一个正整数.<br><a id="more"></a><br>示例1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输入： 2</div><div class="line">输出： 2</div><div class="line">说明： 有两种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步</div><div class="line">2.  2 步</div></pre></td></tr></table></figure></p>
 <p>示例2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">输入： 3</div><div class="line">输出： 3</div><div class="line">说明： 有三种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步 + 1 步</div><div class="line">2.  1 步 + 2 步</div><div class="line">3.  2 步 + 1 步</div></pre></td></tr></table></figure></p>
-<p>英文版：<br><strong>Climbing Stairs</strong><br>You are climbing a stair case. It takes n steps to reach to the top.<br>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p>英文版：<br><strong>Climbing Stairs</strong><br>You are climbing a stair case. It takes n steps to reach to the top.<br>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?<br>Note: Given n will be a positive integer.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Input: 2</div><div class="line">Output: 2</div><div class="line">Explanation:  There are two ways to climb to the top.</div><div class="line"></div><div class="line">1. 1 step + 1 step</div><div class="line">2. 2 steps</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Input: 3</div><div class="line">Output: 3</div><div class="line">Explanation:  There are three ways to climb to the top.</div><div class="line"></div><div class="line">1. 1 step + 1 step + 1 step</div><div class="line">2. 1 step + 2 steps</div><div class="line">3. 2 steps + 1 step</div></pre></td></tr></table></figure></p>
 <p><font color="red">思路：</font><br>这个爬梯子问题最开始看的时候没搞懂是让干啥的，后来看了别人的分析后，才知道实际上跟斐波那契数列非常相似，<br>假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第n-1层一步上来的，要不就是从n-2层2步上来的，<br>所以递推公式非常容易的就得出了：dp[n] = dp[n-1] + dp[n-2]。<br>由于斐波那契额数列的求解可以用递归，所以我最先尝试了递归，拿到OJ上运行，显示Time Limit Exceeded，就是说运行时间超了，因为递归计算了很多分支，效率很低，<br>这里需要用动态规划 (Dynamic Programming) 来提高效率。<br>代码如下：</p>
 <p><font color="red">解法一：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        if (n &lt;= 1) return 1;</div><div class="line">        int[] dp = new int[n];</div><div class="line">        dp[0] = 1; //爬到第一层的方法，只有一种</div><div class="line">        dp[1] = 2; //爬到第二层的方法，有两种，要么是一次一步爬上去，要么是直接两步上去</div><div class="line">        for (int i = 2; i &lt; n; ++i) &#123;</div><div class="line">            dp[i] = dp[i - 1] + dp[i - 2];</div><div class="line">        &#125;</div><div class="line">        return dp[n - 1];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。</p>
 <p><font color="red">解法二：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        int a = 1, b = 1;</div><div class="line">        while (n-- &gt; 0) &#123;</div><div class="line">            b += a; </div><div class="line">            a = b - a;</div><div class="line">        &#125;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/17002/3-4-short-lines-in-every-language" target="_blank" rel="external">https://discuss.leetcode.com/topic/17002/3-4-short-lines-in-every-language</a><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
+<p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
+<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><a href="http://lizhirong.club/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/" target="_blank" rel="external"><font color="red">返回LeetCode刷题笔记总纲</font></a></p>
 
       
@@ -623,8 +626,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/29/LeetCode刷题笔记总纲/" rel="prev" title="LeetCode刷题笔记总纲">
-                LeetCode刷题笔记总纲 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/02/LeetCode-746-使用最小花费爬楼梯/" rel="prev" title="746.使用最小花费爬楼梯">
+                746.使用最小花费爬楼梯 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -652,7 +655,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2018/04/02/LeetCode-070-爬楼梯/"
-           data-title="LeetCode-070.爬楼梯" data-url="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/">
+           data-title="070.爬楼梯" data-url="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/">
       </div>
     
   </div>
@@ -690,7 +693,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -41,7 +41,7 @@
     <link href="http://lzrlizhirong.github.io/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/"/>
     <id>http://lzrlizhirong.github.io/2019/03/29/LeetCode刷题笔记总纲/</id>
     <published>2019-03-29T07:19:30.000Z</published>
-    <updated>2018-04-02T06:47:22.000Z</updated>
+    <updated>2018-04-02T07:59:55.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要记录在LeetCode上刷题的历程，会总结解题思路及难点要点。<br>坚持每天至少更新一题！<br><a id="more"></a><br><strong><font color="red">数组</font></strong><br>001、<a href="http://lizhirong.club/2018/03/29/LeetCode-Two-Sum-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_blank" rel="external">Two Sum 两数之和</a><br>026、<a href="http://lizhirong.club/2018/03/29/LeetCode-Remove-Duplicates-from-Sorted-Array-%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/" target="_blank" rel="external">Remove Duplicates from Sorted Array 从排序数组中删除重复项</a><br>027、<a href="http://lizhirong.club/2018/03/29/LeetCode-027-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" target="_blank" rel="external">Remove Element 移除元素</a><br>035、搜索插入位置<br>053、最大子序和<br>066、加一<br>088、合并两个有序数组<br>118、帕斯卡三角形<br>119、帕斯卡三角形 II<br>121、买卖股票的最佳时机<br>122、买卖股票的最佳时机 II<br>167、两数之和 II - 输入有序数组<br>169、求众数<br>189、旋转数组<br>217、存在重复<br>219、存在重复 II<br>268、缺失数字<br>283、移动零<br>414、第三大的数<br>448、找到所有数组中消失的数字<br>485、最大连续1的个数<br>532、K-diff Pairs in an Array<br>561、数组拆分 I<br>566、重塑矩阵<br>581、最短无序连续子数组<br>605、种花问题<br>628、三个数的最大乘积<br>643、子数组最大平均数 I<br>661、图片平滑器<br>665、非递减数列<br>674、最长连续递增序列<br>695、岛屿的最大面积<br>697、Degree of an Array<br>717、1比特与2比特字符<br>724、寻找数组的中心索引<br>746、使用最小花费爬楼梯<br>747、至少是其他数字两倍的最大数<br>766、托普利茨矩阵 </p>
 <p><strong><font color="red">哈希表</font></strong><br>001、<a href="http://lizhirong.club/2018/03/29/LeetCode-Two-Sum-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_blank" rel="external">Two Sum 两数之和</a><br>136、只出现一次的数字<br>202、快乐数<br>204、计数质数<br>205、同构字符串<br>217、存在重复<br>219、存在重复 II<br>242、有效的字母异位词<br>290、单词模式<br>349、两个数组的交集<br>350、两个数组的交集 II<br>387、字符串中的第一个唯一字符<br>389、找不同<br>409、最长回文串<br>438、Find All Anagrams in a String<br>447、Number of Boomerangs<br>463、Island Perimeter<br>500、键盘行<br>575、Distribute Candies<br>594、最长和谐子序列<br>599、两个列表的最小索引总和<br>645、Set Mismatch<br>690、Employee Importance<br>720、词典中最长的单词<br>771、宝石与石头</p>
@@ -56,7 +56,7 @@
 <p><strong><font color="red">双指针</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">二分查找</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">分治算法</font></strong><br>待续、、、、</p>
-<p><strong><font color="red">动态规划</font></strong><br>070、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Climbing Stairs 爬楼梯</a></p>
+<p><strong><font color="red">动态规划</font></strong><br>070、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Climbing Stairs 爬楼梯</a><br>746、<a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><strong><font color="red">回溯算法</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">贪心算法</font></strong><br>待续、、、、</p>
 <p><strong><font color="red">深度优先搜索</font></strong><br>待续、、、、</p>
@@ -92,20 +92,62 @@
   </entry>
   
   <entry>
-    <title>LeetCode-070.爬楼梯</title>
+    <title>746.使用最小花费爬楼梯</title>
+    <link href="http://lzrlizhirong.github.io/2018/04/02/LeetCode-746-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/"/>
+    <id>http://lzrlizhirong.github.io/2018/04/02/LeetCode-746-使用最小花费爬楼梯/</id>
+    <published>2018-04-02T07:49:01.000Z</published>
+    <updated>2018-04-02T08:00:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><font color="red">题目:</font><br>数组的每个索引做为一个阶梯，第 i个阶梯对应着一个非负数的体力花费值 cost<a href="索引从0开始">i</a>。<br>每当你爬上一个阶梯你都要花费对应的体力花费值，然后你可以选择继续爬一个阶梯或者爬两个阶梯。<br>您需要找到达到楼层顶部的最低花费。在开始时，你可以选择从索引为 0 或 1 的元素作为初始阶梯。<br><a id="more"></a><br>示例1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">输入: cost = [10, 15, 20]</div><div class="line">输出: 15</div><div class="line">解释: 最低花费是从cost[1]开始，然后走两步即可到阶梯顶，一共花费15。</div></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">输入: cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]</div><div class="line">输出: 6</div><div class="line">解释: 最低花费方式是从cost[0]开始，逐个经过那些1，跳过cost[3]，一共花费6。</div></pre></td></tr></table></figure></p>
+<p>注意：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、cost 的长度将会在 [2, 1000]。</div><div class="line">2、每一个 cost[i] 将会是一个Integer类型，范围为 [0, 999]。</div></pre></td></tr></table></figure></p>
+<p>英文版：<br><strong>Min Cost Climbing Stairs</strong><br>On a staircase, the i-th step has some non-negative cost cost[i] assigned (0 indexed).<br>Once you pay the cost, you can either climb one or two steps. You need to find minimum cost to reach the top of the floor, and you can either start from the step with index 0, or the step with index 1. </p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Input: cost = [10, 15, 20]</div><div class="line">Output: 15</div><div class="line">Explanation: Cheapest is start on cost[1], pay that cost and go to the top.</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Input: cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]</div><div class="line">Output: 6</div><div class="line">Explanation: Cheapest is start on cost[0], and only step on 1s, skipping cost[3].</div></pre></td></tr></table></figure></p>
+<p>Note：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、cost will have a length in the range [2, 1000].</div><div class="line">2、Every cost[i] will be an integer in the range [0, 999].</div></pre></td></tr></table></figure></p>
+<p><font color="red">思路：</font><br>这道题应该算是之前那道Climbing Stairs的拓展，这里不是求步数，而是每个台阶上都有一个cost，让我们求爬到顶端的最小cost是多少。<br>换汤不换药，还是用动态规划Dynamic Programming来做。<br>这里我们定义一个一维的dp数组，其中dp[i]表示爬到第i层的最小cost，然后我们来想dp[i]如何推导。<br>我们来思考一下如何才能到第i层呢？是不是只有两种可能性，一个是从第i-2层上直接跳上来，一个是从第i-1层上跳上来。<br>不会再有别的方法，所以我们的dp[i]只和前两层有关系，所以可以写做如下：<br>dp[i] = min(dp[i- 2] + cost[i - 2], dp[i - 1] + cost[i - 1])<br>最后我们返回最后一个数字dp[n]即可。<br>代码如下：</p>
+<p><font color="red">解法一：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int minCostClimbingStairs1(int[] cost) &#123;</div><div class="line">        int n = cost.length;</div><div class="line">        int[] dp = new int[n + 1];</div><div class="line">        for (int i = 2; i &lt; n + 1; ++i) &#123;</div><div class="line">            dp[i] = min(dp[i- 2] + cost[i - 2], dp[i - 1] + cost[i - 1]);</div><div class="line">        &#125;</div><div class="line">        return dp[n];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再来看一种DP的解法，跟上面的解法很相近，不同在于dp数组长度为n，其中dp[i]表示到第i+1层的最小cost，分别初始化dp[0]和dp[1]为cost[0]和cost[1]。<br>然后从i=2处开始遍历，此时我们的更新思路是，要爬当前的台阶，肯定需要加上当前的cost[i]，那么我们还是要从前一层或者前两层的台阶上跳上来，那么我们选择dp值小的那个，<br>所以递归式如下：dp[i] = cost[i] + min(dp[i- 1], dp[i - 2])<br>最后我们在最后两个dp值中选择一个较小的返回即可。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int minCostClimbingStairs1(int[] cost) &#123;</div><div class="line">        int n = cost.length;</div><div class="line">        int[] dp = new int[n];</div><div class="line">        dp[0] = cost[0]; dp[1] = cost[1];</div><div class="line">        for (int i = 2; i &lt; n; ++i) &#123;</div><div class="line">            dp[i] = cost[i] + min(dp[i- 1], dp[i - 2]);</div><div class="line">        &#125;</div><div class="line">        return min(dp[n - 1], dp[n - 2]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以对空间复杂度进行优化，通过前面的分析我们可以发现，当前的dp值仅仅依赖前面两个的值，所以我们不必把整个dp数组都记录下来，只需用两个变量a和b来记录前两个值，然后不停的用新得到的值来覆盖它们就好了。<br>我们初始化a和b均为0，然后遍历cost数组，首先将a和b中较小值加上num放入临时变量t中，然后把b赋给a，把t赋给b即可。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int minCostClimbingStairs1(int[] cost) &#123;</div><div class="line">        int a = 0, b = 0;</div><div class="line">        for (int num : cost) &#123;</div><div class="line">            int t = min(a, b) + num;</div><div class="line">            a = b;</div><div class="line">            b = t;</div><div class="line">        &#125;</div><div class="line">        return min(a, b);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">070、Climbing Stairs 爬楼梯</a></p>
+<p><a href="http://lizhirong.club/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/" target="_blank" rel="external"><font color="red">返回LeetCode刷题笔记总纲</font></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;font color=&quot;red&quot;&gt;题目:&lt;/font&gt;&lt;br&gt;数组的每个索引做为一个阶梯，第 i个阶梯对应着一个非负数的体力花费值 cost&lt;a href=&quot;索引从0开始&quot;&gt;i&lt;/a&gt;。&lt;br&gt;每当你爬上一个阶梯你都要花费对应的体力花费值，然后你可以选择继续爬一个阶梯或者爬两个阶梯。&lt;br&gt;您需要找到达到楼层顶部的最低花费。在开始时，你可以选择从索引为 0 或 1 的元素作为初始阶梯。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://lzrlizhirong.github.io/categories/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://lzrlizhirong.github.io/tags/LeetCode/"/>
+    
+      <category term="算法" scheme="http://lzrlizhirong.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="动态规划" scheme="http://lzrlizhirong.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>070.爬楼梯</title>
     <link href="http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/"/>
     <id>http://lzrlizhirong.github.io/2018/04/02/LeetCode-070-爬楼梯/</id>
     <published>2018-04-02T06:15:10.000Z</published>
-    <updated>2018-04-02T06:45:02.000Z</updated>
+    <updated>2018-04-02T08:01:03.000Z</updated>
     
     <content type="html"><![CDATA[<p><font color="red">题目:</font><br>你正在爬楼梯。需要 n 步你才能到达顶部。<br>每次你可以爬 1 或 2 个台阶。你有多少种不同的方式可以爬到楼顶呢？<br>注意：给定 n 将是一个正整数.<br><a id="more"></a><br>示例1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输入： 2</div><div class="line">输出： 2</div><div class="line">说明： 有两种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步</div><div class="line">2.  2 步</div></pre></td></tr></table></figure></p>
 <p>示例2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">输入： 3</div><div class="line">输出： 3</div><div class="line">说明： 有三种方法可以爬到顶端。</div><div class="line"></div><div class="line">1.  1 步 + 1 步 + 1 步</div><div class="line">2.  1 步 + 2 步</div><div class="line">3.  2 步 + 1 步</div></pre></td></tr></table></figure></p>
-<p>英文版：<br><strong>Climbing Stairs</strong><br>You are climbing a stair case. It takes n steps to reach to the top.<br>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p>英文版：<br><strong>Climbing Stairs</strong><br>You are climbing a stair case. It takes n steps to reach to the top.<br>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?<br>Note: Given n will be a positive integer.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Input: 2</div><div class="line">Output: 2</div><div class="line">Explanation:  There are two ways to climb to the top.</div><div class="line"></div><div class="line">1. 1 step + 1 step</div><div class="line">2. 2 steps</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Input: 3</div><div class="line">Output: 3</div><div class="line">Explanation:  There are three ways to climb to the top.</div><div class="line"></div><div class="line">1. 1 step + 1 step + 1 step</div><div class="line">2. 1 step + 2 steps</div><div class="line">3. 2 steps + 1 step</div></pre></td></tr></table></figure></p>
 <p><font color="red">思路：</font><br>这个爬梯子问题最开始看的时候没搞懂是让干啥的，后来看了别人的分析后，才知道实际上跟斐波那契数列非常相似，<br>假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第n-1层一步上来的，要不就是从n-2层2步上来的，<br>所以递推公式非常容易的就得出了：dp[n] = dp[n-1] + dp[n-2]。<br>由于斐波那契额数列的求解可以用递归，所以我最先尝试了递归，拿到OJ上运行，显示Time Limit Exceeded，就是说运行时间超了，因为递归计算了很多分支，效率很低，<br>这里需要用动态规划 (Dynamic Programming) 来提高效率。<br>代码如下：</p>
 <p><font color="red">解法一：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        if (n &lt;= 1) return 1;</div><div class="line">        int[] dp = new int[n];</div><div class="line">        dp[0] = 1; //爬到第一层的方法，只有一种</div><div class="line">        dp[1] = 2; //爬到第二层的方法，有两种，要么是一次一步爬上去，要么是直接两步上去</div><div class="line">        for (int i = 2; i &lt; n; ++i) &#123;</div><div class="line">            dp[i] = dp[i - 1] + dp[i - 2];</div><div class="line">        &#125;</div><div class="line">        return dp[n - 1];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。</p>
 <p><font color="red">解法二：</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int climbStairs(int n) &#123;</div><div class="line">        int a = 1, b = 1;</div><div class="line">        while (n-- &gt; 0) &#123;</div><div class="line">            b += a; </div><div class="line">            a = b - a;</div><div class="line">        &#125;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/17002/3-4-short-lines-in-every-language" target="_blank" rel="external">https://discuss.leetcode.com/topic/17002/3-4-short-lines-in-every-language</a><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
+<p><font color="red">参考资料：</font><br><a href="https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly" target="_blank" rel="external">https://discuss.leetcode.com/topic/30638/using-the-fibonacci-formular-to-get-the-answer-directly</a></p>
+<p><font color="red">类似题目：</font><br><a href="http://lizhirong.club/2018/04/02/LeetCode-070-%E7%88%AC%E6%A5%BC%E6%A2%AF/" target="_blank" rel="external">746、Min Cost Climbing Stairs 使用最小花费爬楼梯</a></p>
 <p><a href="http://lizhirong.club/2019/03/29/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BA%B2/" target="_blank" rel="external"><font color="red">返回LeetCode刷题笔记总纲</font></a></p>
 ]]></content>
     
@@ -907,75 +949,6 @@
       <category term="kafka" scheme="http://lzrlizhirong.github.io/tags/kafka/"/>
     
       <category term="spark streaming" scheme="http://lzrlizhirong.github.io/tags/spark-streaming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>经验贴--kudu在小米的实践应用</title>
-    <link href="http://lzrlizhirong.github.io/2017/02/22/%E7%BB%8F%E9%AA%8C%E8%B4%B4-kudu%E5%9C%A8%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8/"/>
-    <id>http://lzrlizhirong.github.io/2017/02/22/经验贴-kudu在小米的实践应用/</id>
-    <published>2017-02-22T10:06:45.000Z</published>
-    <updated>2017-02-22T10:24:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。</p>
-<h1 id="2-小米使用kudu的背景"><a href="#2-小米使用kudu的背景" class="headerlink" title="2.小米使用kudu的背景"></a>2.小米使用kudu的背景</h1><p>小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。<br><a id="more"></a><br>在kudu之前，我们的大数据分析pipeline大概是有这几种：</p>
-<blockquote>
-<ol>
-<li>数据源-&gt; scribe打日志到HDFS -&gt; MR/Hive/Spark -&gt; HDFS Parquet -&gt; Impala -&gt; 结果service<br>这个数据流一般用来分析各种日志。</li>
-<li>数据源 -&gt; 实时更新HBase/Mysql -&gt; 每天批量导出Parquet-&gt; Impala -&gt; 结果serve<br>这个数据流一般用来分析状态数据，也就是一般需要随机更新的数据，比如用户profile之类。</li>
-</ol>
-</blockquote>
-<p>这两条数据流主要由几个问题：</p>
-<blockquote>
-<ol>
-<li>数据从生成到能够被高效查询的列存储，整个数据流延迟比较大，一般是小时级别到一天；</li>
-<li>很多数据的日志到达时间和逻辑时间是不一致的，一般存在一些随机延迟。</li>
-</ol>
-</blockquote>
-<p>比如很多mobile app统计应用，这些tracing event发生后，很可能过一段时间才被后端tracing server收集到。</p>
-<p>我们经常看到一些hive查询，分析一天或者一小时的数据，但是要读2-3天或者多个小时的日志，然后过滤出实际想要的记录。</p>
-<p>对于一些实时分析需求，有一些可以通过流处理来解决，不过他肯定没用SQL方便，另外流式处理只能做固定的数据分析，对ad-hoc查询无能为力</p>
-<p>kudu的特点正好可以来配合impala搭建实时ad-hoc分析应用。</p>
-<p>改进后的数据流大概是这个样子：</p>
-<blockquote>
-<ol>
-<li>数据源 -&gt; kafka -&gt; ETL(Storm) -&gt; kudu -&gt; Impala</li>
-<li>数据源 -&gt; kudu -&gt; Impala</li>
-</ol>
-</blockquote>
-<p>数据流1 主要是为需要进一步做ETL的应用使用的，另外kafka可以当做一个buffer，当写吞吐有毛刺时，kafka可以做一个缓冲。</p>
-<p>如果应用有严格的实时需求，就是只要数据源写入就必须能够查到，就需要使用数据流2。</p>
-<h1 id="3-引入kudu的目的"><a href="#3-引入kudu的目的" class="headerlink" title="3.引入kudu的目的"></a>3.引入kudu的目的</h1><p>引入kudu主要是用来替换 HDFS+parquet的。</p>
-<h1 id="4-kudu的列存和parquet列存有啥区别？"><a href="#4-kudu的列存和parquet列存有啥区别？" class="headerlink" title="4.kudu的列存和parquet列存有啥区别？"></a>4.kudu的列存和parquet列存有啥区别？</h1><p>从功能上说，kudu的列存除了提供跟parquet接近的scan速度，还支持随机读写。支持随机写，数据就可以实时灌入存储中，达到实时查询的效果；但是parquet文件只能批量写，所以一般只能定期生成，所以增大了延迟。kudu的存储类似hbase的lsm存储。</p>
-<h1 id="5-为什么说kudu的scan会比kylin快呢"><a href="#5-为什么说kudu的scan会比kylin快呢" class="headerlink" title="5.为什么说kudu的scan会比kylin快呢"></a>5.为什么说kudu的scan会比kylin快呢</h1><p>kylin是存储在hbase上的，kudu的scan为什么比hbase快，简单的说kudu是真正的列存储，hbase只是列簇存储。kudu是有schema的，每一列的数据是在文件中已数组的形式保存的，而hbase存储在hfile里面的还是sort好的(rowkey, column, timestamp, value)对，scan是开销要多很多，具体需要看kudu的paper了，在这里文字不好解释。</p>
-<h1 id="6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢"><a href="#6-storm-写kudu的吞吐量能到多少，和storm写hbase比呢" class="headerlink" title="6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢"></a>6.storm 写kudu的吞吐量能到多少，和storm写hbase比呢</h1><p>我们在71个节点的集群做了测试，随机写性能：随机写26亿条记录：每个节点大概4W 随机写性能。</p>
-<p>大概的情况如下：</p>
-<blockquote>
-<p><strong>71 Node cluster</strong><br><strong><em>Hardware</em></strong><br>CPU: E5-2620 2.1GHz <em> 24 core  Memory: 64GB<br>Network: 1Gb  Disk: 12 HDD<br><strong><em>Software</em></strong><br>Hadoop2.6/Impala 2.1/Kudu<br><em>*<em>3个大表，其中一个大表每天：</em></em></em><br>~2.6 Billion rows<br>~270 bytes/row<br>17 columns, 5 key columns</p>
-</blockquote>
-<p>storm到kudu，按照每天26亿数据来算，每秒大概30000条记录吧。<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm1.jpeg" alt=""><br>这个是我们的应用挑出的6个查询，做的查询性能对比。同样6个查询，查询parquet和查询kudu做的对比。当时kudu的设计目标是接近parquet的scan性能，惊喜的是，目前kudu的scan性能在生产环境下有时还比parquet快一些。</p>
-<h1 id="7-像hbase有coprocessor，kudu有类似的计算功能吗？"><a href="#7-像hbase有coprocessor，kudu有类似的计算功能吗？" class="headerlink" title="7.像hbase有coprocessor，kudu有类似的计算功能吗？"></a>7.像hbase有coprocessor，kudu有类似的计算功能吗？</h1><p>kudud。kudu有predicatepushdown，目前有impala使用时，scan时是把一些过滤提交给kudu去做的。</p>
-<h1 id="8-你们是想用kudu替换hbase还是一起搭配用？"><a href="#8-你们是想用kudu替换hbase还是一起搭配用？" class="headerlink" title="8.你们是想用kudu替换hbase还是一起搭配用？"></a>8.你们是想用kudu替换hbase还是一起搭配用？</h1><p>感觉这两个工具目前用来解决不同的问题，hbase还是用来做OLTP类存储跟Mysql类似，kudu则用来升级我们现有的数据分析数据流，主要还是OLAP的workload。</p>
-<h1 id="9-Kudu支持随机增加列吗？"><a href="#9-Kudu支持随机增加列吗？" class="headerlink" title="9.Kudu支持随机增加列吗？"></a>9.Kudu支持随机增加列吗？</h1><p>只要不是primarykey的列，是可以随时增加的，而且不像mysql增加列时影响其他操作，kudu altertable是异步的，而且对性能影响不大。hbase是无schema的，所以可以成千上万个列，kudu不行的，列的数量也不能过多。我们目前也就试过30多列的，一些300+列的表还没有测试过。</p>
-<h1 id="10-Kudu目前有稳定版吗"><a href="#10-Kudu目前有稳定版吗" class="headerlink" title="10.Kudu目前有稳定版吗"></a>10.Kudu目前有稳定版吗</h1><p>目前beta版本，不推荐现在在生产环境使用。(写此篇博客时(2017.2.22)已发布1.2.0版本)<br><img src="/2017/02/22/经验贴-kudu在小米的实践应用/../../../../images/kdm2.png" alt=""></p>
-<h1 id="11-能否介绍一下小米使用kudu过程中踩过的坑？"><a href="#11-能否介绍一下小米使用kudu过程中踩过的坑？" class="headerlink" title="11.能否介绍一下小米使用kudu过程中踩过的坑？"></a>11.能否介绍一下小米使用kudu过程中踩过的坑？</h1><p>目前踩的坑都还在开发阶段，其实都不算什么，而且从大方向上看，我们还是相信kudu这种方式对比之前的数据流优势很明显，对吞吐不是非常高的应用，这种方案是发展方向。其实我们在老的数据流上碰到很多问题，之前提到的数据延迟，数据无序，多个组件之间的兼容性，数据无schema导致灌入数据时缺少验证，其实都希望引入kudu后能够解决。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot; title=&quot;1.前言&quot;&gt;&lt;/a&gt;1.前言&lt;/h1&gt;&lt;p&gt;本文是小米工程师常冰琳于2016年10月25日晚10点在“大数据产业联合会”微信群分享的内容，整理分享给大家。&lt;/p&gt;
-&lt;h1 id=&quot;2-小米使用kudu的背景&quot;&gt;&lt;a href=&quot;#2-小米使用kudu的背景&quot; class=&quot;headerlink&quot; title=&quot;2.小米使用kudu的背景&quot;&gt;&lt;/a&gt;2.小米使用kudu的背景&lt;/h1&gt;&lt;p&gt;小米大概在14年中开始和cloudera合作，作为kudu小白鼠用户，帮cloudera在生产环境验证kudu。kudu+Impala可以帮助我们解决实时数据的ad-hoc查询需求。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据库" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-      <category term="NoSQL" scheme="http://lzrlizhirong.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/NoSQL/"/>
-    
-    
-      <category term="kudu" scheme="http://lzrlizhirong.github.io/tags/kudu/"/>
-    
-      <category term="NoSQL" scheme="http://lzrlizhirong.github.io/tags/NoSQL/"/>
     
   </entry>
   
